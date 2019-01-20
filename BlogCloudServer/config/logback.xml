@@ -1,0 +1,40 @@
+<configuration scan="true" scanPeriod="10 second">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>
+        %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+     </pattern>
+    </encoder>
+   </appender>
+  
+   <appender name="SERVER" class="ch.qos.logback.core.FileAppender">
+    <file>logs/server.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>logs/%d{yyyy-MM-dd}/server-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+   </appender>
+  
+   <appender name="ACCESS" class="ch.qos.logback.core.FileAppender">
+    <file>./logs/access.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>./logs/%d{yyyy-MM-dd}/access-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.server.LogHelper" additivity="false">
+    <appender-ref ref="ACCESS" />
+  </logger>
+
+  <root level="DEBUG">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="SERVER" />
+  </root>
+</configuration>
