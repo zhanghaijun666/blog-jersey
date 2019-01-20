@@ -1,6 +1,6 @@
 {
     "db": {
-        "url": "jdbc:mysql://localhost:3306/proteindb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false&createDatabaseIfNotExist=true&autoReconnect=true&failOverReadOnly=false&useUnicode=true&&createDatabaseIfNotExist=true&autoReconnect=true&failOverReadOnly=false",
+        "url": "jdbc:mysql://localhost:3306/blogdb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false&createDatabaseIfNotExist=true&autoReconnect=true&failOverReadOnly=false&useUnicode=true&&createDatabaseIfNotExist=true&autoReconnect=true&failOverReadOnly=false",
         "driver": "com.mysql.cj.jdbc.Driver",
         "user": "root",
         "password": "1q2w3e"
