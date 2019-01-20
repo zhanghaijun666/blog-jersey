@@ -1,7 +1,6 @@
 #### 技术
 [Jersey](https://jersey.github.io/) , [liquibase](http://www.liquibase.org/) , [activejdbc](http://javalite.io/record_selection)
- , [protobuf](https://developers.google.com/protocol-buffers/) , [liquibase](http://www.liquibase.org/) , [liquibase](http://www.liquibase.org/)
-  , [liquibase](http://www.liquibase.org/) , [liquibase](http://www.liquibase.org/) , [liquibase](http://www.liquibase.org/)
+ , [protobuf](https://developers.google.com/protocol-buffers/)
 
 #### 数据库支持
 [mysql](https://www.mysql.com/) , [H2](http://www.h2database.com/html/main.html)
