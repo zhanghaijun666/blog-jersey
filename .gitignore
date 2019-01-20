@@ -2,3 +2,5 @@
 /BlogCloudClinet/nbproject/private/
 
 /BlogCloudServer/src/main/java/com/proto
+/ProteinDBServer/logs/
+/ProteinDBClient/www/static/visitor/js/pbs.js
