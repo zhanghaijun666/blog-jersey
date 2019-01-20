@@ -7,4 +7,4 @@
 [mysql](https://www.mysql.com/) , [H2](http://www.h2database.com/html/main.html)
 
 #### Jersey 创建后台项目
-`mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-grizzly2 -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=com -DartifactId=BlogCloudServer -Dpackage=com -DarchetypeVersion=2.27`
+`mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-grizzly2 -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=com -DartifactId=BlogCloudServer -Dpackage=com.server -DarchetypeVersion=2.27`
