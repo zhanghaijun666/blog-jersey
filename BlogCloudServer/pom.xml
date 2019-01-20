@@ -322,7 +322,31 @@
                     </execution>
                 </executions>
             </plugin>
-            
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <exec executable="protoc" dir="./src/main/resources">
+                                    <arg line="--java_out=../java config.proto"/>
+                                </exec>
+                                <exec executable="protoc" dir="./src/main/resources">
+                                    <arg line="--java_out=../java structure.proto"/>
+                                </exec>
+                                <exec executable="node" dir="../node_modules/.bin">
+                                    <arg line="pbjs -t json-module -r pbStore -w --force-long --force-message --no-comments  ../../BlogCloudServer/src/main/resources/structure.proto -o ../../BlogCloudClinet/www/static/visitor/js/pbs.js"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

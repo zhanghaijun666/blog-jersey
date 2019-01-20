@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="longtext.type" value="clob" dbms="oracle"/>
+    <property name="longtext.type" value="longtext" dbms="mysql"/>
+    <property name="longtext.type" value="longtext" dbms="h2"/>    
+    <property name="longtext.type" value="text" dbms="sqlite"/>
+    <property name="bigint.type" value="bigint" dbms="oracle"/>
+    <property name="bigint.type" value="bigint" dbms="mysql"/>
+    <property name="bigint.type" value="bigint" dbms="h2"/>
+    <property name="bigint.type" value="int" dbms="sqlite"/>
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+    
+    
+    <changeSet author="zhanghaijun" id="creat-mysql-database" runOnChange="true"  runAlways="true" failOnError="false">
+        <sql dbms="mysql" splitStatements="true" stripComments="true">
+            ALTER DATABASE ${database.liquibaseSchemaName}  DEFAULT CHARACTER SET utf8  DEFAULT COLLATE utf8_bin
+            <comment>make sure we use utf-8 for database</comment>
+        </sql>
+    </changeSet>
+    
+    <include file="db-common-tables.xml" relativeToChangelogFile="false"/>
+    <include file="db-common-data.xml" relativeToChangelogFile="false"/>
+    
+    <include file="db-action-tables.xml" relativeToChangelogFile="false"/>
+    <include file="db-action-data.xml" relativeToChangelogFile="false"/>
+
+</databaseChangeLog>

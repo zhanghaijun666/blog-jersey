@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+option java_package = "com.proto";
+option java_outer_classname = "ConfigStore";
+
+message Config{
+    required DB db=1;
+    required string webDir = 2;
+    optional string logback = 3 [default = "config/logback.xml"];
+    optional int32 sessionTimeout = 4 [default = 1800];//time in seconds
+    optional string salt = 5;
+    required Server server = 6;
+}
+message DB {
+    required string url=1;
+    required string driver=2;
+    optional string user=3 [default = "root"];
+    optional string password=4 [default = "root"];
+}
+message Server{
+    optional string host=1 [default = "127.0.0.1"];
+    optional int32 port=2 [default = 8888];
+}

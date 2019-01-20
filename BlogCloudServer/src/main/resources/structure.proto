@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+option java_package = "com.proto";
+option java_outer_classname = "PBStore";
+
+enum Status{
+    StatusDefault = 0;
+    StatusActive = 1;
+    StatusDeleted = 2;
+}
+enum Authenticator{
+    DEFAULT_AUTHENTICATOR = 0;
+    SYSTEM_AUTHENTICATOR = 1;
+    TEXT_AUTHENTICATOR = 2;
+    EMAIL_AUTHENTICATOR = 3;
+}
+enum ReturnCode{
+    UNKNOWN_RETURN_CODE = 0;
+    OK = 1;
+    ERROR = 2;
+    USER_EXIST = 50;
+    PASSWORD_ERROR = 51;
+    USERNAME_OR_PASSWORD_IS_EMPTY = 52;
+    USER_EMPTY = 53;
+    NOT_YOURSELF = 54;
+}
+
+message User{
+    string username = 1;
+    string nickname = 2;
+    string password = 3;
+    Role role = 4;
+    string email = 5;
+    string phone = 6;
+    int32 status = 7;
+    int32 userId = 8;
+    int32 authenticator = 9;
+}
+message Role{
+    int32 id = 1;
+    string roleName = 2;
+    string note = 3;
+    int32 status = 4;
+    string icon = 5;
+}
+message UserList {
+    repeated User items = 1;
+}
+message RoleList{
+    repeated Role items = 1;
+}
+message Menu{
+    int32 menuId = 1;
+    int32 parent_id = 2;
+    string name = 3;
+    string icon = 4;
+    string component = 5; 
+    string hash = 6; 
+    bool deletable = 7; 
+    bool defaultShow = 8;
+    int32 status = 9; 
+}
+message MenuList {
+    repeated Menu items = 1;
+}
+message Protein{
+    string id = 1;
+    string name = 2;
+    string family = 3;
+    string sort = 4;
+    repeated string sources = 5;
+    string sequence = 6;
+    string secondary = 7;
+    string tertiary = 8;
+    string go = 9;
+    repeated string kegg = 10;
+    string ppi = 11;
+}
+message ProteinList{
+    repeated Protein items = 1;
+}
+message RspInfo{
+    ReturnCode code = 1;
+    string msg = 2;
+}
+message RspInfoList{
+    ReturnCode code = 1;
+    repeated RspInfo items = 2;
+}

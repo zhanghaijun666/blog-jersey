@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet author="zhanghaijun" id = "insert_roles">
+        <insert tableName = "roles">
+            <column name="id" value="1"/>
+            <column name="role_name" value="admin"/>
+            <column name="note" value="System Admin"/>
+            <column name="icon" value="fa-user-secret"/>
+    
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+    </changeSet>
+    <changeSet author="zhanghaijun" id = "insert_menus">
+        <insert tableName = "menus">
+            <column name="id" value="1"/>
+            <column name="parent_id" value="0"/>
+            <column name="name" value="user-list"/>
+            <column name="icon" value="fa-vcard"/>
+            <column name="hash" value="home"/>
+            <column name="role_id" value="1"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="2"/>
+            <column name="parent_id" value="1"/>
+            <column name="name" value="user-all"/>
+            <column name="icon" value="fa-user-circle-o"/>
+            <column name="component" value="user-list"/>
+            <column name="hash" value="home"/>
+            <column name="deletable" valueBoolean="true"/>
+            <column name="default_show" valueBoolean="true"/>
+            <column name="role_id" value="1"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="3"/>
+            <column name="parent_id" value="0"/>
+            <column name="name" value="protein-list"/>
+            <column name="icon" value="fa-product-hunt"/>
+            <column name="hash" value="home"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="4"/>
+            <column name="parent_id" value="3"/>
+            <column name="name" value="protein-all"/>
+            <column name="icon" value="fa-slideshare"/>
+            <column name="component" value="page-protein"/>
+            <column name="hash" value="home"/>
+            <column name="deletable" valueBoolean="true"/>
+            <column name="default_show" valueBoolean="false"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="5"/>
+            <column name="parent_id" value="0"/>
+            <column name="name" value="twaver"/>
+            <column name="hash" value="home"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="6"/>
+            <column name="parent_id" value="5"/>
+            <column name="name" value="twaver-spring"/>
+            <column name="component" value="twaver-spring"/>
+            <column name="hash" value="home"/>
+            <column name="deletable" valueBoolean="true"/>
+            <column name="default_show" valueBoolean="false"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>

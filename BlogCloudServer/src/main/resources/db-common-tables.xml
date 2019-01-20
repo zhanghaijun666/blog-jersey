@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="create-table-user" author="zhanghaijun">
+        <createTable tableName="users">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(50)"/>
+            <column name="password" type="varchar(50)"/>
+            <column name="nickname" type="varchar(50)"/>
+            <column name="email" type="varchar(255)" defaultValue=""/>
+            <column name="phone" type="varchar(100)" defaultValue=""/>
+            <column name="authenticator" type="int" defaultValueNumeric="1"/>
+            <column name="role_id" type="int"/>
+            
+            <column name="status" type="int" defaultValueNumeric="0"/>
+            <column name="created_at" type="datetime" />
+            <column name="created_by" type = "int" />
+            <column name="updated_at" type="datetime" />
+            <column name="updated_by" type = "int" />
+        </createTable>
+    </changeSet>
+    <changeSet id="create-table-menus" author="zhanghaijun">
+        <createTable tableName="menus">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="int" defaultValueNumeric="0"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="icon" type="varchar(50)"/>
+            <column name="component" type="varchar(50)"/>
+            <column name="hash" type="varchar(50)"/>
+            <column name="deletable" type="boolean" defaultValueBoolean="true"/>
+            <column name="default_show" type="boolean" defaultValueBoolean="false"/>
+            <column name="role_id" type="int"/>
+            
+            <column name="status" type="int" defaultValueNumeric="0"/>
+            <column name="created_at" type="datetime" />
+            <column name="created_by" type = "int" />
+            <column name="updated_at" type="datetime" />
+            <column name="updated_by" type = "int" />
+        </createTable>
+    </changeSet>
+    <changeSet id="create-table-roles" author="zhanghaijun" >
+        <createTable tableName="roles" >
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role_name" type="varchar(255)" defaultValue=""/>
+            <column name="note" type="varchar(1024)" defaultValue=""/>
+            <column name="icon" type="varchar(50)"/>
+            
+            <column name="status" type="int" defaultValueNumeric="0"/>
+            <column name="created_at" type="datetime" />
+            <column name="created_by" type = "int" />
+            <column name="updated_at" type="datetime" />
+            <column name="updated_by" type = "int" />
+        </createTable>
+    </changeSet>
+   
+</databaseChangeLog>
