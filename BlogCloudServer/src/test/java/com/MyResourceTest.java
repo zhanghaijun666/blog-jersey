@@ -43,7 +43,7 @@ public class MyResourceTest {
      */
     @Test
     public void testGetIt() {
-        String responseMsg = target.path("statice").request().get(String.class);
+        String responseMsg = target.path("test").request().get(String.class);
         assertEquals("Got it!", responseMsg);
     }
 }

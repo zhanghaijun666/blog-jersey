@@ -8,13 +8,16 @@ import javax.ws.rs.core.MediaType;
 /**
  * @author haijun.zhang
  */
-@Path("statice")
-public class StaticeFile {
+@Path("/")
+public class ResourceService {
 
     @GET
+    @Path("test")
     @Produces(MediaType.TEXT_PLAIN)
     public String getIt() {
         return "Got it!";
     }
 
+    public void getResource() {
+    }
 }
