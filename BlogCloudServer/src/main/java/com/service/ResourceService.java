@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang.StringUtils;
@@ -41,7 +42,7 @@ public class ResourceService {
     @GET
     public void index() {
         try {
-            sendPackedFile(new File(Configuration.getInstance().getWebDir(), "/static/visitor/packed-index.html.txt"), res.getOutputStream());
+            sendPackedFile(new File(Configuration.getInstance().getWebDir(), "packed-index.html.txt"), res.getOutputStream());
         } catch (IOException ex) {
             throw new NotFoundException("index.html is not found");
         }
@@ -49,21 +50,20 @@ public class ResourceService {
 
     @GET
     @Path("/static/{path: .*}")
-    public void getResource() {
+    public void getResource(@PathParam("path") String filePath) {
         File webDir = Configuration.getInstance().getWebDir();
-        String path = req.getPath().getPath();
-        String contentType = FileUtils.getFileContentType(new File(webDir, path));
+        String contentType = FileUtils.getFileContentType(new File(webDir, filePath));
         if (StringUtils.isNotBlank(contentType)) {
             res.setContentType(contentType);
         }
         try (OutputStream out = res.getOutputStream()) {
-            if (FileUtils.getFileName(path).startsWith("packed-")) {
-                sendPackedFile(new File(webDir, path + ".txt"), out);
+            if (FileUtils.getFileName(filePath).startsWith("packed-")) {
+                sendPackedFile(new File(webDir, filePath + ".txt"), out);
             } else {
-                writeFile(out, new File(webDir, path), new byte[10240]);
+                writeFile(out, new File(webDir, filePath), new byte[10240]);
             }
         } catch (IOException ex) {
-            throw new NotFoundException(path + "is not found");
+            throw new NotFoundException(filePath + "is not found");
         }
     }
 

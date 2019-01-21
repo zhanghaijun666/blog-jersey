@@ -1,5 +1,5 @@
 (function (global) {
-    define(["knockout", "/static/local/lang/en.js", "/static/local/lang/zh-CN.js"], function (ko, langEN, langCN) {
+    define(["knockout", "/static/resource/local/lang/en.js", "/static/resource/local/lang/zh-CN.js"], function (ko, langEN, langCN) {
         global.localLang = ko.observable("zh-CN");
         global.l10n = function (str) {
             var strs = str.split(".");

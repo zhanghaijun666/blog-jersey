@@ -1,4 +1,3 @@
 ./index-start.html
-./visitor/templates/common.xhtml
-./visitor/templates/dialog.xhtml
+./visitor/templates/
 ./index-end.html

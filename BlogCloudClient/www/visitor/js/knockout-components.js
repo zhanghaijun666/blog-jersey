@@ -28,7 +28,6 @@
 
     /* common or utils component end */
     /* action component start */
-    ko.components.register('user-list', {require: 'static/visitor/components/user-list/user.js'});
     ko.components.register('twaver-spring', {require: 'static/visitor/components/twaver/twaver-spring.js'});
 
     /* action component end */
