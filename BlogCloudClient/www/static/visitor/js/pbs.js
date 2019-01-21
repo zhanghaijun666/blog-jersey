@@ -10,10 +10,10 @@
 })(this, function($protobuf) {
     "use strict";
 
-    var $root = ($protobuf.roots.pbStore || ($protobuf.roots.pbStore = new $protobuf.Root()))
+    var $root = ($protobuf.roots.BlogStore || ($protobuf.roots.BlogStore = new $protobuf.Root()))
     .setOptions({
       java_package: "com.proto",
-      java_outer_classname: "PBStore"
+      java_outer_classname: "BlogStore"
     })
     .addJSON({
       Status: {

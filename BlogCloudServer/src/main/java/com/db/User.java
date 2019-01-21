@@ -1,6 +1,6 @@
 package com.db;
 
-import com.proto.PBStore;
+import com.proto.BlogStore;
 import com.utils.BlogUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,11 +59,11 @@ public class User extends CommonModel {
         return getInteger("authenticator");
     }
 
-    public static PBStore.User UserBuilder(User user) {
+    public static BlogStore.User UserBuilder(User user) {
         if (null == user) {
-            return PBStore.User.getDefaultInstance();
+            return BlogStore.User.getDefaultInstance();
         }
-        return PBStore.User.newBuilder()
+        return BlogStore.User.newBuilder()
                 .setUserId(user.getUserId())
                 .setUsername(user.getUsername())
                 .setNickname(user.getNickname())
@@ -75,12 +75,12 @@ public class User extends CommonModel {
                 .build();
     }
 
-    public static User saveUser(PBStore.User user, int userId, int AuthPlatform) {
-        User dbUser = User.findFirst("username = ? AND status = ? AND authenticator = ? ", user.getUsername(), PBStore.Status.StatusActive_VALUE, AuthPlatform);
+    public static User saveUser(BlogStore.User user, int userId, int AuthPlatform) {
+        User dbUser = User.findFirst("username = ? AND status = ? AND authenticator = ? ", user.getUsername(), BlogStore.Status.StatusActive_VALUE, AuthPlatform);
         if (null == dbUser) {
-            dbUser = User.create("username", user.getUsername(), "status", PBStore.Status.StatusActive_VALUE, "authenticator", AuthPlatform, "created_by", userId);
+            dbUser = User.create("username", user.getUsername(), "status", BlogStore.Status.StatusActive_VALUE, "authenticator", AuthPlatform, "created_by", userId);
         }
-        if (AuthPlatform == PBStore.Authenticator.SYSTEM_AUTHENTICATOR_VALUE) {
+        if (AuthPlatform == BlogStore.Authenticator.SYSTEM_AUTHENTICATOR_VALUE) {
             dbUser.setString("password", BlogUtils.sha1Hex(user.getPassword()));
         }
         dbUser.setString("nickname", user.getNickname());
@@ -92,9 +92,9 @@ public class User extends CommonModel {
         return dbUser;
     }
 
-    public static int saveUser(PBStore.User user, User dbUser, int userId) {
+    public static int saveUser(BlogStore.User user, User dbUser, int userId) {
         if (null == dbUser) {
-            return PBStore.ReturnCode.USER_EMPTY_VALUE;
+            return BlogStore.ReturnCode.USER_EMPTY_VALUE;
         }
         dbUser.setString("username", user.getUsername());
         dbUser.setString("nickname", user.getNickname());
@@ -103,24 +103,24 @@ public class User extends CommonModel {
         dbUser.setString("phone", user.getPhone());
         dbUser.setInteger("updated_by", userId);
         dbUser.saveIt();
-        return PBStore.ReturnCode.OK_VALUE;
+        return BlogStore.ReturnCode.OK_VALUE;
     }
 
     public static boolean isExist(String username) {
-        return User.count(" username = ? AND status = ? ", username, PBStore.Status.StatusActive_VALUE) > 0;
+        return User.count(" username = ? AND status = ? ", username, BlogStore.Status.StatusActive_VALUE) > 0;
     }
 
     public static User getSystemActiveUser(String username, String password) {
         List<Object> params = new ArrayList<>();
         params.add(username);
         params.add(BlogUtils.sha1Hex(password));
-        params.add(PBStore.Status.StatusActive_VALUE);
-        params.add(PBStore.Authenticator.SYSTEM_AUTHENTICATOR_VALUE);
+        params.add(BlogStore.Status.StatusActive_VALUE);
+        params.add(BlogStore.Authenticator.SYSTEM_AUTHENTICATOR_VALUE);
         return User.findFirst("username = ? AND password = ? AND status = ? AND authenticator = ? ", params.toArray());
     }
 
     public static List<User> findAllActiveUser() {
-        return User.find("status = ? ", PBStore.Status.StatusActive_VALUE);
+        return User.find("status = ? ", BlogStore.Status.StatusActive_VALUE);
     }
 
 }

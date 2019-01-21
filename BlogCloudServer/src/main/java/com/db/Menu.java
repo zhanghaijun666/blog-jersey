@@ -1,6 +1,6 @@
 package com.db;
 
-import com.proto.PBStore;
+import com.proto.BlogStore;
 import com.utils.BasicConvertUtils;
 import java.util.List;
 import org.javalite.activejdbc.annotations.Table;
@@ -47,11 +47,11 @@ public class Menu extends CommonModel {
         return getInteger("status");
     }
 
-    public static PBStore.Menu MenuBuilder(Menu menu) {
+    public static BlogStore.Menu MenuBuilder(Menu menu) {
         if (null == menu) {
-            return PBStore.Menu.getDefaultInstance();
+            return BlogStore.Menu.getDefaultInstance();
         }
-        return PBStore.Menu.newBuilder()
+        return BlogStore.Menu.newBuilder()
                 .setMenuId(menu.getMenuId())
                 .setParentId(menu.getParentId())
                 .setName(menu.getName())
@@ -64,10 +64,10 @@ public class Menu extends CommonModel {
                 .build();
     }
 
-    public static int saveMenu(PBStore.Menu menu, int userId) {
-        Menu dbMenu = Menu.findFirst("name = ? AND status = ? ", menu.getName(), PBStore.Status.StatusActive_VALUE);
+    public static int saveMenu(BlogStore.Menu menu, int userId) {
+        Menu dbMenu = Menu.findFirst("name = ? AND status = ? ", menu.getName(), BlogStore.Status.StatusActive_VALUE);
         if (null == dbMenu) {
-            dbMenu = Menu.create("name", menu.getName(), "status", PBStore.Status.StatusActive_VALUE, "created_by", userId);
+            dbMenu = Menu.create("name", menu.getName(), "status", BlogStore.Status.StatusActive_VALUE, "created_by", userId);
         }
         dbMenu.setInteger("parent_id", menu.getParentId());
         dbMenu.setString("icon", menu.getIcon());
@@ -77,20 +77,20 @@ public class Menu extends CommonModel {
         dbMenu.setBoolean("default_show", menu.getDefaultShow());
         dbMenu.setInteger("updated_by", userId);
         dbMenu.saveIt();
-        return PBStore.ReturnCode.OK_VALUE;
+        return BlogStore.ReturnCode.OK_VALUE;
     }
 
-    public static PBStore.MenuList getHashMenus(String hash) {
-        PBStore.MenuList.Builder menuList = PBStore.MenuList.newBuilder();
-        List<Menu> list = Menu.find("hash = ? AND status = ? ", hash, PBStore.Status.StatusActive_VALUE);
+    public static BlogStore.MenuList getHashMenus(String hash) {
+        BlogStore.MenuList.Builder menuList = BlogStore.MenuList.newBuilder();
+        List<Menu> list = Menu.find("hash = ? AND status = ? ", hash, BlogStore.Status.StatusActive_VALUE);
         for (Menu menu : list) {
             menuList.addItems(MenuBuilder(menu));
         }
         return menuList.build();
     }
 
-    public static PBStore.MenuList getMenuAll(String hash) {
-        PBStore.MenuList.Builder menuList = PBStore.MenuList.newBuilder();
+    public static BlogStore.MenuList getMenuAll(String hash) {
+        BlogStore.MenuList.Builder menuList = BlogStore.MenuList.newBuilder();
         List<Menu> list = Menu.findAll();
         for (Menu menu : list) {
             menuList.addItems(MenuBuilder(menu));
