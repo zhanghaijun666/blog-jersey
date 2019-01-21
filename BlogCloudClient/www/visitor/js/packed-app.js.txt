@@ -1,4 +1,0 @@
-./dialog.js
-./item-select.js
-./knockout-components.js
-./view.js

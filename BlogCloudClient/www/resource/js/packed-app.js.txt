@@ -1,7 +1,0 @@
-./util.js
-./request.js
-./requirejs.config.js
-./structure.js
-./sammy.js
-./lang.js
-./return-code.js
