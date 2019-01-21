@@ -1,4 +1,0 @@
-./index-start.html
-./templates/ommon.xhtml
-./templates/dialog.xhtml
-./index-end.html
