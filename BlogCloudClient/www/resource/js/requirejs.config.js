@@ -7,9 +7,9 @@ requirejs.config({
     //never includes a ".js" extension since
     //the paths config could be for a directory.
     paths: {
-        "text": "static/visitor/require/text",
-        "css": "static/visitor/require/css",
-        "bcs": "static/visitor/js/structure"
+        "text": "static/resource/require/text",
+        "css": "static/resource/require/css",
+        "bcs": "static/resource/js/structure"
     },
     shim:{
         "pbs":{
