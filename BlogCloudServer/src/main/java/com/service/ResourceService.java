@@ -73,6 +73,7 @@ public class ResourceService {
                 File[] childFils = file.listFiles();
                 for (File childFile : childFils) {
                     writeFile(out, childFile, buffer);
+                    out.write(NEWLINE);
                 }
             } else {
                 try (BufferedInputStream innerStream = new BufferedInputStream(new FileInputStream(file))) {
@@ -84,7 +85,7 @@ public class ResourceService {
             }
         }
     }
-    private static final byte[] newLine = "\r\n".getBytes();
+    private static final byte[] NEWLINE = "\r\n".getBytes();
 
     private static void sendPackedFile(File packedFile, OutputStream out) throws FileNotFoundException, IOException {
         try (BufferedReader in = new BufferedReader(new FileReader(packedFile))) {
@@ -95,7 +96,7 @@ public class ResourceService {
                 if (filePath.length() > 0 && !filePath.startsWith("#")) {
                     File innerFile = new File(packedFile.getParent(), filePath);
                     writeFile(out, innerFile, buffer);
-                    out.write(newLine);
+                    out.write(NEWLINE);
                 }
             }
         }
