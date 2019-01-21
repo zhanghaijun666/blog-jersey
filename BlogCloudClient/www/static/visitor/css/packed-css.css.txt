@@ -1,0 +1,3 @@
+../lib/bootstrap/css/bootstrap.min.css
+./css.css
+./custom-component.css

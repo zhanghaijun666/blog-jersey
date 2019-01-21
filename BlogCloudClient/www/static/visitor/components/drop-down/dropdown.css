@@ -1,0 +1,4 @@
+.custom-dropdown [data-toggle="dropdown"]{
+    padding: 6px 12px;
+    cursor: pointer;
+}

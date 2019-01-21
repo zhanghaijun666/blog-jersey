@@ -1,0 +1,37 @@
+<template id="default-dialog-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i></button>
+    <h4 class="dialog-header-text" data-bind="text: $data.header"></h4>
+</template>
+
+<template id="default-dialog-footer">
+    <div class="dialog-footer-button">
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="text: '取消'"></button>
+        <button type="button" class="btn btn-primary" data-bind="text: '确定',click: $data.success"></button>
+    </div>
+</template>
+
+<template id="login-dialog-body">
+    <div class="login_body">
+        <div class="form-group input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-user fa-lg"></i></span>
+            <input data-bind="textInput: $data.user.username" type="text" class="form-control" placeholder="Username"/>
+        </div>
+        <div class="form-group input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
+            <input data-bind="textInput: $data.user.password" type="password" class="form-control" placeholder="Password" />
+        </div>
+    </div>
+</template>
+
+<template id="login-dialog-foot">
+    <div align="center">
+        <button data-bind="click: $data.doLogin" class="btn-lg btn-success" >
+            <i class="fa fa-sign-in fa-lg"></i>
+            <span data-bind="text: l10n('user.login')"></span>
+        </button>
+    </div>
+</template>
+
+<template id="template-small-dialogMsg">
+    <div class="small-dialogMsg"><h4 data-bind="text: l10n('operate.confirmDelete')"></h4></div>
+</template>

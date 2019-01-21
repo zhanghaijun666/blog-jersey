@@ -1,0 +1,53 @@
+<!-- ko template: 'template-custom-card' --><!-- /ko -->
+
+<template id="template-custom-card">
+    <div class="custom-card-top-operation">
+        <div class="col-md-2">
+            <button class="btn btn-default" data-bind="click: createUser">
+                <i class="fa fa-plus-square"></i>
+                <span data-bind="text: l10n('user.addUser')"></span>
+            </button>
+        </div>
+        <div class="col-md-4 input-group">
+            <div class="input-group-addon input-group-menu">
+                <drop-down params="menuItems: searchItems"></drop-down>
+            </div>
+            <input type="text" class="form-control"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <i class="fa fa-search"></i>
+                    <span data-bind="text: '查找'"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <custom-table params="itemList: users, operateMenu: userOperateMenu"></custom-table>
+</template>
+<template id="template-user-info">
+    <div class="user-info" data-bind="with: $data.user">
+        <div class="form-group input-group">
+            <span class="input-group-addon" data-bind="text: l10n('user.userName')"></span>
+            <input data-bind="textInput: $data.username" type="text" class="form-control" placeholder="UserName"/>
+        </div>
+        <div class="form-group input-group">
+            <span class="input-group-addon" data-bind="text: l10n('user.userNick')"></span>
+            <input data-bind="textInput: $data.nickname" type="text" class="form-control" placeholder="UserNick"/>
+        </div>
+        <div class="form-group input-group">
+            <span class="input-group-addon" data-bind="text: l10n('user.passWord')"></span>
+            <input data-bind="textInput: $data.password" type="text" class="form-control" placeholder="PassWord"/>
+        </div>
+        <div class="form-group input-group">
+            <span class="input-group-addon" data-bind="text: l10n('user.confirmPassWord')"></span>
+            <input data-bind="textInput: $data.confirmPassword" type="text" class="form-control" placeholder="ConfirmPassWord"/>
+        </div>
+        <div class="form-group input-group">
+            <span class="input-group-addon" data-bind="text: l10n('user.userMail')"></span>
+            <input data-bind="textInput: $data.email" type="text" class="form-control" placeholder="user Mail"/>
+        </div>
+        <div class="form-group input-group">
+            <span class="input-group-addon" data-bind="text: l10n('user.userPhone')"></span>
+            <input data-bind="textInput: $data.phone" type="text" class="form-control" placeholder="user Phone"/>
+        </div>
+    </div>
+</template>

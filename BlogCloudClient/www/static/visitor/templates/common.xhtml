@@ -1,0 +1,19 @@
+<template id="template-toast">
+    <div class="panel panel-default toast-div">
+        <div class="panel-heading">
+            <h3 class="panel-title" data-bind="text: $data.headText"></h3>
+        </div>
+        <div class="panel-body">
+            <span data-bind="text: $data.getMessage()"></span>
+        </div>
+    </div>
+</template>
+
+<template id="custom-checkbox-tmpl">
+    <div class="custom-checkbox" data-bind="click: function(){$data.checked(!$data.checked());}, clickBubble: false">
+        <i class="fa" data-bind="css: $data.checked() ? 'fa-check-square-o':'fa-square-o'"></i>
+        <!-- ko if: $data.label -->
+        <span data-bind="text: $data.label"></span>
+        <!-- /ko -->
+    </div>
+</template>

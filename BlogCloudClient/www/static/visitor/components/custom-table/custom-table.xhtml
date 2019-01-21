@@ -1,0 +1,60 @@
+<table class="custom-card-table">
+    <!-- ko ifnot: itemSelect.getSelectedConut() > 0 -->
+    <thead>
+        <tr class="custom-card-single-header">
+            <td class="custom-card-checkbox">
+                <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
+            </td>
+            <td class="custom-card-content"><span data-bind="text: '用户'"></span></td>
+            <td class="custom-card-operation"><span data-bind="text: '操作'"></span></td>
+        </tr>
+    </thead>
+    <!-- /ko -->
+    <!-- ko if: itemSelect.getSelectedConut() > 0 -->
+    <thead>
+        <tr class="custom-card-multi-header">
+            <td class="custom-card-checkbox">
+                <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
+            </td>
+            <td class="custom-card-content">
+                <ul>
+                    <li><span data-bind="text: itemSelect.getSelectedStr()"></span></li>
+                    <!-- ko foreach: getOperateMenu(window.CustomMenuType.MultipleSelection) -->
+                    <li data-bind="click: $component.operateMenuClick">
+                        <span class="span-button">
+                            <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
+                            <span data-bind="text: $data.text"></span>
+                        </span>
+                    </li>
+                    <!-- /ko -->
+                </ul>
+            </td>
+            <td></td>
+        </tr>
+    </thead>
+    <!-- /ko -->
+    <tbody data-bind="foreach: itemList">
+        <tr class="custom-card-info cursor_pointer">
+            <td class="custom-card-checkbox">
+                <custom-checkbox params="checked: $data.select"></custom-checkbox>
+            </td>
+            <td class="custom-card-content">
+                <span class="custom-card-icon"><i class="fa" data-bind="css: $data.role.icon || 'fa-user' "></i></span>
+                <!-- ko if: $data.status === pbs.Status.StatusDeleted -->
+                <del data-bind="text: $data.getFullName() "></del>
+                <!-- /ko -->
+                <!-- ko ifnot: $data.status === pbs.Status.StatusDeleted -->
+                <span data-bind="text: $data.getFullName() "></span>
+                <!-- /ko -->
+            </td>
+            <td class="custom-card-operation">
+                <ul data-bind="foreach: $component.getOperateMenu(window.CustomMenuType.SingleSlection)">
+                    <li data-bind="click: function(){ $component.operateMenuClick($data,null,$parent);}">
+                        <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
+                        <div class=""><span data-bind="text: $data.text"></span></div>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

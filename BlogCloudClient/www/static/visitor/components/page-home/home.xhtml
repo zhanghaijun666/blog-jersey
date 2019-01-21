@@ -1,0 +1,36 @@
+<div class="body_head">
+    <nav class="navbar navbar-default navbar-static-top navbar-lk">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#lk_nav"
+                        aria-expanded="false">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" style="margin-right: 50px;">
+                    <img src="/static/images/logo.png" alt="logo" width="50" height="32">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="lk_nav">
+                <ul class="nav navbar-nav" data-bind="foreach: tabs">
+                    <li class="cursor_pointer" data-bind="css: {active: isActive}, click: $component.navTab().addMenuTabs">
+                        <a data-bind="text: name"></a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+                    <li><a><img src="/static/images/hear.png" class="img-rounded" width="21" height="21" alt="头像"></a></li>
+                    <li><a><span data-bind="text: $root.user.username"></span></a></li>
+                    <!-- ko if: $root.isLogin -->
+                    <li class="cursor_pointer" data-bind="click: $root.logout"><a><i class="fa fa-sign-out fa-lg"></i><span>登出</span></a></li>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $root.isLogin -->
+                    <li class="cursor_pointer" data-bind="click: $root.gotoLogin"><a><i class="fa fa-sign-in fa-lg"></i><span>登录</span></a></li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!-- ko component: {name: "home-nav-tabs", params:{ref: navTab}} --><!-- /ko -->
