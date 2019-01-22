@@ -61,14 +61,14 @@
                     }}, {user: item}));
             }
             function doDeleteUser(users) {
-                var req = pbs.UserList.create();
+                var req = bcs.UserList.create();
                 ko.utils.arrayForEach(users, function (user) {
                     req.items.push(user.unwrap());
                 });
                 ajax({url: "/users", method: "DELETE", type: "application/x-protobuf", accept: "application/x-protobuf", data: pbs.UserList.encode(req).finish(), complete: function (data) {
-                        var rspInfo = pbs.RspInfo.decode(data);
+                        var rspInfo = bcs.RspInfo.decode(data);
                         toastShowCode(rspInfo.code);
-                        if (rspInfo.code === pbs.ReturnCode.OK) {
+                        if (rspInfo.code === bcs.ReturnCode.OK) {
                             getUser();
                         }
                     }
@@ -76,9 +76,9 @@
             }
             function doUpdateUser(user, callBack) {
                 ajax({url: "/users", method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: user.toArrayBuffer(), complete: function (data) {
-                        var rspInfo = pbs.RspInfo.decode(data);
+                        var rspInfo = bcs.RspInfo.decode(data);
                         toastShowCode(rspInfo.code);
-                        if (rspInfo.code === pbs.ReturnCode.OK) {
+                        if (rspInfo.code === bcs.ReturnCode.OK) {
                             getUser();
                             if (callBack) {
                                 callBack();
@@ -89,9 +89,9 @@
             }
             function doCreateUser(user, callBack) {
                 ajax({url: "/users/create", method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: user.toArrayBuffer(), complete: function (data) {
-                        var rspInfo = pbs.RspInfo.decode(data);
+                        var rspInfo = bcs.RspInfo.decode(data);
                         toastShowCode(rspInfo.code);
-                        if (rspInfo.code === pbs.ReturnCode.OK) {
+                        if (rspInfo.code === bcs.ReturnCode.OK) {
                             getUser();
                             if (callBack) {
                                 callBack();
@@ -102,7 +102,7 @@
             }
             function getUser() {
                 ajax({url: "/users/all/false", accept: "application/x-protobuf", complete: function (data) {
-                        var users = pbs.UserList.decode(data);
+                        var users = bcs.UserList.decode(data);
                         self.users(User.fromPbsUsers(users));
                     }
                 });

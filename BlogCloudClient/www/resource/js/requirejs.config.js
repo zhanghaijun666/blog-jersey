@@ -12,7 +12,7 @@ requirejs.config({
         "bcs": "static/resource/js/structure"
     },
     shim:{
-        "pbs":{
+        "bcs":{
             deps: ["protobufjs/light"]
         }
     }

@@ -11,7 +11,7 @@
 
             function init() {
                 ajax({url: "/menu/hash/home", accept: "application/x-protobuf", complete: function (data) {
-                        var menuList = pbs.MenuList.decode(data);
+                        var menuList = bcs.MenuList.decode(data);
                         var menuMap = {};
                         ko.utils.arrayForEach(menuList.items, function (menu) {
                             menu.name = l10n('menu.' + menu.name);
