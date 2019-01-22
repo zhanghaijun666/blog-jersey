@@ -1,6 +1,7 @@
 package com.server;
 
 import com.config.Configuration;
+import com.proto.ConfigStore;
 import com.server.filter.SecurityRequestFilter;
 import java.io.IOException;
 import java.net.URI;
@@ -15,9 +16,9 @@ import org.glassfish.jersey.simple.SimpleServer;
  */
 public class ServerMain {
 
-    public static final URI BASE_URI = UriBuilder.fromUri("http://0.0.0.0").port(8080).build();
-
     public static SimpleServer startServer() {
+        ConfigStore.Server configServer = Configuration.getInstance().getConfig().getServer();
+        final URI BASE_URI = UriBuilder.fromUri("http://" + configServer.getHost()).port(configServer.getPort()).build();
         final ResourceConfig resourceConfig = new ResourceConfig().packages("com.service");
         resourceConfig.register(SecurityRequestFilter.class);
         resourceConfig.register(RolesAllowedDynamicFeature.class);
