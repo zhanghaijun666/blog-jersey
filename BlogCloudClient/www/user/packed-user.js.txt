@@ -1,1 +1,1 @@
-./js/knockout-components.js
+js/knockout-components.js

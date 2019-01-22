@@ -1,8 +1,8 @@
-./protobuf.js
-./knockout.debug.js
-./knockout.validation.js
-./jquery-3.1.1.js
-./bootstrap/js/bootstrap.js
-./sammy.js
-./twaver/twaver.js
-./twaver/twaver-util.js
+protobuf.js
+knockout.debug.js
+knockout.validation.js
+jquery-3.1.1.js
+bootstrap/js/bootstrap.js
+sammy.js
+twaver/twaver.js
+twaver/twaver-util.js
