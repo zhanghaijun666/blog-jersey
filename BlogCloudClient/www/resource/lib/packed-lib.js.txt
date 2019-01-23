@@ -2,7 +2,7 @@
 ./knockout.debug.js
 ./knockout.validation.js
 ./jquery-3.1.1.js
-./bootstrap/js/bootstrap.js
+./bootstrap/js/bootstrap.min.js
 ./sammy.js
 ./twaver/twaver.js
 ./twaver/twaver-util.js
