@@ -10,9 +10,10 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -30,9 +31,19 @@ import org.simpleframework.http.Response;
 public class ResourceService {
 
     private static final byte[] NEWLINE = "\r\n".getBytes();
+    private static final byte[] READ_BUFFER = new byte[8192];
     private static final String WEB_DIR = Configuration.getInstance().getConfig().getWebDir();
-    private static final String WEB_DIR_USER = Configuration.getInstance().getWebDir("user");
-    private static final String WEB_DIR_ADMIN = Configuration.getInstance().getWebDir("admin");
+    private static final String WEB_DIR_USER;
+    private static final String WEB_DIR_ADMIN;
+
+    static {
+        String dir = WEB_DIR.substring(WEB_DIR.indexOf("/"));
+        if (!dir.endsWith("/")) {
+            dir += "/";
+        }
+        WEB_DIR_USER = dir + "user/";
+        WEB_DIR_ADMIN = dir + "admin/";
+    }
 
     @Inject
     Request req;
@@ -49,13 +60,13 @@ public class ResourceService {
     }
 
     @GET
-    public void index() {
+    public void index() throws IOException {
         getResource("packed-index.html");
     }
 
     @GET
     @Path("/static/{path: .*}")
-    public void getResource(@PathParam("path") String filePath) {
+    public void getResource(@PathParam("path") String filePath) throws IOException {
         AppSession session = (AppSession) security.getUserPrincipal();
         File file = new File(WEB_DIR, filePath);
         String contentType = FileUtils.getFileContentType(file);
@@ -63,38 +74,30 @@ public class ResourceService {
             res.setContentType(contentType);
         }
         try (OutputStream out = res.getOutputStream()) {
-            getResource(file, out, session);
-        } catch (IOException ex) {
-            throw new NotFoundException(file.getPath() + "is not found" + ex.getMessage());
+            writeResource(file, out, session);
         }
     }
 
-    public static void getResource(File file, final OutputStream out, AppSession session) {
-        try {
-            if (file.getCanonicalPath().contains(WEB_DIR_USER) && null == session) {
-                return;
-            }
-            if (file.getCanonicalPath().contains(WEB_DIR_ADMIN) && (null == session || session.getRoles().contains("admin"))) {
-                return;
-            }
-            writeFile(out, file, new byte[10240], session);
-        } catch (IOException ex) {
-            throw new NotFoundException(file.getPath() + "is not found" + ex.getMessage());
+    public void writeResource(File file, final OutputStream out, AppSession session) throws IOException {
+        if (file.getCanonicalPath().contains(WEB_DIR_USER) && null == session) {
+            return;
         }
-    }
-
-    private static void writeFile(final OutputStream out, File file, final byte[] buffer, AppSession session) throws IOException {
+        if (file.getCanonicalPath().contains(WEB_DIR_ADMIN) && (null == session || session.getRoles().contains("admin"))) {
+            return;
+        }
         if (file.getName().startsWith("packed-")) {
-            file = new File(file.getParent(), file.getName() + ".txt");
+            file = new File(file.getParentFile(), file.getName() + ".txt");
         }
         if (file.exists() && file.canRead()) {
+            System.out.println("writeResource()" + file.getCanonicalPath());
             if (file.getName().startsWith("packed-")) {
                 try (BufferedReader in = new BufferedReader(new FileReader(file))) {
                     String filePath;
                     while ((filePath = in.readLine()) != null) {
                         filePath = filePath.trim();
                         if (filePath.length() > 0 && !filePath.startsWith("#")) {
-                            getResource(new File(file.getParent(), filePath), out, session);
+                            File innerFile = new File(file.getParent(), filePath);
+                            writeResource(innerFile, out, session);
                             out.write(NEWLINE);
                         }
                     }
@@ -102,19 +105,19 @@ public class ResourceService {
             } else if (file.isDirectory()) {
                 File[] childFils = file.listFiles();
                 for (File childFile : childFils) {
-                    getResource(childFile, out, session);
+                    writeResource(childFile, out, session);
                     out.write(NEWLINE);
                 }
             } else {
                 try (BufferedInputStream innerStream = new BufferedInputStream(new FileInputStream(file))) {
                     int bytesSize;
-                    while ((bytesSize = innerStream.read(buffer)) != -1) {
-                        out.write(buffer, 0, bytesSize);
+                    while ((bytesSize = innerStream.read(READ_BUFFER)) != -1) {
+                        out.write(READ_BUFFER, 0, bytesSize);
                     }
                 }
             }
         } else {
-            System.out.println("com.service.ResourceService.writeFile()" + file.getPath());
+            Logger.getLogger(ResourceService.class.getName()).log(Level.SEVERE, "not foud resource file :{0}", file.getCanonicalPath());
         }
     }
 }
