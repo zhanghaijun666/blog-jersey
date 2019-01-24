@@ -31,7 +31,6 @@ import org.simpleframework.http.Response;
 public class ResourceService {
 
     private static final byte[] NEWLINE = "\r\n".getBytes();
-    private static final byte[] READ_BUFFER = new byte[8192];
     private static final String WEB_DIR = Configuration.getInstance().getConfig().getWebDir();
     private static final String WEB_DIR_USER;
     private static final String WEB_DIR_ADMIN;
@@ -46,9 +45,9 @@ public class ResourceService {
     }
 
     @Inject
-    Request req;
+    Request request;
     @Inject
-    Response res;
+    Response response;
     @Context
     SecurityContext security;
 
@@ -71,9 +70,9 @@ public class ResourceService {
         File file = new File(WEB_DIR, filePath);
         String contentType = FileUtils.getFileContentType(file);
         if (StringUtils.isNotBlank(contentType)) {
-            res.setContentType(contentType);
+            response.setContentType(contentType);
         }
-        try (OutputStream out = res.getOutputStream()) {
+        try (OutputStream out = response.getOutputStream()) {
             writeResource(file, out, session);
         }
     }
@@ -109,11 +108,13 @@ public class ResourceService {
                     out.write(NEWLINE);
                 }
             } else {
+                byte[] buffer = new byte[2048];
                 try (BufferedInputStream innerStream = new BufferedInputStream(new FileInputStream(file))) {
                     int bytesSize;
-                    while ((bytesSize = innerStream.read(READ_BUFFER)) != -1) {
-                        out.write(READ_BUFFER, 0, bytesSize);
+                    while ((bytesSize = innerStream.read(buffer)) != -1) {
+                        out.write(buffer, 0, bytesSize);
                     }
+                    out.flush();
                 }
             }
         } else {
