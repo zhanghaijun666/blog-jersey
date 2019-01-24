@@ -4,7 +4,6 @@ requirejs(["bcs", "protobufjs/light"], function (bcs, protobuf) {
         var self = this;
         window.rootView = self;
         self.page = ko.observable("page-home");
-        self.user = new User();
         self.isLogin = ko.observable(false);
         self.app = new SammyPage();
 

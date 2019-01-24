@@ -33,6 +33,15 @@ public class Configuration {
     public File getWebDir() {
         return webDir;
     }
+    
+    public String getWebDir(String path) {
+        String dir = getConfig().getWebDir();
+        if (dir.endsWith("/")) {
+            return webDir + path;
+        } else {
+            return dir + "/" + path;
+        }
+    }
 
     public long getSessionTimeoutMills() {
         return config.getSessionTimeout() * 1000;
