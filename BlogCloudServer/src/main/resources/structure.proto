@@ -63,22 +63,6 @@ message Menu{
 message MenuList {
     repeated Menu items = 1;
 }
-message Protein{
-    string id = 1;
-    string name = 2;
-    string family = 3;
-    string sort = 4;
-    repeated string sources = 5;
-    string sequence = 6;
-    string secondary = 7;
-    string tertiary = 8;
-    string go = 9;
-    repeated string kegg = 10;
-    string ppi = 11;
-}
-message ProteinList{
-    repeated Protein items = 1;
-}
 message RspInfo{
     ReturnCode code = 1;
     string msg = 2;

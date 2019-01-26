@@ -3375,7 +3375,6 @@ Namespace.prototype.add = function add(object) {
         this.nested = {};
     else {
         var prev = this.get(object.name);
-        console.log(object.name + "****" + prev);
         if (prev) {
             if (prev instanceof Namespace && object instanceof Namespace && !(prev instanceof Type || prev instanceof Service)) {
                 // replace plain namespace but keep existing nested elements and options

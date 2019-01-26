@@ -174,65 +174,6 @@
           }
         }
       },
-      Protein: {
-        fields: {
-          id: {
-            type: "string",
-            id: 1
-          },
-          name: {
-            type: "string",
-            id: 2
-          },
-          family: {
-            type: "string",
-            id: 3
-          },
-          sort: {
-            type: "string",
-            id: 4
-          },
-          sources: {
-            rule: "repeated",
-            type: "string",
-            id: 5
-          },
-          sequence: {
-            type: "string",
-            id: 6
-          },
-          secondary: {
-            type: "string",
-            id: 7
-          },
-          tertiary: {
-            type: "string",
-            id: 8
-          },
-          go: {
-            type: "string",
-            id: 9
-          },
-          kegg: {
-            rule: "repeated",
-            type: "string",
-            id: 10
-          },
-          ppi: {
-            type: "string",
-            id: 11
-          }
-        }
-      },
-      ProteinList: {
-        fields: {
-          items: {
-            rule: "repeated",
-            type: "Protein",
-            id: 1
-          }
-        }
-      },
       RspInfo: {
         fields: {
           code: {
