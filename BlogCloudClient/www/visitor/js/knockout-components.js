@@ -1,7 +1,6 @@
 //https://knockoutjs.com/documentation/component-overview.html
 (function (global, ko) {
 
-    ko.components.register('page-home', {require: 'static/visitor/components/page-home/home.js'});
     ko.components.register('home-nav-tabs', {require: 'static/visitor/components/home-nav-tabs/home-nav-tabs.js'});
 
     /* common or utils component start */
