@@ -34,9 +34,11 @@
     text-align: center;
 }
 .login-body>div{
-    width: 500px;
-    height: 400px;
+    width: 400px;
+    height: 300px;
     margin: auto auto;
     background: rgba(255,255,255,0.5);
+    border: 1px solid #eee;
+    border-radius: 4px;
 }
 /*------login end------*/
