@@ -4,7 +4,8 @@ js/return-code.js
 local/lang/en.js
 local/lang/zh-CN.js
 js/lang.js
-js/sammy.js
 js/requirejs.config.js
-../visitor/packed-visitor.js
-../user/packed-user.js
+js/view.js
+../visitor/js/
+../user/js/
+../admin/js/

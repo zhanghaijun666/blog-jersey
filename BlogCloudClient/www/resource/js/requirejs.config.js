@@ -18,7 +18,6 @@ requirejs.config({
     }
 });
 
-//保证所有的knockout实例都是同一个引用
 define("knockout", [], function () {
     return ko;
 });

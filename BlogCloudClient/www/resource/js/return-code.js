@@ -12,8 +12,8 @@
     global.toastShowCode = function (code) {
         toastShow({returnCode: code});
     };
-    global.toastShowMsg = function (code) {
-        toastShow({message: code});
+    global.toastShowMsg = function (Msg) {
+        toastShow({message: Msg});
     };
 
     function ToastRoot(options) {
