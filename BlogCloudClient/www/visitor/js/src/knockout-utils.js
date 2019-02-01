@@ -1,53 +1,46 @@
 (function (global, ko) {
-
     //深度克隆
-    function getDeepClone(obj) {
-        var result, oClass = getClass(obj);
-        //确定result的类型
-        if (oClass === "Object") {
-            result = {};
+    function deepClone(object, isUnwrapObservable) {
+        var result = {}, oClass = getClass(object);
+        if (oClass === "Observable") {
+            return isUnwrapObservable ? ko.unwrap(object) : ko.observable(ko.unwrap(object));
+        } else if (oClass === "Object" || oClass === "Array") {
+            ko.utils.arrayForEach(Object.keys(object), function (obj) {
+                result[obj] = deepClone(object[obj], isUnwrapObservable);
+            });
         } else if (oClass === "Array") {
-            result = [];
+            ko.utils.arrayForEach(object, function (obj) {
+                result[obj] = deepClone(object[obj], isUnwrapObservable);
+            });
         } else {
-            return obj;
-        }
-        for (let key in obj) {
-            var copy = obj[key];
-            if (getClass(copy) === "Object" || getClass(copy) === "Array") {
-                result[key] = arguments.callee(copy);//递归调用
-            } else {
-                result[key] = obj[key];
-            }
+            return object;
         }
         return result;
     }
     //返回对象的类型
     function getClass(o) {
+        if (ko.isObservable(o)) {
+            return "Observable";
+        }
         if (o === null) {
             return "Null";
         }
         if (o === undefined) {
             return "Undefined";
         }
-        //使用typeof（Array）返回的是object,所以不用typeof
+        //使用typeof（Array）返回的是objectect,所以不用typeof
         return Object.prototype.toString.call(o).slice(8, -1);
     }
 
 
 
 
-    function undeepObservableClone(item) {
-        item = ko.unwrap(item);
-        if (typeof item === 'undefined' || item === null) {
-            return null;
-        }
-    }
 
-
-
-
-
-
-
-
+    global.getClass = getClass;
+    global.getDeepClone = function (object) {
+        return deepClone(object, false);
+    };
+    ko.deepObservableClone = function (object) {
+        return deepClone(object, true);
+    };
 })(this, ko);

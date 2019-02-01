@@ -5,7 +5,6 @@ local/lang/en.js
 local/lang/zh-CN.js
 js/lang.js
 js/requirejs.config.js
-js/view.js
 ../visitor/js/
 ../user/js/
 ../admin/js/

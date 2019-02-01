@@ -1,6 +1,6 @@
 <template id="template-Blog-home">
-    <div class="home-header" data-bind="template: {name: 'template-Blog-home-header', data: {} }"></div>
-    <div class="home-body" data-bind="template: {name: 'template-login-page', data: {} }"></div>
+    <div class="home-header" data-bind="template: {name: 'template-Blog-home-header', data: $data }"></div>
+    <div class="home-body" data-bind="template: {name: 'template-login-page', data: $data }"></div>
     <!--    
     <div class="home-body" data-bind='component: {name: "custom-checkbox", params: {} }'></div>
     <div class="home-foot" data-bind='component: {name: "custom-checkbox", params: {} }'></div>
@@ -10,31 +10,31 @@
     <div class="login-body">
         <div>
             <h1 data-bind="text:l10n('user.login')"></h1>
-<!--            <div class="form-group input-group input-group-lg">
+            <div class="form-group input-group input-group-lg">
                 <span class="input-group-addon"><i class="fa fa-user fa-lg"></i></span>
-                <input type="text" class="form-control" placeholder="Username" data-bind="textInput: userName"/>
+                <input type="text" class="form-control" placeholder="Username" data-bind="textInput: user.username"/>
             </div>
             <div class="form-group input-group input-group-lg">
                 <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
-                <input type="password" class="form-control" placeholder="Password" data-bind="textInput: userPass"/>
+                <input type="password" class="form-control" placeholder="Password" data-bind="textInput: user.password"/>
             </div>
             <div class="form-group">
                 <label>
                     <input type="checkbox"/>
-                    <span data-bind="text:l10n('user.rememberMe'),value:rememberMe"></span>
+                    <span data-bind="text:l10n('user.rememberMe'),value: user.rememberMe"></span>
                 </label>
-                <a class="pull-right"><span data-bind="text:l10n('user.forgetPassword'),click:forgetPassword"></span></a>
+                <a class="pull-right"><span data-bind="text:l10n('user.forgetPassword'),click: LoginJs.forgetPassword"></span></a>
             </div>
             <div class="form-group" align="center">
-                <button class="btn-lg btn-success" data-bind="click: dologin">
+                <button class="btn-lg btn-success" data-bind="click: LoginJs.dologin">
                     <i class="fa fa-sign-in fa-lg"></i>
                     <span data-bind="text:l10n('user.login')"></span>
                 </button>
-                <button class="btn-lg btn-success" data-bind="click: function(){showRegisterPage(true);}">
+                <button class="btn-lg btn-success">
                     <i class="fa fa-registered fa-lg"></i>
                     <span data-bind="text:l10n('user.register')"></span>
                 </button>
-            </div>-->
+            </div>
         </div>
     </div>
     <div class="login-foot" data-bind="text: '版权归属'"></div>
