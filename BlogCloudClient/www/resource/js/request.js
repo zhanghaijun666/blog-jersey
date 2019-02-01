@@ -21,12 +21,12 @@ var requestValue = {
 
 function getRequest(url, options, callback, erroCallback) {
     var xhr = new XMLHttpRequest();
+    xhr.open(options.method || requestValue.method, url, options.async || requestValue.async);
     let accept = options.accept || requestValue.accept;
     xhr.timeout = options.timeout || requestValue.timeout;
     xhr.setRequestHeader("Accept", accept);
     xhr.responseType = options.responseType || accept.indexOf("text/") > -1 ? "text" : "arraybuffer";
-    xhr.open(options.method || requestValue.method, url, options.async || requestValue.async);
-
+    
     if (options.data) {
         xhr.setRequestHeader("Content-Type", options.type || requestValue["Content-Type"]);
         xhr.send(options.data);

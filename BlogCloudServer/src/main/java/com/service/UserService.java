@@ -27,7 +27,7 @@ import org.simpleframework.http.Response;
 /**
  * @author zhanghaijun
  */
-@Path("/users")
+@Path("/user")
 public class UserService {
 
     @Inject

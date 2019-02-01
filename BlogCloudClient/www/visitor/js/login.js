@@ -2,7 +2,12 @@
     function LoginJs() {
         var self = this;
         self.getUser = function () {
-
+            getRequest("/user", {accept: "application/x-protobuf"}, function (data) {
+                var user = bcstore.User.decode(data);
+                if (user.userId) {
+                    self.user.setData(new User(user));
+                }
+            });
         };
         self.dologin = function () {
 
