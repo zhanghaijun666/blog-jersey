@@ -1,5 +1,5 @@
-requirejs(["bcs", "protobufjs/light"], function (bcs, protobuf) {
-    window.bcs = bcs;
+requirejs(["bcstore", "protobufjs/light"], function (bcstore, protobuf) {
+    window.bcstore = bcstore;
     function RootView() {
         var self = this;
         window.rootView = self;

@@ -1,5 +1,5 @@
 js/dialog.js
-js/lang.js
+#js/lang.js
 js/view.js
 js/item-select.js
 js/knockout-components.js

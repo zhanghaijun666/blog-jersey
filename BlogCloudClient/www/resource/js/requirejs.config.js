@@ -9,22 +9,20 @@ requirejs.config({
     paths: {
         "text": "static/resource/require/text",
         "css": "static/resource/require/css",
-        "bcs": "static/resource/js/structure"
+        "bcstore": "static/resource/js/structure"
     },
-    shim:{
-        "bcs":{
+    shim: {
+        "bcstore": {
             deps: ["protobufjs/light"]
         }
     }
 });
 
 //保证所有的knockout实例都是同一个引用
-define("knockout",[],function(){
+define("knockout", [], function () {
     return ko;
 });
 
-define("protobufjs/light",[],function(){
+define("protobufjs/light", [], function () {
     return protobuf;
 });
-
-
