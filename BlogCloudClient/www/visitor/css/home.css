@@ -1,3 +1,13 @@
+/* 
+小屏幕（平板，大于等于 768px） 
+@media (min-width: @screen-sm-min) {}
+
+ 中等屏幕（桌面显示器，大于等于 992px） 
+@media (min-width: @screen-md-min) {}
+
+ 大屏幕（大桌面显示器，大于等于 1200px） 
+@media (min-width: @screen-lg-min) {}
+*/
 .home-header{
     position: absolute;
     width: 100%;
@@ -23,6 +33,10 @@
     width: 100%;
     height: 100%;
     background-image: url(/static/resource/images/blueback.png);
+    background-repeat: no-repeat; 
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    padding-top: 80px;
 }
 .login-foot{
     position: absolute;
@@ -34,11 +48,23 @@
     text-align: center;
 }
 .login-body>div{
-    width: 500px;
-    height: 400px;
-    margin: auto auto;
+    margin: auto;
     background: rgba(255,255,255,0.5);
-    border: 1px solid #eee;
-    border-radius: 4px;
 }
+@media screen and (min-width: 992px) {
+    .login-body>div{
+        width: 500px;
+        height: 400px;
+        border: 1px solid #eee;
+        border-radius: 4px;
+    }
+}
+@media screen and (max-width: 992px) {
+    .login-body>div{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
 /*------login end------*/
