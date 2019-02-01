@@ -1,6 +1,4 @@
 (function (global) {
-
-    var CODE = {};
     global.toastShow = function (options) {
         var toastEle = "<!-- ko template: 'template-toast' --><!-- /ko -->";
         var container = document.createElement("div");
@@ -14,8 +12,8 @@
     global.toastShowCode = function (code) {
         toastShow({returnCode: code});
     };
-    global.toastShowMsg = function (code) {
-        toastShow({message: code});
+    global.toastShowMsg = function (Msg) {
+        toastShow({message: Msg});
     };
 
     function ToastRoot(options) {

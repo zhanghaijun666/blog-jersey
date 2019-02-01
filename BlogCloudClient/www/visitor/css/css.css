@@ -1,3 +1,14 @@
+.toast-div{
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    width: 180px;
+    height: 90px;
+    margin: 0px;
+}
+.toast-div>.panel-body{
+    text-align: center;
+}
 /*.body_head{
     height: 50px;
     border-bottom: 1px solid #000;
@@ -32,14 +43,7 @@
 .dialog-header-text{
     margin: 0px 20px;
 }
-.toast-div{
-    position: absolute;
-    right: 10px;
-    bottom: 20px;
-    width: 210px;
-    height: 90px;
-    margin: 0px;
-}
+
 .span-button{
     border: 1px solid #ccc;
     border-radius: 4px;

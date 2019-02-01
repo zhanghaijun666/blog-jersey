@@ -1,2 +1,3 @@
-../visitor/packed-visitor.css
-../user/packed-user.css
+../visitor/css/
+../user/css/
+../admin/css/

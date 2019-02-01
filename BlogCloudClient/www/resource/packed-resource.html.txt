@@ -1,2 +1,3 @@
-../visitor/packed-visitor.html
-../user/packed-user.html
+../visitor/templates/
+../user/templates/
+../admin/templates/
