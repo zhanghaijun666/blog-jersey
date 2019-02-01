@@ -3,5 +3,6 @@ js/util.js
 js/return-code.js
 js/sammy.js
 js/requirejs.config.js
+js/structure.js
 ../visitor/packed-visitor.js
 ../user/packed-user.js
