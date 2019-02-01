@@ -36,7 +36,7 @@
     background-repeat: no-repeat; 
     background-size: 100% 100%;
     -moz-background-size: 100% 100%;
-    overflow: hidden;
+    overflow: auto;
 }
 .login-foot{
     position: absolute;
@@ -47,6 +47,7 @@
     border-top: 1px solid #eee;
     text-align: center;
     background-color: #eee;
+    z-index: 999;
 }
 .login-body>div{
     border-radius: 4px;
@@ -61,7 +62,7 @@
     }
     .login-body>div{
         width: 500px;
-        height: 400px;
+        height: 360px;
         border: 1px solid #eee;
         border-radius: 4px;
         padding: 20px 60px;
