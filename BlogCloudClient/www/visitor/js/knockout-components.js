@@ -27,6 +27,7 @@
 
     /* common or utils component end */
     /* action component start */
+    ko.components.register('login-page', {require: 'static/visitor/components/login/login.js'});
     ko.components.register('twaver-spring', {require: 'static/visitor/components/twaver/twaver-spring.js'});
 
     /* action component end */

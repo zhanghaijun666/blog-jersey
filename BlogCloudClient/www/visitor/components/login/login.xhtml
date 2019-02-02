@@ -1,0 +1,40 @@
+<div class="login-page" data-bind="template: { name: getTemplateName(), data: $data } "></div>
+<div class="login-foot" data-bind="text: '版权所有：******'"></div>
+<template id="login-template">
+    <div class="login-body">
+        <h1 data-bind="text:l10n('user.login')"></h1>
+        <div class="form-group input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-user fa-lg"></i></span>
+            <input type="text" class="form-control" placeholder="Username" data-bind="textInput: user().username"/>
+        </div>
+        <div class="form-group input-group input-group-lg">
+            <span class="input-group-addon"><i class="fa fa-lock fa-lg"></i></span>
+            <input type="password" class="form-control" placeholder="Password" data-bind="textInput: user().password"/>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox"/>
+                <span data-bind="text:l10n('user.rememberMe'),value: user().rememberMe"></span>
+            </label>
+            <a class="pull-right"><span data-bind="text:l10n('user.forgetPassword'),click: forgetPassword"></span></a>
+        </div>
+        <div class="form-group" align="center">
+            <button class="btn-lg btn-success" data-bind="click: dologin">
+                <i class="fa fa-sign-in fa-lg"></i>
+                <span data-bind="text:l10n('user.login')"></span>
+            </button>
+            <button class="btn-lg btn-success">
+                <i class="fa fa-registered fa-lg"></i>
+                <span data-bind="text:l10n('user.register')"></span>
+            </button>
+        </div>
+    </div>
+</template>
+
+<template id="register-template">
+
+</template>
+
+<template id="forgetpassword-template">
+
+</template>

@@ -4,12 +4,10 @@ requirejs(["bcstore"], function (bcstore) {
     function RootViewModel() {
         var self = this;
         window.RootView = self;
-        self.app = new SammyPage();
-        self.LoginJs = LoginJs();
-        
-        self.user = ko.observable(new User({}, true));
-        self.LoginJs.getUser();
-        
+        self.RootPage = ko.observable("login-page");
+        self.user = ko.observable();
+        self.app = new SammyPage({view: self});
+
     }
 
     ko.applyBindings(new RootViewModel());
