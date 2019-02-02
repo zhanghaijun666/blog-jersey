@@ -1,5 +1,5 @@
 (function (global) {
-    define(["knockout", "text!/static/components/home-nav-tabs/home-nav-tabs.xhtml", "css!/static/components/home-nav-tabs/home-nav-tabs.css"], function (ko, pageView) {
+    define(["knockout", "text!./home-nav-tabs.xhtml", "css!./home-nav-tabs.css"], function (ko, pageView) {
         function homeNavTabs(params, componentInfo) {
             var defaultMenuId = 0;
             var self = this;
@@ -10,27 +10,27 @@
             self.menuTabs = ko.observableArray([]);
 
             function init() {
-                ajax({url: "/menu/hash/home", accept: "application/x-protobuf", complete: function (data) {
-                        var menuList = bcs.MenuList.decode(data);
-                        var menuMap = {};
-                        ko.utils.arrayForEach(menuList.items, function (menu) {
-                            menu.name = l10n('menu.' + menu.name);
-                            if (menuMap[menu.parentId]) {
-                                menuMap[menu.parentId].push(menu);
-                            } else {
-                                menuMap[menu.parentId] = [menu];
-                            }
-                            if (menu.defaultShow && menu.component) {
-                                self.menuTabs.push(menu);
-                            }
-                        });
-                        if (menuMap && menuMap[defaultMenuId]) {
-                            ko.utils.arrayForEach(menuMap[defaultMenuId], function (menu) {
-                                menu.items = menuMap[menu.menuId];
-                                self.leftMenu.push(menu);
-                            });
+                getRequest("/menu/hash/home", {accept: "application/x-protobuf"}, function (data) {
+                    var menuList = bcstore.MenuList.decode(data);
+                    var menuMap = {};
+                    ko.utils.arrayForEach(menuList.items, function (menu) {
+                        menu.name = l10n('menu.' + menu.name);
+                        if (menuMap[menu.parentId]) {
+                            menuMap[menu.parentId].push(menu);
+                        } else {
+                            menuMap[menu.parentId] = [menu];
                         }
-                    }});
+                        if (menu.defaultShow && menu.component) {
+                            self.menuTabs.push(menu);
+                        }
+                    });
+                    if (menuMap && menuMap[defaultMenuId]) {
+                        ko.utils.arrayForEach(menuMap[defaultMenuId], function (menu) {
+                            menu.items = menuMap[menu.menuId];
+                            self.leftMenu.push(menu);
+                        });
+                    }
+                });
             }
             self.addMenuTabs = function (menu, event) {
                 if ($("#tab" + menu.menuId).length > 0) {

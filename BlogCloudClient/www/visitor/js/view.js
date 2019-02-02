@@ -16,6 +16,9 @@ requirejs(["bcstore"], function (bcstore) {
                 }
             });
         };
+        self.isLogin = function () {
+            return self.user() && self.user().userId && RootView.user().username();
+        };
 
 
         self.getUser();
