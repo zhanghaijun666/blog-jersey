@@ -2,6 +2,7 @@ package com.service;
 
 import com.config.Configuration;
 import com.server.AppSession;
+import com.server.BlogMediaType;
 import com.utils.FileUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -18,7 +19,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import org.apache.commons.lang.StringUtils;
 import org.simpleframework.http.Request;
@@ -53,7 +53,7 @@ public class ResourceService {
 
     @GET
     @Path("test")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(BlogMediaType.TEXT_PLAIN)
     public String getIt() {
         return "Got it!";
     }

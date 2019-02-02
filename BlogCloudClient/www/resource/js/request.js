@@ -53,29 +53,28 @@ function getRequest(url, options, callback, erroCallback) {
                 callback(result);
             }
         } else {
-            console.log(xhr.statusText);
             if (erroCallback) {
                 erroCallback();
             }
         }
     };
 
-// 请求成功回调函数
-    xhr.onload = e => {
-        console.log('request success');
-    };
-// 请求结束
-    xhr.onloadend = e => {
-        console.log('request loadend');
-    };
-// 请求出错
-    xhr.onerror = e => {
-        console.log('request error');
-    };
-// 请求超时
-    xhr.ontimeout = e => {
-        console.log('request timeout');
-    };
+//// 请求成功回调函数
+//    xhr.onload = e => {
+//        console.log('request success');
+//    };
+//// 请求结束
+//    xhr.onloadend = e => {
+//        console.log('request loadend');
+//    };
+//// 请求出错
+//    xhr.onerror = e => {
+//        console.log('request error');
+//    };
+//// 请求超时
+//    xhr.ontimeout = e => {
+//        console.log('request timeout');
+//    };
 
 
 

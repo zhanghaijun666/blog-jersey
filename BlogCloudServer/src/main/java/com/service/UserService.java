@@ -18,7 +18,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import org.apache.commons.lang3.StringUtils;
 import org.simpleframework.http.Request;
@@ -39,8 +38,8 @@ public class UserService {
 
     @POST
     @Path("/login")
-    @Consumes({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-    @Produces({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     public BlogStore.RspInfo login(BlogStore.User requestUser) {
         BlogStore.ReturnCode checkCode = LoginAuthenticator.authenticator(requestUser, response);
         return BlogStore.RspInfo.newBuilder().setCode(checkCode).build();
@@ -48,7 +47,7 @@ public class UserService {
 
     @GET
     @Path("/logout")
-    @Produces({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
     public BlogStore.RspInfo logout() {
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
@@ -60,8 +59,8 @@ public class UserService {
 
     @PUT
     @Path("/create")
-    @Consumes({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-    @Produces({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
     public BlogStore.RspInfo createNewUser(BlogStore.User user) {
         AppSession session = (AppSession) security.getUserPrincipal();
@@ -78,7 +77,7 @@ public class UserService {
 
     @GET
     @Path("/all/{isShowDeleted}")
-    @Produces({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
     public BlogStore.UserList getAllActiveUser(@PathParam("isShowDeleted") boolean isShowDeleted) {
         BlogStore.UserList.Builder users = BlogStore.UserList.newBuilder();
@@ -96,7 +95,7 @@ public class UserService {
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     public BlogStore.User getUser() {
         AppSession session = (AppSession) security.getUserPrincipal();
         if (null == session) {
@@ -106,8 +105,8 @@ public class UserService {
     }
 
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-    @Produces({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
     public BlogStore.RspInfo updataUser(BlogStore.User user) {
         AppSession session = (AppSession) security.getUserPrincipal();
@@ -127,8 +126,8 @@ public class UserService {
     }
 
     @DELETE
-    @Consumes({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-    @Produces({MediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
     public BlogStore.RspInfoList deleteUser(BlogStore.UserList users) {
         AppSession session = (AppSession) security.getUserPrincipal();
