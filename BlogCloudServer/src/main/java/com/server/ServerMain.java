@@ -2,6 +2,7 @@ package com.server;
 
 import ch.qos.logback.core.joran.spi.JoranException;
 import com.config.Configuration;
+import com.jersey.SimpleContainerFactory2;
 import com.proto.ConfigStore;
 import com.server.filter.SecurityRequestFilter;
 import java.io.IOException;
@@ -9,7 +10,6 @@ import java.net.URI;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
-import org.glassfish.jersey.simple.SimpleContainerFactory;
 import org.glassfish.jersey.simple.SimpleServer;
 
 /**
@@ -23,7 +23,7 @@ public class ServerMain {
         final ResourceConfig resourceConfig = new ResourceConfig().packages("com.service","com.jersey.provider");
         resourceConfig.register(SecurityRequestFilter.class);
         resourceConfig.register(RolesAllowedDynamicFeature.class);
-        return SimpleContainerFactory.create(BASE_URI, resourceConfig);
+        return SimpleContainerFactory2.create(BASE_URI, resourceConfig);
     }
 
     public static void main(String[] args) throws IOException, JoranException {

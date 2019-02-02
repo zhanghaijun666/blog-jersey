@@ -45,19 +45,18 @@ public class ProtobufWriter implements MessageBodyWriter<Message> {
 
     @Override
     public void writeTo(Message t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
-        entityStream.write(buffer.remove(t));
-//        byte[] b = buffer.remove(t);
-//        if (b == null) {
-//            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//            try {
-//                t.writeTo(baos);
-//                b = baos.toByteArray();
-//            } catch (IOException e) {
-//                b = new byte[0];
-//                LoggerFactory.getLogger(ProtobufWriter.class).warn("write protobuf message fail", e);
-//            }
-//        }
-//        entityStream.write(b);
+//        entityStream.write(buffer.remove(t));
+        byte[] b = buffer.remove(t);
+        if (b == null) {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try {
+                t.writeTo(baos);
+                b = baos.toByteArray();
+            } catch (IOException e) {
+                b = new byte[0];
+            }
+        }
+        entityStream.write(b);
     }
 
 }

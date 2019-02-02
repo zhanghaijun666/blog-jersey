@@ -5,8 +5,8 @@
  Description:	Validation Library for KnockoutJS							
  Version:		2.0.3											
  ===============================================================================
-https://www.bootcdn.cn/knockout-validation/
-https://cdn.bootcss.com/knockout-validation/2.0.3/knockout.validation.js
+ https://www.bootcdn.cn/knockout-validation/
+ https://cdn.bootcss.com/knockout-validation/2.0.3/knockout.validation.js
  */
 /*globals require: false, exports: false, define: false, ko: false */
 
@@ -573,7 +573,11 @@ https://cdn.bootcss.com/knockout-validation/2.0.3/knockout.validation.js
             insertValidationMessage: function (element) {
                 var span = document.createElement('SPAN');
                 span.className = utils.getConfigOptions(element).errorMessageClass;
-                utils.insertAfter(element, span);
+                if (element.parentNode) {
+                    utils.insertAfter(element.parentNode, span);
+                } else {
+                    utils.insertAfter(element, span);
+                }
                 return span;
             },
 

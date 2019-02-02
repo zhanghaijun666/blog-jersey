@@ -21,17 +21,13 @@
                 return "";
             };
 
-
-            self.getUser = function () {
-                getRequest("/user", {accept: "application/x-protobuf"}, function (data) {
-                    var user = bcstore.User.decode(data);
-                    if (user.userId) {
-                        self.user.setData(new User(user));
-                    }
-                });
-            };
-            self.dologin = function (user) {
-                getRequest("/user/login", {method: "POST", accept: "application/x-protobuf", type: "application/x-protobuf", data: user.toArrayBuffer()}, function (data) {
+            self.dologin = function () {
+                let errors = ko.validation.group(self.user());
+                if (errors().length !== 0) {
+                    errors.showAllMessages();
+                    return;
+                }
+                getRequest("/user/login", {method: "POST", accept: "application/x-protobuf", type: "application/x-protobuf", data: self.user().toArrayBuffer()}, function (data) {
                     var rspInfo = bcstore.RspInfo.decode(data);
                     toastShowCode(rspInfo.code);
                     if (rspInfo.code === bcstore.ReturnCode.OK) {
