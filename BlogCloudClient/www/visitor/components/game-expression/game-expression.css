@@ -1,0 +1,58 @@
+.expression-box{
+    width: 100%;
+    height: 100%;
+    position:relative;
+}
+.expression-top{
+    width: 100%;
+    height: 100px; 
+    text-align: center;
+    font-size: 25px; 
+    font-weight: 900;
+    border: 1px solid #000;
+    background-color: #2a2218;
+    color: #fff;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
+.expression-top>button{
+    width: 140px; 
+    height: 40px; 
+    border: 1px solid #241d13; 
+    background: #a73f2d; 
+    color: #fff; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    cursor:pointer;
+}
+.expression-bom{
+    background-color: #fff;
+    width: 100%; 
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    padding-top: 100px;
+    z-index: 1;
+}
+.expression-bom>div{
+    height: 100%;
+}
+.expression-bom .col-md-2{
+    border-right: 1px solid #2a2218;
+    padding: 10px;
+    line-height: 25px;
+}
+.expression-bom .col-md-10{
+    overflow: hidden;
+}
+.expression-bom .col-md-10 img{
+    width: 34px; 
+    height: 34px; 
+    cursor: pointer; 
+    position: absolute; 
+    left: 0px; 
+    top: 0px; 
+    display: none;
+}

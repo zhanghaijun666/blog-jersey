@@ -1,0 +1,15 @@
+<div class="expression-box" >
+    <div class="expression-top">
+        <p>你的鼠标有多快？ 游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让他掉下来！！ </p>
+        <button data-bind="click: starGame"><span data-bind="text: buttonName"></span></button>
+    </div>
+    <div class="expression-bom">
+        <div class="col-md-2">
+            <p>得分：<span data-bind="text: Score"></span>分</p>
+            <p>失分：<span data-bind="text: lose"></span>分</p>
+        </div>
+        <div class="col-md-10" onselectstart="return false">
+            <img ondragstart="return false"/>
+        </div>
+    </div>
+</div>
