@@ -6,13 +6,12 @@ requirejs(["bcstore"], function (bcstore) {
         window.RootView = self;
         self.RootPage = ko.observable();
         self.user = ko.observable();
-        self.app = new SammyPage({view: self});
-
         self.getUser = function () {
             getRequest("/user", {accept: "application/x-protobuf"}, function (data) {
                 var user = bcstore.User.decode(data);
                 if (user.userId) {
                     self.user(new User(user));
+                    self.app.refresh();
                 }
             });
         };
@@ -22,6 +21,7 @@ requirejs(["bcstore"], function (bcstore) {
 
 
         self.getUser();
+        self.app = new SammyPage({view: self});
     }
 
     ko.applyBindings(new RootViewModel());

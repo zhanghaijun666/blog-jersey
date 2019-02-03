@@ -1,6 +1,10 @@
 <template id="template-Blog-home">
     <div class="home-header" data-bind="template: { name: 'template-Blog-home-header', data: $data }"></div>
-    <div class="home-body" data-bind="component: { name: RootView.RootPage(), params: {} }"></div>
+    <div class="home-body">
+        <!-- ko if: RootView.RootPage() -->
+        <!-- ko component: { name: RootView.RootPage(), params: {} } --><!-- /ko -->
+        <!-- /ko -->
+    </div>
 </template>
 <template id="template-Blog-home-header">
     <header>
