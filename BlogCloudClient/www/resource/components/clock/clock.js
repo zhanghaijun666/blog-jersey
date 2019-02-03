@@ -3,19 +3,32 @@
         function ClockModel(params, componentInfo) {
             var self = this;
             self.imgArray = componentInfo.element.getElementsByTagName("img");
-            var nowDate = new Date();
-            self.prevtime = toZero(nowDate.getHours()) + toZero(nowDate.getMinutes()) + toZero(nowDate.getSeconds());
-            for (var i = 0; i < self.imgArray.length; i++) {
-                self.imgArray[i].src = "/static/resource/images/clock/" + self.prevtime.charAt(i) + ".png";
+            function initClock(){
+                var nowDate = new Date();
+                var prevtime = toZero(nowDate.getHours()) + toZero(nowDate.getMinutes()) + toZero(nowDate.getSeconds());
+                for (var i = 0; i < self.imgArray.length; i++) {
+                    self.imgArray[i].src = "/static/resource/images/clock/" + prevtime.charAt(i) + ".png";
+                }
             }
-
-            function renderingPage() {
-                var newNow = new Date();
-                var newTime = toZero(newNow.getHours()) + toZero(newNow.getMinutes()) + toZero(newNow.getSeconds());
-                toCom(self.prevtime, newTime);
-                self.prevtime = newTime;
-            }
-            setInterval(renderingPage, 1000);
+            initClock();
+            setInterval(initClock, 1000);
+            
+            
+            
+//            self.imgArray = componentInfo.element.getElementsByTagName("img");
+//            var nowDate = new Date();
+//            self.prevtime = toZero(nowDate.getHours()) + toZero(nowDate.getMinutes()) + toZero(nowDate.getSeconds());
+//            for (var i = 0; i < self.imgArray.length; i++) {
+//                self.imgArray[i].src = "/static/resource/images/clock/" + self.prevtime.charAt(i) + ".png";
+//            }
+//
+//            function renderingPage() {
+//                var newNow = new Date();
+//                var newTime = toZero(newNow.getHours()) + toZero(newNow.getMinutes()) + toZero(newNow.getSeconds());
+//                toCom(self.prevtime, newTime);
+//                self.prevtime = newTime;
+//            }
+//            setInterval(renderingPage, 1000);
 
             //每次清空数组里面的数据
             function toCom(oldTime, newTime) {
