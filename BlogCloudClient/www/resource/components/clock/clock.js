@@ -1,71 +1,49 @@
-(function (global) {
-    define(["knockout", "text!./clock.xhtml", "css!./clock.css"], function (ko, pageView) {
+(function () {
+    define(["text!./clock.xhtml", "css!./clock.css"], function (pageView) {
         function ClockModel(params, componentInfo) {
             var self = this;
             self.imgArray = componentInfo.element.getElementsByTagName("img");
+            var nowDate = new Date();
+            self.prevtime = toZero(nowDate.getHours()) + toZero(nowDate.getMinutes()) + toZero(nowDate.getSeconds());
+            for (var i = 0; i < self.imgArray.length; i++) {
+                self.imgArray[i].src = "/static/resource/images/clock/" + self.prevtime.charAt(i) + ".png";
+            }
 
             function renderingPage() {
-                self.nowDate = new Date();
-                var prevtime = toZero(self.nowDate.getHours()) + toZero(self.nowDate.getMinutes()) + toZero(self.nowDate.getSeconds());
-                for (var i = 0; i < self.imgArray.length; i++) {
-                    self.imgArray[i].src = "/static/resource/images/clock/" + prevtime.charAt(i) + ".png";
-                }
+                var newNow = new Date();
+                var newTime = toZero(newNow.getHours()) + toZero(newNow.getMinutes()) + toZero(newNow.getSeconds());
+                toCom(self.prevtime, newTime);
+                self.prevtime = newTime;
             }
             setInterval(renderingPage, 1000);
-            renderingPage();
 
-
-
-
-            function initClock() {
-                var aImg = document.getElementById("clock").getElementsByTagName("img");
-                var now = new Date();
-                var prevtime = toZero(now.getHours()) + toZero(now.getMinutes()) + toZero(now.getSeconds());
-                var nexttime = "";
+            //每次清空数组里面的数据
+            function toCom(oldTime, newTime) {
                 var arr = [];
-                var timer = null;
-
-
-                for (var i = 0; i < aImg.length; i++) {
-                    aImg[i].src = "./images/" + prevtime.charAt(i) + ".png";
+                for (var i = 0; i < oldTime.length; i++) {
+                    if (oldTime.charAt(i) !== newTime.charAt(i)) {
+                        arr.push(i);
+                    }
                 }
-                setInterval(toChange, 1000);
-                function toChange() {
-                    var date = new Date();
-                    nexttime = toZero(date.getHours()) + toZero(date.getMinutes()) + toZero(date.getSeconds());
-                    toCom(prevtime, nexttime);
-                    prevtime = nexttime;
-                }
-
-                function toCom(str1, str2) {
-                    //每次清空数组里面的数据
-                    arr = [];
-                    for (var i = 0; i < str1.length; i++) {
-                        if (str1.charAt(i) != str2.charAt(i)) {
-                            arr.push(i);
+                startMove(arr, newTime);
+            }
+            //上下翻转效果：利用数字高度减少至0再增加回来实现视觉差翻转
+            function startMove(arr, newTime) {
+                var speed = -4;
+                timer = setInterval(function () {
+                    for (var i = 0; i < arr.length; i++) {
+                        if (self.imgArray[arr[i]].offsetHeight === 0) {
+                            speed = 4;
+                            self.imgArray[arr[i]].src = "/static/resource/images/clock/" + newTime.charAt(arr[i]) + ".png"
+                        }
+                        //改变数字高度时默认向底线减少，所以手动改变数字的top向上移动
+                        self.imgArray[arr[i]].style.height = self.imgArray[arr[i]].offsetHeight + speed + "px";
+                        self.imgArray[arr[i]].style.top = self.imgArray[arr[i]].offsetHeight / 2 - 18 + "px";
+                        if (self.imgArray[arr[i]].offsetHeight === 36) {
+                            clearInterval(timer);
                         }
                     }
-                    startMove();
-                }
-                //上下翻转效果：利用数字高度减少至0再增加回来实现视觉差翻转
-                function startMove() {
-                    var speed = -4;
-                    timer = setInterval(function () {
-                        for (var i = 0; i < arr.length; i++) {
-                            if (aImg[arr[i]].offsetHeight === 0) {
-                                speed = 4;
-                                aImg[arr[i]].src = "./images/" + nexttime.charAt(arr[i]) + ".png"
-                            }
-                            //改变数字高度时默认向底线减少，所以手动改变数字的top向上移动
-                            aImg[arr[i]].style.height = aImg[arr[i]].offsetHeight + speed + "px";
-                            aImg[arr[i]].style.top = aImg[arr[i]].offsetHeight / 2 - 18 + "px";
-                            if (aImg[arr[i]].offsetHeight === 36) {
-                                clearInterval(timer);
-                            }
-                        }
-                    }, 10);
-                }
-
+                }, 10);
             }
             //补0操作，保证数字一直为六位数
             function toZero(num) {
@@ -85,4 +63,4 @@
             template: pageView
         };
     });
-})(this);
+})();
