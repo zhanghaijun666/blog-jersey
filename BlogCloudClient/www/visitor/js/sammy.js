@@ -7,7 +7,7 @@ function SammyPage(options) {
         });
 
         this.get("#home", function () {
-            root.RootPage("login-page");
+            root.RootPage("home-nav-tabs");
         });
         this.get("#login", function () {
             root.RootPage("login-page");

@@ -1,4 +1,4 @@
-<div class="body_body">
+<div class="nav_body">
     <div class="col-md-2 leftMenu">
         <div class="table-responsive" role="tablist" data-bind="foreach: leftMenu">
             <div class="panel panel-default collapsebox" style="margin-bottom: 0px;">
@@ -30,7 +30,7 @@
         </ul>
         <div class="tab-content" data-bind="foreach: {data: menuTabs, afterRenderAll: function(){$component.contentAfterRender($element)} }">
             <div role="tabpanel" class="tab-pane fade" data-bind="attr: { id: 'content'+$data.menuId}">
-                <!-- ko component: $data.component --><!-- /ko -->
+                <!-- ko template: $data.template --><!-- /ko -->
             </div>
         </div>
     </div>

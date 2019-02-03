@@ -54,7 +54,7 @@ message Menu{
     int32 parent_id = 2;
     string name = 3;
     string icon = 4;
-    string component = 5; 
+    string template = 5; 
     string hash = 6; 
     bool deletable = 7; 
     bool defaultShow = 8;

@@ -27,8 +27,8 @@ public class Menu extends CommonModel {
         return BasicConvertUtils.toString(getString("icon"), "");
     }
 
-    public String getComponent() {
-        return BasicConvertUtils.toString(getString("component"), "");
+    public String getTemplate() {
+        return BasicConvertUtils.toString(getString("template"), "");
     }
 
     public String getHash() {
@@ -56,7 +56,7 @@ public class Menu extends CommonModel {
                 .setParentId(menu.getParentId())
                 .setName(menu.getName())
                 .setIcon(menu.getIcon())
-                .setComponent(menu.getComponent())
+                .setTemplate(menu.getTemplate())
                 .setHash(menu.getHash())
                 .setDeletable(menu.isDeletable())
                 .setDefaultShow(menu.isDefaultShow())
@@ -71,7 +71,7 @@ public class Menu extends CommonModel {
         }
         dbMenu.setInteger("parent_id", menu.getParentId());
         dbMenu.setString("icon", menu.getIcon());
-        dbMenu.setString("component", menu.getComponent());
+        dbMenu.setString("template", menu.getTemplate());
         dbMenu.setString("hash", menu.getHash());
         dbMenu.setBoolean("deletable", menu.getDeletable());
         dbMenu.setBoolean("default_show", menu.getDefaultShow());
