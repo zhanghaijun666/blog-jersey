@@ -1,0 +1,14 @@
+.clock-body{
+    width: 100%;
+    height: 100%;
+    background: #666;
+    text-align: center;
+}
+.clock-body>img{
+    width: 25px; height: 36px;
+    margin: 0 2px;
+}
+.clock-body>span{
+    font-size: 30px;
+    color: #aaa;
+}

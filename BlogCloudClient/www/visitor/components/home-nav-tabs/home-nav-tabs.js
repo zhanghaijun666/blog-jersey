@@ -10,7 +10,7 @@
             self.menuTabs = ko.observableArray([]);
 
             function init() {
-                getRequest("/menu/hash/home", {accept: "application/x-protobuf"}, function (data) {
+                getRequest("/menu/hash/" + RootView.getHome(), {accept: "application/x-protobuf"}, function (data) {
                     var menuList = bcstore.MenuList.decode(data);
                     var menuMap = {};
                     ko.utils.arrayForEach(menuList.items, function (menu) {
@@ -20,7 +20,7 @@
                         } else {
                             menuMap[menu.parentId] = [menu];
                         }
-                        if (menu.defaultShow && menu.component) {
+                        if (menu.defaultShow && menu.template) {
                             self.menuTabs.push(menu);
                         }
                     });

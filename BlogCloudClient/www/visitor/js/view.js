@@ -18,6 +18,15 @@ requirejs(["bcstore"], function (bcstore) {
         self.isLogin = function () {
             return self.user() && self.user().userId && RootView.user().username();
         };
+        self.getHome = function (localhash) {
+            var regExp = /^#([^/?]+)/;
+            var hash = localhash || window.location.hash;
+            if (regExp.test(hash)) {
+                return regExp.exec(hash)[1];
+            } else {
+                return "";
+            }
+        };
 
 
         self.getUser();

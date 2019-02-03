@@ -21,4 +21,6 @@
     ko.components.register('drop-down', {require: 'static/resource/components/drop-down/dropdown.js'});
     ko.components.register('custom-table', {require: 'static/resource/components/custom-table/custom-table.js'});
 
+    ko.components.register('clock', {require: 'static/resource/components/clock/clock.js'});
+
 })(this, ko);
