@@ -37,5 +37,9 @@
     padding: 0px;
 }
 .user-info span.validationMessage{
-    float: right;
+    margin-top: -15px;
+    display: block;
+    margin-bottom: 15px;
+    color: red;
+    padding-left: 80px;
 }

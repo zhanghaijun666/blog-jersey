@@ -78,10 +78,10 @@ public class ResourceService {
     }
 
     public void writeResource(File file, final OutputStream out, AppSession session) throws IOException {
-        if (file.getCanonicalPath().contains(WEB_DIR_USER) && null == session) {
+        if (file.getCanonicalPath().contains(WEB_DIR_USER) && (null == session || !session.getRoles().contains("user"))) {
             return;
         }
-        if (file.getCanonicalPath().contains(WEB_DIR_ADMIN) && (null == session || session.getRoles().contains("admin"))) {
+        if (file.getCanonicalPath().contains(WEB_DIR_ADMIN) && (null == session || !session.getRoles().contains("admin"))) {
             return;
         }
         if (file.getName().startsWith("packed-")) {

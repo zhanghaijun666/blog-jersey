@@ -61,54 +61,47 @@
                     }}, {user: item}));
             }
             function doDeleteUser(users) {
-                var req = bcs.UserList.create();
+                var req = bcstore.UserList.create();
                 ko.utils.arrayForEach(users, function (user) {
                     req.items.push(user.unwrap());
                 });
-//                getRequest("/user", {accept: "application/x-protobuf"}, function (data) {
-//                    
-//                });
-//                ajax({url: "/users", method: "DELETE", type: "application/x-protobuf", accept: "application/x-protobuf", data: pbs.UserList.encode(req).finish(), complete: function (data) {
-//                        var rspInfo = bcs.RspInfo.decode(data);
-//                        toastShowCode(rspInfo.code);
-//                        if (rspInfo.code === bcs.ReturnCode.OK) {
-//                            getUser();
-//                        }
-//                    }
-//                });
+                getRequest("/user", {method: "DELETE", type: "application/x-protobuf", accept: "application/x-protobuf", data: bcstore.UserList.encode(req).finish()}, function (data) {
+                    var rspInfo = bcstore.RspInfo.decode(data);
+                    toastShowCode(rspInfo.code);
+                    if (rspInfo.code === bcstore.ReturnCode.OK) {
+                        getUser();
+                    }
+                });
             }
             function doUpdateUser(user, callBack) {
-//                ajax({url: "/users", method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: user.toArrayBuffer(), complete: function (data) {
-//                        var rspInfo = bcs.RspInfo.decode(data);
-//                        toastShowCode(rspInfo.code);
-//                        if (rspInfo.code === bcs.ReturnCode.OK) {
-//                            getUser();
-//                            if (callBack) {
-//                                callBack();
-//                            }
-//                        }
-//                    }
-//                });
+                getRequest("/user", {method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: user.toArrayBuffer()}, function (data) {
+                    var rspInfo = bcstore.RspInfo.decode(data);
+                    toastShowCode(rspInfo.code);
+                    if (rspInfo.code === bcstore.ReturnCode.OK) {
+                        getUser();
+                        if (callBack) {
+                            callBack();
+                        }
+                    }
+                });
             }
             function doCreateUser(user, callBack) {
-//                ajax({url: "/users/create", method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: user.toArrayBuffer(), complete: function (data) {
-//                        var rspInfo = bcs.RspInfo.decode(data);
-//                        toastShowCode(rspInfo.code);
-//                        if (rspInfo.code === bcs.ReturnCode.OK) {
-//                            getUser();
-//                            if (callBack) {
-//                                callBack();
-//                            }
-//                        }
-//                    }
-//                });
+                getRequest("/user/create", {method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: user.toArrayBuffer()}, function (data) {
+                    var rspInfo = bcstore.RspInfo.decode(data);
+                    toastShowCode(rspInfo.code);
+                    if (rspInfo.code === bcstore.ReturnCode.OK) {
+                        getUser();
+                        if (callBack) {
+                            callBack();
+                        }
+                    }
+                });
             }
             function getUser() {
-//                ajax({url: "/users/all/false", accept: "application/x-protobuf", complete: function (data) {
-//                        var users = bcs.UserList.decode(data);
-//                        self.users(User.fromPbsUsers(users));
-//                    }
-//                });
+                getRequest("/user/all/false", {accept: "application/x-protobuf"}, function (data) {
+                    var users = bcstore.UserList.decode(data);
+                    self.users(User.fromPbsUsers(users));
+                });
             }
             initMOdel();
         }
