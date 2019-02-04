@@ -10,7 +10,7 @@
             self.menuTabs = ko.observableArray([]);
 
             function init() {
-                getRequest("/menu/hash/" + RootView.getHome(), {accept: "application/x-protobuf"}, function (data) {
+                getRequest("/menu/hash/" + RootView.getHash(), {accept: "application/x-protobuf"}, function (data) {
                     var menuList = bcstore.MenuList.decode(data);
                     var menuMap = {};
                     ko.utils.arrayForEach(menuList.items, function (menu) {

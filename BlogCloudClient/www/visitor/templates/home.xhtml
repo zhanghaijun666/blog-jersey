@@ -6,9 +6,19 @@
         <!-- /ko -->
     </div>
 </template>
+<template id="navigator-template">
+    <ul class="navigator">
+        <li class="active"><i class="fa fa-book"></i><span data-bind="text: '我的博客'"></span></li>
+        <li><i class="fa fa-comments-o"></i><span data-bind="text: '消息'"></span></li>
+        <li><i class="fa fa-coffee"></i><span data-bind="text: '系统管理'"></span></li>
+    </ul>
+</template>
 <template id="template-Blog-home-header">
-    <div class="col-md-2 logo-body"></div>
-    <div class="col-md-8 home-title-body"></div>
+    <div class="col-md-2 logo-body">
+        <img src="/static/resource/images/logo.png" width="70px" height="50px" alt="logo"/>
+        <span data-bind="text: '晨谨知识库'"></span>
+    </div>
+    <div class="col-md-8 home-title-body" data-bind="template: 'navigator-template'"></div>
     <div class="col-md-2 blog-clock" data-bind="component: 'clock'"></div>
     <!--    
     <header>

@@ -22,6 +22,11 @@
 }
 .logo-body{
     border-right: 1px solid #eee;
+    text-align: center;
+}
+.logo-body>span{
+    font-size: 20px;
+    margin-left: 10px;
 }
 .home-title-body{
 
