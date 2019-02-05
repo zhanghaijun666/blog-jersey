@@ -26,8 +26,8 @@ public class SessionFactory {
         return BlogUtils.sha1Hex(sessionId);
     }
 
-    public AppSession createSession(User user) {
-        AppSession session = new AppSession(generatorSessionId(), user.getUserId(), user.getUsername());
+    public AppSession createSession(User user, Boolean isRememberMe) {
+        AppSession session = new AppSession(generatorSessionId(), user.getUserId(), user.getUsername(), isRememberMe);
         LOGIN_APPSESSIONS.put(session.getId(), session);
         return session;
     }

@@ -11,7 +11,7 @@
             };
             var self = $.extend(this, defaultValue, params);
 
-            self.users = ko.observableArray([]);
+            self.userList = ko.observableArray([]);
             function initMOdel() {
                 getUser();
                 self.userOperateMenu = [
@@ -99,8 +99,12 @@
             }
             function getUser() {
                 getRequest("/user/all/false", {accept: "application/x-protobuf"}, function (data) {
-                    var users = bcstore.UserList.decode(data);
-                    self.users(User.fromPbsUsers(users));
+                    let userList = bcstore.UserList.decode(data);
+                    if (userList && userList.items) {
+                        userList.items.forEach(function (item) {
+                            self.userList.push(new User(item));
+                        });
+                    }
                 });
             }
             initMOdel();

@@ -7,12 +7,16 @@ import java.security.Principal;
 import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
+import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.ext.Provider;
 import org.simpleframework.http.Request;
 
 /**
  * @author haijun.zhang
  */
+@Provider
+@PreMatching
 public class SecurityRequestFilter implements ContainerRequestFilter {
 
     @Inject

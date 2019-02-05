@@ -26,16 +26,22 @@ public class AppSession implements Principal, HttpSession {
     private final int userId;
     private final String username;
     private List<String> roles;
+    private final Boolean isRememberMe;
 
-    public AppSession(String sessionId, int userId, String username) {
+    public AppSession(String sessionId, int userId, String username, Boolean isRememberMe) {
         this.lastAccessedTime = this.creationTime = System.currentTimeMillis();
         this.sessionId = sessionId;
         this.userId = userId;
         this.username = username;
+        this.isRememberMe = isRememberMe;
     }
 
     public boolean isAlive() {
-        return System.currentTimeMillis() - lastAccessedTime < Configuration.getInstance().getSessionTimeoutMills();
+        if (isRememberMe) {
+            return true;
+        } else {
+            return System.currentTimeMillis() - lastAccessedTime < Configuration.getInstance().getSessionTimeoutMills();
+        }
     }
 
     public void touch() {

@@ -18,7 +18,15 @@
         <img src="/static/resource/images/logo.png" width="70px" height="50px" alt="logo"/>
         <span data-bind="text: '晨谨知识库'"></span>
     </div>
-    <div class="col-md-8 home-title-body" data-bind="template: 'navigator-template'"></div>
+    <div class="col-md-8 home-title-body">
+        <div class="pull-left" data-bind="template: {name: 'navigator-template', data: {}}"></div>
+        <div class="pull-right">
+            <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
+            <!-- ko if: RootView.isLogin() -->
+            <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
+            <!-- /ko -->
+        </div>
+    </div>
     <div class="col-md-2 blog-clock" data-bind="component: 'clock'"></div>
     <!--    
     <header>

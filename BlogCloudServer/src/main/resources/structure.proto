@@ -35,6 +35,10 @@ message User{
     int32 status = 7;
     int32 userId = 8;
     int32 authenticator = 9;
+    bool rememberMe = 10;
+}
+message UserList {
+    repeated User items = 1;
 }
 message Role{
     int32 id = 1;
@@ -42,9 +46,6 @@ message Role{
     string note = 3;
     int32 status = 4;
     string icon = 5;
-}
-message UserList {
-    repeated User items = 1;
 }
 message RoleList{
     repeated Role items = 1;

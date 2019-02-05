@@ -29,7 +29,10 @@
     margin-left: 10px;
 }
 .home-title-body{
-
+    
+}
+.home-title-body>div{
+    height: 100%;
 }
 .blog-clock{
     border-left: 1px solid #eee;

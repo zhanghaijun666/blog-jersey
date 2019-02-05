@@ -35,7 +35,7 @@ public class LoginAuthenticator {
         if (null == dbUser) {
             return BlogStore.ReturnCode.USER_EMPTY;
         }
-        AppSession session = SessionFactory.instance().createSession(dbUser);
+        AppSession session = SessionFactory.instance().createSession(dbUser, requestUser.getRememberMe());
         response.setCookie("session", session.getId());
         return BlogStore.ReturnCode.OK;
     }

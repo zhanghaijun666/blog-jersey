@@ -7,7 +7,7 @@
                 menuClick: function () {},
                 dropdownCss: '',
                 isShowSelect: true,
-                isSingleSelected: true,
+                isSingleSelected: true
             };
             var self = $.extend(this, defaultValue, params);
 

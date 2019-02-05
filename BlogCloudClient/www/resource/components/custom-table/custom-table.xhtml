@@ -40,10 +40,10 @@
             </td>
             <td class="custom-card-content">
                 <span class="custom-card-icon"><i class="fa" data-bind="css: $data.role.icon || 'fa-user' "></i></span>
-                <!-- ko if: $data.status === bcs.Status.StatusDeleted -->
+                <!-- ko if: $data.status === bcstore.Status.StatusDeleted -->
                 <del data-bind="text: $data.getFullName() "></del>
                 <!-- /ko -->
-                <!-- ko ifnot: $data.status === bcs.Status.StatusDeleted -->
+                <!-- ko ifnot: $data.status === bcstore.Status.StatusDeleted -->
                 <span data-bind="text: $data.getFullName() "></span>
                 <!-- /ko -->
             </td>

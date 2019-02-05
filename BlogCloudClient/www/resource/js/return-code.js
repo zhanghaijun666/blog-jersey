@@ -25,8 +25,8 @@
 
     }
     ToastRoot.prototype.getMessage = function () {
-        if (this.returnCode && window.bcs) {
-            return l10n('returnCode.' + window.bcs.lookupEnum("ReturnCode").valuesById[this.returnCode].toLowerCase());
+        if (this.returnCode && window.bcstore) {
+            return l10n('returnCode.' + bcstore.lookupEnum("ReturnCode").valuesById[this.returnCode].toLowerCase());
         } else {
             return this.message;
         }

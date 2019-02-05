@@ -44,6 +44,12 @@ requirejs(["bcstore"], function (bcstore) {
             {text: '消息', icon: 'fa-comments-o', click: function () {}, isSelect: function () {}},
             {text: '系统管理', icon: 'fa-coffee', click: function () {}, isSelect: function () {}}
         ];
+        self.PersonalCenter = [
+            new DropdownMenu(l10n('user.userName'), {icon: 'fa-user', select: true}),
+            new DropdownMenu(l10n('user.userNick'), {icon: 'fa-user'}),
+            new DropdownMenu(l10n('user.userMail'), {icon: 'fa-envelope-o'}),
+            new DropdownMenu(l10n('user.userPhone'), {icon: 'fa-phone'})
+        ];
 
 
         self.getUser();
