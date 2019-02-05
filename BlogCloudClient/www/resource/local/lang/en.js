@@ -32,6 +32,19 @@
             "edit": "Edit",
             "delete": "Delete",
             "pwdNotSame": "Password is not the same"
+        }, "menu": {
+            "user-list": "System User",
+            "user-all": "All User",
+            "twaver": "Topology",
+            "twaver-spring": "spring Twaver",
+            "expression": "Expression",
+            "game-expression": "Expression",
+            "all-university": "University"
+        }, "operate": {
+            "tips": "Tips",
+            "confirmDelete": "Confirm Deletion ?",
+            "delete": "Delete",
+            "edit": "Edit"
         }, "tab": {
             "return": "Return"
         }, "returnCode": {
@@ -41,18 +54,11 @@
             "password_error": "Password error",
             "username_or_password_is_empty": "Null username or password",
             "not_yourself": "Can't be yourself"
-        }, "menu": {
-            "user-list": "System User",
-            "user-all": "All User",
-            "protein-list": "Proteins",
-            "protein-all": "All Protein",
-            "twaver": "Topology",
-            "twaver-spring": "Protein"
-        }, "operate": {
-            "tips": "Tips",
-            "confirmDelete": "Confirm Deletion ?",
-            "delete": "Delete",
-            "edit": "Edit"
+        }, "validation": {
+            "nameEmpty": "name is required.",
+            "passwordEmpty": "password is required.",
+            "emailError": "Please enter a proper email address.",
+            "phoneError": "Please specify a valid phone number."
         }
     };
 })(window);

@@ -31,6 +31,19 @@
             "edit": "修改",
             "delete": "删除",
             "pwdNotSame": "两次输入的密码不一致，请重新输入"
+        }, "menu": {
+            "user-list": "系统用户",
+            "user-all": "成员信息",
+            "twaver": "拓扑图",
+            "twaver-spring": "拓扑图",
+            "expression": "Demo实例",
+            "game-expression": "表情游戏",
+            "all-university": "高等学府"
+        }, "operate": {
+            "tips": "提示",
+            "confirmDelete": "确定删除？",
+            "delete": "删除",
+            "edit": "编辑"
         }, "tab": {
             "return": "返回"
         }, "returnCode": {
@@ -40,18 +53,11 @@
             "password_error": "密码错误",
             "username_or_password_is_empty": "用户名或密码为空",
             "not_yourself": "不能是自己"
-        }, "menu": {
-            "user-list": "系统用户",
-            "user-all": "成员信息",
-            "protein-list": "蛋白列表",
-            "protein-all": "全部蛋白",
-            "twaver": "拓扑图",
-            "twaver-spring": "蛋白拓扑图"
-        }, "operate": {
-            "tips": "提示",
-            "confirmDelete": "确定删除？",
-            "delete": "删除",
-            "edit": "编辑"
+        }, "validation": {
+            "nameEmpty": "用户名称不能为空",
+            "passwordEmpty": "密码不能为空",
+            "emailError": "非法的邮箱地址",
+            "phoneError": "非法的电话号码"
         }
     };
 })(window);

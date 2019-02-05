@@ -42,9 +42,8 @@
                 });
             };
             function userInfoDialog(user = {}, callback){
-                let item = new User(user);
-                User.addVerification(item);
-                item.confirmPassword = ko.observable("").extend({equal: {params: item.password(), message: l10n("user.pwdNotSame")}});
+                let item = new User(user, true);
+                item.confirmPassword = ko.observable("").extend({equal: {params: item.password, message: l10n("user.pwdNotSame")}});
                 showDialog($.extend({
                     header: l10n("user.userInfo"),
                     bodyTemplate: "template-user-info",
@@ -101,6 +100,7 @@
                 getRequest("/user/all/false", {accept: "application/x-protobuf"}, function (data) {
                     let userList = bcstore.UserList.decode(data);
                     if (userList && userList.items) {
+                        self.userList().length = 0;
                         userList.items.forEach(function (item) {
                             self.userList.push(new User(item));
                         });
