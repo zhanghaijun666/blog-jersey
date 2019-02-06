@@ -26,27 +26,7 @@
             <column name="updated_by" type = "int" />
         </createTable>
     </changeSet>
-    <changeSet id="create-table-menus" author="zhanghaijun">
-        <createTable tableName="menus">
-            <column name="id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="parent_id" type="int" defaultValueNumeric="0"/>
-            <column name="name" type="varchar(50)"/>
-            <column name="icon" type="varchar(50)"/>
-            <column name="template" type="varchar(50)"/>
-            <column name="hash" type="varchar(50)"/>
-            <column name="deletable" type="boolean" defaultValueBoolean="true"/>
-            <column name="default_show" type="boolean" defaultValueBoolean="false"/>
-            <column name="role_id" type="int"/>
-            
-            <column name="status" type="int" defaultValueNumeric="0"/>
-            <column name="created_at" type="datetime" />
-            <column name="created_by" type = "int" />
-            <column name="updated_at" type="datetime" />
-            <column name="updated_by" type = "int" />
-        </createTable>
-    </changeSet>
+    
     <changeSet id="create-table-roles" author="zhanghaijun" >
         <createTable tableName="roles" >
             <column name="id" type="int" autoIncrement="true">

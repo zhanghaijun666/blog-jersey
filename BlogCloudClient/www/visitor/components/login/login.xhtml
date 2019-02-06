@@ -13,8 +13,8 @@
         </div>
         <div class="form-group">
             <label>
-                <input type="checkbox"/>
-                <span data-bind="text:l10n('user.rememberMe'),value: user().rememberMe"></span>
+                <input type="checkbox" data-bind="checked: user().rememberMe"/>
+                <span data-bind="text:l10n('user.rememberMe')"></span>
             </label>
             <a class="pull-right"><span data-bind="text:l10n('user.forgetPassword'),click: forgetPassword"></span></a>
         </div>

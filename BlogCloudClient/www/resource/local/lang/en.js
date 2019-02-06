@@ -33,6 +33,8 @@
             "delete": "Delete",
             "pwdNotSame": "Password is not the same"
         }, "menu": {
+            "myblog": "My Blog",
+            "blog": "Blog",
             "user-list": "System User",
             "user-all": "All User",
             "twaver": "Topology",

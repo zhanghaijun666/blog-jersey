@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="create-table-menus" author="zhanghaijun">
+        <createTable tableName="menus">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="parent_id" type="int" defaultValueNumeric="0"/>
+            <column name="name" type="varchar(50)"/>
+            <column name="icon" type="varchar(50)"/>
+            <column name="template" type="varchar(50)"/>
+            <column name="hash" type="varchar(50)"/>
+            <column name="deletable" type="boolean" defaultValueBoolean="true"/>
+            <column name="default_show" type="boolean" defaultValueBoolean="false"/>
+            <column name="role_id" type="int"/>
+            
+            <column name="status" type="int" defaultValueNumeric="0"/>
+            <column name="created_at" type="datetime" />
+            <column name="created_by" type = "int" />
+            <column name="updated_at" type="datetime" />
+            <column name="updated_by" type = "int" />
+        </createTable>
+    </changeSet>
+    <changeSet author="zhanghaijun" id = "insert_menus_blog">
+        <insert tableName = "menus">
+            <column name="id" value="1"/>
+            <column name="parent_id" value="0"/>
+            <column name="name" value="myblog"/>
+            <column name="icon" value="fa-book"/>
+            <column name="hash" value="home"/>
+            <column name="role_id" value="0"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="2"/>
+            <column name="parent_id" value="1"/>
+            <column name="name" value="blog"/>
+            <column name="icon" value="fa-file"/>
+            <column name="template" value="blog-template"/>
+            <column name="hash" value="home"/>
+            <column name="role_id" value="0"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+    </changeSet>
+    <changeSet author="zhanghaijun" id = "insert_menus_user">
+        <insert tableName = "menus">
+            <column name="id" value="11"/>
+            <column name="parent_id" value="0"/>
+            <column name="name" value="user-list"/>
+            <column name="icon" value="fa-vcard"/>
+            <column name="hash" value="home"/>
+            <column name="role_id" value="1"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="12"/>
+            <column name="parent_id" value="11"/>
+            <column name="name" value="user-all"/>
+            <column name="icon" value="fa-user-circle-o"/>
+            <column name="template" value="user-list-template"/>
+            <column name="hash" value="home"/>
+            <column name="deletable" valueBoolean="true"/>
+            <column name="default_show" valueBoolean="true"/>
+            <column name="role_id" value="1"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+    </changeSet>
+    <changeSet author="zhanghaijun" id = "insert_menus_twaver">
+        <insert tableName = "menus">
+            <column name="id" value="21"/>
+            <column name="parent_id" value="0"/>
+            <column name="name" value="twaver"/>
+            <column name="hash" value="home"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="22"/>
+            <column name="parent_id" value="21"/>
+            <column name="name" value="twaver-spring"/>
+            <column name="template" value="twaver-spring-template"/>
+            <column name="hash" value="home"/>
+            <column name="deletable" valueBoolean="true"/>
+            <column name="default_show" valueBoolean="false"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+    </changeSet>
+    <changeSet author="zhanghaijun" id = "insert_menus_expression">
+        <insert tableName = "menus">
+            <column name="id" value="31"/>
+            <column name="parent_id" value="0"/>
+            <column name="name" value="expression"/>
+            <column name="icon" value="fa-skyatlas"/>
+            <column name="hash" value="home"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="32"/>
+            <column name="parent_id" value="31"/>
+            <column name="name" value="game-expression"/>
+            <column name="icon" value="fa-gamepad"/>
+            <column name="template" value="game-expression-template"/>
+            <column name="hash" value="home"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+        <insert tableName = "menus">
+            <column name="id" value="33"/>
+            <column name="parent_id" value="31"/>
+            <column name="name" value="all-university"/>
+            <column name="icon" value="fa-university"/>
+            <column name="template" value="all-university-template"/>
+            <column name="hash" value="home"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
