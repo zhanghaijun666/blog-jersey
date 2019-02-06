@@ -3,7 +3,7 @@ function SammyPage(options) {
     var root = options.view;
     var sammy = Sammy(function () {
         this.get("/", function () {
-            this.redirect("#home");
+            this.redirect("#login");
         });
         this.get("#login", function () {
             if (root.isLogin()) {
@@ -19,8 +19,15 @@ function SammyPage(options) {
                 this.redirect("#login");
             }
         });
-        this.get("#blog", function () {
+        this.get("#messages", function () {
+            toastShowMsg("暂未开发，尽情期待！！！");
             root.RootPage("login-page");
+            this.redirect("#login");
+        });
+        this.get("#admin", function () {
+            toastShowMsg("暂未开发，尽情期待！！！");
+            root.RootPage("login-page");
+            this.redirect("#login");
         });
 
 

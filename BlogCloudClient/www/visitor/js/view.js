@@ -18,6 +18,16 @@ requirejs(["bcstore"], function (bcstore) {
         self.isLogin = function () {
             return self.user() && self.user().userId && RootView.user().username();
         };
+        self.isHash = function (hash) {
+            if (!hash) {
+                return false;
+            }
+            if (hash.slice(0, 1) === "#") {
+                return "#" + self.getHash() === hash;
+            } else {
+                return self.getHash() === hash;
+            }
+        };
         self.getHash = function (localhash) {
             var regExp = /^#([^/?]+)/;
             var hash = localhash || window.location.hash;
@@ -40,9 +50,9 @@ requirejs(["bcstore"], function (bcstore) {
             window.location.hash = hash;
         };
         self.blogNavigator = [
-            {text: '我的博客', icon: 'fa-book', click: self.changeHash("home"), isSelect: function () {}},
-            {text: '消息', icon: 'fa-comments-o', click: function () {}, isSelect: function () {}},
-            {text: '系统管理', icon: 'fa-coffee', click: function () {}, isSelect: function () {}}
+            {text: '我的博客', icon: 'fa-book', click: self.changeHash.bind(null, "home"), isSelect: ko.computed(function () {return self.isHash("home");})},
+            {text: '消息', icon: 'fa-comments-o', click: self.changeHash.bind(null, "messages"), isSelect: ko.computed(function () {return self.isHash("messages");})},
+            {text: '系统管理', icon: 'fa-coffee', click: self.changeHash.bind(null, "admin"), isSelect: ko.computed(function () {return self.isHash("admin");})}
         ];
         self.PersonalCenter = [
             new DropdownMenu(l10n('user.userName'), {icon: 'fa-user', select: true}),

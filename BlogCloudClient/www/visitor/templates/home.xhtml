@@ -7,10 +7,13 @@
     </div>
 </template>
 <template id="navigator-template">
-    <ul class="navigator">
-        <li class="active"><i class="fa fa-book"></i><span data-bind="text: '我的博客'"></span></li>
-        <li><i class="fa fa-comments-o"></i><span data-bind="text: '消息'"></span></li>
-        <li><i class="fa fa-coffee"></i><span data-bind="text: '系统管理'"></span></li>
+    <ul class="navigator" data-bind="foreach: $data">
+        <li data-bind="css: {active: isSelect()}, click: click">
+            <!-- ko if: icon -->
+            <i class="fa" data-bind="css: icon"></i>
+            <!-- /ko -->
+            <span data-bind="text: text"></span>
+        </li>
     </ul>
 </template>
 <template id="template-Blog-home-header">
@@ -19,7 +22,7 @@
         <span data-bind="text: '晨谨知识库'"></span>
     </div>
     <div class="col-md-8 home-title-body">
-        <div class="pull-left" data-bind="template: {name: 'navigator-template', data: {}}"></div>
+        <div class="pull-left" data-bind="template: {name: 'navigator-template', data: blogNavigator}"></div>
         <div class="pull-right">
             <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
             <!-- ko if: RootView.isLogin() -->
