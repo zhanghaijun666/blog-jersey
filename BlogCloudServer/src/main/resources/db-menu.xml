@@ -77,8 +77,6 @@
             <column name="icon" value="fa-user-circle-o"/>
             <column name="template" value="user-list-template"/>
             <column name="hash" value="home"/>
-            <column name="deletable" valueBoolean="true"/>
-            <column name="default_show" valueBoolean="true"/>
             <column name="role_id" value="1"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
@@ -92,6 +90,7 @@
             <column name="id" value="21"/>
             <column name="parent_id" value="0"/>
             <column name="name" value="twaver"/>
+            <column name="icon" value="fa-area-chart"/>
             <column name="hash" value="home"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
@@ -103,6 +102,7 @@
             <column name="id" value="22"/>
             <column name="parent_id" value="21"/>
             <column name="name" value="twaver-spring"/>
+            <column name="icon" value="fa-adjust"/>
             <column name="template" value="twaver-spring-template"/>
             <column name="hash" value="home"/>
             <column name="deletable" valueBoolean="true"/>
@@ -147,6 +147,25 @@
             <column name="icon" value="fa-university"/>
             <column name="template" value="all-university-template"/>
             <column name="hash" value="home"/>
+            <column name="status" value="1"/>
+            <column name="created_at" value="${now}" />
+            <column name="created_by" value = "0" />
+            <column name="updated_at" value="${now}" />
+            <column name="updated_by" value = "0" />
+        </insert>
+    </changeSet>
+    
+    <changeSet author="zhanghaijun" id = "insert_menus_home">
+        <insert tableName = "menus">
+            <column name="id" value="100"/>
+            <column name="parent_id" value="100"/>
+            <column name="name" value="user-home"/>
+            <column name="icon" value="fa-home"/>
+            <column name="template" value="user-home-template"/>
+            <column name="hash" value="home"/>
+            <column name="deletable" valueBoolean="false"/>
+            <column name="default_show" valueBoolean="true"/>
+            <column name="role_id" value="0"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
             <column name="created_by" value = "0" />

@@ -33,6 +33,7 @@
             "delete": "Delete",
             "pwdNotSame": "Password is not the same"
         }, "menu": {
+            "user-home": "用户首页",
             "myblog": "My Blog",
             "blog": "Blog",
             "user-list": "System User",

@@ -32,6 +32,7 @@
             "delete": "删除",
             "pwdNotSame": "两次输入的密码不一致，请重新输入"
         }, "menu": {
+            "user-home": "用户首页",
             "myblog": "我的博客",
             "blog": "博客",
             "user-list": "系统用户",
