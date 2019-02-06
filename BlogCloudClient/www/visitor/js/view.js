@@ -15,6 +15,16 @@ requirejs(["bcstore"], function (bcstore) {
                 }
             });
         };
+        self.logout = function () {
+            getRequest("/user/logout", {accept: "application/x-protobuf"}, function (data) {
+                var rspInfo = bcstore.RspInfo.decode(data);
+                toastShowCode(rspInfo.code);
+                if (rspInfo.code === bcstore.ReturnCode.OK) {
+                    self.user(null);
+                    self.app.refresh();
+                }
+            });
+        };
         self.isLogin = function () {
             return self.user() && self.user().userId && RootView.user().username();
         };
@@ -50,9 +60,15 @@ requirejs(["bcstore"], function (bcstore) {
             window.location.hash = hash;
         };
         self.blogNavigator = [
-            {text: '我的博客', icon: 'fa-book', click: self.changeHash.bind(null, "home"), isSelect: ko.computed(function () {return self.isHash("home");})},
-            {text: '消息', icon: 'fa-comments-o', click: self.changeHash.bind(null, "messages"), isSelect: ko.computed(function () {return self.isHash("messages");})},
-            {text: '系统管理', icon: 'fa-coffee', click: self.changeHash.bind(null, "admin"), isSelect: ko.computed(function () {return self.isHash("admin");})}
+            {text: '我的博客', icon: 'fa-book', click: self.changeHash.bind(null, "home"), isSelect: ko.computed(function () {
+                    return self.isHash("home");
+                })},
+            {text: '消息', icon: 'fa-comments-o', click: self.changeHash.bind(null, "messages"), isSelect: ko.computed(function () {
+                    return self.isHash("messages");
+                })},
+            {text: '系统管理', icon: 'fa-coffee', click: self.changeHash.bind(null, "admin"), isSelect: ko.computed(function () {
+                    return self.isHash("admin");
+                })}
         ];
         self.PersonalCenter = [
             new DropdownMenu(l10n('user.userName'), {icon: 'fa-user', select: true}),

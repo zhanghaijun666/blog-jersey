@@ -30,7 +30,12 @@
         </ul>
         <div class="tab-content" data-bind="foreach: {data: menuTabs, afterRenderAll: function(){$component.contentAfterRender($element)} }">
             <div role="tabpanel" class="tab-pane fade" data-bind="attr: { id: 'content'+$data.menuId}">
+                <!-- ko if: ko.components.isRegistered($data.template) -->
+                <!-- ko component: $data.template --><!-- /ko -->
+                <!-- /ko -->
+                <!-- ko ifnot: ko.components.isRegistered($data.template) -->
                 <!-- ko template: $data.template --><!-- /ko -->
+                <!-- /ko -->
             </div>
         </div>
     </div>

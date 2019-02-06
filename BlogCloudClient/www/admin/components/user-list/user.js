@@ -62,7 +62,7 @@
             function doDeleteUser(users) {
                 var req = bcstore.UserList.create();
                 ko.utils.arrayForEach(users, function (user) {
-                    req.items.push(user.unwrap());
+                    req.items.push(ko.deepObservableClone(user));
                 });
                 getRequest("/user", {method: "DELETE", type: "application/x-protobuf", accept: "application/x-protobuf", data: bcstore.UserList.encode(req).finish()}, function (data) {
                     var rspInfo = bcstore.RspInfo.decode(data);

@@ -4,7 +4,7 @@
         var result = {}, oClass = getClass(object);
         if (oClass === "Observable") {
             return isUnwrapObservable ? ko.unwrap(object) : ko.observable(ko.unwrap(object));
-        } else if (oClass === "Object" || oClass === "Array") {
+        } else if (oClass === "Object") {
             ko.utils.arrayForEach(Object.keys(object), function (obj) {
                 result[obj] = deepClone(object[obj], isUnwrapObservable);
             });

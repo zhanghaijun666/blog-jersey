@@ -1,14 +1,15 @@
 function initStore() {
     function Message(type) {
-        this.$type = bcstore.lookupType(type);
+        this.type = type;
     }
     Message.prototype.toArrayBuffer = function () {
         let store = ko.deepObservableClone(this);
-        let errors = this.$type.verify(store);
+        let $type = bcstore.lookupType(this.type);
+        let errors = $type.verify(store);
         if (errors) {
             throw new Error(errors);
         }
-        return this.$type.encode(store).finish();
+        return $type.encode(store).finish();
     };
 
     function getStoreFileds(fileds) {

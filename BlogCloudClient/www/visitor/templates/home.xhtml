@@ -27,7 +27,9 @@
             <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
             <!-- ko if: RootView.isLogin() -->
             <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
+            <button data-bind="click: RootView.logout"><span class="glyphicon glyphicon-off"></span><span data-bind="text: '退出'"></span></button>
             <!-- /ko -->
+
         </div>
     </div>
     <div class="col-md-2 blog-clock" data-bind="component: 'clock'"></div>

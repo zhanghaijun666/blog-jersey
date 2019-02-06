@@ -37,8 +37,8 @@
             function initDataBox() {
                 for (let i = 0; i < self.nodeList.length; i++) {
                     let node = new twaver.Node(self.nodeList[i]);
-                    node.setImage("protein");
-                    node.setIcon("protein");
+//                    node.setImage("protein");
+//                    node.setIcon("protein");
                     self.box.add(node);
                     self.nodeMap[self.nodeList[i].id] = node;
                 }
