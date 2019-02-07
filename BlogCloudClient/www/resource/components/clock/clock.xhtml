@@ -1,10 +1,13 @@
 <div class="clock-body">
-    <img src="/static/resource/images/clock/0.png" alt="0"/>
-    <img src="/static/resource/images/clock/0.png" alt="0"/>
+    <!-- ko foreach: hoursImgSrcArray -->
+    <img alt="0" data-bind="attr: { src: $data }"/>
+    <!-- /ko -->
     <span>:</span>
-    <img src="/static/resource/images/clock/0.png" alt="0"/>
-    <img src="/static/resource/images/clock/0.png" alt="0"/>
+    <!-- ko foreach: minutesImgSrcArray -->
+    <img alt="0" data-bind="attr: { src: $data }"/>
+    <!-- /ko -->
     <span>:</span>
-    <img src="/static/resource/images/clock/0.png" alt="0"/>
-    <img src="/static/resource/images/clock/0.png" alt="0"/>
+    <!-- ko foreach: secondsImgSrcArray -->
+    <img alt="0" data-bind="attr: { src: $data }"/>
+    <!-- /ko -->
 </div>

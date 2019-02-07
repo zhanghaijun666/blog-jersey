@@ -2,19 +2,49 @@
     define(["text!./clock.xhtml", "css!./clock.css"], function (pageView) {
         function ClockModel(params, componentInfo) {
             var self = this;
-            self.imgArray = componentInfo.element.getElementsByTagName("img");
-            function initClock(){
-                var nowDate = new Date();
-                var prevtime = toZero(nowDate.getHours()) + toZero(nowDate.getMinutes()) + toZero(nowDate.getSeconds());
-                for (var i = 0; i < self.imgArray.length; i++) {
-                    self.imgArray[i].src = "/static/resource/images/clock/" + prevtime.charAt(i) + ".png";
-                }
+            self.hoursImgSrcArray = ko.observableArray([
+                "/static/resource/images/clock/0.png",
+                "/static/resource/images/clock/0.png"
+            ]);
+            self.minutesImgSrcArray = ko.observableArray([
+                "/static/resource/images/clock/0.png",
+                "/static/resource/images/clock/0.png"
+            ]);
+            self.secondsImgSrcArray = ko.observableArray([
+                "/static/resource/images/clock/0.png",
+                "/static/resource/images/clock/0.png"
+            ]);
+
+            function initClock() {
+                let nowDate = new Date();
+                let hours = toZero(nowDate.getHours());
+                let minutes = toZero(nowDate.getMinutes());
+                let seconds = toZero(nowDate.getSeconds());
+                self.hoursImgSrcArray([
+                    "/static/resource/images/clock/" + hours.charAt(0) + ".png",
+                    "/static/resource/images/clock/" + hours.charAt(1) + ".png"
+                ]);
+                self.minutesImgSrcArray([
+                    "/static/resource/images/clock/" + minutes.charAt(0) + ".png",
+                    "/static/resource/images/clock/" + minutes.charAt(1) + ".png"
+                ]);
+                self.secondsImgSrcArray([
+                    "/static/resource/images/clock/" + seconds.charAt(0) + ".png",
+                    "/static/resource/images/clock/" + seconds.charAt(1) + ".png"
+                ]);
             }
             initClock();
             setInterval(initClock, 1000);
-            
-            
-            
+            //补0操作，保证数字一直为六位数
+            function toZero(num) {
+                if (num < 10) {
+                    return num = "0" + num;
+                } else {
+                    return num = num + "";
+                }
+            }
+
+
 //            self.imgArray = componentInfo.element.getElementsByTagName("img");
 //            var nowDate = new Date();
 //            self.prevtime = toZero(nowDate.getHours()) + toZero(nowDate.getMinutes()) + toZero(nowDate.getSeconds());
@@ -31,41 +61,34 @@
 //            setInterval(renderingPage, 1000);
 
             //每次清空数组里面的数据
-            function toCom(oldTime, newTime) {
-                var arr = [];
-                for (var i = 0; i < oldTime.length; i++) {
-                    if (oldTime.charAt(i) !== newTime.charAt(i)) {
-                        arr.push(i);
-                    }
-                }
-                startMove(arr, newTime);
-            }
+//            function toCom(oldTime, newTime) {
+//                var arr = [];
+//                for (var i = 0; i < oldTime.length; i++) {
+//                    if (oldTime.charAt(i) !== newTime.charAt(i)) {
+//                        arr.push(i);
+//                    }
+//                }
+//                startMove(arr, newTime);
+//            }
             //上下翻转效果：利用数字高度减少至0再增加回来实现视觉差翻转
-            function startMove(arr, newTime) {
-                var speed = -4;
-                timer = setInterval(function () {
-                    for (var i = 0; i < arr.length; i++) {
-                        if (self.imgArray[arr[i]].offsetHeight === 0) {
-                            speed = 4;
-                            self.imgArray[arr[i]].src = "/static/resource/images/clock/" + newTime.charAt(arr[i]) + ".png"
-                        }
-                        //改变数字高度时默认向底线减少，所以手动改变数字的top向上移动
-                        self.imgArray[arr[i]].style.height = self.imgArray[arr[i]].offsetHeight + speed + "px";
-                        self.imgArray[arr[i]].style.top = self.imgArray[arr[i]].offsetHeight / 2 - 18 + "px";
-                        if (self.imgArray[arr[i]].offsetHeight === 36) {
-                            clearInterval(timer);
-                        }
-                    }
-                }, 10);
-            }
-            //补0操作，保证数字一直为六位数
-            function toZero(num) {
-                if (num < 10) {
-                    return num = "0" + num;
-                } else {
-                    return num = num + "";
-                }
-            }
+//            function startMove(arr, newTime) {
+//                var speed = -4;
+//                timer = setInterval(function () {
+//                    for (var i = 0; i < arr.length; i++) {
+//                        if (self.imgArray[arr[i]].offsetHeight === 0) {
+//                            speed = 4;
+//                            self.imgArray[arr[i]].src = "/static/resource/images/clock/" + newTime.charAt(arr[i]) + ".png"
+//                        }
+//                        //改变数字高度时默认向底线减少，所以手动改变数字的top向上移动
+//                        self.imgArray[arr[i]].style.height = self.imgArray[arr[i]].offsetHeight + speed + "px";
+//                        self.imgArray[arr[i]].style.top = self.imgArray[arr[i]].offsetHeight / 2 - 18 + "px";
+//                        if (self.imgArray[arr[i]].offsetHeight === 36) {
+//                            clearInterval(timer);
+//                        }
+//                    }
+//                }, 10);
+//            }
+
         }
         return {
             viewModel: {
