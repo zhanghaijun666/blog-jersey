@@ -5,9 +5,7 @@
         <!-- ko component: { name: RootView.RootPage(), params: {} } --><!-- /ko -->
         <!-- /ko -->
     </div>
-    <!-- ko if: RootView.isShowHomeFoot() -->
-    <div class="home-foot" data-bind="template: { name: 'navigator-template', data: blogNavigator() }"></div>
-    <!-- /ko -->
+    <div class="home-foot " data-bind="css: {'display_none': !RootView.isShowHomeFoot()}, template: { name: 'navigator-template', data: RootView.blogNavigator() }"></div>
 </template>
 <template id="navigator-template">
     <ul class="navigator" data-bind="foreach: $data">
@@ -26,7 +24,7 @@
     </div>
     <div class="col-md-8 home-title-body">
         <!-- ko if: RootView.isLogin() -->
-        <div class="pull-left" data-bind="visible: RootView.isLogin(), template: {name: 'navigator-template', data: blogNavigator()}"></div>
+        <div class="pull-left" data-bind="template: {name: 'navigator-template', data: RootView.blogNavigator()}"></div>
         <div class="pull-right">
             <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
             <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
