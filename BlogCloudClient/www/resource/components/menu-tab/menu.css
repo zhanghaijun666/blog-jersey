@@ -3,6 +3,7 @@
     height: 100%;
     padding: 0;
     margin: 0;
+    max-height: 60px;
 }
 .menu-tab>ul{
     padding: 0;
@@ -13,44 +14,44 @@
     background-color: #e7e7e7;
     color: #555;
 }
-.menu-tab li{
+.menu-tab li{ 
     list-style:none;
     padding:0;
     margin:0;
     float: left;
     display: block;
-    width: 100px;
-    height: 50px;
-    line-height: 50px;
     text-align: center;
     cursor: pointer;
 }
 .menu-tab li:hover{
     color: #555;
 }
-.menu-tab span{
-    margin-left: 3px;
-}
-.small-dialogMsg{
-    text-align: center;
-    padding: 10px;
-}
-.dialog-header-text{
-    margin: 0px 20px;
-}
 
-.span-button{
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 4px 6px;
-    cursor: pointer;
-    margin-right: 8px;
+/* ------ defaultMenuClass ------ start ------*/
+.default-menu li{
+    padding: 0 20px;
+    line-height: 50px;
+    height: 100%;
 }
-.span-button:hover{
-    background-color: #f5f5f5;
+/* ------ defaultMenuClass ------ end ------*/
+/* ------ small-nav menuClass ------ start ------*/
+.small-nav{
+    overflow: hidden;
 }
-.text-cannot-selected{
-    -webkit-user-select:none;
-    -moz-user-select:none;
-    -ms-user-select:none;
+.small-nav li{
+    line-height: 50px;
+    height: 100%;
 }
+.small-nav span,.small-nav i{
+    display: block;
+    height: 50%;
+    line-height: 25px;
+}
+/* ------ small-nav menuClass ------ end ------*/
+
+
+
+
+
+
+

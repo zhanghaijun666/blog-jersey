@@ -1,6 +1,6 @@
-<div class="menu-tab">
+<div class="menu-tab" data-bind="css: menuClass">
     <ul data-bind="foreach: menus">
-        <li data-bind="css: {active: isActive()}, click: click">
+        <li data-bind="css: {active: isActive()}, click: click, style: {width: $parent.menuWidth}" >
             <!-- ko if: icon -->
             <i class="fa" data-bind="css: icon"></i>
             <!-- /ko -->

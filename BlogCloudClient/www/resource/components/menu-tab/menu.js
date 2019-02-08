@@ -1,14 +1,18 @@
-(function (global) {
+(function () {
     define(["text!./menu.xhtml", "css!./menu.css"], function (pageView) {
         function MenuModel(params, componentInfo) {
+            var defaultParams = {
+                menuClass: "default-menu",
+                menus: [], //new MenuTab("name", {})
+                isCenter: false
+            };
             var self = this;
-            self.menus = params.menus || [];
-            
-            
-
-
-
-
+            self = $.extend(this, defaultParams, params);
+            console.log(self.menuClass);
+            self.menuWidth = "";
+            if (!!ko.unwrap(self.isCenter) && ko.unwrap(self.menus) && ko.unwrap(self.menus).length > 0) {
+                self.menuWidth = (1 / (ko.unwrap(self.menus).length)) * 100 + "%";
+            }
 
 
         }
@@ -21,4 +25,4 @@
             template: pageView
         };
     });
-})(this);
+})();
