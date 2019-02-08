@@ -1898,7 +1898,7 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
             options["read"] = evaluatorFunctionOrOptions;
         }
     }
-    if (typeof options["read"] != "function")
+    if (typeof options["read"] !== "function")
         throw Error("Pass a function that returns the value of the ko.computed");
 
     var writeFunction = options["write"];
@@ -2362,7 +2362,7 @@ var protoProp = ko.observable.protoProperty; // == "__ko_proto__"
 computedFn[protoProp] = ko.computed;
 
 ko.isComputed = function (instance) {
-    return (typeof instance == 'function' && instance[protoProp] === ko.computed);
+    return (typeof instance === 'function' && instance[protoProp] === ko.computed);
 };
 
 ko.isPureComputed = function (instance) {

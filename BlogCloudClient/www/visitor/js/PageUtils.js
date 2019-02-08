@@ -11,29 +11,11 @@ function PageUtils(root) {
 
     self.blogNavigator = function () {
         let arr = [];
-        arr.push(
-                {text: '我的博客', icon: 'fa-book', click: self.changeHash.bind(null, "home"),
-                    isSelect: ko.observable(true)
-                }
-        );
-        arr.push(
-                {text: '消息', icon: 'fa-comments-o', click: self.changeHash.bind(null, "messages"),
-                    isSelect: ko.observable(false)
-                }
-        );
-        arr.push(
-                {text: '系统管理', icon: 'fa-coffee', click: self.changeHash.bind(null, "admin"),
-                    isSelect: ko.observable(false)
-                }
-        );
+        arr.push(new MenuTab('我的博客', {icon: 'fa-book', isActive: true, click: self.changeHash.bind(null, "home")}));
+        arr.push(new MenuTab('消息', {icon: 'fa-comments-o', isActive: false, click: self.changeHash.bind(null, "messages")}));
+        arr.push(new MenuTab('系统管理', {icon: 'fa-coffee', isActive: false, click: self.changeHash.bind(null, "admin")}));
         if (self.isSmallScreen()) {
-            arr.push(
-                    {text: '我的', icon: 'fa-coffee', click: self.changeHash.bind(null, "admin"),
-                        isSelect: ko.computed(function () {
-                            return self.isHash("admin");
-                        })
-                    }
-            );
+            arr.push(new MenuTab('我的', {icon: 'fa-coffee', isActive: false, click: self.changeHash.bind(null, "home")}));
         }
         return arr;
     };

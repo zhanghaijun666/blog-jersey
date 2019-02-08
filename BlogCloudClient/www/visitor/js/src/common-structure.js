@@ -1,13 +1,13 @@
-function MenuTab(menuId, name, options) {
+function MenuTab(name, options) {
     options = options || {};
-    this.menuId = menuId;
     this.name = name;
-    this.isActive = ko.observable(false);
+    this.title = options.title || "";
+    this.isActive = ko.observable(!!ko.unwrap(options.isActive));
     this.icon = options.icon;
-    this.deletable = options.deletable;
     this.click = options.click;
-    this.component = options.component;
 }
+
+
 function DropdownMenu(name, options) {
     options = options || {};
     this.name = name;

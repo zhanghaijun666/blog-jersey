@@ -5,17 +5,7 @@
         <!-- ko component: { name: RootView.RootPage(), params: {} } --><!-- /ko -->
         <!-- /ko -->
     </div>
-    <div class="home-foot " data-bind="css: {'display_none': !RootView.isShowHomeFoot()}, template: { name: 'navigator-template', data: RootView.blogNavigator() }"></div>
-</template>
-<template id="navigator-template">
-    <ul class="navigator" data-bind="foreach: $data">
-        <li data-bind="css: {active: isSelect()}, click: click">
-            <!-- ko if: icon -->
-            <i class="fa" data-bind="css: icon"></i>
-            <!-- /ko -->
-            <span data-bind="text: text"></span>
-        </li>
-    </ul>
+    <div class="home-foot visible-xs-block visible-sm-block" data-bind='component: {name: "menu-tab", params: { menus: RootView.blogNavigator() }}'></div>
 </template>
 <template id="template-Blog-home-header">
     <div class="col-md-2 col-sm-12 logo-body">
@@ -24,7 +14,7 @@
     </div>
     <div class="col-md-8 home-title-body">
         <!-- ko if: RootView.isLogin() -->
-        <div class="pull-left" data-bind="template: {name: 'navigator-template', data: RootView.blogNavigator()}"></div>
+        <div class="pull-left" data-bind='component: {name: "menu-tab", params: { menus: RootView.blogNavigator() }}'></div>
         <div class="pull-right">
             <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
             <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>

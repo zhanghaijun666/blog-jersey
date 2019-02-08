@@ -1,0 +1,10 @@
+<div class="menu-tab">
+    <ul data-bind="foreach: menus">
+        <li data-bind="css: {active: isActive()}, click: click">
+            <!-- ko if: icon -->
+            <i class="fa" data-bind="css: icon"></i>
+            <!-- /ko -->
+            <span data-bind="text: name"></span>
+        </li>
+    </ul>
+</div>
