@@ -5,7 +5,9 @@
         <!-- ko component: { name: RootView.RootPage(), params: {} } --><!-- /ko -->
         <!-- /ko -->
     </div>
-    <div class="home-foot visible-xs-block visible-sm-block" data-bind='component: {name: "menu-tab", params: { menus: RootView.blogNavigator(),isCenter: true,menuClass:"small-nav" }}'></div>
+    <!-- ko if: RootView.isLogin() -->
+    <div class="home-foot visible-xs-block visible-sm-block" data-bind=' component: {name: "menu-tab", params: { menus: RootView.blogNavigator(),isCenter: true,menuClass:"small-nav" }}'></div>
+    <!-- /ko -->
 </template>
 <template id="template-Blog-home-header">
     <div class="col-md-2 col-sm-12 logo-body">
