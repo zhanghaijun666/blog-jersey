@@ -15,7 +15,7 @@ function PageUtils(root) {
         arr.push(new MenuTab('消息', {icon: 'fa-comments-o', isActive: false, click: self.changeHash.bind(null, "messages")}));
         arr.push(new MenuTab('系统管理', {icon: 'fa-coffee', isActive: false, click: self.changeHash.bind(null, "admin")}));
         if (self.isSmallScreen()) {
-            arr.push(new MenuTab('我的', {icon: 'fa-coffee', isActive: false, click: self.changeHash.bind(null, "home")}));
+            arr.push(new MenuTab('我的', {icon: 'fa-home', isActive: false, click: self.changeHash.bind(null, "home")}));
         }
         return arr;
     };

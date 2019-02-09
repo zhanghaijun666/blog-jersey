@@ -1,0 +1,10 @@
+.home-header,.home-foot,.login-foot{
+    background-color: #eee;
+}
+.menu-tab .active{
+    background-color: #e6e6e6;
+    color: #555;
+}
+.custom-card-info:hover{
+    background-color: #f5f5f5;
+}

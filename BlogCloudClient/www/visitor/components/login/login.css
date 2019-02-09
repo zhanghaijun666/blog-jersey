@@ -23,15 +23,12 @@
     height: 20px;
     width: 100%;
     overflow: hidden;
-    border-top: 1px solid #eee;
     text-align: center;
-    background-color: #eee;
     z-index: 999;
 }
 .login-body{
     margin: auto;
     background: rgba(255,255,255,0.5);
-    border: 1px solid #eee;
     overflow: auto;
 }
 @media screen and (min-width: 992px) {

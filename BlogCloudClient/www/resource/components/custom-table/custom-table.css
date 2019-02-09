@@ -24,9 +24,6 @@
 .custom-card-multi-header ul>li{
     float: left;
 }
-.custom-card-info:hover{
-    background-color: #f5f5f5;
-}
 .custom-card-info:hover .custom-card-operation>ul li span{
     display: inherit;
 }

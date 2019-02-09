@@ -10,9 +10,20 @@
     <!-- /ko -->
 </template>
 <template id="template-Blog-home-header">
-    <div class="col-md-2 col-sm-12 logo-body">
-        <img src="/static/resource/images/logo.png" width="70px" height="50px" alt="logo"/>
-        <span data-bind="text: '晨谨知识库'"></span>
+    <div class="col-md-2 col-sm-12">
+        <!-- ko ifnot: RootView.isSmallScreen() && RootView.isLogin() -->
+        <div class="logo-body">
+            <img src="/static/resource/images/logo.png" width="70px" height="50px" alt="logo"/>
+            <span data-bind="text: '晨谨知识库'"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: RootView.isSmallScreen() && RootView.isLogin() -->
+        <div class="small-header">
+            <i class="fa fa-bars small-header-left"></i>
+            <span data-bind="text: '我的博客'"></span>
+            <i class="fa fa-plus small-header-right"></i>
+        </div>
+        <!-- /ko -->
     </div>
     <div class="col-md-8 home-title-body">
         <!-- ko if: RootView.isLogin() -->

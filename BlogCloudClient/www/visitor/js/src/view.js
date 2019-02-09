@@ -1,6 +1,8 @@
 requirejs(["bcstore"], function (bcstore) {
     window.bcstore = bcstore;
     initStore();
+    window.theme = new BlogTheme();
+    window.theme.loadTheme();
     function RootViewModel() {
         var self = this;
         new UserUtils(self);
@@ -10,7 +12,7 @@ requirejs(["bcstore"], function (bcstore) {
 
 
 
-        
+
 
 
         self.getUser();
