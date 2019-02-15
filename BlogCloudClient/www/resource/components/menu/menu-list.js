@@ -1,5 +1,5 @@
 (function () {
-    define(["text!./menu.xhtml", "css!./menu.css"], function (pageView) {
+    define(["text!./menu-list.xhtml", "css!./menu-list.css"], function (pageView) {
         function MenuModel(params, componentInfo) {
             var defaultParams = {
                 menuClass: "default-menu",

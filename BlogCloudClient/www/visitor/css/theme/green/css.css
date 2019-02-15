@@ -1,7 +1,7 @@
 .home-header,.home-foot,.login-foot{
     background-color: #2e99ff;
 }
-.menu-tab .active{
+.menu-list .active{
     background-color: #177dde;
     color: #555;
 }

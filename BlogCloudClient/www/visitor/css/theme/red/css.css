@@ -1,7 +1,7 @@
 .home-header,.home-foot,.login-foot{
     background-color: rgba(105,105,105,.3);
 }
-.menu-tab .active{
+.menu-list .active{
     background-color: rgba(211,211,211,.3);
     color: #555;
 }

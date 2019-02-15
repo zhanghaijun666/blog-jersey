@@ -21,12 +21,12 @@ function SammyPage(options) {
         });
         this.get("#messages", function () {
             toastShowMsg("暂未开发，尽情期待！！！");
-            root.RootPage("login-page");
+//            root.RootPage("login-page");
             this.redirect("#login");
         });
-        this.get("#admin", function () {
+        this.get("#menu", function () {
             toastShowMsg("暂未开发，尽情期待！！！");
-            root.RootPage("login-page");
+//            root.RootPage("login-page");
             this.redirect("#login");
         });
 

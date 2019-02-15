@@ -1,16 +1,16 @@
-.menu-tab{
+.menu-list{
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
     max-height: 60px;
 }
-.menu-tab>ul{
+.menu-list>ul{
     padding: 0;
     margin: 0;
     width: 100%;
 }
-.menu-tab li{ 
+.menu-list li{ 
     list-style:none;
     padding:0;
     margin:0;
@@ -19,7 +19,7 @@
     text-align: center;
     cursor: pointer;
 }
-.menu-tab li:hover{
+.menu-list li:hover{
     color: #555;
 }
 

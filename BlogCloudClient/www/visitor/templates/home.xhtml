@@ -6,7 +6,7 @@
         <!-- /ko -->
     </div>
     <!-- ko if: RootView.isLogin() -->
-    <div class="home-foot visible-xs-block visible-sm-block" data-bind=' component: {name: "menu-tab", params: { menus: RootView.blogNavigator(),isCenter: true,menuClass:"small-nav" }}'></div>
+    <div class="home-foot visible-xs-block visible-sm-block" data-bind=' component: {name: "menu-list", params: { menus: RootView.blogNavigator(),isCenter: true,menuClass:"small-nav" }}'></div>
     <!-- /ko -->
 </template>
 <template id="template-Blog-home-header">
@@ -18,16 +18,16 @@
         </div>
         <!-- /ko -->
         <!-- ko if: RootView.isSmallScreen() && RootView.isLogin() -->
-        <div class="small-header">
-            <i class="fa fa-bars small-header-left"></i>
+        <div class="small-header" data-bind="component: 'small-head'">
+<!--            <i class="fa fa-bars small-header-left"></i>
             <span data-bind="text: '我的博客'"></span>
-            <i class="fa fa-plus small-header-right"></i>
+            <i class="fa fa-plus small-header-right"></i>-->
         </div>
         <!-- /ko -->
     </div>
     <div class="col-md-8 home-title-body">
         <!-- ko if: RootView.isLogin() -->
-        <div class="pull-left" data-bind='component: {name: "menu-tab", params: { menus: RootView.blogNavigator() }}'></div>
+        <div class="pull-left" data-bind='component: {name: "menu-list", params: { menus: RootView.blogNavigator() }}'></div>
         <div class="pull-right">
             <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
             <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>

@@ -20,7 +20,8 @@
     });
     ko.components.register('drop-down', {require: 'static/resource/components/drop-down/dropdown.js'});
     ko.components.register('custom-table', {require: 'static/resource/components/custom-table/custom-table.js'});
-    ko.components.register('menu-tab', {require: 'static/resource/components/menu-tab/menu.js'});
+    ko.components.register('menu-list', {require: 'static/resource/components/menu/menu-list.js'});
+    ko.components.register('small-head', {require: 'static/resource/components/small/small-head.js'});
 
     ko.components.register('clock', {require: 'static/resource/components/clock/clock.js'});
 
