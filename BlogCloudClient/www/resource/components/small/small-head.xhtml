@@ -2,13 +2,11 @@
     <!-- ko if: leftTemplateName && leftIcon -->
     <div class="small-header-left" data-bind="click: leftClick">
         <i class="fa" data-bind="css: leftIcon" ></i>
-        <div class="left-template" data-bind="style: {width: isShowLeftTemplate()?'80%':'0%'}, template: {name: leftTemplateName, data: leftTemplateData}"></div>
     </div>
     <!-- /ko -->
     <!-- ko if: rightTemplateName && rightIcon -->
     <div class="small-header-right">
         <i class="fa" data-bind="css: rightIcon" ></i>
-        <div class="right-template" data-bind="style: {heigth: isShowRightTemplate()?'80%':'0%'}, template: {name: rightTemplateName, data: rightTemplateData}"></div>
     </div>
     <!-- /ko -->
     <div class="small-header-center">

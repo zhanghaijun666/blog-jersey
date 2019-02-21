@@ -18,14 +18,10 @@
         </div>
         <!-- /ko -->
         <!-- ko if: RootView.isSmallScreen() && RootView.isLogin() -->
-        <div class="small-header" data-bind="component: 'small-head'">
-<!--            <i class="fa fa-bars small-header-left"></i>
-            <span data-bind="text: '我的博客'"></span>
-            <i class="fa fa-plus small-header-right"></i>-->
-        </div>
+        <div class="small-header" data-bind="component: 'small-head'"></div>
         <!-- /ko -->
     </div>
-    <div class="col-md-8 home-title-body">
+    <div class="col-md-8 visible-md-block visible-lg-block home-title-body">
         <!-- ko if: RootView.isLogin() -->
         <div class="pull-left" data-bind='component: {name: "menu-list", params: { menus: RootView.blogNavigator() }}'></div>
         <div class="pull-right">
