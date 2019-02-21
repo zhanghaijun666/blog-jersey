@@ -15,7 +15,13 @@
             self.isShowLeftTemplate = ko.observable(false);
             self.isShowRightTemplate = ko.observable(false);
             self.leftClick = function () {
-
+                showDialog($.extend({
+                    isHideHeader: true,
+                    isHideFoot: true,
+                    isCloseDialog: false,
+                    bodyTemplate: self.leftTemplateName,
+                    dialogClass: "left-template"
+                }, self.leftTemplateData));
             };
 
 

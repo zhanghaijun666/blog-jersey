@@ -1,3 +1,4 @@
+./templates/
 ../visitor/templates/
 ../user/templates/
 ../admin/templates/
