@@ -22,15 +22,17 @@ function initStore() {
         return options;
     }
 
-    function User(options, isValidate) {
+    function User(options, isObservable, isValidate) {
         var self = $.extend(this, getStoreFileds("User"), options);
-        self.username = ko.observable(ko.unwrap(self.username));
-        self.password = ko.observable(ko.unwrap(self.password));
-        self.nickname = ko.observable(ko.unwrap(self.nickname));
-        self.phone = ko.observable(ko.unwrap(self.phone));
-        self.email = ko.observable(ko.unwrap(self.email));
-        self.rememberMe = ko.observable(!!ko.unwrap(self.rememberMe));
-        if (isValidate) {
+        if (isObservable) {
+            self.username = ko.observable(ko.unwrap(self.username));
+            self.password = ko.observable(ko.unwrap(self.password));
+            self.nickname = ko.observable(ko.unwrap(self.nickname));
+            self.phone = ko.observable(ko.unwrap(self.phone));
+            self.email = ko.observable(ko.unwrap(self.email));
+            self.rememberMe = ko.observable(!!ko.unwrap(self.rememberMe));
+        }
+        if (isObservable && isValidate) {
             self.username.extend({required: {message: l10n('validation.nameEmpty')}});
             self.password.extend({required: {message: l10n('validation.passwordEmpty')}});
             self.email.extend({email: {message: l10n('validation.emailError')}});
@@ -42,18 +44,23 @@ function initStore() {
         return ko.unwrap(this.nickname) + ' ( ' + ko.unwrap(this.username) + ' ) ';
     };
 
-    function Menu(options) {
+    function Menu(options, isObservable, isValidate) {
         var self = $.extend(this, getStoreFileds("Menu"), options);
-        self.parentId = ko.observable(ko.unwrap(self.parentId));
-        self.name = ko.observable(ko.unwrap(self.name));
-        self.icon = ko.observable(ko.unwrap(self.icon));
-        self.template = ko.observable(ko.unwrap(self.template));
-        self.hash = ko.observable(ko.unwrap(self.hash));
-        self.isDeletable = ko.observable(!!ko.unwrap(self.isDeletable));
-        self.isDefaultShow = ko.observable(!!ko.unwrap(self.isDefaultShow));
-        self.status = ko.observable(ko.unwrap(self.status));
-        
         self.isActive = ko.observable(!!ko.unwrap(self.isActive));
+        if (isObservable) {
+            self.parentId = ko.observable(ko.unwrap(self.parentId));
+            self.name = ko.observable(ko.unwrap(self.name));
+            self.icon = ko.observable(ko.unwrap(self.icon));
+            self.template = ko.observable(ko.unwrap(self.template));
+            self.hash = ko.observable(ko.unwrap(self.hash));
+            self.isDeletable = ko.observable(!!ko.unwrap(self.isDeletable));
+            self.isDefaultShow = ko.observable(!!ko.unwrap(self.isDefaultShow));
+            self.status = ko.observable(ko.unwrap(self.status));
+        }
+        if (isObservable && isValidate) {
+            self.name.extend({required: {message: l10n('validation.nameEmpty')}});
+            self.hash.extend({required: {message: l10n('validation.nameEmpty')}});
+        }
     }
     Menu.prototype = new Message("Menu");
     Menu.prototype.getMenuName = function () {

@@ -42,7 +42,7 @@
                 });
             };
             function userInfoDialog(user = {}, callback){
-                let item = new User(user, true);
+                let item = new User(user, true, true);
                 item.confirmPassword = ko.observable("").extend({equal: {params: item.password, message: l10n("user.pwdNotSame")}});
                 showDialog($.extend({
                     header: l10n("user.userInfo"),
@@ -102,7 +102,7 @@
                     if (userList && userList.items) {
                         self.userList().length = 0;
                         userList.items.forEach(function (item) {
-                            self.userList.push(new User(item));
+                            self.userList.push(new User(item, true));
                         });
                     }
                 });

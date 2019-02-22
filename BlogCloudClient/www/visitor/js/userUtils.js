@@ -5,7 +5,7 @@ function UserUtils(root) {
         getRequest("/user", {accept: "application/x-protobuf"}, function (data) {
             var user = bcstore.User.decode(data);
             if (user.userId) {
-                self.user(new User(user));
+                self.user(new User(user, true));
                 self.app.refresh();
             }
         });

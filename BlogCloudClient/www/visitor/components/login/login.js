@@ -8,7 +8,7 @@
             };
             var self = this;
             self.loginType = ko.observable(LoginTypeEnum.LOGIN);
-            self.user = ko.observable(new User({}, true));
+            self.user = ko.observable(new User({}, true, true));
             self.getTemplateName = function () {
                 switch (self.loginType()) {
                     case LoginTypeEnum.LOGIN:
@@ -36,14 +36,7 @@
                 });
             };
             self.logout = function () {
-                getRequest("/user/logout", {accept: "application/x-protobuf"}, function (data) {
-                    var rspInfo = bcstore.RspInfo.decode(data);
-                    toastShowCode(rspInfo.code);
-                    if (rspInfo.code === bcstore.ReturnCode.OK) {
-                        self.user.setData(new User());
-                        location.hash = "#login";
-                    }
-                });
+                RootView.logout();
             };
             self.forgetPassword = function () {
 

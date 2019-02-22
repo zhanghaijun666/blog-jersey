@@ -18,7 +18,6 @@ function SammyPage(options) {
                 return;
             }
             var params = this.params['splat'][0];
-            console.log(params);
             root.getMenu();
             root.rootPageViewModel({name: 'menu-nav-tabs',
                 params: {

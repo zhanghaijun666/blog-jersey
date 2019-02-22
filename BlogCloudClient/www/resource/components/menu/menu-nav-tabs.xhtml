@@ -1,7 +1,14 @@
 <div class="nav_body">
-    <div class="col-md-2 visible-md-block visible-lg-block leftMenu" data-bind="component: {name: 'menu-panel', params: {menuList: menuList}}"></div>
-    <div class="col-md-10 col-sm-12 centre_tabs">
-        <ul class="nav nav-tabs" role="tablist" data-bind="foreach: {data:menuTabs} ">
+    <div class="visible-md-block visible-lg-block" data-bind="template: 'large-screen-tabs-temlate'"></div>
+    <div class="col-sm-12 visible-xs-block visible-sm-block">
+        <!-- ko template: { name:"tab-content-body-temlate",data: getLsatMenuTab()} --><!-- /ko -->
+    </div>
+</div>
+
+<template id="large-screen-tabs-temlate">
+    <div class="col-md-2  leftMenu" data-bind="component: {name: 'menu-panel', params: {menuList: menuList}}"></div>
+    <div class="col-md-10 centre_tabs">
+        <ul class="nav nav-tabs" role="tablist" data-bind="foreach: {data: getMenuTab()} ">
             <li role="presentation">
                 <a role="tab" data-toggle="tab" data-bind="attr: { href: '#content'+$data.menuId, id: 'tab'+$data.menuId}">
                     <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.name"></span>
@@ -11,15 +18,18 @@
                 </a>
             </li>
         </ul>
-        <div class="tab-content" data-bind="foreach: {data: menuTabs, afterRenderAll: function(){$component.contentAfterRender($element)} }">
+        <div class="tab-content" data-bind="foreach: getAllMenuTemplate()">
             <div role="tabpanel" class="tab-pane fade" data-bind="attr: { id: 'content'+$data.menuId}">
-                <!-- ko if: ko.components.isRegistered($data.template) -->
-                <!-- ko component: $data.template --><!-- /ko -->
-                <!-- /ko -->
-                <!-- ko ifnot: ko.components.isRegistered($data.template) -->
-                <!-- ko template: $data.template --><!-- /ko -->
-                <!-- /ko -->
+                <!-- ko template: 'tab-content-body-temlate' --><!-- /ko -->
             </div>
         </div>
     </div>
-</div>
+</template>
+<template id="tab-content-body-temlate">
+    <!-- ko if: ko.components.isRegistered($data.template) -->
+    <!-- ko component: $data.template --><!-- /ko -->
+    <!-- /ko -->
+    <!-- ko ifnot: ko.components.isRegistered($data.template) -->
+    <!-- ko template: $data.template --><!-- /ko -->
+    <!-- /ko -->
+</template>

@@ -1,55 +1,97 @@
 (function (global) {
     define(["knockout", "text!./menu-nav-tabs.xhtml", "css!./menu-nav-tabs.css"], function (ko, pageView) {
         function MenuNavTabs(params, componentInfo) {
-            var defaultMenuId = 0;
-            var self = this;
+            var defaultValue = {
+                menuList: ko.observableArray([])
+            };
+            var self = $.extend(this, defaultValue, params);
             if (params.ref) {
                 params.ref(self);
             }
             self.menuList = params.menuList || ko.observableArray([]);
-            
-            self.leftMenu = ko.observableArray([]);
-            self.menuTabs = ko.observableArray([]);
 
-            function init() {
-                getRequest("/menu/hash/" + RootView.getHash(), {accept: "application/x-protobuf"}, function (data) {
-                    var menuList = bcstore.MenuList.decode(data);
-                    var menuMap = {};
-                    ko.utils.arrayForEach(menuList.items, function (menu) {
-                        menu.name = l10n('menu.' + menu.name);
-                        if (menuMap[menu.parentId]) {
-                            menuMap[menu.parentId].push(menu);
-                        } else {
-                            menuMap[menu.parentId] = [menu];
-                        }
-                        if (menu.isDefaultShow && menu.template) {
-                            self.menuTabs.push(menu);
+            self.defaultMenuTabs = ko.observableArray([]);
+
+            self.getAllMenuTemplate = function () {
+                let menuArray = new Array();
+                if (ko.unwrap(self.menuList) && ko.unwrap(self.menuList).length > 0) {
+                    ko.utils.arrayForEach(ko.unwrap(self.menuList), function (menu) {
+                        if (menu.template) {
+                            menuArray.push(new Menu(menu));
                         }
                     });
-                    if (menuMap && menuMap[defaultMenuId]) {
-                        ko.utils.arrayForEach(menuMap[defaultMenuId], function (menu) {
-                            menu.items = menuMap[menu.menuId];
-                            self.leftMenu.push(menu);
-                        });
-                    }
-                });
-            }
-            self.addMenuTabs = function (menu, event) {
-                if ($("#tab" + menu.menuId).length > 0) {
-                    $("#tab" + menu.menuId).tab("show");
-                } else {
-                    self.menuTabs.push(menu);
-                    $("#tab" + menu.menuId).tab("show");
                 }
+                return menuArray;
             };
-            self.romveMenuTabs = function (menu, event) {
-                self.menuTabs.remove(menu);
+            self.getMenuTab = function () {
+                let isAddDefaultMenuTab = ko.unwrap(self.defaultMenuTabs).length === 0;
+                let hashMenuTab = null;
+                if (ko.unwrap(self.menuList) && ko.unwrap(self.menuList).length > 0) {
+                    ko.utils.arrayForEach(ko.unwrap(self.menuList), function (menu) {
+                        if (isAddDefaultMenuTab && ko.unwrap(menu.isDefaultShow) && ko.unwrap(menu.template)) {
+                            self.defaultMenuTabs.push(menu);
+                        }
+//                        if(location.hash){
+//                            hashMenuTab = null;
+//                        }
+                    });
+                }
+                if (ko.unwrap(self.defaultMenuTabs).length > 0) {
+                    ko.unwrap(self.defaultMenuTabs)[ko.unwrap(self.defaultMenuTabs).length - 1].isActive(true);
+                }
+                return ko.unwrap(self.defaultMenuTabs);
             };
-            self.contentAfterRender = function (element) {
-                $(element).parents(".centre_tabs").find('.nav-tabs li a:last').tab("show");
+            self.getLsatMenuTab = function () {
+                let menuTabArray = self.getMenuTab();
+                if (menuTabArray && menuTabArray.length > 0) {
+                    return menuTabArray[menuTabArray.length - 1];
+                }
+                return {};
             };
 
-            init();
+
+
+
+
+//            function init() {
+//                getRequest("/menu/hash/" + RootView.getHash(), {accept: "application/x-protobuf"}, function (data) {
+//                    var menuList = bcstore.MenuList.decode(data);
+//                    var menuMap = {};
+//                    ko.utils.arrayForEach(menuList.items, function (menu) {
+//                        menu.name = l10n('menu.' + menu.name);
+//                        if (menuMap[menu.parentId]) {
+//                            menuMap[menu.parentId].push(menu);
+//                        } else {
+//                            menuMap[menu.parentId] = [menu];
+//                        }
+//                        if (menu.isDefaultShow && menu.template) {
+//                            self.menuTabs.push(menu);
+//                        }
+//                    });
+//                    if (menuMap && menuMap[defaultMenuId]) {
+//                        ko.utils.arrayForEach(menuMap[defaultMenuId], function (menu) {
+//                            menu.items = menuMap[menu.menuId];
+//                            self.leftMenu.push(menu);
+//                        });
+//                    }
+//                });
+//            }
+//            self.addMenuTabs = function (menu, event) {
+//                if ($("#tab" + menu.menuId).length > 0) {
+//                    $("#tab" + menu.menuId).tab("show");
+//                } else {
+//                    self.menuTabs.push(menu);
+//                    $("#tab" + menu.menuId).tab("show");
+//                }
+//            };
+//            self.romveMenuTabs = function (menu, event) {
+//                self.menuTabs.remove(menu);
+//            };
+//            self.contentAfterRender = function (element) {
+//                $(element).parents(".centre_tabs").find('.nav-tabs li a:last').tab("show");
+//            };
+//
+//            init();
         }
         return {
             viewModel: {
