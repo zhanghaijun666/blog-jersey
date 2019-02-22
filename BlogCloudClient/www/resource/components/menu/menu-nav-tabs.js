@@ -25,18 +25,32 @@
             };
             self.getMenuTab = function () {
                 let isAddDefaultMenuTab = ko.unwrap(self.defaultMenuTabs).length === 0;
+                let hashMenuTabName = location.hash.indexOf("/") > 0 ? location.hash.substring(location.hash.indexOf("/") + 1) : "";
                 let hashMenuTab = null;
                 if (ko.unwrap(self.menuList) && ko.unwrap(self.menuList).length > 0) {
                     ko.utils.arrayForEach(ko.unwrap(self.menuList), function (menu) {
                         if (isAddDefaultMenuTab && ko.unwrap(menu.isDefaultShow) && ko.unwrap(menu.template)) {
                             self.defaultMenuTabs.push(menu);
                         }
-//                        if(location.hash){
-//                            hashMenuTab = null;
-//                        }
+                        if (hashMenuTabName && menu.name === hashMenuTabName) {
+                            hashMenuTab = menu;
+                        }
                     });
-                }
-                if (ko.unwrap(self.defaultMenuTabs).length > 0) {
+                    if (hashMenuTab) {
+                        let isMenuExist = false;
+                        for (let i = 0; i < ko.unwrap(self.defaultMenuTabs).length; i++) {
+                            if (ko.unwrap(self.defaultMenuTabs)[i].menuId === hashMenuTab.menuId) {
+                                ko.unwrap(self.defaultMenuTabs)[i].isActive(true);
+                                isMenuExist = true;
+                                break;
+                            }
+                        }
+                        if (!isMenuExist) {
+                            hashMenuTab.isActive(true);
+                            self.defaultMenuTabs.push(hashMenuTab);
+                        }
+                    }
+                } else if (ko.unwrap(self.defaultMenuTabs).length > 0) {
                     ko.unwrap(self.defaultMenuTabs)[ko.unwrap(self.defaultMenuTabs).length - 1].isActive(true);
                 }
                 return ko.unwrap(self.defaultMenuTabs);

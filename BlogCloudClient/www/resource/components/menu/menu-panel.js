@@ -3,7 +3,8 @@
         function MenuPanel(params, componentInfo) {
             var defaultMenuId = 0;
             var defaultValue = {
-                menuList: ko.observableArray([])
+                menuList: ko.observableArray([]),
+                clickCallBack: function () {}
             };
             var self = $.extend(this, defaultValue, params);
 
@@ -30,6 +31,9 @@
             self.switchMenu = function (data, event) {
                 if (RootView.isHash("menu") && ko.unwrap(data.name)) {
                     RootView.changeHash("#menu/" + ko.unwrap(data.name));
+                    if (self.dialogRef) {
+                        self.dialogRef.modal("hide");
+                    }
                 }
             };
         }
