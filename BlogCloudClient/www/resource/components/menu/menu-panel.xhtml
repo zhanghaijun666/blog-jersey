@@ -1,0 +1,16 @@
+<div class="table-responsive" role="tablist" data-bind="foreach: getMenuArray()">
+    <div class="panel panel-default collapsebox" style="margin-bottom: 0px;">
+        <div class="panel-heading" data-toggle="collapse" role="tab" data-bind="attr: {'data-target':'#listGroup'+$data.menuId}">
+            <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.getMenuName()"></span>
+            <span class="pull-right"><i class="fa fa-hand-o-left fa-lg"></i></span>
+            <span class="pull-right"><i class="fa fa-hand-o-down fa-lg"></i></span>
+        </div>
+        <div class="panel-collapse collapse" role="tabpanel" data-bind="attr: {id: 'listGroup'+$data.menuId}">
+            <ul class="list-group" data-bind="foreach: $data.items">
+                <li class="list-group-item" data-bind="click: $component.addMenuTabs">
+                    <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.getMenuName()"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

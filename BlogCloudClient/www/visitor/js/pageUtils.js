@@ -1,6 +1,6 @@
 function PageUtils(root) {
     var self = root || this;
-    self.RootPage = ko.observable();
+    self.rootPageViewModel = ko.observable();
 
     self.isSmallScreen = ko.computed(function () {
         return window.innerWidth < 992;

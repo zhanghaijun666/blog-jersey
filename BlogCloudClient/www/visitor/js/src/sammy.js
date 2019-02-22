@@ -9,7 +9,7 @@ function SammyPage(options) {
             if (root.isLogin()) {
                 this.redirect("#menu");
             } else {
-                root.RootPage("login-page");
+                root.rootPageViewModel({name: 'login-page', params: {}});
             }
         });
         this.get("#menu", function () {
@@ -18,7 +18,11 @@ function SammyPage(options) {
                 return;
             }
             root.getMenu();
-            root.RootPage("home-nav-tabs");
+            root.rootPageViewModel({name: 'menu-nav-tabs',
+                params: {
+                    menuList: root.menuList
+                }
+            });
         });
         this.get("#messages", function () {
             toastShowMsg("暂未开发，尽情期待！！！");

@@ -53,8 +53,8 @@ function initStore() {
         self.isDefaultShow = ko.observable(!!ko.unwrap(self.isDefaultShow));
         self.status = ko.observable(ko.unwrap(self.status));
     }
-    User.prototype = new Message("Menu");
-    User.prototype.MenuName = function () {
+    Menu.prototype = new Message("Menu");
+    Menu.prototype.getMenuName = function () {
         return ko.unwrap(this.name) ? l10n('menu.' + ko.unwrap(this.name)) : "";
     };
 

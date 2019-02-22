@@ -40,13 +40,5 @@
     height: 100%;
     overflow: auto;
 }
-.collapsebox .fa-hand-o-down{
-    display: none;
-}
-.collapsebox [aria-expanded=true] .fa-hand-o-down, .collapsebox [aria-expanded=false] .fa-hand-o-left{
-    display: inline-block;
-}
-.collapsebox [aria-expanded=true] .fa-hand-o-left, .collapsebox [aria-expanded=false] .fa-hand-o-down{
-    display: none;
-}
+
 

@@ -20,7 +20,12 @@
                 "			</div>" +
                 "			<!-- /ko -->" +
                 "			<div class=\"modal-body\" style=\"padding: 0px;\">" +
-                "				<!-- ko template: {name: $data.bodyTemplate, data: $data} --> <!-- /ko -->" +
+                "                           <!-- ko if: ko.components.isRegistered($data.bodyTemplate) -->"+
+                "                           <!-- ko component: {name: $data.bodyTemplate, params: $data } --><!-- /ko -->"+
+                "                           <!-- /ko -->"+
+                "                           <!-- ko ifnot: ko.components.isRegistered($data.bodyTemplate) -->"+
+                "                           <!-- ko template: {name: $data.bodyTemplate, data: $data} --><!-- /ko -->"+
+                "                           <!-- /ko -->"+
                 "			</div>" +
                 "			<!-- ko ifnot: $data.isHideFoot -->" +
                 "			<div class=\"modal-footer\">" +

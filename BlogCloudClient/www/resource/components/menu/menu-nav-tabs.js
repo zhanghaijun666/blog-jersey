@@ -1,11 +1,13 @@
 (function (global) {
-    define(["knockout", "text!./home-nav-tabs.xhtml", "css!./home-nav-tabs.css"], function (ko, pageView) {
-        function homeNavTabs(params, componentInfo) {
+    define(["knockout", "text!./menu-nav-tabs.xhtml", "css!./menu-nav-tabs.css"], function (ko, pageView) {
+        function MenuNavTabs(params, componentInfo) {
             var defaultMenuId = 0;
             var self = this;
             if (params.ref) {
                 params.ref(self);
             }
+            self.menuList = params.menuList || ko.observableArray([]);
+            
             self.leftMenu = ko.observableArray([]);
             self.menuTabs = ko.observableArray([]);
 
@@ -52,7 +54,7 @@
         return {
             viewModel: {
                 createViewModel: function (params, componentInfo) {
-                    return new homeNavTabs(params, componentInfo);
+                    return new MenuNavTabs(params, componentInfo);
                 }
             },
             template: pageView

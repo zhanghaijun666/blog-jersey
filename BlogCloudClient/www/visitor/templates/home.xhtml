@@ -1,8 +1,8 @@
 <template id="template-Blog-home">
     <div class="home-header" data-bind="template: { name: 'template-Blog-home-header', data: $data }"></div>
     <div class="home-body">
-        <!-- ko if: RootView.RootPage() -->
-        <!-- ko component: { name: RootView.RootPage(), params: {} } --><!-- /ko -->
+        <!-- ko if: RootView.rootPageViewModel() -->
+        <!-- ko component: RootView.rootPageViewModel() --><!-- /ko -->
         <!-- /ko -->
     </div>
     <!-- ko if: RootView.isLogin() -->
@@ -18,7 +18,7 @@
         </div>
         <!-- /ko -->
         <!-- ko if: RootView.isSmallScreen() && RootView.isLogin() -->
-        <div class="small-header" data-bind="component: 'small-head'"></div>
+        <div class="small-header" data-bind="component: {name: 'small-head', params: {leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList} }}"></div>
         <!-- /ko -->
     </div>
     <div class="col-md-8 visible-md-block visible-lg-block home-title-body">

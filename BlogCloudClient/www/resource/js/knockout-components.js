@@ -24,5 +24,8 @@
     ko.components.register('small-head', {require: 'static/resource/components/small/small-head.js'});
 
     ko.components.register('clock', {require: 'static/resource/components/clock/clock.js'});
+    
+    ko.components.register('menu-panel', {require: 'static/resource/components/menu/menu-panel.js'});
+    ko.components.register('menu-nav-tabs', {require: 'static/resource/components/menu/menu-nav-tabs.js'});
 
 })(this, ko);
