@@ -52,6 +52,8 @@ function initStore() {
         self.isDeletable = ko.observable(!!ko.unwrap(self.isDeletable));
         self.isDefaultShow = ko.observable(!!ko.unwrap(self.isDefaultShow));
         self.status = ko.observable(ko.unwrap(self.status));
+        
+        self.isActive = ko.observable(!!ko.unwrap(self.isActive));
     }
     Menu.prototype = new Message("Menu");
     Menu.prototype.getMenuName = function () {

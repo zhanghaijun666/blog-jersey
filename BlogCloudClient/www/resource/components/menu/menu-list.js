@@ -8,7 +8,6 @@
             };
             var self = this;
             self = $.extend(this, defaultParams, params);
-            console.log(self.menuClass);
             self.menuWidth = "";
             if (!!ko.unwrap(self.isCenter) && ko.unwrap(self.menus) && ko.unwrap(self.menus).length > 0) {
                 self.menuWidth = (1 / (ko.unwrap(self.menus).length)) * 100 + "%";

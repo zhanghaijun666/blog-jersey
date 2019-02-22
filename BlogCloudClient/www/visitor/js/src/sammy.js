@@ -12,11 +12,13 @@ function SammyPage(options) {
                 root.rootPageViewModel({name: 'login-page', params: {}});
             }
         });
-        this.get("#menu", function () {
+        this.get(/\#menu(.*)/, function () {
             if (!root.isLogin()) {
                 this.redirect("#login");
                 return;
             }
+            var params = this.params['splat'][0];
+            console.log(params);
             root.getMenu();
             root.rootPageViewModel({name: 'menu-nav-tabs',
                 params: {
