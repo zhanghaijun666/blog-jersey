@@ -41,7 +41,7 @@
                     toastShowCode(rspInfo.code);
                     if (rspInfo.code === bcstore.ReturnCode.OK) {
                         self.user.setData(new User());
-                        location.hash = "#home";
+                        location.hash = "#login";
                     }
                 });
             };

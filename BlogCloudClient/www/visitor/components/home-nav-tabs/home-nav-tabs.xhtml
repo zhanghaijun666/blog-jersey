@@ -22,7 +22,7 @@
             <li role="presentation">
                 <a role="tab" data-toggle="tab" data-bind="attr: { href: '#content'+$data.menuId, id: 'tab'+$data.menuId}">
                     <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.name"></span>
-                    <!-- ko if: $data.deletable -->
+                    <!-- ko if: $data.idDeletable -->
                     <i class="pull-right fa fa-times cursor_pointer" aria-hidden="true" data-bind="click: $component.romveMenuTabs"></i>
                     <!-- /ko -->
                 </a>

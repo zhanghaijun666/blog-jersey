@@ -33,7 +33,7 @@
             <column name="parent_id" value="0"/>
             <column name="name" value="myblog"/>
             <column name="icon" value="fa-book"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="role_id" value="0"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
@@ -47,7 +47,7 @@
             <column name="name" value="blog"/>
             <column name="icon" value="fa-file"/>
             <column name="template" value="blog"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="role_id" value="0"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
@@ -62,7 +62,7 @@
             <column name="parent_id" value="0"/>
             <column name="name" value="user-list"/>
             <column name="icon" value="fa-vcard"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="role_id" value="1"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
@@ -76,7 +76,7 @@
             <column name="name" value="user-all"/>
             <column name="icon" value="fa-user-circle-o"/>
             <column name="template" value="user-list"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="role_id" value="1"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
@@ -91,7 +91,7 @@
             <column name="parent_id" value="0"/>
             <column name="name" value="twaver"/>
             <column name="icon" value="fa-area-chart"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
             <column name="created_by" value = "0" />
@@ -104,7 +104,7 @@
             <column name="name" value="twaver-spring"/>
             <column name="icon" value="fa-adjust"/>
             <column name="template" value="twaver-spring"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="deletable" valueBoolean="true"/>
             <column name="default_show" valueBoolean="false"/>
             <column name="status" value="1"/>
@@ -120,7 +120,7 @@
             <column name="parent_id" value="0"/>
             <column name="name" value="expression"/>
             <column name="icon" value="fa-skyatlas"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
             <column name="created_by" value = "0" />
@@ -133,7 +133,7 @@
             <column name="name" value="game-expression"/>
             <column name="icon" value="fa-gamepad"/>
             <column name="template" value="game-expression"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
             <column name="created_by" value = "0" />
@@ -146,7 +146,7 @@
             <column name="name" value="all-university"/>
             <column name="icon" value="fa-university"/>
             <column name="template" value="university"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="status" value="1"/>
             <column name="created_at" value="${now}" />
             <column name="created_by" value = "0" />
@@ -162,7 +162,7 @@
             <column name="name" value="user-home"/>
             <column name="icon" value="fa-home"/>
             <column name="template" value="user-home"/>
-            <column name="hash" value="home"/>
+            <column name="hash" value="menu"/>
             <column name="deletable" valueBoolean="false"/>
             <column name="default_show" valueBoolean="true"/>
             <column name="role_id" value="0"/>

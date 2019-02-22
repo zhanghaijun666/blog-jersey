@@ -42,6 +42,22 @@ function initStore() {
         return ko.unwrap(this.nickname) + ' ( ' + ko.unwrap(this.username) + ' ) ';
     };
 
+    function Menu(options) {
+        var self = $.extend(this, getStoreFileds("Menu"), options);
+        self.parentId = ko.observable(ko.unwrap(self.parentId));
+        self.name = ko.observable(ko.unwrap(self.name));
+        self.icon = ko.observable(ko.unwrap(self.icon));
+        self.template = ko.observable(ko.unwrap(self.template));
+        self.hash = ko.observable(ko.unwrap(self.hash));
+        self.isDeletable = ko.observable(!!ko.unwrap(self.isDeletable));
+        self.isDefaultShow = ko.observable(!!ko.unwrap(self.isDefaultShow));
+        self.status = ko.observable(ko.unwrap(self.status));
+    }
+    User.prototype = new Message("Menu");
+    User.prototype.MenuName = function () {
+        return ko.unwrap(this.name) ? l10n('menu.' + ko.unwrap(this.name)) : "";
+    };
+
 
 
 
@@ -67,4 +83,5 @@ function initStore() {
 
 
     window.User = User;
+    window.Menu = Menu;
 }

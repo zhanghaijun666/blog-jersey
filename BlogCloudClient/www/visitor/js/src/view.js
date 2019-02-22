@@ -5,9 +5,10 @@ requirejs(["bcstore"], function (bcstore) {
     window.theme.loadTheme();
     function RootViewModel() {
         var self = this;
-        new UserUtils(self);
         new HashUtils(self);
+        new MenuUtils(self);
         new PageUtils(self);
+        new UserUtils(self);
         self.app = new SammyPage({view: self});
 
 

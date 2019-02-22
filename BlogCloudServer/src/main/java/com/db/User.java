@@ -13,7 +13,8 @@ import org.javalite.activejdbc.annotations.Table;
 @Table("users")
 public class User extends CommonModel {
 
-    public static final int DEFAULTUSERID = 0;
+    private static final long serialVersionUID = 1L;
+    public static final int DEFAULT_USER_ID = 0;
 
     public int getUserId() {
         return getInteger("id");

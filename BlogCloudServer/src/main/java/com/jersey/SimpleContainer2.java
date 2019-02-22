@@ -42,6 +42,7 @@ package com.jersey;
 
 import com.db.DBFactory;
 import com.server.LogHelper;
+import com.server.SessionFactory;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
@@ -414,7 +415,8 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
 
             @Override
             public Principal getUserPrincipal() {
-                return null;
+                return SessionFactory.instance().getSession(request);
+//                return null;
             }
 
             @Override

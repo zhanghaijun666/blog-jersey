@@ -20,7 +20,7 @@
                         } else {
                             menuMap[menu.parentId] = [menu];
                         }
-                        if (menu.defaultShow && menu.template) {
+                        if (menu.isDefaultShow && menu.template) {
                             self.menuTabs.push(menu);
                         }
                     });

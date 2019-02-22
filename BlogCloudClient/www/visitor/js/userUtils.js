@@ -22,6 +22,6 @@ function UserUtils(root) {
     };
 
     self.isLogin = ko.computed(function () {
-        return self.user() && self.user().userId && self.user().username();
+        return !!(self.user() && self.user().userId && self.user().username && self.user().username());
     }, self);
 }

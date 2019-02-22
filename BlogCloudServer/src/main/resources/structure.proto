@@ -52,13 +52,13 @@ message RoleList{
 }
 message Menu{
     int32 menuId = 1;
-    int32 parent_id = 2;
+    int32 parentId = 2;
     string name = 3;
     string icon = 4;
     string template = 5; 
     string hash = 6; 
-    bool deletable = 7; 
-    bool defaultShow = 8;
+    bool isDeletable = 7; 
+    bool isDefaultShow = 8;
     int32 status = 9; 
 }
 message MenuList {

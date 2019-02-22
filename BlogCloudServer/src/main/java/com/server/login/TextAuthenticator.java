@@ -30,7 +30,7 @@ public class TextAuthenticator implements Authenticator {
         List<BlogStore.User> textUsers = readTextUsers();
         for (BlogStore.User textUser : textUsers) {
             if (textUser.getUsername().equals(requestUser.getUsername()) && textUser.getPassword().equals(requestUser.getPassword())) {
-                dbUser = User.saveUser(textUser, User.DEFAULTUSERID, BlogStore.Authenticator.TEXT_AUTHENTICATOR_VALUE);
+                dbUser = User.saveUser(textUser, User.DEFAULT_USER_ID, BlogStore.Authenticator.TEXT_AUTHENTICATOR_VALUE);
                 break;
             }
         }

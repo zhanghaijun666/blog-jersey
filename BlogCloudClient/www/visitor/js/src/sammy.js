@@ -7,30 +7,27 @@ function SammyPage(options) {
         });
         this.get("#login", function () {
             if (root.isLogin()) {
-                this.redirect("#home");
+                this.redirect("#menu");
             } else {
                 root.RootPage("login-page");
             }
         });
-        this.get("#home", function () {
-            if (root.isLogin()) {
-                root.RootPage("home-nav-tabs");
-            } else {
+        this.get("#menu", function () {
+            if (!root.isLogin()) {
                 this.redirect("#login");
+                return;
             }
+            root.getMenu();
+            root.RootPage("home-nav-tabs");
         });
         this.get("#messages", function () {
             toastShowMsg("暂未开发，尽情期待！！！");
-//            root.RootPage("login-page");
             this.redirect("#login");
         });
-        this.get("#menu", function () {
+        this.get("#admin", function () {
             toastShowMsg("暂未开发，尽情期待！！！");
-//            root.RootPage("login-page");
             this.redirect("#login");
         });
-
-
     }).run();
     return sammy;
 }

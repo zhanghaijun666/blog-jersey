@@ -11,6 +11,9 @@ import org.javalite.activejdbc.annotations.Table;
 @Table("menus")
 public class Menu extends CommonModel {
 
+    private static final long serialVersionUID = 1L;
+    public static final int DEFAULT_MENU_PARENT_ID = 0;
+
     public int getMenuId() {
         return getInteger("id");
     }
@@ -58,8 +61,8 @@ public class Menu extends CommonModel {
                 .setIcon(menu.getIcon())
                 .setTemplate(menu.getTemplate())
                 .setHash(menu.getHash())
-                .setDeletable(menu.isDeletable())
-                .setDefaultShow(menu.isDefaultShow())
+                .setIsDeletable(menu.isDeletable())
+                .setIsDefaultShow(menu.isDefaultShow())
                 .setStatus(menu.getStatus())
                 .build();
     }
@@ -73,8 +76,8 @@ public class Menu extends CommonModel {
         dbMenu.setString("icon", menu.getIcon());
         dbMenu.setString("template", menu.getTemplate());
         dbMenu.setString("hash", menu.getHash());
-        dbMenu.setBoolean("deletable", menu.getDeletable());
-        dbMenu.setBoolean("default_show", menu.getDefaultShow());
+        dbMenu.setBoolean("deletable", menu.getIsDeletable());
+        dbMenu.setBoolean("default_show", menu.getIsDefaultShow());
         dbMenu.setInteger("updated_by", userId);
         dbMenu.saveIt();
         return BlogStore.ReturnCode.OK_VALUE;
