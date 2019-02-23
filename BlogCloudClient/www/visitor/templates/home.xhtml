@@ -10,31 +10,36 @@
     <!-- /ko -->
 </template>
 <template id="template-Blog-home-header">
-    <div class="col-md-2 col-sm-12">
-        <!-- ko ifnot: RootView.isSmallScreen() && RootView.isLogin() -->
-        <div class="logo-body">
-            <img src="/static/resource/images/logo.png" width="70px" height="50px" alt="logo"/>
-            <span data-bind="text: '晨谨知识库'"></span>
-        </div>
-        <!-- /ko -->
-        <!-- ko if: RootView.isSmallScreen() && RootView.isLogin() -->
-        <div class="small-header" data-bind="component: {name: 'small-head', params: {leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList} }}"></div>
-        <!-- /ko -->
+    <div class="home-header-logo visible-md-block visible-lg-block">
+        <!-- ko template: 'logo-template' --><!-- /ko -->
     </div>
-    <div class="col-md-8 visible-md-block visible-lg-block home-title-body">
-        <!-- ko if: RootView.isLogin() -->
-        <div class="pull-left" data-bind='component: {name: "menu-list", params: { menus: RootView.blogNavigator() }}'></div>
-        <div class="pull-right">
-            <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
-            <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
-            <button data-bind="click: RootView.logout"><span class="glyphicon glyphicon-off"></span><span data-bind="text: '退出'"></span></button>
+    <div class="home-header-nav">
+        <div class="visible-md-block visible-lg-block">
+            <!-- ko if: RootView.isLogin() -->
+            <div class="pull-left" data-bind='component: {name: "menu-list", params: { menus: RootView.blogNavigator() }}'></div>
+            <div class="pull-right">
+                <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
+                <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
+                <button data-bind="click: RootView.logout"><span class="glyphicon glyphicon-off"></span><span data-bind="text: '退出'"></span></button>
+            </div>
+            <!-- /ko -->
         </div>
-        <!-- /ko -->
+        <div class="visible-sm-block visible-xs-block">
+            <!-- ko ifnot: RootView.isLogin() -->
+            <!-- ko template: 'logo-template' --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: RootView.isLogin() -->
+            <!-- ko component: {name: 'small-head', params: {leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList} }} --><!-- /ko -->
+            <!-- /ko -->
+        </div>
     </div>
-    <div class="col-md-2 visible-md-block visible-lg-block blog-clock">
-        <!-- ko if: RootView.isLogin() -->
-        <!-- ko component: 'clock' -->
-        <!-- /ko -->
-        <!-- /ko -->
+    <div class="home-heade-clock visible-md-block visible-lg-block">
+        <!-- ko component: 'clock' --><!-- /ko -->
+    </div>
+</template>
+<template id="logo-template">
+    <div class="logo-body">
+        <img src="/static/resource/images/logo.png" width="70px" height="50px" alt="logo"/>
+        <span data-bind="text: '晨谨知识库'"></span>
     </div>
 </template>

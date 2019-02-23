@@ -3,10 +3,10 @@
         function SmallMenuModel(params, componentInfo) {
             var defaultValue = {
                 leftIcon: 'fa-bars',
-                leftTemplateName: "defaultleftTemplateData",
+                leftTemplateName: "",
                 leftTemplateData: {},
                 rightIcon: 'fa-plus',
-                rightTemplateName: "defaultleftTemplateData",
+                rightTemplateName: "",
                 rightTemplateData: {},
                 centerIcon: 'fa-book',
                 centerText: '我的博客'
