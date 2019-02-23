@@ -6,7 +6,9 @@
 </div>
 
 <template id="large-screen-tabs-temlate">
-    <div class="col-md-2  leftMenu" data-bind="component: {name: 'menu-panel', params: {menuList: menuList}}"></div>
+    <div class="col-md-2  leftMenu">
+        <menu-panel params="menuList: menuList"></menu-panel>
+    </div>
     <div class="col-md-10 centre_tabs">
         <ul class="nav nav-tabs" role="tablist" data-bind="foreach: {data: getMenuTab()} ">
             <li role="presentation">

@@ -6,7 +6,9 @@
         <!-- /ko -->
     </div>
     <!-- ko if: RootView.isLogin() -->
-    <div class="home-foot visible-xs-block visible-sm-block" data-bind=' component: {name: "menu-list", params: { menus: RootView.blogNavigator(),isCenter: true,menuClass:"small-nav" }}'></div>
+    <div class="home-foot visible-xs-block visible-sm-block">
+        <menu-list params="menus: RootView.blogNavigator(), isCenter: true, menuClass:'small-nav'"></menu-list>
+    </div>
     <!-- /ko -->
 </template>
 <template id="template-Blog-home-header">
@@ -16,9 +18,11 @@
     <div class="home-header-nav">
         <div class="visible-md-block visible-lg-block">
             <!-- ko if: RootView.isLogin() -->
-            <div class="pull-left" data-bind='component: {name: "menu-list", params: { menus: RootView.blogNavigator() }}'></div>
+            <div class="pull-left">
+                <menu-list params="menus: RootView.blogNavigator()"></menu-list>
+            </div>
             <div class="pull-right">
-                <drop-down params="headText: RootView.user().getFullName(),menuItems: RootView.getPersonalCenter(),isShowSelect:false"></drop-down>
+                <menu-list params="menus: RootView.getPersonalCenter()"></menu-list>
             </div>
             <!-- /ko -->
         </div>
@@ -27,12 +31,12 @@
             <!-- ko template: 'logo-template' --><!-- /ko -->
             <!-- /ko -->
             <!-- ko if: RootView.isLogin() -->
-            <!-- ko component: {name: 'small-head', params: {leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList} }} --><!-- /ko -->
+            <small-head params="leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList}"></small-head>
             <!-- /ko -->
         </div>
     </div>
     <div class="home-heade-clock visible-md-block visible-lg-block">
-        <!-- ko component: 'clock' --><!-- /ko -->
+        <clock></clock>
     </div>
 </template>
 <template id="logo-template">
