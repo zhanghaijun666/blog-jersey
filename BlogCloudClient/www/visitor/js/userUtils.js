@@ -11,12 +11,20 @@ function UserUtils(root) {
         });
     };
     self.logout = function () {
-        getRequest("/user/logout", {accept: "application/x-protobuf"}, function (data) {
-            var rspInfo = bcstore.RspInfo.decode(data);
-            toastShowCode(rspInfo.code);
-            if (rspInfo.code === bcstore.ReturnCode.OK) {
-                self.user(null);
-                self.app.refresh();
+        showDialog({
+            header: l10n("operate.tips"),
+            bodyTemplate: "template-small-dialogMsg",
+            tipsMsg: l10n('operate.confirmLogout'),
+            dialogClass: "modal-sm",
+            success: function () {
+                getRequest("/user/logout", {accept: "application/x-protobuf"}, function (data) {
+                    var rspInfo = bcstore.RspInfo.decode(data);
+                    toastShowCode(rspInfo.code);
+                    if (rspInfo.code === bcstore.ReturnCode.OK) {
+                        self.user(null);
+                        self.app.refresh();
+                    }
+                });
             }
         });
     };

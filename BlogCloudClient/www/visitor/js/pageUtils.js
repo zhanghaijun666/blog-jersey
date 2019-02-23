@@ -19,12 +19,11 @@ function PageUtils(root) {
         }
         return arr;
     };
-    self.PersonalCenter = [
-        new MenuTab(l10n('user.userName'), {icon: 'fa-user', select: true}),
-        new MenuTab(l10n('user.userNick'), {icon: 'fa-user'}),
-        new MenuTab(l10n('user.userMail'), {icon: 'fa-envelope-o'}),
-        new MenuTab(l10n('user.userPhone'), {icon: 'fa-phone'})
-    ];
+    self.getPersonalCenter = function () {
+        let menuArr = new Array();
+        menuArr.push(new MenuTab(l10n('user.signOut'), {icon: 'fa-sign-out', clickFun: self.logout}));
+        return menuArr;
+    };
 
 
 }

@@ -45,6 +45,7 @@
         }, "operate": {
             "tips": "提示",
             "confirmDelete": "确定删除？",
+            "confirmLogout": "确定退出登陆？",
             "delete": "删除",
             "edit": "编辑"
         }, "tab": {

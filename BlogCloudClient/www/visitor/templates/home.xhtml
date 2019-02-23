@@ -18,7 +18,7 @@
             <!-- ko if: RootView.isLogin() -->
             <div class="pull-left" data-bind='component: {name: "menu-list", params: { menus: RootView.blogNavigator() }}'></div>
             <div class="pull-right">
-                <drop-down params="headText: RootView.user().getFullName(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
+                <drop-down params="headText: RootView.user().getFullName(),menuItems: RootView.getPersonalCenter(),isShowSelect:false"></drop-down>
             </div>
             <!-- /ko -->
         </div>

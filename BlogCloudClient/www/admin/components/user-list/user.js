@@ -35,6 +35,7 @@
                 showDialog({
                     header: l10n("operate.tips"),
                     bodyTemplate: "template-small-dialogMsg",
+                    tipsMsg: l10n('operate.confirmDelete'),
                     dialogClass: "modal-sm",
                     success: function () {
                         doDeleteUser(user instanceof Array ? user : [user]);

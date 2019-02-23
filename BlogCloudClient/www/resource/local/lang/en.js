@@ -46,6 +46,7 @@
         }, "operate": {
             "tips": "Tips",
             "confirmDelete": "Confirm Deletion ?",
+            "confirmLogout": "Confirm Logout ?",
             "delete": "Delete",
             "edit": "Edit"
         }, "tab": {
