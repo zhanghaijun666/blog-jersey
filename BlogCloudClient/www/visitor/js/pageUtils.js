@@ -21,7 +21,17 @@ function PageUtils(root) {
     };
     self.getPersonalCenter = function () {
         let menuArr = new Array();
-        menuArr.push(new MenuTab(l10n('user.signOut'), {icon: 'fa-sign-out', clickFun: self.logout}));
+        menuArr.push(new MenuTab("", {icon: 'fa-magic', title: l10n('product.theme')}));
+        menuArr.push(new MenuTab("", {icon: 'fa-language', title: l10n('product.switLang'), clickFun: window.switchLocalLang}));
+        menuArr.push(new MenuTab("", {icon: 'fa-question-circle', title: l10n('product.help')}));
+        menuArr.push({template: 'user-center-template', data: {
+                headText: self.user().nickname(),
+                isShowSelect: false,
+                menuItems: [
+                    new MenuTab(l10n('product.switLang'), {icon: 'fa-language', clickFun: window.switchLocalLang}),
+                    new MenuTab(l10n('user.signOut'), {icon: 'fa-sign-out', clickFun: self.logout})
+                ]
+            }});
         return menuArr;
     };
 

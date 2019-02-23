@@ -13,7 +13,8 @@
 
 
             self.menuMinWidth = function () {
-                return $(componentInfo.element).find("[data-toggle='dropdown']").outerWidth() + "px";
+                let width = $(componentInfo.element).find("[data-toggle='dropdown']").outerWidth();
+                return width ? width + 'px' : '0px';
             };
 
             self.dropdownMenuClick = function (menu, event) {
@@ -38,7 +39,7 @@
                 var text = "";
                 if (self.isShowSelect) {
                     ko.utils.arrayForEach(self.getSelected(), function (item) {
-                        text = text + ko.unwrap(item.name) + ",";
+                        text = text + ko.unwrap(item.text) + ",";
                     });
                     text = text.substring(0, text.length - 1)
                 }

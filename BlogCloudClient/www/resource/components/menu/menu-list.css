@@ -23,14 +23,16 @@
     color: #555;
 }
 
-/* ------ defaultMenuClass ------ start ------*/
+/* ------ menuClass ------ start ------*/
 .default-menu li{
+    height: 100%;
+    margin: 0 6px; 
+}
+.home-menu-nav li{
     padding: 0 20px;
     line-height: 50px;
     height: 100%;
 }
-/* ------ defaultMenuClass ------ end ------*/
-/* ------ small-nav menuClass ------ start ------*/
 .small-nav{
     overflow: hidden;
 }
@@ -43,7 +45,7 @@
     height: 50%;
     line-height: 25px;
 }
-/* ------ small-nav menuClass ------ end ------*/
+/* ------ menuClass ------ end ------*/
 
 
 

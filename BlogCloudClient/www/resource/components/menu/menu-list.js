@@ -3,7 +3,7 @@
         function MenuModel(params, componentInfo) {
             var defaultParams = {
                 menuClass: "default-menu",
-                menus: [], //new MenuTab("name", {})
+                menus: [], //new MenuTab() / {template: '', data: {}}
                 isCenter: false
             };
             var self = this;

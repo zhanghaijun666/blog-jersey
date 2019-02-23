@@ -19,7 +19,7 @@
         <div class="visible-md-block visible-lg-block">
             <!-- ko if: RootView.isLogin() -->
             <div class="pull-left">
-                <menu-list params="menus: RootView.blogNavigator()"></menu-list>
+                <menu-list params="menus: RootView.blogNavigator(),menuClass: 'home-menu-nav'"></menu-list>
             </div>
             <div class="pull-right">
                 <menu-list params="menus: RootView.getPersonalCenter()"></menu-list>
@@ -43,5 +43,11 @@
     <div class="logo-body">
         <img src="/static/resource/images/logo.png" width="200px" height="50px" alt="logo"/>
         <!--<span data-bind="text: '晨谨知识库'"></span>-->
+    </div>
+</template>
+<template id="user-center-template">
+    <div>
+        <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
+        <!-- ko component: {name: 'drop-down', params: $data} --><!-- /ko -->
     </div>
 </template>

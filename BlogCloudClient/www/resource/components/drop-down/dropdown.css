@@ -10,3 +10,12 @@
 .custom-dropdown{
     display: inline-block;
 }
+.custom-dropdown li{
+    width: 100%;
+    margin: 0;
+    text-align: left;
+}
+
+/* ------ dropdownCss ------ start ------*/
+
+/* ------ dropdownCss ------ end ------*/

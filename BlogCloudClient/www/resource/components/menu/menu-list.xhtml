@@ -1,10 +1,22 @@
 <div class="menu-list" data-bind="css: menuClass">
     <ul data-bind="foreach: menus">
-        <li data-bind="css: {active: isActive()}, click: clickFun, style: {width: $parent.menuWidth}" >
+        <!-- ko ifnot: $data.template -->
+        <li data-bind="css: {active: isActive()}, click: clickFun, style: {width: $parent.menuWidth}, attr: {title: title}" >
             <!-- ko if: icon -->
             <i class="fa" data-bind="css: icon"></i>
             <!-- /ko -->
             <span data-bind="text: text"></span>
         </li>
+        <!-- /ko -->
+        <!-- ko if: $data.template -->
+        <li>
+            <!-- ko if: ko.components.isRegistered($data.template) -->
+            <!-- ko component: {name: $data.template, params: $data.data} --><!-- /ko -->
+            <!-- /ko -->
+            <!-- ko ifnot: ko.components.isRegistered($data.template) -->
+            <!-- ko template: {name: $data.template, data: $data.data} --><!-- /ko -->
+            <!-- /ko -->
+        </li>
+        <!-- /ko -->
     </ul>
 </div>
