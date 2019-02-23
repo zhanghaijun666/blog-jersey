@@ -10,12 +10,12 @@
         <li role="presentation" data-bind="click: $parent.dropdownMenuClick">
             <a role="menuitem" tabindex="-1" href="javascript:void(0)">
                 <!-- ko ifnot: $parent.isSingleSelected -->
-                <custom-checkbox params="checked: $data.select"></custom-checkbox>
+                <custom-checkbox params="checked: $data.isActive"></custom-checkbox>
                 <!-- /ko -->
                 <!-- ko if: $data.icon -->
                 <i class="fa" data-bind="css: $data.icon"></i>
                 <!-- /ko -->
-                <span data-bind="text: $data.name"></span>
+                <span data-bind="text: $data.text"></span>
             </a>
         </li>
     </ul>

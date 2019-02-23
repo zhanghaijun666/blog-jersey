@@ -18,9 +18,7 @@
             <!-- ko if: RootView.isLogin() -->
             <div class="pull-left" data-bind='component: {name: "menu-list", params: { menus: RootView.blogNavigator() }}'></div>
             <div class="pull-right">
-                <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
-                <drop-down params="headText: RootView.user().nickname(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
-                <button data-bind="click: RootView.logout"><span class="glyphicon glyphicon-off"></span><span data-bind="text: '退出'"></span></button>
+                <drop-down params="headText: RootView.user().getFullName(),menuItems: RootView.PersonalCenter,isShowSelect:false"></drop-down>
             </div>
             <!-- /ko -->
         </div>

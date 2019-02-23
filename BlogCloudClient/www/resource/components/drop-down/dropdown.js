@@ -18,17 +18,17 @@
 
             self.dropdownMenuClick = function (menu, event) {
                 console.log(event);
-                if (!ko.isObservable(menu.select)) {
+                if (!ko.isObservable(menu.isActive)) {
                     event.stopPropagation();
                     return;
                 }
                 if (self.isSingleSelected) {
                     ko.utils.arrayForEach(ko.unwrap(self.menuItems), function (item) {
-                        item.select(item == menu);
+                        item.isActive(item == menu);
                     });
                 } else {
                     event.stopPropagation();
-                    menu.select(!ko.unwrap(menu.select));
+                    menu.isActive(!ko.unwrap(menu.isActive));
                 }
                 if (menu.clickFun) {
                     menu.clickFun();
@@ -50,7 +50,7 @@
             self.getSelected = function () {
                 var itemArray = new Array();
                 ko.utils.arrayForEach(ko.unwrap(self.menuItems), function (item) {
-                    if (ko.unwrap(item.select)) {
+                    if (ko.unwrap(item.isActive)) {
                         itemArray.push(item);
                     }
                 });

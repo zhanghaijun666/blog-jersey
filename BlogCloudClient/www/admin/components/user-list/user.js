@@ -3,10 +3,10 @@
         function UserListModel(params, componentInfo) {
             var defaultValue = {
                 searchItems: [
-                    new DropdownMenu(l10n('user.userName'), {icon: 'fa-user', select: true}),
-                    new DropdownMenu(l10n('user.userNick'), {icon: 'fa-user'}),
-                    new DropdownMenu(l10n('user.userMail'), {icon: 'fa-envelope-o'}),
-                    new DropdownMenu(l10n('user.userPhone'), {icon: 'fa-phone'})
+                    new MenuTab(l10n('user.userName'), {icon: 'fa-user', select: true}),
+                    new MenuTab(l10n('user.userNick'), {icon: 'fa-user'}),
+                    new MenuTab(l10n('user.userMail'), {icon: 'fa-envelope-o'}),
+                    new MenuTab(l10n('user.userPhone'), {icon: 'fa-phone'})
                 ]
             };
             var self = $.extend(this, defaultValue, params);
@@ -15,9 +15,9 @@
             function initMOdel() {
                 getUser();
                 self.userOperateMenu = [
-                    new CustomMenu(l10n('operate.edit'), {icon: 'fa-pencil-square-o', clickFun: self.editUserInfo, menuType: CustomMenuType.SingleSlection}),
-                    new CustomMenu(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.confirmDeleteUser, menuType: CustomMenuType.SingleSlection}),
-                    new CustomMenu(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.confirmDeleteUser, menuType: CustomMenuType.MultipleSelection})
+                    new MenuTab(l10n('operate.edit'), {icon: 'fa-pencil-square-o', clickFun: self.editUserInfo, menuType: CustomMenuType.SingleSlection}),
+                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.confirmDeleteUser, menuType: CustomMenuType.SingleSlection}),
+                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.confirmDeleteUser, menuType: CustomMenuType.MultipleSelection})
                 ];
             }
 

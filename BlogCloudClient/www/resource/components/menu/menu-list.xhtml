@@ -1,10 +1,10 @@
 <div class="menu-list" data-bind="css: menuClass">
     <ul data-bind="foreach: menus">
-        <li data-bind="css: {active: isActive()}, click: click, style: {width: $parent.menuWidth}" >
+        <li data-bind="css: {active: isActive()}, click: clickFun, style: {width: $parent.menuWidth}" >
             <!-- ko if: icon -->
             <i class="fa" data-bind="css: icon"></i>
             <!-- /ko -->
-            <span data-bind="text: name"></span>
+            <span data-bind="text: text"></span>
         </li>
     </ul>
 </div>

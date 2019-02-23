@@ -96,6 +96,7 @@ public class UserService {
 
     @GET
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @RolesAllowed("user")
     public BlogStore.User getUser() {
         AppSession session = (AppSession) security.getUserPrincipal();
         if (null == session) {

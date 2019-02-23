@@ -41,6 +41,7 @@
 package com.jersey;
 
 import com.db.DBFactory;
+import com.server.BologSecurityContext;
 import com.server.LogHelper;
 import com.server.SessionFactory;
 import java.io.IOException;
@@ -401,29 +402,7 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
     }
 
     private SecurityContext getSecurityContext(final Request request) {
-        return new SecurityContext() {
-
-            @Override
-            public boolean isUserInRole(final String role) {
-                return false;
-            }
-
-            @Override
-            public boolean isSecure() {
-                return request.isSecure();
-            }
-
-            @Override
-            public Principal getUserPrincipal() {
-                return SessionFactory.instance().getSession(request);
-//                return null;
-            }
-
-            @Override
-            public String getAuthenticationScheme() {
-                return null;
-            }
-        };
+        return new BologSecurityContext(request);
     }
 
     private void close(final Response response) {
