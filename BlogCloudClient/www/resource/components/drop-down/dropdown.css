@@ -25,7 +25,10 @@
     margin: 2px 0px;
     height: 36px;
 }
-.custom-dropdown [data-toggle="dropdown"]{
+.button-dropdown [data-toggle="dropdown"]{
     padding: 8px 12px;
+}
+.center-dropdown [data-toggle="dropdown"]{
+    padding: 0;
 }
 /* ------ dropdownCss ------ end ------*/

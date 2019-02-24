@@ -25,8 +25,9 @@ function PageUtils(root) {
         menuArr.push(new MenuTab("", {icon: 'fa-language', title: l10n('product.switLang'), clickFun: window.switchLocalLang}));
         menuArr.push(new MenuTab("", {icon: 'fa-question-circle', title: l10n('product.help')}));
         menuArr.push({template: 'user-center-template', data: {
-                headText: self.user().nickname(),
+                headText: self.user().getFullName(),
                 isShowSelect: false,
+                dropdownCss: "center-dropdown",
                 menuItems: [
                     new MenuTab(l10n('product.switLang'), {icon: 'fa-language', clickFun: window.switchLocalLang}),
                     new MenuTab(l10n('user.signOut'), {icon: 'fa-sign-out', clickFun: self.logout})
