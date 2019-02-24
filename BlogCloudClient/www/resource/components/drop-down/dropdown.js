@@ -4,6 +4,7 @@
             var defaultValue = {
                 menuItems: [],
                 headText: '请选择',
+                headIcon: "",
                 menuClick: function () {},
                 dropdownCss: '',
                 isShowSelect: true,

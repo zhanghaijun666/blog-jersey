@@ -1,10 +1,14 @@
-.custom-dropdown [data-toggle="dropdown"]{
-    padding: 6px 12px;
+.custom-dropdown{
+    border-radius: 4px;
     cursor: pointer;
     border: 1px solid #eee;
-    border-radius: 4px;
 }
-.custom-dropdown [data-toggle="dropdown"]:hover{
+.custom-dropdown [data-toggle="dropdown"]{
+    padding: 6px 12px;
+    width: 100%;
+    height: 100%;
+}
+.custom-dropdown:hover{
     background-color: #e7e7e7;
 }
 .custom-dropdown{
@@ -17,5 +21,11 @@
 }
 
 /* ------ dropdownCss ------ start ------*/
-
+.button-dropdown{
+    margin: 2px 0px;
+    height: 36px;
+}
+.custom-dropdown [data-toggle="dropdown"]{
+    padding: 8px 12px;
+}
 /* ------ dropdownCss ------ end ------*/
