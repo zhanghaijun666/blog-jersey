@@ -20,7 +20,7 @@
                     isHideFoot: true,
                     isCloseDialog: false,
                     bodyTemplate: self.leftTemplateName,
-                    dialogClass: "left-template"
+                    dialogClass: "dialog-left-template"
                 }, self.leftTemplateData));
             };
 
