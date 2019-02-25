@@ -10,13 +10,12 @@ requirejs(["bcstore"], function (bcstore) {
         new PageUtils(self);
         new UserUtils(self);
         self.app = new SammyPage({view: self});
+//        self.app.refresh();
 
 
 
 
 
-
-        self.getUser();
     }
     window.RootView = new RootViewModel();
     ko.applyBindings(window.RootView);

@@ -4,7 +4,7 @@ function MenuUtils(root) {
     self.menuList = ko.observableArray([]);
 
     self.getMenu = function (callback) {
-        getRequest("/menu/hash/" + RootView.getHash(), {accept: "application/x-protobuf"}, function (data) {
+        getRequest("/menu/hash/" + self.getHash(), {accept: "application/x-protobuf"}, function (data) {
             let menuList = bcstore.MenuList.decode(data);
             self.menuList().length = 0;
             ko.utils.arrayForEach(menuList.items, function (menu) {

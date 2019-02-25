@@ -19,7 +19,6 @@
             };
 
             self.dropdownMenuClick = function (menu, event) {
-                console.log(event);
                 if (!ko.isObservable(menu.isActive)) {
                     event.stopPropagation();
                     return;

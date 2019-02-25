@@ -34,7 +34,7 @@ function SammyPage(options) {
             this.redirect("#login");
         });
         this.around(function (callback) {
-            callback();
+            root.getUser(callback);
         });
     }).run();
     return sammy;
