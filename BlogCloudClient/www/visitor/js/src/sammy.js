@@ -33,6 +33,9 @@ function SammyPage(options) {
             toastShowMsg("暂未开发，尽情期待！！！");
             this.redirect("#login");
         });
+        this.around(function (callback) {
+            callback();
+        });
     }).run();
     return sammy;
 }
