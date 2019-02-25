@@ -1,8 +1,13 @@
 <template id="template-Blog-home">
     <div class="home-header" data-bind="template: { name: 'template-Blog-home-header', data: $data }"></div>
     <div class="home-body">
-        <!-- ko if: RootView.rootPageViewModel() -->
-        <!-- ko component: RootView.rootPageViewModel() --><!-- /ko -->
+        <!-- ko if: RootView.rootTemplate() -->
+        <!-- ko if: ko.components.isRegistered(RootView.rootTemplate()) -->
+        <!-- ko component: RootView.rootTemplate() --><!-- /ko -->
+        <!-- /ko -->
+        <!-- ko ifnot: ko.components.isRegistered(RootView.rootTemplate()) -->
+        <!-- ko template: RootView.rootTemplate() --><!-- /ko -->
+        <!-- /ko -->
         <!-- /ko -->
     </div>
     <!-- ko if: RootView.isLogin() -->
@@ -50,4 +55,7 @@
         <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />
         <!-- ko component: {name: 'drop-down', params: $data} --><!-- /ko -->
     </div>
+</template>
+<template id="menu-nav-tabs-template">
+    <menu-nav-tabs params="menuList: RootView.menuList"></menu-nav-tabs>
 </template>

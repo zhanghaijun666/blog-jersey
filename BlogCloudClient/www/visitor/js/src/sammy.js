@@ -9,7 +9,7 @@ function SammyPage(options) {
             if (root.isLogin()) {
                 this.redirect("#menu");
             } else {
-                root.rootPageViewModel({name: 'login-page', params: {}});
+                root.setRootTemplate('login-page');
             }
         });
         this.get(/\#menu(.*)/, function () {
@@ -19,11 +19,7 @@ function SammyPage(options) {
             }
             var params = this.params['splat'][0];
             root.getMenu();
-            root.rootPageViewModel({name: 'menu-nav-tabs',
-                params: {
-                    menuList: root.menuList
-                }
-            });
+            root.setRootTemplate('menu-nav-tabs-template');
         });
         this.get("#messages", function () {
             toastShowMsg("暂未开发，尽情期待！！！");
