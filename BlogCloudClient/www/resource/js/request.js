@@ -26,7 +26,7 @@ function getRequest(url, options, callback, erroCallback) {
     xhr.timeout = options.timeout || requestValue.timeout;
     xhr.setRequestHeader("Accept", accept);
     xhr.responseType = options.responseType || accept.indexOf("text/") > -1 ? "text" : "arraybuffer";
-    
+
     if (options.data) {
         xhr.setRequestHeader("Content-Type", options.type || requestValue["Content-Type"]);
         xhr.send(options.data);
@@ -38,23 +38,23 @@ function getRequest(url, options, callback, erroCallback) {
     }
 
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            let result;
-            if (xhr.responseType === 'text') {
-                result = xhr.responseText;
-            } else if (xhr.responseType === 'document') {
-                result = xhr.responseXML;
-            } else if (xhr.responseType === "arraybuffer") {
-                result = new Uint8Array(xhr.response);
-            } else {
-                result = xhr.response;
-            }
-            if (callback) {
-                callback(result);
-            }
-        } else {
-            if (erroCallback) {
-                erroCallback();
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let result;
+                if (xhr.responseType === 'text') {
+                    result = xhr.responseText;
+                } else if (xhr.responseType === 'document') {
+                    result = xhr.responseXML;
+                } else if (xhr.responseType === "arraybuffer") {
+                    result = new Uint8Array(xhr.response);
+                } else {
+                    result = xhr.response;
+                }
+                if (callback) {
+                    callback(result, xhr);
+                }
+            } else if (erroCallback) {
+                erroCallback(xhr);
             }
         }
     };
