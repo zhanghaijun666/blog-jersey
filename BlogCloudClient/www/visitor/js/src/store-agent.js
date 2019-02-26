@@ -47,6 +47,7 @@ function initStore() {
     function Menu(options, isObservable, isValidate) {
         var self = $.extend(this, getStoreFileds("Menu"), options);
         self.isActive = ko.observable(!!ko.unwrap(self.isActive));
+        self.element = ko.observable();
         if (isObservable) {
             self.parentId = ko.observable(ko.unwrap(self.parentId));
             self.name = ko.observable(ko.unwrap(self.name));

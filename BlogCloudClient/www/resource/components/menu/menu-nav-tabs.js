@@ -20,84 +20,61 @@
                 }
                 return menuArray;
             };
-            self.getMenuTab = function () {
-                let isAddDefaultMenuTab = ko.unwrap(self.menuTabs).length === 0;
-                let hashMenuTab = null;
+
+
+            ko.computed(function () {
+                console.log("555");
+                var isEmpty = !!(ko.unwrap(self.menuTabs).length === 0);
                 if (ko.unwrap(self.menuList) && ko.unwrap(self.menuList).length > 0) {
                     ko.utils.arrayForEach(ko.unwrap(self.menuList), function (menu) {
-                        if (isAddDefaultMenuTab && ko.unwrap(menu.isDefaultShow) && ko.unwrap(menu.template)) {
+                        if (isEmpty && ko.unwrap(menu.isDefaultShow) && ko.unwrap(menu.template)) {
                             self.menuTabs.push(new Menu(menu));
                         }
                         if (ko.unwrap(self.currentMenu) && ko.unwrap(self.currentMenu) === menu.name) {
-                            hashMenuTab = menu;
+                            self.showMenu(new Menu(menu));
                         }
                     });
-                    if (hashMenuTab) {
-                        let isMenuExist = false;
-                        for (let i = 0; i < ko.unwrap(self.menuTabs).length; i++) {
-                            if (ko.unwrap(self.menuTabs)[i].menuId === hashMenuTab.menuId) {
-                                isMenuExist = true;
-                                break;
-                            }
-                        }
-                        if (!isMenuExist) {
-                            self.menuTabs.push(hashMenuTab);
+                }
+                if (ko.unwrap(self.showMenu)) {
+                    var isExistShowMenu = false;
+                    for (var i = 0; i < ko.unwrap(self.menuTabs).length; i++) {
+                        if (ko.unwrap(self.showMenu().name) === ko.unwrap(self.menuTabs()[i].name)) {
+                            self.showMenu(self.menuTabs()[i]);
+                            isExistShowMenu = true;
+                            break;
                         }
                     }
+                    if (!isExistShowMenu) {
+                        self.menuTabs.push(new Menu(ko.unwrap(self.showMenu())));
+                    }
+                } else if (ko.unwrap(self.menuTabs).length > 0) {
+                    self.showMenu(ko.unwrap(self.menuTabs)[ko.unwrap(self.menuTabs).length - 1]);
+                } else {
+                    self.showMenu(null);
                 }
-                return ko.unwrap(self.menuTabs);
-            };
+                setTimeout(function () {
+                    if (self.showMenu()) {
+                        $(ko.unwrap(self.showMenu().element)).find('a').tab('show');
+                    }
+                }, 50);
+            });
+
             self.getLsatMenuTab = function () {
-                let menuTabArray = self.getMenuTab();
-                if (menuTabArray && menuTabArray.length > 0) {
-                    return menuTabArray[menuTabArray.length - 1];
+                if (ko.unwrap(self.menuTabs) && ko.unwrap(self.menuTabs).length > 0) {
+                    return ko.unwrap(self.menuTabs)[ko.unwrap(self.menuTabs).length - 1];
                 }
                 return {};
             };
+            self.romveMenuTabs = function (data, event) {
+                self.menuTabs.remove(function (menu) {
+                    return ko.unwrap(menu.name) === ko.unwrap(data.name);
+                });
+            };
+            self.isShowDeletable = function (data) {
+                return data.isDeletable && data.name !== self.showMenu().name;
+            };
 
 
-
-
-
-//            function init() {
-//                getRequest("/menu/hash/" + RootView.getHash(), {accept: "application/x-protobuf"}, function (data) {
-//                    var menuList = bcstore.MenuList.decode(data);
-//                    var menuMap = {};
-//                    ko.utils.arrayForEach(menuList.items, function (menu) {
-//                        menu.name = l10n('menu.' + menu.name);
-//                        if (menuMap[menu.parentId]) {
-//                            menuMap[menu.parentId].push(menu);
-//                        } else {
-//                            menuMap[menu.parentId] = [menu];
-//                        }
-//                        if (menu.isDefaultShow && menu.template) {
-//                            self.menuTabs.push(menu);
-//                        }
-//                    });
-//                    if (menuMap && menuMap[defaultMenuId]) {
-//                        ko.utils.arrayForEach(menuMap[defaultMenuId], function (menu) {
-//                            menu.items = menuMap[menu.menuId];
-//                            self.leftMenu.push(menu);
-//                        });
-//                    }
-//                });
-//            }
-//            self.addMenuTabs = function (menu, event) {
-//                if ($("#tab" + menu.menuId).length > 0) {
-//                    $("#tab" + menu.menuId).tab("show");
-//                } else {
-//                    self.menuTabs.push(menu);
-//                    $("#tab" + menu.menuId).tab("show");
-//                }
-//            };
-//            self.romveMenuTabs = function (menu, event) {
-//                self.menuTabs.remove(menu);
-//            };
-//            self.contentAfterRender = function (element) {
-//                $(element).parents(".centre_tabs").find('.nav-tabs li a:last').tab("show");
-//            };
-//
-//            init();
         }
         return {
             viewModel: {
