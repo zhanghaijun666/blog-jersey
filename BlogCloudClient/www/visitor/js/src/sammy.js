@@ -5,7 +5,7 @@ function SammyPage(options) {
         this.get("/", function () {
             this.redirect("#login");
         });
-        this.get("#login", function () {
+        this.get(/\#login(.*)/, function () {
             if (root.isLogin()) {
                 this.redirect("#menu");
             } else {
@@ -21,13 +21,16 @@ function SammyPage(options) {
             root.getMenu();
             root.setRootTemplate('menu-nav-tabs-template');
         });
-        this.get("#messages", function () {
+        this.get(/\#messages(.*)/, function () {
             toastShowMsg("暂未开发，尽情期待！！！");
             this.redirect("#login");
         });
-        this.get("#admin", function () {
+        this.get(/\#admin(.*)/, function () {
             toastShowMsg("暂未开发，尽情期待！！！");
             this.redirect("#login");
+        });
+        this.get(/.+/, function () {
+            this.redirect("#menu");
         });
         this.around(function (callback) {
             root.getUser(callback);
