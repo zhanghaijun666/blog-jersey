@@ -2,6 +2,7 @@ function MenuUtils(root) {
     var self = root || this;
 
     self.menuList = ko.observableArray([]);
+    self.currentMenu = ko.observable("");
 
     self.getMenu = function (callback) {
         if (self.menuList().length > 0) {

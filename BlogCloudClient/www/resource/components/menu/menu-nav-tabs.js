@@ -2,15 +2,12 @@
     define(["knockout", "text!./menu-nav-tabs.xhtml", "css!./menu-nav-tabs.css"], function (ko, pageView) {
         function MenuNavTabs(params, componentInfo) {
             var defaultValue = {
-                menuList: ko.observableArray([])
+                menuList: ko.observableArray([]),
+                currentMenu: ko.observable("")
             };
             var self = $.extend(this, defaultValue, params);
-            if (params.ref) {
-                params.ref(self);
-            }
-            self.menuList = params.menuList || ko.observableArray([]);
-
-            self.defaultMenuTabs = ko.observableArray([]);
+            self.menuTabs = ko.observableArray([]);
+            self.showMenu = ko.observable();
 
             self.getAllMenuTemplate = function () {
                 let menuArray = new Array();
@@ -24,36 +21,31 @@
                 return menuArray;
             };
             self.getMenuTab = function () {
-                let isAddDefaultMenuTab = ko.unwrap(self.defaultMenuTabs).length === 0;
-                let hashMenuTabName = location.hash.indexOf("/") > 0 ? location.hash.substring(location.hash.indexOf("/") + 1) : "";
+                let isAddDefaultMenuTab = ko.unwrap(self.menuTabs).length === 0;
                 let hashMenuTab = null;
                 if (ko.unwrap(self.menuList) && ko.unwrap(self.menuList).length > 0) {
                     ko.utils.arrayForEach(ko.unwrap(self.menuList), function (menu) {
                         if (isAddDefaultMenuTab && ko.unwrap(menu.isDefaultShow) && ko.unwrap(menu.template)) {
-                            self.defaultMenuTabs.push(menu);
+                            self.menuTabs.push(new Menu(menu));
                         }
-                        if (hashMenuTabName && menu.name === hashMenuTabName) {
+                        if (ko.unwrap(self.currentMenu) && ko.unwrap(self.currentMenu) === menu.name) {
                             hashMenuTab = menu;
                         }
                     });
                     if (hashMenuTab) {
                         let isMenuExist = false;
-                        for (let i = 0; i < ko.unwrap(self.defaultMenuTabs).length; i++) {
-                            if (ko.unwrap(self.defaultMenuTabs)[i].menuId === hashMenuTab.menuId) {
-                                ko.unwrap(self.defaultMenuTabs)[i].isActive(true);
+                        for (let i = 0; i < ko.unwrap(self.menuTabs).length; i++) {
+                            if (ko.unwrap(self.menuTabs)[i].menuId === hashMenuTab.menuId) {
                                 isMenuExist = true;
                                 break;
                             }
                         }
                         if (!isMenuExist) {
-                            hashMenuTab.isActive(true);
-                            self.defaultMenuTabs.push(hashMenuTab);
+                            self.menuTabs.push(hashMenuTab);
                         }
                     }
-                } else if (ko.unwrap(self.defaultMenuTabs).length > 0) {
-                    ko.unwrap(self.defaultMenuTabs)[ko.unwrap(self.defaultMenuTabs).length - 1].isActive(true);
                 }
-                return ko.unwrap(self.defaultMenuTabs);
+                return ko.unwrap(self.menuTabs);
             };
             self.getLsatMenuTab = function () {
                 let menuTabArray = self.getMenuTab();

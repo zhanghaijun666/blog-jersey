@@ -18,6 +18,7 @@ function SammyPage(options) {
                 return;
             }
             var params = this.params['splat'][0];
+            root.currentMenu(params.substring(1));
             root.getMenu();
             root.setRootTemplate('menu-nav-tabs-template');
         });
