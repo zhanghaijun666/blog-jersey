@@ -4,6 +4,12 @@ function MenuUtils(root) {
     self.menuList = ko.observableArray([]);
 
     self.getMenu = function (callback) {
+        if (self.menuList().length > 0) {
+            if (isFunction(callback)) {
+                callback(self.menuList());
+            }
+            return;
+        }
         getRequest("/menu/hash/" + self.getHash(), {accept: "application/x-protobuf"}, function (data) {
             let menuList = bcstore.MenuList.decode(data);
             self.menuList().length = 0;

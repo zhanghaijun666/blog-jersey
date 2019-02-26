@@ -32,15 +32,35 @@
         return Object.prototype.toString.call(o).slice(8, -1);
     }
 
+    ko.deepObservableClone = function (object) {
+        return deepClone(object, true);
+    };
 
+    ko.bindingHandlers.elementCallback = {
+        init: function (element, valueAccessor) {
+            var params = valueAccessor();
+            var initCallback = params.init;
+            var disposeCallback = params.dispose;
+            if (isFunction(initCallback)) {
+                window.setTimeout(function () {
+                    initCallback(element);
+                }, 100);
+            }
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                if (isFunction(disposeCallback)) {
+                    disposeCallback(element);
+                }
+            });
+        },
+        update: function (element, valueAccessor) {
+
+        }
+    };
 
 
 
     global.getClass = getClass;
     global.getDeepClone = function (object) {
         return deepClone(object, false);
-    };
-    ko.deepObservableClone = function (object) {
-        return deepClone(object, true);
     };
 })(this, ko);

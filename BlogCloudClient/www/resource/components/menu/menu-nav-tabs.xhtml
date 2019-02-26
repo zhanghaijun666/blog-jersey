@@ -10,8 +10,8 @@
         <menu-panel params="menuList: menuList"></menu-panel>
     </div>
     <div class="col-md-10 centre_tabs">
-        <ul class="nav nav-tabs" role="tablist" data-bind="foreach: {data: getMenuTab()} ">
-            <li role="presentation">
+        <ul class="nav nav-tabs" role="tablist" data-bind="foreach: { data: getMenuTab() } ">
+            <li role="presentation" data-bind="elementCallback: {init: function(element){$(element).find('a').tab('show');}}">
                 <a role="tab" data-toggle="tab" data-bind="attr: { href: '#content'+$data.menuId, id: 'tab'+$data.menuId}">
                     <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.getMenuName()"></span>
                     <!-- ko if: $data.idDeletable -->
