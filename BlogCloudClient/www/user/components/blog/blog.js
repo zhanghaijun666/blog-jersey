@@ -5,12 +5,18 @@
             };
             var self = $.extend(this, defaultValue, params);
 
-            self.uploadFilesMenuItems = [
-                new MenuTab("上传文件", {icon: "fa-upload"}),
-                new MenuTab("上传文件夹", {icon: "fa-upload"})
-            ];
+            self.uploadFilesMenuItems = function () {
+                return [
+                    new MenuTab("上传文件", {icon: "fa-upload", clickFun: global.simulateClick.bind(null, document.getElementById('fileToUpload'))}),
+                    new MenuTab("上传文件夹", {icon: "fa-upload"})
+                ];
+            };
 
-
+            var fileToUpload = document.getElementById("fileToUpload");
+            fileToUpload.addEventListener("change", function (evt) {
+                evt.preventDefault();
+                
+            });
 
 //            let fileUpload = document.getElementById("fileUpload");
 //            fileUpload.addEventListener("change", function (evt) {
