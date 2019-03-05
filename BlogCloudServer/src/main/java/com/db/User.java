@@ -11,7 +11,7 @@ import org.javalite.activejdbc.annotations.Table;
  * @author zhanghaijun
  */
 @Table("users")
-public class User extends CommonModel {
+public class User extends org.javalite.activejdbc.Model implements CommonModel {
 
     private static final long serialVersionUID = 1L;
     public static final int DEFAULT_USER_ID = 0;

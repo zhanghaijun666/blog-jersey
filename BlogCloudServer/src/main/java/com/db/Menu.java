@@ -9,7 +9,7 @@ import org.javalite.activejdbc.annotations.Table;
  * @author zhanghaijun
  */
 @Table("menus")
-public class Menu extends CommonModel {
+public class Menu extends org.javalite.activejdbc.Model implements CommonModel {
 
     private static final long serialVersionUID = 1L;
     public static final int DEFAULT_MENU_PARENT_ID = 0;
