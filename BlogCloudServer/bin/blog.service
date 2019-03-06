@@ -1,0 +1,14 @@
+# put this file in /usr/lib/systemd/system/blog.service as root
+# below paths assume bedock installed in /opt/blog
+# systemctl start blog
+[Unit]
+Description=Blog Cloud
+After=syslog.target network.target remote-fs.target nss-lookup.target systemd-journald-dev-log.socket
+Before=multi-user.target graphical.target
+Conflicts=shutdown.target
+[Service]
+#User=root
+ExecStart=/opt/blog/bin/run.sh
+Restart=always
+[Install]
+WantedBy=multi-user.target graphical.target

@@ -26,7 +26,18 @@ if [[ ! -d "/usr/local/node" ]]; then
 	echo "export PATH=\$PATH:\$NODE_HOME/bin" >> /etc/profile
 	source /etc/profile
 fi
-
+if [[ ! -d "/usr/local/protoc" ]]; then
+	yum -y install gcc automake autoconf libtool make
+	yum install gcc gcc-c++
+	wget https://github.com/protocolbuffers/protobuf/archive/v3.6.1.tar.gz
+	tar -zxvf v3.6.1.tar.gz
+	rm -rf v3.6.1.tar.gz
+	mv protobuf-3.6.1 protobuf
+	./autogen.sh
+	./configure
+	make
+	make install
+fi
 
 
 
