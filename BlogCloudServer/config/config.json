@@ -1,6 +1,6 @@
 {
     "db": {
-        "url": "jdbc:mysql://localhost:3306/blogdb?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false&createDatabaseIfNotExist=true&autoReconnect=true&failOverReadOnly=false&useUnicode=true&&createDatabaseIfNotExist=true&autoReconnect=true&failOverReadOnly=false",
+        "url": "jdbc:mysql://localhost:3306/blogdb?useSSL=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true",
         "driver": "com.mysql.cj.jdbc.Driver",
         "user": "root",
         "password": "1q2w3e"
