@@ -35,4 +35,8 @@ fi
 if [[ ! -f "/usr/lib/systemd/system/blog.service" ]]; then
 	cp /opt/blog/bin/blog.service /usr/lib/systemd/system/blog.service
 fi
+
+#CentOS7防火墙开启端口8888
+#firewall-cmd --permanent --add-port=8888/tcp
+#firewall-cmd --reload 
 #systemctl start blog
