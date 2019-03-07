@@ -39,4 +39,6 @@ fi
 #CentOS7防火墙开启端口8888
 #firewall-cmd --permanent --add-port=8888/tcp
 #firewall-cmd --reload 
+#查看进程占用
+#lsof -i:8888
 #systemctl start blog
