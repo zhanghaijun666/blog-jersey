@@ -12,22 +12,6 @@
                 ];
             };
 
-            var fileToUpload = document.getElementById("fileToUpload");
-            fileToUpload.addEventListener("change", function (evt) {
-                evt.preventDefault();
-                
-            });
-
-//            let fileUpload = document.getElementById("fileUpload");
-//            fileUpload.addEventListener("change", function (evt) {
-////                fileUpload.files
-//                console.log("---------------");
-//                evt.preventDefault();
-//            });
-
-
-
-
         }
         return {
             viewModel: {
