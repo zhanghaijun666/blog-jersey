@@ -1,34 +1,35 @@
 const server = window.location.protocol + "//" + window.location.host;
 
+function isDebug() {
+    return /^(localhost|127\.0\.0\.1)/.test(window.location.host);
+}
 function getServerUrl(url) {
     if (url.startsWith("/")) {
         url = server + url;
-
     } else {
         url = server + "/" + url;
     }
     return url;
 }
 
-var requestValue = {
-    method: "GET",
-    async: true,
-    accept: "text/plain",
-    timeout: 2000,
-    withCredentials: true,
-    "Content-Type": "application/json; charset=UTF-8"
-};
-
 function getRequest(url, options, callback, erroCallback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open(options.method || requestValue.method, url, options.async || requestValue.async);
-    let accept = options.accept || requestValue.accept;
-    xhr.timeout = options.timeout || requestValue.timeout;
-    xhr.setRequestHeader("Accept", accept);
-    xhr.responseType = options.responseType || accept.indexOf("text/") > -1 ? "text" : "arraybuffer";
+    var requestValue = {
+        method: "GET",
+        async: true,
+        accept: "text/plain",
+        timeout: isDebug() ? 0 : 2000,
+        withCredentials: true,
+        "Content-Type": "application/json; charset=UTF-8"
+    };
+    options = $.extend({}, requestValue, options);
+    var xhr = createXMLHttpRequest(options, callback, erroCallback);
+    xhr.open(options.method, url, options.async);
+    xhr.timeout = options.timeout;
+    xhr.setRequestHeader("Accept", options.accept);
+    xhr.responseType = options.responseType || options.accept.indexOf("text/") > -1 ? "text" : "arraybuffer";
 
     if (options.data) {
-        xhr.setRequestHeader("Content-Type", options.type || requestValue["Content-Type"]);
+        xhr.setRequestHeader("Content-Type", options["Content-Type"]);
         xhr.send(options.data);
     } else if (options.formData) {
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -36,7 +37,9 @@ function getRequest(url, options, callback, erroCallback) {
     } else {
         xhr.send();
     }
-
+}
+function createXMLHttpRequest(options, callback, erroCallback) {
+    var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -58,6 +61,12 @@ function getRequest(url, options, callback, erroCallback) {
             }
         }
     };
+    xhr.upload.onprogress = function (e) {
+        if (e.lengthComputable) {
+            var percentage = (e.loaded / e.total) * 100;
+            console.log(percentage + "%");
+        }
+    };
 
 //// 请求成功回调函数
 //    xhr.onload = e => {
@@ -75,8 +84,5 @@ function getRequest(url, options, callback, erroCallback) {
 //    xhr.ontimeout = e => {
 //        console.log('request timeout');
 //    };
-
-
-
-
+    return xhr;
 }
