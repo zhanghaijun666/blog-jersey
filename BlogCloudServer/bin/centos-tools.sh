@@ -56,3 +56,10 @@ if [[ $? = 127 ]]; then
 	make
 	make install
 fi
+cd /usr/local/tools
+git --help &>/dev/null
+if [[ $? = 127 ]]; then
+	yum -y install git
+	git config --global user.name "zhanghaijun666"
+	git config --global user.email "zhanghaijun_java@163.com"
+fi
