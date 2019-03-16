@@ -23,7 +23,6 @@
 
 
             ko.computed(function () {
-                console.log("555");
                 var isEmpty = !!(ko.unwrap(self.menuTabs).length === 0);
                 if (ko.unwrap(self.menuList) && ko.unwrap(self.menuList).length > 0) {
                     ko.utils.arrayForEach(ko.unwrap(self.menuList), function (menu) {
