@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 if [[ ! -z $(docker ps | grep blog_mysql) ]]; then
 	echo "docker_mysql started"

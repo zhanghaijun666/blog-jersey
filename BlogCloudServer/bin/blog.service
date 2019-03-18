@@ -8,7 +8,7 @@ Before=multi-user.target graphical.target
 Conflicts=shutdown.target
 [Service]
 #User=root
-ExecStart=/opt/blog/bin/run.sh
+ExecStart=/opt/Blog/bin/run.sh
 Restart=always
 [Install]
 WantedBy=multi-user.target graphical.target
