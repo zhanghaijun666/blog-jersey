@@ -63,3 +63,13 @@ if [[ $? = 127 ]]; then
 	git config --global user.name "zhanghaijun666"
 	git config --global user.email "zhanghaijun_java@163.com"
 fi
+cd /usr/local/tools
+docker --version &>/dev/null
+if [[ $? = 127 ]]; then
+	sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+	sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+	sudo yum -y install docker-ce docker-ce-cli containerd.io
+	sudo systemctl start docker
+	systemctl enable docker
+fi
+
