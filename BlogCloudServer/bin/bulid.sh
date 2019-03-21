@@ -34,6 +34,7 @@ if [[ ! -d "/usr/lib/systemd/system" ]]; then
 fi
 if [[ ! -f "/usr/lib/systemd/system/blog.service" ]]; then
 	cp /opt/Blog/bin/blog.service /usr/lib/systemd/system/blog.service
+	systemctl daemon-reload
 fi
 
 #CentOS7防火墙开启端口8888

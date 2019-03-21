@@ -13,6 +13,7 @@
 
 #### 备用
 [jersey 文件上传-使用两种不同的方式](https://blog.csdn.net/wk313753744/article/details/46235895)
+[git文件存储](https://git-scm.com/book/zh/v2/Git-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86-Git-%E5%AF%B9%E8%B1%A1)
 
 #### 项目部署
 获取动态IP: `dhclinet`
