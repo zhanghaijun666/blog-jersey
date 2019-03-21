@@ -20,7 +20,7 @@ public class ServerMain {
     public static SimpleServer startServer() {
         ConfigStore.Server configServer = Configuration.getInstance().getConfig().getServer();
         final URI BASE_URI = UriBuilder.fromUri("http://" + configServer.getHost()).port(configServer.getPort()).build();
-        final ResourceConfig resourceConfig = new ResourceConfig().packages("com.service","com.jersey.provider");
+        final ResourceConfig resourceConfig = new ResourceConfig().packages("com.blog.controller","com.jersey.provider");
         resourceConfig.register(SecurityRequestFilter.class);
         resourceConfig.register(RolesAllowedDynamicFeature.class);
         return SimpleContainerFactory2.create(BASE_URI, resourceConfig);
