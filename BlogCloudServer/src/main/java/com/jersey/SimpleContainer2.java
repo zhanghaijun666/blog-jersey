@@ -40,16 +40,14 @@
 
 package com.jersey;
 
-import com.db.DBFactory;
+import com.blog.factory.DBFactory;
 import com.server.BologSecurityContext;
 import com.server.LogHelper;
-import com.server.SessionFactory;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledExecutorService;

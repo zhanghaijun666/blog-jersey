@@ -3,7 +3,7 @@ package com.server;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
 import ch.qos.logback.core.joran.spi.JoranException;
-import com.config.Configuration;
+import com.blog.config.Configuration;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;

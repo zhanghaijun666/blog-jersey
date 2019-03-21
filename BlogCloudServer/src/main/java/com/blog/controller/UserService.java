@@ -1,11 +1,11 @@
-package com.service;
+package com.blog.controller;
 
-import com.db.User;
-import com.proto.BlogStore;
+import com.blog.db.User;
+import com.blog.proto.BlogStore;
 import com.server.AppSession;
 import com.server.BlogMediaType;
 import com.server.SessionFactory;
-import com.server.login.LoginAuthenticator;
+import com.blog.login.LoginAuthenticator;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;

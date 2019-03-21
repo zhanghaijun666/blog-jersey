@@ -1,7 +1,7 @@
-package com.config;
+package com.blog.config;
 
+import com.blog.proto.ConfigStore;
 import com.googlecode.protobuf.format.JsonFormat;
-import com.proto.ConfigStore;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -33,7 +33,7 @@ public class Configuration {
     public File getWebDir() {
         return webDir;
     }
-    
+
     public String getWebDir(String path) {
         String dir = getConfig().getWebDir();
         if (dir.endsWith("/")) {

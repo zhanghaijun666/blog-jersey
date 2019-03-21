@@ -1,8 +1,8 @@
 package com.server;
 
-import com.config.Configuration;
-import com.db.Role;
-import com.db.User;
+import com.blog.config.Configuration;
+import com.blog.db.Role;
+import com.blog.db.User;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,7 +1,7 @@
-package com.server.login;
+package com.blog.login;
 
-import com.db.User;
-import com.proto.BlogStore;
+import com.blog.db.User;
+import com.blog.proto.BlogStore;
 
 /**
  * @author zhanghaijun

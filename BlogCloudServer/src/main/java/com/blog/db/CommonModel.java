@@ -1,4 +1,4 @@
-package com.db;
+package com.blog.db;
 
 import java.util.Date;
 import org.javalite.activejdbc.Model;
@@ -57,9 +57,7 @@ public interface CommonModel {
     <T extends Model> T set(String attributeName, Object value);
 
     boolean saveIt();
-    
-    
-    
+
 //    default Date getDate(String attributeName) {
 //        return new Date(getTimestamp(attributeName).getTime());
 //    }

@@ -1,4 +1,4 @@
-package com.plugin;
+package com.blog.plugin;
 
 
 /**

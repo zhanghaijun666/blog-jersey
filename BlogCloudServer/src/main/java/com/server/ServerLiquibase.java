@@ -1,7 +1,7 @@
 package com.server;
 
-import com.config.Configuration;
-import com.proto.ConfigStore;
+import com.blog.config.Configuration;
+import com.blog.proto.ConfigStore;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

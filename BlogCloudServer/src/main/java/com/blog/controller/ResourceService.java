@@ -1,6 +1,6 @@
-package com.service;
+package com.blog.controller;
 
-import com.config.Configuration;
+import com.blog.config.Configuration;
 import com.server.AppSession;
 import com.server.BlogMediaType;
 import com.utils.FileUtils;

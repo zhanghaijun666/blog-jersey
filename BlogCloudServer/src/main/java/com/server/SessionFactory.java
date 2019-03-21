@@ -1,6 +1,6 @@
 package com.server;
 
-import com.db.User;
+import com.blog.db.User;
 import com.utils.BlogUtils;
 import java.util.concurrent.ConcurrentHashMap;
 import org.simpleframework.http.Cookie;

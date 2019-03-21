@@ -1,7 +1,7 @@
-package com.server.login;
+package com.blog.login;
 
-import com.db.User;
-import com.proto.BlogStore;
+import com.blog.db.User;
+import com.blog.proto.BlogStore;
 import com.server.AppSession;
 import com.server.SessionFactory;
 import java.util.ArrayList;

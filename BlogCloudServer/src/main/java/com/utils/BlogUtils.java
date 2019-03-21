@@ -1,6 +1,6 @@
 package com.utils;
 
-import com.config.Configuration;
+import com.blog.config.Configuration;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**

@@ -1,9 +1,9 @@
 package com.server;
 
 import ch.qos.logback.core.joran.spi.JoranException;
-import com.config.Configuration;
+import com.blog.config.Configuration;
+import com.blog.proto.ConfigStore;
 import com.jersey.SimpleContainerFactory2;
-import com.proto.ConfigStore;
 import com.server.filter.SecurityRequestFilter;
 import java.io.IOException;
 import java.net.URI;

@@ -1,7 +1,7 @@
-package com.service;
+package com.blog.controller;
 
-import com.db.Menu;
-import com.proto.BlogStore;
+import com.blog.db.Menu;
+import com.blog.proto.BlogStore;
 import com.server.BlogMediaType;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

@@ -1,4 +1,4 @@
-package com.utils.blog;
+package com.blog.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

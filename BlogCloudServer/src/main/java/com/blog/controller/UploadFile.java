@@ -1,4 +1,4 @@
-package com.service;
+package com.blog.controller;
 
 import com.server.AppSession;
 import com.server.BlogMediaType;
