@@ -1,43 +1,3 @@
-/*
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
- *
- * Copyright (c) 2010-2017 Oracle and/or its affiliates. All rights reserved.
- *
- * The contents of this file are subject to the terms of either the GNU
- * General Public License Version 2 only ("GPL") or the Common Development
- * and Distribution License("CDDL") (collectively, the "License").  You
- * may not use this file except in compliance with the License.  You can
- * obtain a copy of the License at
- * https://oss.oracle.com/licenses/CDDL+GPL-1.1
- * or LICENSE.txt.  See the License for the specific
- * language governing permissions and limitations under the License.
- *
- * When distributing the software, include this License Header Notice in each
- * file and include the License file at LICENSE.txt.
- *
- * GPL Classpath Exception:
- * Oracle designates this particular file as subject to the "Classpath"
- * exception as provided by Oracle in the GPL Version 2 section of the License
- * file that accompanied this code.
- *
- * Modifications:
- * If applicable, add the following below the License Header, with the fields
- * enclosed by brackets [] replaced by your own identifying information:
- * "Portions Copyright [year] [name of copyright owner]"
- *
- * Contributor(s):
- * If you wish your version of this file to be governed by only the CDDL or
- * only the GPL Version 2, indicate your decision by adding "[Contributor]
- * elects to include this software in this distribution under the [CDDL or GPL
- * Version 2] license."  If you don't indicate a single choice of license, a
- * recipient has the option to distribute your version of this file under
- * either the CDDL, the GPL Version 2 or to extend the choice of license to
- * its licensees as provided above.  However, if you add GPL Version 2 code
- * and therefore, elected the GPL Version 2 license, then the option applies
- * only if the new code is made subject to such option by the copyright
- * holder.
- */
-
 package com.jersey;
 
 import com.blog.factory.DBFactory;
@@ -87,19 +47,14 @@ import org.simpleframework.http.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Jersey {@code Container} implementation based on Simple framework
- * {@link org.simpleframework.http.core.Container}.
- *
- * @author Arul Dhesiaseelan (aruld@acm.org)
- * @author Marek Potociar (marek.potociar at oracle.com)
- */
 public final class SimpleContainer2 implements org.simpleframework.http.core.Container, Container {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleContainer2.class);
 
-    private final Type RequestTYPE = (new GenericType<Ref<Request>>() { }).getType();
-    private final Type ResponseTYPE = (new GenericType<Ref<Response>>() { }).getType();
+    private final Type RequestTYPE = (new GenericType<Ref<Request>>() {
+    }).getType();
+    private final Type ResponseTYPE = (new GenericType<Ref<Response>>() {
+    }).getType();
 
     /**
      * Referencing factory for Simple request.
@@ -123,22 +78,18 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
         }
     }
 
-    /**
-     * An internal binder to enable Simple HTTP container specific types injection. This binder allows
-     * to inject underlying Grizzly HTTP request and response instances.
-     */
     private static class SimpleBinder extends AbstractBinder {
 
         @Override
         protected void configure() {
             bindFactory(SimpleRequestReferencingFactory.class).to(Request.class).proxy(true)
-                                                              .proxyForSameScope(false).in(RequestScoped.class);
+                    .proxyForSameScope(false).in(RequestScoped.class);
             bindFactory(ReferencingFactory.<Request>referenceFactory())
                     .to(new GenericType<Ref<Request>>() {
                     }).in(RequestScoped.class);
 
             bindFactory(SimpleResponseReferencingFactory.class).to(Response.class).proxy(true)
-                                                               .proxyForSameScope(false).in(RequestScoped.class);
+                    .proxyForSameScope(false).in(RequestScoped.class);
             bindFactory(ReferencingFactory.<Response>referenceFactory())
                     .to(new GenericType<Ref<Response>>() {
                     }).in(RequestScoped.class);
@@ -162,7 +113,7 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
 
         @Override
         public OutputStream writeResponseStatusAndHeaders(final long contentLength,
-                                                          final ContainerResponse context) throws ContainerException {
+                final ContainerResponse context) throws ContainerException {
             final javax.ws.rs.core.Response.StatusType statusInfo = context.getStatusInfo();
 
             final int code = statusInfo.getStatusCode();
@@ -190,14 +141,14 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
 
         @Override
         public boolean suspend(final long timeOut, final TimeUnit timeUnit,
-                               final TimeoutHandler timeoutHandler) {
+                final TimeoutHandler timeoutHandler) {
             try {
                 TimeoutTimer timer = reference.get();
 
                 if (timer == null) {
                     TimeoutDispatcher task = new TimeoutDispatcher(this, timeoutHandler);
-                    ScheduledFuture<?> future =
-                            scheduler.schedule(task, timeOut == 0 ? Integer.MAX_VALUE : timeOut,
+                    ScheduledFuture<?> future
+                            = scheduler.schedule(task, timeOut == 0 ? Integer.MAX_VALUE : timeOut,
                                     timeOut == 0 ? TimeUnit.SECONDS : timeUnit);
                     timer = new TimeoutTimer(scheduler, future, task);
                     reference.set(timer);
@@ -261,11 +212,6 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
             return false;
         }
 
-        /**
-         * Rethrow the original exception as required by JAX-RS, 3.3.4
-         *
-         * @param error throwable to be re-thrown
-         */
         private void rethrow(final Throwable error) {
             if (error instanceof RuntimeException) {
                 throw (RuntimeException) error;
@@ -283,7 +229,7 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
         private final TimeoutDispatcher task;
 
         public TimeoutTimer(ScheduledExecutorService service, ScheduledFuture<?> future,
-                            TimeoutDispatcher task) {
+                TimeoutDispatcher task) {
             this.reference = new AtomicReference<ScheduledFuture<?>>();
             this.service = service;
             this.task = task;
@@ -330,7 +276,7 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
         final ResponseWriter responseWriter = new ResponseWriter(response, scheduler);
         final URI baseUri = getBaseUri(request);
         final URI requestUri = getRequestUri(request, baseUri);
-        
+
         DB db = null;
         try {
             final ContainerRequest requestContext = new ContainerRequest(baseUri, requestUri,
@@ -344,7 +290,7 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
                 injectionManager.<Ref<Request>>getInstance(RequestTYPE).set(request);
                 injectionManager.<Ref<Response>>getInstance(ResponseTYPE).set(response);
             });
-            
+
             db = DBFactory.open();
             appHandler.handle(requestContext);
         } catch (final Exception ex) {
@@ -436,42 +382,15 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
         return appHandler;
     }
 
-    /**
-     * Inform this container that the server has been started.
-     * <p/>
-     * This method must be implicitly called after the server containing this container is started.
-     */
     void onServerStart() {
         appHandler.onStartup(this);
     }
 
-    /**
-     * Inform this container that the server is being stopped.
-     * <p/>
-     * This method must be implicitly called before the server containing this container is stopped.
-     */
     void onServerStop() {
         appHandler.onShutdown(this);
         scheduler.shutdown();
     }
 
-    /**
-     * Create a new Simple framework HTTP container.
-     *
-     * @param application   JAX-RS / Jersey application to be deployed on Simple framework HTTP container.
-     * @param parentContext DI provider specific context with application's registered bindings.
-     */
-    SimpleContainer2(final Application application, final Object parentContext) {
-        this.appHandler = new ApplicationHandler(application, new SimpleBinder(), parentContext);
-        this.scheduler = new ScheduledThreadPoolExecutor(2, new DaemonFactory(TimeoutDispatcher.class));
-    }
-
-    /**
-     * Create a new Simple framework HTTP container.
-     *
-     * @param application JAX-RS / Jersey application to be deployed on Simple framework HTTP
-     *                    container.
-     */
     SimpleContainer2(final Application application) {
         this.appHandler = new ApplicationHandler(application, new SimpleBinder());
         this.scheduler = new ScheduledThreadPoolExecutor(2, new DaemonFactory(TimeoutDispatcher.class));
