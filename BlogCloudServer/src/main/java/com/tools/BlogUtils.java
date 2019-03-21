@@ -1,4 +1,4 @@
-package com.utils;
+package com.tools;
 
 import com.blog.config.Configuration;
 import org.apache.commons.codec.digest.DigestUtils;

@@ -1,4 +1,4 @@
-package com.utils;
+package com.tools;
 
 import org.apache.commons.lang3.StringUtils;
 import org.simpleframework.http.Request;

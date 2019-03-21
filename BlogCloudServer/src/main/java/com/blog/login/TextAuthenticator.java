@@ -2,7 +2,7 @@ package com.blog.login;
 
 import com.blog.db.User;
 import com.blog.proto.BlogStore;
-import com.utils.BasicConvertUtils;
+import com.tools.BasicConvertUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
