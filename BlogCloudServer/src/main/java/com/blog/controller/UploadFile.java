@@ -1,7 +1,7 @@
 package com.blog.controller;
 
-import com.server.AppSession;
-import com.server.BlogMediaType;
+import com.blog.login.AppSession;
+import com.blog.utils.BlogMediaType;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;

@@ -2,7 +2,7 @@ package com.blog.controller;
 
 import com.blog.db.Menu;
 import com.blog.proto.BlogStore;
-import com.server.BlogMediaType;
+import com.blog.utils.BlogMediaType;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;

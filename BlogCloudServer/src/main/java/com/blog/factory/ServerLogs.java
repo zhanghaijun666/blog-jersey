@@ -1,4 +1,4 @@
-package com.server;
+package com.blog.factory;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 /**
  * @author zhanghaijun
  */
-public class LogHelper {
-    private static final Logger logger = LoggerFactory.getLogger(LogHelper.class);
+public class ServerLogs {
+    private static final Logger logger = LoggerFactory.getLogger(ServerLogs.class);
     
     public static void logInit() throws JoranException {
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();

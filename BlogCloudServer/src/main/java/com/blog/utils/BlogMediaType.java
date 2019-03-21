@@ -1,4 +1,4 @@
-package com.server;
+package com.blog.utils;
 
 import javax.ws.rs.core.MediaType;
 

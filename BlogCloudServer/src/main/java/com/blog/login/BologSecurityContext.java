@@ -1,5 +1,6 @@
-package com.server;
+package com.blog.login;
 
+import com.blog.factory.SreverSession;
 import java.security.Principal;
 import javax.ws.rs.core.SecurityContext;
 import org.simpleframework.http.Request;
@@ -19,7 +20,7 @@ public class BologSecurityContext implements SecurityContext {
     @Override
     public Principal getUserPrincipal() {
         if (session == null) {
-            session = SessionFactory.instance().getSession(request);
+            session = SreverSession.instance().getSession(request);
         }
         return session;
     }

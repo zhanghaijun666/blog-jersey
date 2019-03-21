@@ -1,8 +1,7 @@
 /BlogCloudServer/target/
 /BlogCloudClinet/nbproject/private/
 
-/BlogCloudServer/src/main/java/com/proto
+/BlogCloudServer/src/main/java/com/blog/proto
 /BlogCloudServer/logs/
 /BlogCloudClient/www/resource/js/structure.js
-/BlogCloudClient/nbproject/private/
-/BlogCloudClinet/nbproject/private
+

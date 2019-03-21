@@ -1,8 +1,8 @@
 package com.blog.controller;
 
 import com.blog.config.Configuration;
-import com.server.AppSession;
-import com.server.BlogMediaType;
+import com.blog.login.AppSession;
+import com.blog.utils.BlogMediaType;
 import com.tools.FileUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;

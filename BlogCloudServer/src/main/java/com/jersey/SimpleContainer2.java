@@ -1,8 +1,8 @@
 package com.jersey;
 
 import com.blog.factory.DBFactory;
-import com.server.BologSecurityContext;
-import com.server.LogHelper;
+import com.blog.login.BologSecurityContext;
+import com.blog.factory.ServerLogs;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
@@ -303,7 +303,7 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
             if (!responseWriter.isSuspended()) {
                 close(response);
             }
-            LogHelper.logAccess(response, request);
+            ServerLogs.logAccess(response, request);
         }
     }
 

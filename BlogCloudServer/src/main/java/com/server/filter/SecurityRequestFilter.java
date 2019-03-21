@@ -1,6 +1,6 @@
 package com.server.filter;
 
-import com.server.BologSecurityContext;
+import com.blog.login.BologSecurityContext;
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.ws.rs.container.ContainerRequestContext;

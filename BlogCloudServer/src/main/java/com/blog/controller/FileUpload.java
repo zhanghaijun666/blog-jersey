@@ -1,7 +1,7 @@
 package com.blog.controller;
 
-import com.server.AppSession;
-import com.server.BlogMediaType;
+import com.blog.login.AppSession;
+import com.blog.utils.BlogMediaType;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.POST;

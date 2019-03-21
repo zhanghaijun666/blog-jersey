@@ -1,4 +1,4 @@
-package com.server;
+package com.blog.factory;
 
 import com.blog.config.Configuration;
 import com.blog.proto.ConfigStore;

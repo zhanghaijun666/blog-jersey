@@ -2,9 +2,9 @@ package com.blog.controller;
 
 import com.blog.db.User;
 import com.blog.proto.BlogStore;
-import com.server.AppSession;
-import com.server.BlogMediaType;
-import com.server.SessionFactory;
+import com.blog.login.AppSession;
+import com.blog.utils.BlogMediaType;
+import com.blog.factory.SreverSession;
 import com.blog.login.LoginAuthenticator;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -52,7 +52,7 @@ public class UserService {
     public BlogStore.RspInfo logout() {
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
         AppSession session = (AppSession) security.getUserPrincipal();
-        SessionFactory.instance().removeSession(session);
+        SreverSession.instance().removeSession(session);
         response.setCookie("session", "");
         return rspInfo.setCode(BlogStore.ReturnCode.OK).build();
     }

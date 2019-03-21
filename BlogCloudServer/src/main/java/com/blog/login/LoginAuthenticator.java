@@ -2,8 +2,7 @@ package com.blog.login;
 
 import com.blog.db.User;
 import com.blog.proto.BlogStore;
-import com.server.AppSession;
-import com.server.SessionFactory;
+import com.blog.factory.SreverSession;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +34,7 @@ public class LoginAuthenticator {
         if (null == dbUser) {
             return BlogStore.ReturnCode.USER_EMPTY;
         }
-        AppSession session = SessionFactory.instance().createSession(dbUser, requestUser.getRememberMe());
+        AppSession session = SreverSession.instance().createSession(dbUser, requestUser.getRememberMe());
         response.setCookie("session", session.getId());
         return BlogStore.ReturnCode.OK;
     }

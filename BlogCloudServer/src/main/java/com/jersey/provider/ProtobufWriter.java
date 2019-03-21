@@ -1,7 +1,7 @@
 package com.jersey.provider;
 
 import com.google.protobuf.Message;
-import com.server.BlogMediaType;
+import com.blog.utils.BlogMediaType;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;

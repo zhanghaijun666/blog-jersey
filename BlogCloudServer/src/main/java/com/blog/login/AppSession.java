@@ -1,4 +1,4 @@
-package com.server;
+package com.blog.login;
 
 import com.blog.config.Configuration;
 import com.blog.db.Role;

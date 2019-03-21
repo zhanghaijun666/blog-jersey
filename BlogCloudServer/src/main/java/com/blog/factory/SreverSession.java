@@ -1,5 +1,6 @@
-package com.server;
+package com.blog.factory;
 
+import com.blog.login.AppSession;
 import com.blog.db.User;
 import com.tools.BlogUtils;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,15 +10,15 @@ import org.simpleframework.http.Request;
 /**
  * @author haijun.zhang
  */
-public class SessionFactory {
+public class SreverSession {
 
     private static final ConcurrentHashMap<String, AppSession> LOGIN_APPSESSIONS = new ConcurrentHashMap<>();
-    private static final SessionFactory SESSION_FACTORY = new SessionFactory();
+    private static final SreverSession SESSION_FACTORY = new SreverSession();
 
-    private SessionFactory() {
+    private SreverSession() {
     }
 
-    public static SessionFactory instance() {
+    public static SreverSession instance() {
         return SESSION_FACTORY;
     }
 

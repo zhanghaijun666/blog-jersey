@@ -1,5 +1,7 @@
 package com.server;
 
+import com.blog.factory.ServerLiquibase;
+import com.blog.factory.ServerLogs;
 import ch.qos.logback.core.joran.spi.JoranException;
 import com.blog.config.Configuration;
 import com.blog.proto.ConfigStore;
@@ -20,7 +22,8 @@ public class ServerMain {
     public static SimpleServer startServer() {
         ConfigStore.Server configServer = Configuration.getInstance().getConfig().getServer();
         final URI BASE_URI = UriBuilder.fromUri("http://" + configServer.getHost()).port(configServer.getPort()).build();
-        final ResourceConfig resourceConfig = new ResourceConfig().packages("com.blog.controller","com.jersey.provider");
+        final ResourceConfig resourceConfig = new ResourceConfig();
+        resourceConfig.packages("com.blog.controller", "com.jersey.provider");
         resourceConfig.register(SecurityRequestFilter.class);
         resourceConfig.register(RolesAllowedDynamicFeature.class);
         return SimpleContainerFactory2.create(BASE_URI, resourceConfig);
@@ -28,7 +31,7 @@ public class ServerMain {
 
     public static void main(String[] args) throws IOException, JoranException {
         Configuration.getInstance().loadConfig();
-        LogHelper.logInit();
+        ServerLogs.logInit();
         ServerLiquibase.initLiquibase();
         final SimpleServer server = startServer();
     }
