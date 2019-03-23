@@ -36,7 +36,7 @@ public class LicenseUtil {
             licenseStr.append("total-volume=").append(license.getTotalVolume()).append("\r\n");
             ExtendedLicense extendedLicense = new ExtendedLicense();
             extendedLicense.setLicense(licenseStr.toString());
-            extendedLicense.loadKey(LicenseUtil.class.getResourceAsStream("/config/secring.gpg"), "bjtxra (Bedrock Cloud License) <bjtxra@bjtxra.com>");
+            extendedLicense.loadKey(LicenseUtil.class.getResourceAsStream("/license/secring.gpg"), "bjtxra (Bedrock Cloud License) <bjtxra@bjtxra.com>");
             extendedLicense.generateLicenseId();
             return extendedLicense.encodeLicense("bjtxra").getBytes("utf-8");
         } catch (Exception ex) {
@@ -51,7 +51,7 @@ public class LicenseUtil {
         try {
             InputStream stream = new ByteArrayInputStream(licenseByte);
             ExtendedLicense license = new ExtendedLicense();
-            license.loadKeyRing(LicenseUtil.class.getClassLoader().getResourceAsStream("/config/pubring.gpg"), null).setLicenseEncoded(stream);
+            license.loadKeyRing(LicenseUtil.class.getClassLoader().getResourceAsStream("/license/pubring.gpg"), null).setLicenseEncoded(stream);
             return buildLicense(license);
         } catch (Exception e) {
             logger.info("Starting server init license ", e);
@@ -81,16 +81,16 @@ public class LicenseUtil {
     
     public static BlogStore.License getLicenseFromRecource() {
         try {
-            if (new File("conf/defaults.lic").canRead()) {
+            if (new File("config/defaults.lic").canRead()) {
                 ExtendedLicense license = new ExtendedLicense();
-                if (license.loadKeyRing(LicenseUtil.class.getClassLoader().getResourceAsStream("pubring.gpg"), null)
+                if (license.loadKeyRing(LicenseUtil.class.getClassLoader().getResourceAsStream("license/pubring.gpg"), null)
                         .setLicenseEncodedFromFile("config/defaults.lic").isVerified() && !license.isExpired()) {
                     return buildLicense(license);
                 }
             }
             ExtendedLicense license = new ExtendedLicense();
-            if (license.loadKeyRing(LicenseUtil.class.getClassLoader().getResourceAsStream("pubring.gpg"), null)
-                    .setLicenseEncodedFromResource("defaults.lic").isVerified()) {
+            if (license.loadKeyRing(LicenseUtil.class.getClassLoader().getResourceAsStream("license/pubring.gpg"), null)
+                    .setLicenseEncodedFromResource("license/defaults.lic").isVerified()) {
                 return buildLicense(license);
             }
         } catch (Exception e) {

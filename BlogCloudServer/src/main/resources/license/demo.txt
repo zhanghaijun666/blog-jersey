@@ -1,0 +1,8 @@
+valid-until=2119-07-03
+company=中国华创集团
+edition=Product
+product_name=个人博客记录
+short_product_name=博客
+total-user=100
+total-volume=10T
+

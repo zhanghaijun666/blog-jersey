@@ -371,13 +371,13 @@
                         <configuration>
                             <target>
                                 <exec executable="protoc" dir="./src/main/resources">
-                                    <arg line="--java_out=../java config.proto"/>
+                                    <arg line="--java_out=../java proto/config.proto"/>
                                 </exec>
                                 <exec executable="protoc" dir="./src/main/resources">
-                                    <arg line="--java_out=../java structure.proto"/>
+                                    <arg line="--java_out=../java proto/structure.proto"/>
                                 </exec>
                                 <exec executable="node" dir="../protobuf.js/bin">
-                                    <arg line="pbjs -t json-module -r BlogStore -w --force-long --force-message --no-comments  ../../BlogCloudServer/src/main/resources/structure.proto -o ../../BlogCloudClient/www/resource/js/structure.js"/>
+                                    <arg line="pbjs -t json-module -r BlogStore -w --force-long --force-message --no-comments  ../../BlogCloudServer/src/main/resources/proto/structure.proto -o ../../BlogCloudClient/www/resource/js/structure.js"/>
                                 </exec>
                             </target>
                         </configuration>

@@ -19,7 +19,7 @@ import liquibase.resource.ClassLoaderResourceAccessor;
  */
 public class ServerLiquibase {
 
-    private static final String DB_FILE = "server-db.xml";
+    private static final String DB_FILE = "db/server-db.xml";
 
     private static Connection getConnection() throws ClassNotFoundException, SQLException {
         ConfigStore.DB dbConfig = Configuration.getInstance().getConfig().getDb();

@@ -27,7 +27,7 @@ public class LicenseFileTool {
                         // license 的原文
                         .setLicense(licenseFile)
                         // 私钥与之前生成密钥时产生的USER-ID
-                        .loadKey(LicenseFileTool.class.getResourceAsStream("/config/secring.gpg"), "bjtxra (Bedrock Cloud License) <bjtxra@bjtxra.com>")
+                        .loadKey(LicenseFileTool.class.getResourceAsStream("/license/secring.gpg"), "bjtxra (Bedrock Cloud License) <bjtxra@bjtxra.com>")
                         // 生成密钥时输入的密码
                         .encodeLicense("bjtxra").getBytes("utf-8"));
                 os.close();
@@ -36,7 +36,7 @@ public class LicenseFileTool {
                 License license = new License();
                 
                 if (license
-                        .loadKeyRing(LicenseFileTool.class.getResourceAsStream("/config/pubring.gpg"), null)
+                        .loadKeyRing(LicenseFileTool.class.getResourceAsStream("/license/pubring.gpg"), null)
                         .setLicenseEncodedFromFile(licenseOutputFile.getPath()).isVerified()) {
                     System.out.println(license.getFeature("edition"));
                     System.out.println(license.getFeature("valid-until"));

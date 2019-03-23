@@ -27,11 +27,11 @@
         </sql>
     </changeSet>
     
-    <include file="db-common-tables.xml" relativeToChangelogFile="false"/>
-    <include file="db-common-data.xml" relativeToChangelogFile="false"/>
-    <include file="db-menu.xml" relativeToChangelogFile="false"/>
+    <include file="db/db-common-tables.xml" relativeToChangelogFile="false"/>
+    <include file="db/db-common-data.xml" relativeToChangelogFile="false"/>
+    <include file="db/db-menu.xml" relativeToChangelogFile="false"/>
     
-    <include file="db-action-tables.xml" relativeToChangelogFile="false"/>
-    <include file="db-action-data.xml" relativeToChangelogFile="false"/>
+    <include file="db/db-action-tables.xml" relativeToChangelogFile="false"/>
+    <include file="db/db-action-data.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>
