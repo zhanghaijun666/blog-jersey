@@ -1,14 +1,18 @@
 # put this file in /usr/lib/systemd/system/blog.service as root
 # below paths assume bedock installed in /opt/blog
 # systemctl start blog
+
+
 [Unit]
 Description=Blog Cloud
-After=syslog.target network.target remote-fs.target nss-lookup.target systemd-journald-dev-log.socket
-Before=multi-user.target graphical.target
-Conflicts=shutdown.target
+After=network.target
+
 [Service]
-#User=root
+Type=forking
+Environment="JAVA_HOME=/usr/local/tools/java_jdk"
 ExecStart=/opt/Blog/bin/run.sh
-Restart=always
+PrivateTmp=true
+#Restart=always
+
 [Install]
-WantedBy=multi-user.target graphical.target
+WantedBy=multi-user.target
