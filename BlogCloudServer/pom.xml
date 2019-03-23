@@ -61,6 +61,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- 上传文件需要该依赖-->
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-server</artifactId>
@@ -182,6 +188,11 @@
         </dependency>
         
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
@@ -191,7 +202,7 @@
             <artifactId>commons-net</artifactId>
             <version>3.3</version>
             <type>jar</type>
-        </dependency>        
+        </dependency>
         <!--        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-vfs2</artifactId>
