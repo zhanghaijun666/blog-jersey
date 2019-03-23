@@ -73,6 +73,21 @@ message RspInfoList{
     repeated RspInfo items = 2;
 }
 
+message License {
+    string licenseId=1;
+    string company=2;
+    string edition=3;
+    int64 validUntil=4;
+    string productName = 5;
+    string shortProductName = 6;
+    int32 totalUser = 7;
+    int64 totalVolume = 8;
+    
+    string value = 15;
+    string createByName = 16;
+    int32 createById = 17;
+    int64 createAt = 18;
+}
 message TreeUpdateItem {
     string name = 1;
     string hash = 2;
