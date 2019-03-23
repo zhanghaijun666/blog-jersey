@@ -54,3 +54,10 @@ fi
 #systemctl start blog
 #systemctl restart blog
 #systemctl stop blog
+
+
+#pkill sendmail 关闭系统发送邮件
+#pkill prelink 关闭系统自检测
+
+#修改bash提示符
+#export PS1="[\u@`env| grep SSH_CONNECTION | awk '{print $(NF-1)}'` \W]\$ "

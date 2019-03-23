@@ -73,3 +73,22 @@ if [[ $? = 127 ]]; then
 	systemctl enable docker
 fi
 
+# maven 阿里云中央仓库
+# <mirrors>
+#     <mirror>
+#       <id>alimaven</id>
+#       <name>aliyun maven</name>
+#   　　<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+#       <mirrorOf>central</mirrorOf>        
+#     </mirror>
+# </mirrors>
+
+# 配置镜像加速器
+# sudo mkdir -p /etc/docker
+# sudo tee /etc/docker/daemon.json <<-'EOF'
+# {
+#   "registry-mirrors": ["https://2yz6xc59.mirror.aliyuncs.com"]
+# }
+# EOF
+# sudo systemctl daemon-reload
+# sudo systemctl restart docker
