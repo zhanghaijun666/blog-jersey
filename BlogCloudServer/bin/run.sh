@@ -1,5 +1,7 @@
 #! /bin/bash
 
+. docker-mysql.sh
+
 if [[ -f "/opt/Blog/Blog-1.0.jar" ]]; then
 	cd /opt/Blog
 	OPTS="-Dsun.jnu.encoding=UTF-8 -Dfile.encoding=UTF-8"

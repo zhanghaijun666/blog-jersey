@@ -14,10 +14,11 @@ import org.apache.commons.lang3.StringUtils;
 public class Configuration {
 
     private final static Configuration BLOG_CONFIG = new Configuration();
-    private ConfigStore.Config config;
+    private ConfigStore.Config config = null;
+    private File webDir = null;
+    private File fileStore = null;
 
     private Configuration() {
-
     }
 
     public static Configuration getInstance() {
@@ -28,10 +29,12 @@ public class Configuration {
         return config;
     }
 
-    private File webDir = null;
-
     public File getWebDir() {
         return webDir;
+    }
+
+    public File getFileStore() {
+        return fileStore;
     }
 
     public String getWebDir(String path) {
@@ -54,6 +57,7 @@ public class Configuration {
     public void loadConfig() throws IOException {
         config = readConfig().build();
         webDir = new File(config.getWebDir());
+        fileStore = new File(Configuration.getInstance().getConfig().getFileStorage().getUrl());
     }
 
     private ConfigStore.Config.Builder readConfig() throws FileNotFoundException, IOException {

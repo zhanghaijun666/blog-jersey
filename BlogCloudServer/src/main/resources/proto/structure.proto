@@ -15,6 +15,7 @@ enum Authenticator{
     EMAIL_AUTHENTICATOR = 3;
 }
 enum StoreTypeEnum {
+    StoreDefault = 0;
     StoreCommit = 1;
     StoreTree = 2;
     StoreBlob = 3;
@@ -147,4 +148,7 @@ message Blob {
     string blobHash = 1;
     Operator owner = 2;
     Operator committer = 3;
+}
+message Store {
+    
 }

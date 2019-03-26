@@ -102,6 +102,19 @@ public final class ConfigStore {
      * <code>required .Server server = 6;</code>
      */
     com.blog.proto.ConfigStore.ServerOrBuilder getServerOrBuilder();
+
+    /**
+     * <code>required .FileStorage fileStorage = 7;</code>
+     */
+    boolean hasFileStorage();
+    /**
+     * <code>required .FileStorage fileStorage = 7;</code>
+     */
+    com.blog.proto.ConfigStore.FileStorage getFileStorage();
+    /**
+     * <code>required .FileStorage fileStorage = 7;</code>
+     */
+    com.blog.proto.ConfigStore.FileStorageOrBuilder getFileStorageOrBuilder();
   }
   /**
    * Protobuf type {@code Config}
@@ -110,6 +123,7 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:Config)
       ConfigOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Config.newBuilder() to construct.
     private Config(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -131,6 +145,9 @@ public final class ConfigStore {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -142,13 +159,6 @@ public final class ConfigStore {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.blog.proto.ConfigStore.DB.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -198,6 +208,26 @@ public final class ConfigStore {
               bitField0_ |= 0x00000020;
               break;
             }
+            case 58: {
+              com.blog.proto.ConfigStore.FileStorage.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000040) == 0x00000040)) {
+                subBuilder = fileStorage_.toBuilder();
+              }
+              fileStorage_ = input.readMessage(com.blog.proto.ConfigStore.FileStorage.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(fileStorage_);
+                fileStorage_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000040;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -215,6 +245,7 @@ public final class ConfigStore {
       return com.blog.proto.ConfigStore.internal_static_Config_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.proto.ConfigStore.internal_static_Config_fieldAccessorTable
@@ -414,7 +445,29 @@ public final class ConfigStore {
       return server_ == null ? com.blog.proto.ConfigStore.Server.getDefaultInstance() : server_;
     }
 
+    public static final int FILESTORAGE_FIELD_NUMBER = 7;
+    private com.blog.proto.ConfigStore.FileStorage fileStorage_;
+    /**
+     * <code>required .FileStorage fileStorage = 7;</code>
+     */
+    public boolean hasFileStorage() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>required .FileStorage fileStorage = 7;</code>
+     */
+    public com.blog.proto.ConfigStore.FileStorage getFileStorage() {
+      return fileStorage_ == null ? com.blog.proto.ConfigStore.FileStorage.getDefaultInstance() : fileStorage_;
+    }
+    /**
+     * <code>required .FileStorage fileStorage = 7;</code>
+     */
+    public com.blog.proto.ConfigStore.FileStorageOrBuilder getFileStorageOrBuilder() {
+      return fileStorage_ == null ? com.blog.proto.ConfigStore.FileStorage.getDefaultInstance() : fileStorage_;
+    }
+
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -432,6 +485,10 @@ public final class ConfigStore {
         memoizedIsInitialized = 0;
         return false;
       }
+      if (!hasFileStorage()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       if (!getDb().isInitialized()) {
         memoizedIsInitialized = 0;
         return false;
@@ -440,6 +497,7 @@ public final class ConfigStore {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -460,9 +518,13 @@ public final class ConfigStore {
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(6, getServer());
       }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeMessage(7, getFileStorage());
+      }
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -489,12 +551,15 @@ public final class ConfigStore {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(6, getServer());
       }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getFileStorage());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -536,6 +601,11 @@ public final class ConfigStore {
         result = result && getServer()
             .equals(other.getServer());
       }
+      result = result && (hasFileStorage() == other.hasFileStorage());
+      if (hasFileStorage()) {
+        result = result && getFileStorage()
+            .equals(other.getFileStorage());
+      }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -546,7 +616,7 @@ public final class ConfigStore {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasDb()) {
         hash = (37 * hash) + DB_FIELD_NUMBER;
         hash = (53 * hash) + getDb().hashCode();
@@ -571,11 +641,26 @@ public final class ConfigStore {
         hash = (37 * hash) + SERVER_FIELD_NUMBER;
         hash = (53 * hash) + getServer().hashCode();
       }
+      if (hasFileStorage()) {
+        hash = (37 * hash) + FILESTORAGE_FIELD_NUMBER;
+        hash = (53 * hash) + getFileStorage().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
+    public static com.blog.proto.ConfigStore.Config parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.ConfigStore.Config parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.blog.proto.ConfigStore.Config parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -635,6 +720,7 @@ public final class ConfigStore {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -642,6 +728,7 @@ public final class ConfigStore {
     public static Builder newBuilder(com.blog.proto.ConfigStore.Config prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -665,6 +752,7 @@ public final class ConfigStore {
         return com.blog.proto.ConfigStore.internal_static_Config_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.proto.ConfigStore.internal_static_Config_fieldAccessorTable
@@ -687,8 +775,10 @@ public final class ConfigStore {
                 .alwaysUseFieldBuilders) {
           getDbFieldBuilder();
           getServerFieldBuilder();
+          getFileStorageFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (dbBuilder_ == null) {
@@ -711,18 +801,27 @@ public final class ConfigStore {
           serverBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
+        if (fileStorageBuilder_ == null) {
+          fileStorage_ = null;
+        } else {
+          fileStorageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.blog.proto.ConfigStore.internal_static_Config_descriptor;
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.Config getDefaultInstanceForType() {
         return com.blog.proto.ConfigStore.Config.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.Config build() {
         com.blog.proto.ConfigStore.Config result = buildPartial();
         if (!result.isInitialized()) {
@@ -731,6 +830,7 @@ public final class ConfigStore {
         return result;
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.Config buildPartial() {
         com.blog.proto.ConfigStore.Config result = new com.blog.proto.ConfigStore.Config(this);
         int from_bitField0_ = bitField0_;
@@ -767,37 +867,52 @@ public final class ConfigStore {
         } else {
           result.server_ = serverBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        if (fileStorageBuilder_ == null) {
+          result.fileStorage_ = fileStorage_;
+        } else {
+          result.fileStorage_ = fileStorageBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.blog.proto.ConfigStore.Config) {
           return mergeFrom((com.blog.proto.ConfigStore.Config)other);
@@ -833,11 +948,15 @@ public final class ConfigStore {
         if (other.hasServer()) {
           mergeServer(other.getServer());
         }
+        if (other.hasFileStorage()) {
+          mergeFileStorage(other.getFileStorage());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         if (!hasDb()) {
           return false;
@@ -848,12 +967,16 @@ public final class ConfigStore {
         if (!hasServer()) {
           return false;
         }
+        if (!hasFileStorage()) {
+          return false;
+        }
         if (!getDb().isInitialized()) {
           return false;
         }
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1384,11 +1507,131 @@ public final class ConfigStore {
         }
         return serverBuilder_;
       }
+
+      private com.blog.proto.ConfigStore.FileStorage fileStorage_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.blog.proto.ConfigStore.FileStorage, com.blog.proto.ConfigStore.FileStorage.Builder, com.blog.proto.ConfigStore.FileStorageOrBuilder> fileStorageBuilder_;
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public boolean hasFileStorage() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public com.blog.proto.ConfigStore.FileStorage getFileStorage() {
+        if (fileStorageBuilder_ == null) {
+          return fileStorage_ == null ? com.blog.proto.ConfigStore.FileStorage.getDefaultInstance() : fileStorage_;
+        } else {
+          return fileStorageBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public Builder setFileStorage(com.blog.proto.ConfigStore.FileStorage value) {
+        if (fileStorageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          fileStorage_ = value;
+          onChanged();
+        } else {
+          fileStorageBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public Builder setFileStorage(
+          com.blog.proto.ConfigStore.FileStorage.Builder builderForValue) {
+        if (fileStorageBuilder_ == null) {
+          fileStorage_ = builderForValue.build();
+          onChanged();
+        } else {
+          fileStorageBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public Builder mergeFileStorage(com.blog.proto.ConfigStore.FileStorage value) {
+        if (fileStorageBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040) &&
+              fileStorage_ != null &&
+              fileStorage_ != com.blog.proto.ConfigStore.FileStorage.getDefaultInstance()) {
+            fileStorage_ =
+              com.blog.proto.ConfigStore.FileStorage.newBuilder(fileStorage_).mergeFrom(value).buildPartial();
+          } else {
+            fileStorage_ = value;
+          }
+          onChanged();
+        } else {
+          fileStorageBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000040;
+        return this;
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public Builder clearFileStorage() {
+        if (fileStorageBuilder_ == null) {
+          fileStorage_ = null;
+          onChanged();
+        } else {
+          fileStorageBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000040);
+        return this;
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public com.blog.proto.ConfigStore.FileStorage.Builder getFileStorageBuilder() {
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return getFileStorageFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      public com.blog.proto.ConfigStore.FileStorageOrBuilder getFileStorageOrBuilder() {
+        if (fileStorageBuilder_ != null) {
+          return fileStorageBuilder_.getMessageOrBuilder();
+        } else {
+          return fileStorage_ == null ?
+              com.blog.proto.ConfigStore.FileStorage.getDefaultInstance() : fileStorage_;
+        }
+      }
+      /**
+       * <code>required .FileStorage fileStorage = 7;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.blog.proto.ConfigStore.FileStorage, com.blog.proto.ConfigStore.FileStorage.Builder, com.blog.proto.ConfigStore.FileStorageOrBuilder> 
+          getFileStorageFieldBuilder() {
+        if (fileStorageBuilder_ == null) {
+          fileStorageBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.blog.proto.ConfigStore.FileStorage, com.blog.proto.ConfigStore.FileStorage.Builder, com.blog.proto.ConfigStore.FileStorageOrBuilder>(
+                  getFileStorage(),
+                  getParentForChildren(),
+                  isClean());
+          fileStorage_ = null;
+        }
+        return fileStorageBuilder_;
+      }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1410,11 +1653,12 @@ public final class ConfigStore {
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<Config>
         PARSER = new com.google.protobuf.AbstractParser<Config>() {
+      @java.lang.Override
       public Config parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Config(input, extensionRegistry);
+        return new Config(input, extensionRegistry);
       }
     };
 
@@ -1427,6 +1671,7 @@ public final class ConfigStore {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.blog.proto.ConfigStore.Config getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1500,6 +1745,7 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:DB)
       DBOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use DB.newBuilder() to construct.
     private DB(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1521,6 +1767,9 @@ public final class ConfigStore {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1532,13 +1781,6 @@ public final class ConfigStore {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
@@ -1563,6 +1805,13 @@ public final class ConfigStore {
               password_ = bs;
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1580,6 +1829,7 @@ public final class ConfigStore {
       return com.blog.proto.ConfigStore.internal_static_DB_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.proto.ConfigStore.internal_static_DB_fieldAccessorTable
@@ -1757,6 +2007,7 @@ public final class ConfigStore {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1774,6 +2025,7 @@ public final class ConfigStore {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -1791,6 +2043,7 @@ public final class ConfigStore {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1813,7 +2066,6 @@ public final class ConfigStore {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -1855,7 +2107,7 @@ public final class ConfigStore {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasUrl()) {
         hash = (37 * hash) + URL_FIELD_NUMBER;
         hash = (53 * hash) + getUrl().hashCode();
@@ -1877,6 +2129,17 @@ public final class ConfigStore {
       return hash;
     }
 
+    public static com.blog.proto.ConfigStore.DB parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.ConfigStore.DB parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.blog.proto.ConfigStore.DB parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1936,6 +2199,7 @@ public final class ConfigStore {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1943,6 +2207,7 @@ public final class ConfigStore {
     public static Builder newBuilder(com.blog.proto.ConfigStore.DB prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1966,6 +2231,7 @@ public final class ConfigStore {
         return com.blog.proto.ConfigStore.internal_static_DB_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.proto.ConfigStore.internal_static_DB_fieldAccessorTable
@@ -1988,6 +2254,7 @@ public final class ConfigStore {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         url_ = "";
@@ -2001,15 +2268,18 @@ public final class ConfigStore {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.blog.proto.ConfigStore.internal_static_DB_descriptor;
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.DB getDefaultInstanceForType() {
         return com.blog.proto.ConfigStore.DB.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.DB build() {
         com.blog.proto.ConfigStore.DB result = buildPartial();
         if (!result.isInitialized()) {
@@ -2018,6 +2288,7 @@ public final class ConfigStore {
         return result;
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.DB buildPartial() {
         com.blog.proto.ConfigStore.DB result = new com.blog.proto.ConfigStore.DB(this);
         int from_bitField0_ = bitField0_;
@@ -2043,32 +2314,39 @@ public final class ConfigStore {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.blog.proto.ConfigStore.DB) {
           return mergeFrom((com.blog.proto.ConfigStore.DB)other);
@@ -2105,6 +2383,7 @@ public final class ConfigStore {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         if (!hasUrl()) {
           return false;
@@ -2115,6 +2394,7 @@ public final class ConfigStore {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2437,11 +2717,13 @@ public final class ConfigStore {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2463,11 +2745,12 @@ public final class ConfigStore {
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<DB>
         PARSER = new com.google.protobuf.AbstractParser<DB>() {
+      @java.lang.Override
       public DB parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DB(input, extensionRegistry);
+        return new DB(input, extensionRegistry);
       }
     };
 
@@ -2480,6 +2763,7 @@ public final class ConfigStore {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.blog.proto.ConfigStore.DB getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2520,6 +2804,7 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:Server)
       ServerOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Server.newBuilder() to construct.
     private Server(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2539,6 +2824,9 @@ public final class ConfigStore {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2550,13 +2838,6 @@ public final class ConfigStore {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
@@ -2566,6 +2847,13 @@ public final class ConfigStore {
             case 16: {
               bitField0_ |= 0x00000002;
               port_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -2585,6 +2873,7 @@ public final class ConfigStore {
       return com.blog.proto.ConfigStore.internal_static_Server_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.proto.ConfigStore.internal_static_Server_fieldAccessorTable
@@ -2651,6 +2940,7 @@ public final class ConfigStore {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2660,6 +2950,7 @@ public final class ConfigStore {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2671,6 +2962,7 @@ public final class ConfigStore {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2688,7 +2980,6 @@ public final class ConfigStore {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2720,7 +3011,7 @@ public final class ConfigStore {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (19 * hash) + getDescriptor().hashCode();
       if (hasHost()) {
         hash = (37 * hash) + HOST_FIELD_NUMBER;
         hash = (53 * hash) + getHost().hashCode();
@@ -2734,6 +3025,17 @@ public final class ConfigStore {
       return hash;
     }
 
+    public static com.blog.proto.ConfigStore.Server parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.ConfigStore.Server parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static com.blog.proto.ConfigStore.Server parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2793,6 +3095,7 @@ public final class ConfigStore {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2800,6 +3103,7 @@ public final class ConfigStore {
     public static Builder newBuilder(com.blog.proto.ConfigStore.Server prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2823,6 +3127,7 @@ public final class ConfigStore {
         return com.blog.proto.ConfigStore.internal_static_Server_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.proto.ConfigStore.internal_static_Server_fieldAccessorTable
@@ -2845,6 +3150,7 @@ public final class ConfigStore {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         host_ = "127.0.0.1";
@@ -2854,15 +3160,18 @@ public final class ConfigStore {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.blog.proto.ConfigStore.internal_static_Server_descriptor;
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.Server getDefaultInstanceForType() {
         return com.blog.proto.ConfigStore.Server.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.Server build() {
         com.blog.proto.ConfigStore.Server result = buildPartial();
         if (!result.isInitialized()) {
@@ -2871,6 +3180,7 @@ public final class ConfigStore {
         return result;
       }
 
+      @java.lang.Override
       public com.blog.proto.ConfigStore.Server buildPartial() {
         com.blog.proto.ConfigStore.Server result = new com.blog.proto.ConfigStore.Server(this);
         int from_bitField0_ = bitField0_;
@@ -2888,32 +3198,39 @@ public final class ConfigStore {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
+          int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
+          java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.blog.proto.ConfigStore.Server) {
           return mergeFrom((com.blog.proto.ConfigStore.Server)other);
@@ -2938,10 +3255,12 @@ public final class ConfigStore {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3068,11 +3387,13 @@ public final class ConfigStore {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3094,11 +3415,12 @@ public final class ConfigStore {
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<Server>
         PARSER = new com.google.protobuf.AbstractParser<Server>() {
+      @java.lang.Override
       public Server parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Server(input, extensionRegistry);
+        return new Server(input, extensionRegistry);
       }
     };
 
@@ -3111,7 +3433,591 @@ public final class ConfigStore {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.blog.proto.ConfigStore.Server getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface FileStorageOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:FileStorage)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string url = 1 [default = "store"];</code>
+     */
+    boolean hasUrl();
+    /**
+     * <code>optional string url = 1 [default = "store"];</code>
+     */
+    java.lang.String getUrl();
+    /**
+     * <code>optional string url = 1 [default = "store"];</code>
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
+  }
+  /**
+   * Protobuf type {@code FileStorage}
+   */
+  public  static final class FileStorage extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:FileStorage)
+      FileStorageOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use FileStorage.newBuilder() to construct.
+    private FileStorage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private FileStorage() {
+      url_ = "store";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FileStorage(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              url_ = bs;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.blog.proto.ConfigStore.internal_static_FileStorage_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.blog.proto.ConfigStore.internal_static_FileStorage_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.blog.proto.ConfigStore.FileStorage.class, com.blog.proto.ConfigStore.FileStorage.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int URL_FIELD_NUMBER = 1;
+    private volatile java.lang.Object url_;
+    /**
+     * <code>optional string url = 1 [default = "store"];</code>
+     */
+    public boolean hasUrl() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string url = 1 [default = "store"];</code>
+     */
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          url_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string url = 1 [default = "store"];</code>
+     */
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, url_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, url_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.blog.proto.ConfigStore.FileStorage)) {
+        return super.equals(obj);
+      }
+      com.blog.proto.ConfigStore.FileStorage other = (com.blog.proto.ConfigStore.FileStorage) obj;
+
+      boolean result = true;
+      result = result && (hasUrl() == other.hasUrl());
+      if (hasUrl()) {
+        result = result && getUrl()
+            .equals(other.getUrl());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasUrl()) {
+        hash = (37 * hash) + URL_FIELD_NUMBER;
+        hash = (53 * hash) + getUrl().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.blog.proto.ConfigStore.FileStorage parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.blog.proto.ConfigStore.FileStorage prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code FileStorage}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:FileStorage)
+        com.blog.proto.ConfigStore.FileStorageOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.blog.proto.ConfigStore.internal_static_FileStorage_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.blog.proto.ConfigStore.internal_static_FileStorage_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.blog.proto.ConfigStore.FileStorage.class, com.blog.proto.ConfigStore.FileStorage.Builder.class);
+      }
+
+      // Construct using com.blog.proto.ConfigStore.FileStorage.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        url_ = "store";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.blog.proto.ConfigStore.internal_static_FileStorage_descriptor;
+      }
+
+      @java.lang.Override
+      public com.blog.proto.ConfigStore.FileStorage getDefaultInstanceForType() {
+        return com.blog.proto.ConfigStore.FileStorage.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.blog.proto.ConfigStore.FileStorage build() {
+        com.blog.proto.ConfigStore.FileStorage result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.blog.proto.ConfigStore.FileStorage buildPartial() {
+        com.blog.proto.ConfigStore.FileStorage result = new com.blog.proto.ConfigStore.FileStorage(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.url_ = url_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.blog.proto.ConfigStore.FileStorage) {
+          return mergeFrom((com.blog.proto.ConfigStore.FileStorage)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.blog.proto.ConfigStore.FileStorage other) {
+        if (other == com.blog.proto.ConfigStore.FileStorage.getDefaultInstance()) return this;
+        if (other.hasUrl()) {
+          bitField0_ |= 0x00000001;
+          url_ = other.url_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.blog.proto.ConfigStore.FileStorage parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.blog.proto.ConfigStore.FileStorage) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object url_ = "store";
+      /**
+       * <code>optional string url = 1 [default = "store"];</code>
+       */
+      public boolean hasUrl() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string url = 1 [default = "store"];</code>
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            url_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 1 [default = "store"];</code>
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string url = 1 [default = "store"];</code>
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 1 [default = "store"];</code>
+       */
+      public Builder clearUrl() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string url = 1 [default = "store"];</code>
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:FileStorage)
+    }
+
+    // @@protoc_insertion_point(class_scope:FileStorage)
+    private static final com.blog.proto.ConfigStore.FileStorage DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.blog.proto.ConfigStore.FileStorage();
+    }
+
+    public static com.blog.proto.ConfigStore.FileStorage getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<FileStorage>
+        PARSER = new com.google.protobuf.AbstractParser<FileStorage>() {
+      @java.lang.Override
+      public FileStorage parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FileStorage(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<FileStorage> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FileStorage> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.blog.proto.ConfigStore.FileStorage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3132,6 +4038,11 @@ public final class ConfigStore {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Server_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_FileStorage_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_FileStorage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3141,15 +4052,17 @@ public final class ConfigStore {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022proto/config.proto\"\223\001\n\006Config\022\017\n\002db\030\001 " +
+      "\n\022proto/config.proto\"\266\001\n\006Config\022\017\n\002db\030\001 " +
       "\002(\0132\003.DB\022\016\n\006webDir\030\002 \002(\t\022#\n\007logback\030\003 \001(" +
       "\t:\022config/logback.xml\022\034\n\016sessionTimeout\030" +
       "\004 \001(\005:\0041800\022\014\n\004salt\030\005 \001(\t\022\027\n\006server\030\006 \002(" +
-      "\0132\007.Server\"M\n\002DB\022\013\n\003url\030\001 \002(\t\022\016\n\006driver\030" +
-      "\002 \002(\t\022\022\n\004user\030\003 \001(\t:\004root\022\026\n\010password\030\004 " +
-      "\001(\t:\004root\"5\n\006Server\022\027\n\004host\030\001 \001(\t:\t127.0" +
-      ".0.1\022\022\n\004port\030\002 \001(\005:\0048888B\035\n\016com.blog.pro" +
-      "toB\013ConfigStore"
+      "\0132\007.Server\022!\n\013fileStorage\030\007 \002(\0132\014.FileSt" +
+      "orage\"M\n\002DB\022\013\n\003url\030\001 \002(\t\022\016\n\006driver\030\002 \002(\t" +
+      "\022\022\n\004user\030\003 \001(\t:\004root\022\026\n\010password\030\004 \001(\t:\004" +
+      "root\"5\n\006Server\022\027\n\004host\030\001 \001(\t:\t127.0.0.1\022" +
+      "\022\n\004port\030\002 \001(\005:\0048888\"!\n\013FileStorage\022\022\n\003ur" +
+      "l\030\001 \001(\t:\005storeB\035\n\016com.blog.protoB\013Config" +
+      "Store"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3168,7 +4081,7 @@ public final class ConfigStore {
     internal_static_Config_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Config_descriptor,
-        new java.lang.String[] { "Db", "WebDir", "Logback", "SessionTimeout", "Salt", "Server", });
+        new java.lang.String[] { "Db", "WebDir", "Logback", "SessionTimeout", "Salt", "Server", "FileStorage", });
     internal_static_DB_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_DB_fieldAccessorTable = new
@@ -3181,6 +4094,12 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Server_descriptor,
         new java.lang.String[] { "Host", "Port", });
+    internal_static_FileStorage_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_FileStorage_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_FileStorage_descriptor,
+        new java.lang.String[] { "Url", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
