@@ -14,6 +14,11 @@ enum Authenticator{
     TEXT_AUTHENTICATOR = 2;
     EMAIL_AUTHENTICATOR = 3;
 }
+enum StoreTypeEnum {
+    StoreCommit = 1;
+    StoreTree = 2;
+    StoreBlob = 3;
+}
 enum ReturnCode{
     UNKNOWN_RETURN_CODE = 0;
     OK = 1;
@@ -88,15 +93,58 @@ message License {
     int32 createById = 17;
     int64 createAt = 18;
 }
-message TreeUpdateItem {
-    string name = 1;
-    string hash = 2;
-    int64 size = 3;
-    bytes content = 4;
-}
 
-message TreeUpdateReq{
-    string path = 1;
-    string roothash = 2;
-    repeated TreeUpdateItem items = 3;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+message Operator {
+    int64 date = 1;
+    int32 gptype = 2;
+    int32 gpid = 3;
+}
+message Commit {
+    string commitHash = 1;
+    Operator owner = 2;
+    Operator committer = 3;
+    string parent = 4;
+    repeated string treeHash = 5;
+}
+message TreeItem {
+    string treeHash = 1;
+    Operator owner = 2;
+    Operator committer = 3;
+    string treeName = 4;
+    int64 size = 5;
+    repeated string itemtTree = 6;
+    repeated BlobList file = 7;
+}
+message BlobList {
+    repeated Blob blob = 1;
+}
+message Blob {
+    string blobHash = 1;
+    Operator owner = 2;
+    Operator committer = 3;
 }

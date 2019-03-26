@@ -352,20 +352,20 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.8</version>
                 <executions>
-                    <!--                    
                     <execution>
                         <id>mkdir</id>
                         <phase>generate-sources</phase>
                         <configuration>
                             <target>
-                                <mkdir dir="${project.basedir}/store"/>
+                                <mkdir dir="${project.basedir}/store/commit"/>
+                                <mkdir dir="${project.basedir}/store/tree"/>
+                                <mkdir dir="${project.basedir}/store/blob"/>
                             </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
                         </goals>
                     </execution>
-                    -->
                     <execution>
                         <phase>process-resources</phase>
                         <configuration>
