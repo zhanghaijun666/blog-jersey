@@ -14104,6 +14104,16 @@ public final class BlogStore {
      */
     com.google.protobuf.ByteString
         getBlobNameBytes();
+
+    /**
+     * <code>optional string contentType = 2;</code>
+     */
+    java.lang.String getContentType();
+    /**
+     * <code>optional string contentType = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getContentTypeBytes();
   }
   /**
    * Protobuf type {@code StoreBlob}
@@ -14118,6 +14128,7 @@ public final class BlogStore {
     }
     private StoreBlob() {
       blobName_ = "";
+      contentType_ = "";
     }
 
     @java.lang.Override
@@ -14149,6 +14160,12 @@ public final class BlogStore {
               java.lang.String s = input.readStringRequireUtf8();
 
               blobName_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              contentType_ = s;
               break;
             }
           }
@@ -14208,6 +14225,40 @@ public final class BlogStore {
       }
     }
 
+    public static final int CONTENTTYPE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object contentType_;
+    /**
+     * <code>optional string contentType = 2;</code>
+     */
+    public java.lang.String getContentType() {
+      java.lang.Object ref = contentType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        contentType_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string contentType = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getContentTypeBytes() {
+      java.lang.Object ref = contentType_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        contentType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -14223,6 +14274,9 @@ public final class BlogStore {
       if (!getBlobNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, blobName_);
       }
+      if (!getContentTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, contentType_);
+      }
     }
 
     public int getSerializedSize() {
@@ -14232,6 +14286,9 @@ public final class BlogStore {
       size = 0;
       if (!getBlobNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, blobName_);
+      }
+      if (!getContentTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, contentType_);
       }
       memoizedSize = size;
       return size;
@@ -14251,6 +14308,8 @@ public final class BlogStore {
       boolean result = true;
       result = result && getBlobName()
           .equals(other.getBlobName());
+      result = result && getContentType()
+          .equals(other.getContentType());
       return result;
     }
 
@@ -14263,6 +14322,8 @@ public final class BlogStore {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + BLOBNAME_FIELD_NUMBER;
       hash = (53 * hash) + getBlobName().hashCode();
+      hash = (37 * hash) + CONTENTTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getContentType().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -14383,6 +14444,8 @@ public final class BlogStore {
         super.clear();
         blobName_ = "";
 
+        contentType_ = "";
+
         return this;
       }
 
@@ -14406,6 +14469,7 @@ public final class BlogStore {
       public com.blog.proto.BlogStore.StoreBlob buildPartial() {
         com.blog.proto.BlogStore.StoreBlob result = new com.blog.proto.BlogStore.StoreBlob(this);
         result.blobName_ = blobName_;
+        result.contentType_ = contentType_;
         onBuilt();
         return result;
       }
@@ -14449,6 +14513,10 @@ public final class BlogStore {
         if (other == com.blog.proto.BlogStore.StoreBlob.getDefaultInstance()) return this;
         if (!other.getBlobName().isEmpty()) {
           blobName_ = other.blobName_;
+          onChanged();
+        }
+        if (!other.getContentType().isEmpty()) {
+          contentType_ = other.contentType_;
           onChanged();
         }
         onChanged();
@@ -14542,6 +14610,75 @@ public final class BlogStore {
   checkByteStringIsUtf8(value);
         
         blobName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object contentType_ = "";
+      /**
+       * <code>optional string contentType = 2;</code>
+       */
+      public java.lang.String getContentType() {
+        java.lang.Object ref = contentType_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          contentType_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string contentType = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getContentTypeBytes() {
+        java.lang.Object ref = contentType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          contentType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string contentType = 2;</code>
+       */
+      public Builder setContentType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        contentType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string contentType = 2;</code>
+       */
+      public Builder clearContentType() {
+        
+        contentType_ = getDefaultInstance().getContentType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string contentType = 2;</code>
+       */
+      public Builder setContentTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        contentType_ = value;
         onChanged();
         return this;
       }
@@ -14712,21 +14849,21 @@ public final class BlogStore {
       "Tree\022\020\n\010treeName\030\001 \001(\t\022\014\n\004size\030\002 \001(\003\022\021\n\t" +
       "itemtTree\030\003 \003(\t\022!\n\titemtFile\030\004 \003(\0132\016.Sto" +
       "reBlobList\")\n\rStoreBlobList\022\030\n\004item\030\001 \003(" +
-      "\0132\n.StoreBlob\"\035\n\tStoreBlob\022\020\n\010blobName\030\001" +
-      " \001(\t*@\n\006Status\022\021\n\rStatusDefault\020\000\022\020\n\014Sta" +
-      "tusActive\020\001\022\021\n\rStatusDeleted\020\002*u\n\rAuthen" +
-      "ticator\022\031\n\025DEFAULT_AUTHENTICATOR\020\000\022\030\n\024SY" +
-      "STEM_AUTHENTICATOR\020\001\022\026\n\022TEXT_AUTHENTICAT" +
-      "OR\020\002\022\027\n\023EMAIL_AUTHENTICATOR\020\003*`\n\rStoreTy",
-      "peEnum\022\024\n\020StoreTypeDefault\020\000\022\023\n\017StoreTyp" +
-      "eCommit\020\001\022\021\n\rStoreTypeTree\020\002\022\021\n\rStoreTyp" +
-      "eBlob\020\003*\322\001\n\nReturnCode\022\027\n\023UNKNOWN_RETURN" +
-      "_CODE\020\000\022\r\n\tReturn_OK\020\001\022\020\n\014Return_ERROR\020\002" +
-      "\022\025\n\021Return_USER_EXIST\0202\022\031\n\025Return_PASSWO" +
-      "RD_ERROR\0203\022(\n$Return_USERNAME_OR_PASSWOR" +
-      "D_IS_EMPTY\0204\022\025\n\021Return_USER_EMPTY\0205\022\027\n\023R" +
-      "eturn_NOT_YOURSELF\0206B\033\n\016com.blog.protoB\t" +
-      "BlogStoreb\006proto3"
+      "\0132\n.StoreBlob\"2\n\tStoreBlob\022\020\n\010blobName\030\001" +
+      " \001(\t\022\023\n\013contentType\030\002 \001(\t*@\n\006Status\022\021\n\rS" +
+      "tatusDefault\020\000\022\020\n\014StatusActive\020\001\022\021\n\rStat" +
+      "usDeleted\020\002*u\n\rAuthenticator\022\031\n\025DEFAULT_" +
+      "AUTHENTICATOR\020\000\022\030\n\024SYSTEM_AUTHENTICATOR\020" +
+      "\001\022\026\n\022TEXT_AUTHENTICATOR\020\002\022\027\n\023EMAIL_AUTHE",
+      "NTICATOR\020\003*`\n\rStoreTypeEnum\022\024\n\020StoreType" +
+      "Default\020\000\022\023\n\017StoreTypeCommit\020\001\022\021\n\rStoreT" +
+      "ypeTree\020\002\022\021\n\rStoreTypeBlob\020\003*\322\001\n\nReturnC" +
+      "ode\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tReturn_O" +
+      "K\020\001\022\020\n\014Return_ERROR\020\002\022\025\n\021Return_USER_EXI" +
+      "ST\0202\022\031\n\025Return_PASSWORD_ERROR\0203\022(\n$Retur" +
+      "n_USERNAME_OR_PASSWORD_IS_EMPTY\0204\022\025\n\021Ret" +
+      "urn_USER_EMPTY\0205\022\027\n\023Return_NOT_YOURSELF\020" +
+      "6B\033\n\016com.blog.protoB\tBlogStoreb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14829,7 +14966,7 @@ public final class BlogStore {
     internal_static_StoreBlob_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StoreBlob_descriptor,
-        new java.lang.String[] { "BlobName", });
+        new java.lang.String[] { "BlobName", "ContentType", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

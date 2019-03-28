@@ -1,13 +1,11 @@
 package com.blog.file;
 
-import com.blog.config.Configuration;
 import com.blog.proto.BlogStore;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * @author haijun.zhang
@@ -16,13 +14,9 @@ public class FileStorage {
 
     public final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(FileStorage.class);
 
-    public static final String BLOB_DIR = "blob";
-    public static final String COMMIT_DIR = "commit";
-    public static final String TREE_DIR = "tree";
-
-    public static BlogStore.Store loadStore(BlogStore.StoreTypeEnum type, String hash) {
+    public static BlogStore.Store readStore(BlogStore.StoreTypeEnum type, String hash) {
         BlogStore.Store store = null;
-        String fileFullPath = FileStorage.getHashFullPath(type, hash);
+        String fileFullPath = StoreUtil.getHashFullPath(type, hash);
         File file = new File(fileFullPath);
         FileInputStream input = null;
         if (file.exists() && file.isFile() && file.canRead()) {
@@ -47,26 +41,29 @@ public class FileStorage {
         return store;
     }
 
-    public static String getHashFullPath(BlogStore.StoreTypeEnum type, String hash) {
-        String store = "";
-        switch (type) {
-            case StoreTypeCommit:
-                store = FileStorage.COMMIT_DIR;
-                break;
-            case StoreTypeTree:
-                store = FileStorage.TREE_DIR;
-                break;
-            case StoreTypeBlob:
-                store = FileStorage.BLOB_DIR;
-                break;
+    public static BlogStore.ReturnCode writeStore(BlogStore.Store store, String hash) {
+        String fileFullPath = StoreUtil.getHashFullPath(store.getStoreType(), hash);
+        File file = new File(fileFullPath);
+        FileOutputStream out = null;
+        if (file.getParentFile().mkdirs()) {
+            try {
+                out = new FileOutputStream(file);
+                out.write(store.toByteArray());
+            } catch (FileNotFoundException ex) {
+                logger.error("Unable to write " + fileFullPath, ex);
+                return BlogStore.ReturnCode.Return_ERROR;
+            } catch (IOException ex) {
+                logger.error("Unable to write " + fileFullPath, ex);
+                return BlogStore.ReturnCode.Return_ERROR;
+            } finally {
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException ex) {
+                    }
+                }
+            }
         }
-        return new File(Configuration.getInstance().getFileStore(), store + File.separator + FileStorage.getHashPath(hash)).getAbsolutePath();
-    }
-
-    public static String getHashPath(String hash) {
-        if (StringUtils.isBlank(hash) || hash.length() < 5) {
-            return hash;
-        }
-        return StringUtils.join(Arrays.asList(hash.substring(0, 2), hash.substring(hash.length() - 4), hash), File.separator);
+        return BlogStore.ReturnCode.Return_OK;
     }
 }

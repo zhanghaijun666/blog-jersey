@@ -149,4 +149,5 @@ message StoreBlobList {
 }
 message StoreBlob {
     string blobName = 1;
+    string contentType = 2;
 }
