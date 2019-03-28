@@ -15,20 +15,20 @@ enum Authenticator{
     EMAIL_AUTHENTICATOR = 3;
 }
 enum StoreTypeEnum {
-    StoreDefault = 0;
-    StoreCommit = 1;
-    StoreTree = 2;
-    StoreBlob = 3;
+    StoreTypeDefault = 0;
+    StoreTypeCommit = 1;
+    StoreTypeTree = 2;
+    StoreTypeBlob = 3;
 }
 enum ReturnCode{
     UNKNOWN_RETURN_CODE = 0;
-    OK = 1;
-    ERROR = 2;
-    USER_EXIST = 50;
-    PASSWORD_ERROR = 51;
-    USERNAME_OR_PASSWORD_IS_EMPTY = 52;
-    USER_EMPTY = 53;
-    NOT_YOURSELF = 54;
+    Return_OK = 1;
+    Return_ERROR = 2;
+    Return_USER_EXIST = 50;
+    Return_PASSWORD_ERROR = 51;
+    Return_USERNAME_OR_PASSWORD_IS_EMPTY = 52;
+    Return_USER_EMPTY = 53;
+    Return_NOT_YOURSELF = 54;
 }
 
 message User{
@@ -125,30 +125,28 @@ message Operator {
     int32 gptype = 2;
     int32 gpid = 3;
 }
-message Commit {
-    string commitHash = 1;
-    Operator owner = 2;
-    Operator committer = 3;
-    string parent = 4;
-    repeated string treeHash = 5;
-}
-message TreeItem {
-    string treeHash = 1;
-    Operator owner = 2;
-    Operator committer = 3;
-    string treeName = 4;
-    int64 size = 5;
-    repeated string itemtTree = 6;
-    repeated BlobList file = 7;
-}
-message BlobList {
-    repeated Blob blob = 1;
-}
-message Blob {
-    string blobHash = 1;
-    Operator owner = 2;
-    Operator committer = 3;
-}
 message Store {
-    
+    string storeHash = 1;
+    Operator owner = 2;
+    Operator committer = 3;
+    StoreTypeEnum storeType = 4;
+    StoreCommit commit = 5;
+    StoreTree tree = 6;
+    StoreBlob blob = 7;
+}
+message StoreCommit {
+    string parent = 1;
+    repeated string treeHash = 2;
+}
+message StoreTree {
+    string treeName = 1;
+    int64 size = 2;
+    repeated string itemtTree = 3;
+    repeated StoreBlobList itemtFile = 4;
+}
+message StoreBlobList {
+    repeated StoreBlob item = 1;
+}
+message StoreBlob {
+    string blobName = 1;
 }

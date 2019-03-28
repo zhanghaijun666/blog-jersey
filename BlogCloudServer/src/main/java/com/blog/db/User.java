@@ -95,7 +95,7 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel {
 
     public static int saveUser(BlogStore.User user, User dbUser, int userId) {
         if (null == dbUser) {
-            return BlogStore.ReturnCode.USER_EMPTY_VALUE;
+            return BlogStore.ReturnCode.Return_USER_EMPTY_VALUE;
         }
         dbUser.setString("username", user.getUsername());
         dbUser.setString("nickname", user.getNickname());
@@ -104,7 +104,7 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel {
         dbUser.setString("phone", user.getPhone());
         dbUser.setInteger("updated_by", userId);
         dbUser.saveIt();
-        return BlogStore.ReturnCode.OK_VALUE;
+        return BlogStore.ReturnCode.Return_OK_VALUE;
     }
 
     public static boolean isExist(String username) {

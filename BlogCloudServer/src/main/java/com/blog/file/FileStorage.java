@@ -20,7 +20,7 @@ public class FileStorage {
     public static final String COMMIT_DIR = "commit";
     public static final String TREE_DIR = "tree";
 
-    public BlogStore.Store loadStore(BlogStore.StoreTypeEnum type, String hash) {
+    public static BlogStore.Store loadStore(BlogStore.StoreTypeEnum type, String hash) {
         BlogStore.Store store = null;
         String fileFullPath = FileStorage.getHashFullPath(type, hash);
         File file = new File(fileFullPath);
@@ -50,13 +50,13 @@ public class FileStorage {
     public static String getHashFullPath(BlogStore.StoreTypeEnum type, String hash) {
         String store = "";
         switch (type) {
-            case StoreCommit:
+            case StoreTypeCommit:
                 store = FileStorage.COMMIT_DIR;
                 break;
-            case StoreTree:
+            case StoreTypeTree:
                 store = FileStorage.TREE_DIR;
                 break;
-            case StoreBlob:
+            case StoreTypeBlob:
                 store = FileStorage.BLOB_DIR;
                 break;
         }

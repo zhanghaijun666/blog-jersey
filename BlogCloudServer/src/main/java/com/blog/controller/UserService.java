@@ -54,7 +54,7 @@ public class UserService {
         AppSession session = (AppSession) security.getUserPrincipal();
         SreverSession.instance().removeSession(session);
         response.setCookie("session", "");
-        return rspInfo.setCode(BlogStore.ReturnCode.OK).build();
+        return rspInfo.setCode(BlogStore.ReturnCode.Return_OK).build();
     }
 
     @PUT
@@ -66,13 +66,13 @@ public class UserService {
         AppSession session = (AppSession) security.getUserPrincipal();
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
         if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
-            return rspInfo.setCode(BlogStore.ReturnCode.USERNAME_OR_PASSWORD_IS_EMPTY).build();
+            return rspInfo.setCode(BlogStore.ReturnCode.Return_USERNAME_OR_PASSWORD_IS_EMPTY).build();
         }
         if (User.isExist(user.getUsername())) {
-            return rspInfo.setCode(BlogStore.ReturnCode.USER_EXIST).build();
+            return rspInfo.setCode(BlogStore.ReturnCode.Return_USER_EXIST).build();
         }
         User.saveUser(user, session.getUserId(), BlogStore.Authenticator.SYSTEM_AUTHENTICATOR_VALUE);
-        return rspInfo.setCode(BlogStore.ReturnCode.OK).build();
+        return rspInfo.setCode(BlogStore.ReturnCode.Return_OK).build();
     }
 
     @GET
@@ -114,16 +114,16 @@ public class UserService {
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
         User dbUser = User.findById(user.getUserId());
         if (null == dbUser) {
-            return rspInfo.setCode(BlogStore.ReturnCode.USER_EMPTY).build();
+            return rspInfo.setCode(BlogStore.ReturnCode.Return_USER_EMPTY).build();
         }
         if (dbUser.getStatus() != BlogStore.Status.StatusActive_VALUE) {
-            return rspInfo.setCode(BlogStore.ReturnCode.USER_EMPTY).build();
+            return rspInfo.setCode(BlogStore.ReturnCode.Return_USER_EMPTY).build();
         }
         if (User.isExist(user.getUsername())) {
-            return rspInfo.setCode(BlogStore.ReturnCode.USER_EXIST).build();
+            return rspInfo.setCode(BlogStore.ReturnCode.Return_USER_EXIST).build();
         }
         User.saveUser(user, dbUser, session.getUserId());
-        return rspInfo.setCode(BlogStore.ReturnCode.OK).build();
+        return rspInfo.setCode(BlogStore.ReturnCode.Return_OK).build();
     }
 
     @DELETE
@@ -136,16 +136,16 @@ public class UserService {
         for (BlogStore.User user : users.getItemsList()) {
             User dbUser = User.findById(user.getUserId());
             if (null == dbUser) {
-                rspInfoList.addItems(BlogStore.RspInfo.newBuilder().setCode(BlogStore.ReturnCode.USER_EMPTY).setMsg(user.getUsername()).build());
+                rspInfoList.addItems(BlogStore.RspInfo.newBuilder().setCode(BlogStore.ReturnCode.Return_USER_EMPTY).setMsg(user.getUsername()).build());
             } else if (session.getUserId() == dbUser.getUserId()) {
-                rspInfoList.addItems(BlogStore.RspInfo.newBuilder().setCode(BlogStore.ReturnCode.NOT_YOURSELF).setMsg(user.getUsername()).build());
+                rspInfoList.addItems(BlogStore.RspInfo.newBuilder().setCode(BlogStore.ReturnCode.Return_NOT_YOURSELF).setMsg(user.getUsername()).build());
             } else {
                 dbUser.setStatus(BlogStore.Status.StatusDeleted_VALUE);
                 dbUser.saveIt();
             }
         }
         if (rspInfoList.getItemsCount() == 0) {
-            rspInfoList.setCode(BlogStore.ReturnCode.OK);
+            rspInfoList.setCode(BlogStore.ReturnCode.Return_OK);
         }
         return rspInfoList.build();
     }

@@ -56,7 +56,7 @@ public class Role extends org.javalite.activejdbc.Model implements CommonModel {
         dbRole.setInteger("updated_by", userId);
         dbRole.setString("icon", role.getIcon());
         dbRole.saveIt();
-        return BlogStore.ReturnCode.OK_VALUE;
+        return BlogStore.ReturnCode.Return_OK_VALUE;
     }
 
     public static BlogStore.Role getRole(int roleId) {

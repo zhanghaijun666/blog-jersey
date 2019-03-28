@@ -22,7 +22,7 @@ public class LoginAuthenticator {
 
     public static BlogStore.ReturnCode authenticator(BlogStore.User requestUser, Response response) {
         if (StringUtils.isBlank(requestUser.getUsername()) || StringUtils.isBlank(requestUser.getPassword())) {
-            return BlogStore.ReturnCode.USERNAME_OR_PASSWORD_IS_EMPTY;
+            return BlogStore.ReturnCode.Return_USERNAME_OR_PASSWORD_IS_EMPTY;
         }
         User dbUser = null;
         for (Authenticator auth : AuthenticatorPlatform) {
@@ -32,10 +32,10 @@ public class LoginAuthenticator {
             }
         }
         if (null == dbUser) {
-            return BlogStore.ReturnCode.USER_EMPTY;
+            return BlogStore.ReturnCode.Return_USER_EMPTY;
         }
         AppSession session = SreverSession.instance().createSession(dbUser, requestUser.getRememberMe());
         response.setCookie("session", session.getId());
-        return BlogStore.ReturnCode.OK;
+        return BlogStore.ReturnCode.Return_OK;
     }
 }

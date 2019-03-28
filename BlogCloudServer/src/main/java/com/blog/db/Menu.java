@@ -80,7 +80,7 @@ public class Menu extends org.javalite.activejdbc.Model implements CommonModel {
         dbMenu.setBoolean("default_show", menu.getIsDefaultShow());
         dbMenu.setInteger("updated_by", userId);
         dbMenu.saveIt();
-        return BlogStore.ReturnCode.OK_VALUE;
+        return BlogStore.ReturnCode.Return_OK_VALUE;
     }
 
     public static BlogStore.MenuList getHashMenus(String hash) {
