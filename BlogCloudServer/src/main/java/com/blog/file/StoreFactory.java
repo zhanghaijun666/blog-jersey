@@ -5,4 +5,7 @@ package com.blog.file;
  */
 public class StoreFactory {
 
+    public void getStoreFolder(String fullPath){
+        
+    }
 }

@@ -151,3 +151,13 @@ message StoreBlob {
     string blobName = 1;
     string contentType = 2;
 }
+message StoreFolder{
+    StoreItem currentItem = 1;
+    repeated StoreItem item = 2;
+}
+message StoreItem{
+    string name = 1;
+    string fullPath = 2;
+    int64 size = 3;
+    int64 createAt = 4;
+}
