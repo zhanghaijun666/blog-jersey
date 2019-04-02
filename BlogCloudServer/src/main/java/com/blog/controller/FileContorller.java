@@ -35,7 +35,7 @@ public class FileContorller {
     @RolesAllowed("user")
     public BlogStore.RspInfoList uploadFile(@PathParam("path") String filePath, BlogStore.TreeUpdateItemList list) {
         AppSession session = (AppSession) security.getUserPrincipal();
-        if(request.getContentLength() > 0){
+        if (request.getContentLength() == 0) {
             return BlogStore.RspInfoList.newBuilder().setCode(BlogStore.ReturnCode.Return_ERROR).build();
         }
         return FileUploadService.fileUpload(request, response);
