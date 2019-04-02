@@ -3,9 +3,9 @@ function initStore() {
         this.type = type;
     }
     Message.prototype.toArrayBuffer = function () {
-        let store = ko.deepObservableClone(this);
-        let $type = bcstore.lookupType(this.type);
-        let errors = $type.verify(store);
+        var store = ko.deepObservableClone(this);
+        var $type = bcstore.lookupType(this.type);
+        var errors = $type.verify(store);
         if (errors) {
             throw new Error(errors);
         }
@@ -13,7 +13,7 @@ function initStore() {
     };
 
     function getStoreFileds(fileds) {
-        let options = {};
+        var options = {};
         if (bcstore[fileds] && bcstore[fileds].fields) {
             ko.utils.arrayForEach(Object.keys(bcstore[fileds].fields), function (Field) {
                 options[Field] = null;

@@ -153,3 +153,12 @@ message StoreBlob {
     string name = 4;
     string contentType = 5;
 }
+message TreeUpdateItem{
+    string originPath = 5;
+    string fileName = 6;
+    bytes content = 7;
+    int64 size = 8;
+}
+message TreeUpdateItemList{
+    repeated TreeUpdateItem item = 4;
+}
