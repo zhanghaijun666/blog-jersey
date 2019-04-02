@@ -33,7 +33,7 @@ function UserUtils(root) {
                 getRequest("/user/logout", {accept: "application/x-protobuf"}, function (data) {
                     var rspInfo = bcstore.RspInfo.decode(data);
                     toastShowCode(rspInfo.code);
-                    if (rspInfo.code === bcstore.ReturnCode.OK) {
+                    if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
                         self.user(null);
                         self.app.refresh();
                     }

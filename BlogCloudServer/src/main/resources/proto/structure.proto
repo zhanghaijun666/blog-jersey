@@ -125,39 +125,31 @@ message Operator {
     int32 gptype = 2;
     int32 gpid = 3;
 }
-message Store {
-    string storeHash = 1;
+message StoreCommit {
+    string hash = 1;
     Operator owner = 2;
     Operator committer = 3;
-    StoreTypeEnum storeType = 4;
-    StoreCommit commit = 5;
-    StoreTree tree = 6;
-    StoreBlob blob = 7;
-}
-message StoreCommit {
-    string parent = 1;
-    repeated string treeHash = 2;
+    string parent = 4;
+    string treeHash = 5;
 }
 message StoreTree {
-    string treeName = 1;
-    int64 size = 2;
-    repeated string itemtTree = 3;
-    repeated StoreBlobList itemtFile = 4;
+    string hash = 1;
+    Operator owner = 2;
+    Operator committer = 3;
+    repeated treeItem item = 4;
 }
-message StoreBlobList {
-    repeated StoreBlob item = 1;
+message treeItem{
+    repeated string blobHash = 1;
+    string treeHash = 2;
+    string name = 3;
+    int64 size = 4;
+    string contentType = 5;
+    
 }
 message StoreBlob {
-    string blobName = 1;
-    string contentType = 2;
-}
-message StoreFolder{
-    StoreItem currentItem = 1;
-    repeated StoreItem item = 2;
-}
-message StoreItem{
-    string name = 1;
-    string fullPath = 2;
-    int64 size = 3;
-    int64 createAt = 4;
+    string hash = 1;
+    Operator owner = 2;
+    Operator committer = 3;
+    string name = 4;
+    string contentType = 5;
 }

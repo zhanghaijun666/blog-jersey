@@ -30,7 +30,7 @@
                 getRequest("/user/login", {method: "POST", accept: "application/x-protobuf", type: "application/x-protobuf", data: self.user().toArrayBuffer()}, function (data) {
                     var rspInfo = bcstore.RspInfo.decode(data);
                     toastShowCode(rspInfo.code);
-                    if (rspInfo.code === bcstore.ReturnCode.OK) {
+                    if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
                         location.reload();
                     }
                 });

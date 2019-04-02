@@ -61,12 +61,12 @@ function createXMLHttpRequest(options, callback, erroCallback) {
             }
         }
     };
-    xhr.upload.onprogress = function (e) {
-        if (e.lengthComputable) {
-            var percentage = (e.loaded / e.total) * 100;
-            console.log(percentage + "%");
-        }
-    };
+//    xhr.upload.onprogress = function (e) {
+//        if (e.lengthComputable) {
+//            var percentage = (e.loaded / e.total) * 100;
+//            console.log(percentage + "%");
+//        }
+//    };
 
 //// 请求成功回调函数
 //    xhr.onload = e => {
