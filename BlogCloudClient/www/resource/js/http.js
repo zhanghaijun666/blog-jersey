@@ -1,5 +1,5 @@
 (function () {
-    function sendRequest(url, options, callback, erroCallback) {
+    window.sendRequest = function (url, options, callback, erroCallback) {
         var defaultValue = {
             cmd: "GET",
             async: true,
@@ -10,14 +10,14 @@
         options = $.extend({}, defaultValue, options);
         switch (options.cmd) {
             case "upload":
-                window.requestUpload(url, options, callback, erroCallback);
+                requestUpload(url, options, callback, erroCallback);
                 break;
             default:
-                window.requestCommon(url, options, callback, erroCallback);
+                requestCommon(url, options, callback, erroCallback);
                 break;
         }
     }
-    window.requestCommon = function (url, options, callback, erroCallback) {
+    requestCommon = function (url, options, callback, erroCallback) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -54,7 +54,7 @@
             xhr.send();
         }
     };
-    window.requestUpload = function (url, options, callback, erroCallback) {
+    requestUpload = function (url, options, callback, erroCallback) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -102,7 +102,7 @@
         xhr.timeout = options.timeout;
         xhr.setRequestHeader("Accept", options.accept);
         xhr.setRequestHeader("Content-Type", "application/cc-update-index");
-
+        
 
 
 
