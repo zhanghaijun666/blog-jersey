@@ -6,7 +6,6 @@ import com.blog.service.FileUploadService;
 import com.blog.utils.BlogMediaType;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -36,7 +35,10 @@ public class FileContorller {
     @RolesAllowed("user")
     public BlogStore.RspInfoList uploadFile(@PathParam("path") String filePath, BlogStore.TreeUpdateItemList list) {
         AppSession session = (AppSession) security.getUserPrincipal();
-        return FileUploadService.fileUpload(list, session.getUserId());
+        if(request.getContentLength() > 0){
+            return BlogStore.RspInfoList.newBuilder().setCode(BlogStore.ReturnCode.Return_ERROR).build();
+        }
+        return FileUploadService.fileUpload(request, response);
     }
 
 //    public String uploadFiledemo(String filePath) {

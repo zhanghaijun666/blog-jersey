@@ -25,7 +25,10 @@
         }
         var form = new FormData();
         form.append("file", file.files[0]);
-        getRequest(url, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf",
+        //application/x-www-form-urlencoded
+        //application/cc-update-index
+        
+        sendRequest(url, {cmd: "POST", accept: "application/x-protobuf",
 //            data: bcstore.TreeUpdateItemList.encode(fileItemList).finish(),
             formData: file
         }, function (data) {
