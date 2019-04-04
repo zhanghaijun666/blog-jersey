@@ -10,6 +10,7 @@ import com.server.filter.SecurityRequestFilter;
 import java.io.IOException;
 import java.net.URI;
 import javax.ws.rs.core.UriBuilder;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.glassfish.jersey.simple.SimpleServer;
@@ -26,6 +27,7 @@ public class ServerMain {
         resourceConfig.packages("com.blog.controller", "com.jersey.provider");
         resourceConfig.register(SecurityRequestFilter.class);
         resourceConfig.register(RolesAllowedDynamicFeature.class);
+        resourceConfig.register(MultiPartFeature.class);
         return SimpleContainerFactory2.create(BASE_URI, resourceConfig);
     }
 
