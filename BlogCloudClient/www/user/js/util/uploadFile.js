@@ -5,10 +5,11 @@
 
     setTimeout(function () {
         var fileToUpload = document.getElementById("fileToUpload");
-
         fileToUpload.addEventListener("change", function (evt) {
             evt.preventDefault();
-            uploadFile("upload/file/daa", fileToUpload);
+            var uploadPool = new UploadFilePool(fileToUpload);
+            uploadPool.startAll();
+//            uploadFile("upload/file/daa", fileToUpload);
         });
 
     }, 1000);
