@@ -37,23 +37,40 @@ UploadFile.prototype.readerFile = function () {
     self.reader.onloadend = function (evt) {
         var arraybuffer = evt.target.result;
         self.total = evt.target.result.byteLength || evt.total;
-        var hashQueue = [];
+        self.blobList = [];
         for (var startIndex = 0; startIndex < self.total; startIndex += window.hash_chunksize) {
-            var newBuf = arraybuffer.slice(startIndex, Math.min(startIndex + window.hash_chunksize, self.total));
-            crypto.subtle.digest("SHA-1", newBuf).then(function (hash) {
-//                Rusha.createHash().update(hash).digest('hex')
-//                new Rusha().digest(hash);
-                console.log(new Rusha().digest(hash));
-            }, function (error) {
-                console.error("Unable to hash:" + error);
+            self.blobList.push({
+                data: arraybuffer.slice(startIndex, Math.min(startIndex + window.hash_chunksize, self.total)),
+                blobIndex: startIndex
             });
-            hashQueue.push({data: newBuf});
         }
-        self.blobList = hashQueue;
-
+        console.log(self.blobList.length);
+        crypto.subtle.digest("SHA-1", self.blobList[0].data).then(function (hash) {
+            self.blobList[0].hash = new Rusha().digest(hash)
+//                Rusha.createHash().update(hash).digest('hex');
+            console.log(new Rusha().digest(hash));
+        }, function (error) {
+            console.error("Unable to hash:" + error);
+        });
+        setTimeout(function () {
+            self.sendUplodFile();
+        }, 50);
     };
     self.reader.readAsArrayBuffer(self.file);
 };
 UploadFile.prototype.abort = function () {
+
+};
+UploadFile.prototype.sendUplodFile = function () {
+    var self = this;
+    console.log(self.blobList);
+//    data: bcstore.UserList.encode(req).finish()
+    getRequest("/uplod", {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf"}, function (data) {
+        var rspInfo = bcstore.RspInfo.decode(data);
+        toastShowCode(rspInfo.code);
+    });
+
+
+
 
 };
