@@ -2,9 +2,9 @@ package com.blog.controller;
 
 import com.blog.db.User;
 import com.blog.proto.BlogStore;
-import com.blog.login.AppSession;
+import com.blog.login.BlogSession;
 import com.blog.utils.BlogMediaType;
-import com.blog.factory.SreverSession;
+import com.blog.login.BlogSessionFactory;
 import com.blog.login.LoginAuthenticator;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -27,7 +27,7 @@ import org.simpleframework.http.Response;
  * @author zhanghaijun
  */
 @Path("/user")
-public class UserService {
+public class UserContorller {
 
     @Inject
     Request request;
@@ -51,8 +51,8 @@ public class UserService {
     @RolesAllowed("user")
     public BlogStore.RspInfo logout() {
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
-        AppSession session = (AppSession) security.getUserPrincipal();
-        SreverSession.instance().removeSession(session);
+        BlogSession session = (BlogSession) security.getUserPrincipal();
+        BlogSessionFactory.instance().removeSession(session);
         response.setCookie("session", "");
         return rspInfo.setCode(BlogStore.ReturnCode.Return_OK).build();
     }
@@ -63,7 +63,7 @@ public class UserService {
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
     public BlogStore.RspInfo createNewUser(BlogStore.User user) {
-        AppSession session = (AppSession) security.getUserPrincipal();
+        BlogSession session = (BlogSession) security.getUserPrincipal();
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
         if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
             return rspInfo.setCode(BlogStore.ReturnCode.Return_USERNAME_OR_PASSWORD_IS_EMPTY).build();
@@ -98,7 +98,7 @@ public class UserService {
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
     public BlogStore.User getUser() {
-        AppSession session = (AppSession) security.getUserPrincipal();
+        BlogSession session = (BlogSession) security.getUserPrincipal();
         if (null == session) {
             return BlogStore.User.getDefaultInstance();
         }
@@ -110,7 +110,7 @@ public class UserService {
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
     public BlogStore.RspInfo updataUser(BlogStore.User user) {
-        AppSession session = (AppSession) security.getUserPrincipal();
+        BlogSession session = (BlogSession) security.getUserPrincipal();
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
         User dbUser = User.findById(user.getUserId());
         if (null == dbUser) {
@@ -131,7 +131,7 @@ public class UserService {
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
     public BlogStore.RspInfoList deleteUser(BlogStore.UserList users) {
-        AppSession session = (AppSession) security.getUserPrincipal();
+        BlogSession session = (BlogSession) security.getUserPrincipal();
         BlogStore.RspInfoList.Builder rspInfoList = BlogStore.RspInfoList.newBuilder();
         for (BlogStore.User user : users.getItemsList()) {
             User dbUser = User.findById(user.getUserId());

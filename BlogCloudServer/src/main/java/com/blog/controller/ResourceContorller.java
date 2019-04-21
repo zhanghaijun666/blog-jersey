@@ -1,7 +1,7 @@
 package com.blog.controller;
 
 import com.blog.config.Configuration;
-import com.blog.login.AppSession;
+import com.blog.login.BlogSession;
 import com.blog.utils.BlogMediaType;
 import com.tools.FileUtils;
 import java.io.BufferedInputStream;
@@ -28,7 +28,7 @@ import org.simpleframework.http.Response;
  * @author haijun.zhang
  */
 @Path("/")
-public class ResourceService {
+public class ResourceContorller {
 
     private static final byte[] NEWLINE = "\r\n".getBytes();
     private static final String WEB_DIR = Configuration.getInstance().getConfig().getWebDir();
@@ -66,7 +66,7 @@ public class ResourceService {
     @GET
     @Path("/static/{path: .*}")
     public void getResource(@PathParam("path") String filePath) throws IOException {
-        AppSession session = (AppSession) security.getUserPrincipal();
+        BlogSession session = (BlogSession) security.getUserPrincipal();
         File file = new File(WEB_DIR, filePath);
         String contentType = FileUtils.getFileContentType(file);
         if (StringUtils.isNotBlank(contentType)) {
@@ -81,7 +81,7 @@ public class ResourceService {
         }
     }
 
-    public void writeResource(File file, final OutputStream out, AppSession session) throws IOException {
+    public void writeResource(File file, final OutputStream out, BlogSession session) throws IOException {
         if (file.getCanonicalPath().contains(WEB_DIR_USER) && (null == session || !session.getRoles().contains("user"))) {
             return;
         }
@@ -122,7 +122,7 @@ public class ResourceService {
                 }
             }
         } else {
-            Logger.getLogger(ResourceService.class.getName()).log(Level.SEVERE, "not foud resource file :{0}", file.getCanonicalPath());
+            Logger.getLogger(ResourceContorller.class.getName()).log(Level.SEVERE, "not foud resource file :{0}", file.getCanonicalPath());
         }
     }
 }

@@ -12,7 +12,7 @@ import javax.ws.rs.Produces;
  * @author haijun.zhang
  */
 @Path("menu")
-public class MenuService {
+public class MenuContorller {
 
     @GET
     @Path("/hash/{hash}")

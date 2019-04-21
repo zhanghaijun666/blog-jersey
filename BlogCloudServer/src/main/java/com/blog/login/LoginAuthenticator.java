@@ -2,7 +2,6 @@ package com.blog.login;
 
 import com.blog.db.User;
 import com.blog.proto.BlogStore;
-import com.blog.factory.SreverSession;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
@@ -15,8 +14,8 @@ public class LoginAuthenticator {
 
     private static final List<Authenticator> AuthenticatorPlatform = new ArrayList<Authenticator>() {
         {
-            add(new SystemAuthenticator());
-            add(new TextAuthenticator());
+            add(new LoginAuthenticatorForSystem());
+            add(new LoginAuthenticatorForText());
         }
     };
 
@@ -34,7 +33,7 @@ public class LoginAuthenticator {
         if (null == dbUser) {
             return BlogStore.ReturnCode.Return_USER_EMPTY;
         }
-        AppSession session = SreverSession.instance().createSession(dbUser, requestUser.getRememberMe());
+        BlogSession session = BlogSessionFactory.instance().createSession(dbUser, requestUser.getRememberMe());
         response.setCookie("session", session.getId());
         return BlogStore.ReturnCode.Return_OK;
     }

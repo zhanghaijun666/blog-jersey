@@ -1,6 +1,5 @@
 package com.blog.login;
 
-import com.blog.factory.SreverSession;
 import java.security.Principal;
 import javax.ws.rs.core.SecurityContext;
 import org.simpleframework.http.Request;
@@ -10,7 +9,7 @@ import org.simpleframework.http.Request;
  */
 public class BologSecurityContext implements SecurityContext {
 
-    private AppSession session;
+    private BlogSession session;
     private final Request request;
 
     public BologSecurityContext(Request request) {
@@ -20,14 +19,14 @@ public class BologSecurityContext implements SecurityContext {
     @Override
     public Principal getUserPrincipal() {
         if (session == null) {
-            session = SreverSession.instance().getSession(request);
+            session = BlogSessionFactory.instance().getSession(request);
         }
         return session;
     }
 
     @Override
     public boolean isUserInRole(String role) {
-        AppSession appSession = (AppSession) getUserPrincipal();
+        BlogSession appSession = (BlogSession) getUserPrincipal();
         return appSession != null && appSession.getRoles().contains(role);
     }
 

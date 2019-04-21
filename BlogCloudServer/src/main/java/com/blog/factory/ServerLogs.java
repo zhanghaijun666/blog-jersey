@@ -18,8 +18,9 @@ import org.slf4j.LoggerFactory;
  * @author zhanghaijun
  */
 public class ServerLogs {
+
     private static final Logger logger = LoggerFactory.getLogger(ServerLogs.class);
-    
+
     public static void logInit() throws JoranException {
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
         JoranConfigurator configurator = new JoranConfigurator();
@@ -27,33 +28,36 @@ public class ServerLogs {
         loggerContext.reset();
         configurator.doConfigure(new File(Configuration.getInstance().getConfig().getLogback()));
     }
-    
+
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    public static void logAccess(Response response, Request request){
-        try{
+
+    public static void logAccess(Response response, Request request) {
+        try {
             RequestParser requestParser = new RequestParser(request);
             logger.info(request.getClientAddress().getAddress().getHostAddress()
                     + " " + dateFormat.format(new Date(request.getRequestTime()))
                     + " " + requestParser.getRequestUrl()
-                    + " " + (response.getResponseTime() - request.getRequestTime()) + "ms " 
-                    + response.getCode() 
-                    + " " + request.getMethod() 
-                    + " "+ request.getPath().toString() 
+                    + " " + (response.getResponseTime() - request.getRequestTime()) + "ms "
+                    + response.getCode()
+                    + " " + request.getMethod()
+                    + " " + request.getPath().toString()
                     + " " + requestParser.userAgent);
-        }catch(Throwable e){
+        } catch (Throwable e) {
         }
     }
-    
+
     //.*不匹配换行符
     private static final Pattern HOST_REG = Pattern.compile("Host:(.*)");
     private static final Pattern USER_AGENT_REG = Pattern.compile("User-Agent:(.*)");
-    private static class RequestParser{
+
+    private static class RequestParser {
+
         String protocol = "";
         String host = "";
         String path = "";
         String userAgent = "";
-        
-        RequestParser(Request request){
+
+        RequestParser(Request request) {
             protocol = request.getMajor() == 1 ? "http" : "https";
             path = request.getTarget();
             CharSequence header = request.getHeader();
@@ -70,6 +74,6 @@ public class ServerLogs {
         public String getRequestUrl() {
             return protocol + "://" + host + path;
         }
-        
+
     }
 }

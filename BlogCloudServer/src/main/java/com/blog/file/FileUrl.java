@@ -19,7 +19,7 @@ public class FileUrl {
     int gpType;
     int gpId;
     String bucket;
-    String path;    // 以/开头
+    String path;
 
     public FileUrl(String originPath, int userId) {
         Matcher matcher = standUrlPattern.matcher(originPath);

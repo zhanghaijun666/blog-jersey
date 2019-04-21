@@ -1,6 +1,6 @@
 package com.blog.controller;
 
-import com.blog.login.AppSession;
+import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
 import com.blog.service.FileUploadService;
 import com.blog.utils.BlogMediaType;
@@ -19,7 +19,7 @@ import org.simpleframework.http.Response;
  * @author zhanghaijun
  */
 @Path("/upload")
-public class FileContorller {
+public class FileUploadContorller {
 
     @Inject
     Request request;
@@ -34,7 +34,7 @@ public class FileContorller {
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
     public BlogStore.RspInfoList uploadFile(@PathParam("path") String filePath, BlogStore.TreeUpdateItemList list) {
-        AppSession session = (AppSession) security.getUserPrincipal();
+        BlogSession session = (BlogSession) security.getUserPrincipal();
         if (request.getContentLength() == 0) {
             return BlogStore.RspInfoList.newBuilder().setCode(BlogStore.ReturnCode.Return_ERROR).build();
         }

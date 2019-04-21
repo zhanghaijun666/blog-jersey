@@ -6,7 +6,7 @@ import com.blog.proto.BlogStore;
 /**
  * @author zhanghaijun
  */
-public class SystemAuthenticator implements Authenticator {
+public class LoginAuthenticatorForSystem implements Authenticator {
 
     @Override
     public User checkUserInfo(BlogStore.User requestUser) {

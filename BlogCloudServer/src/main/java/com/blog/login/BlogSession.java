@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSessionContext;
 /**
  * @author haijun.zhang
  */
-public class AppSession implements Principal, HttpSession {
+public class BlogSession implements Principal, HttpSession {
 
     private final Map<String, Object> attributes = new ConcurrentHashMap<>();
     private final String sessionId;
@@ -28,7 +28,7 @@ public class AppSession implements Principal, HttpSession {
     private List<String> roles;
     private final Boolean isRememberMe;
 
-    public AppSession(String sessionId, int userId, String username, Boolean isRememberMe) {
+    public BlogSession(String sessionId, int userId, String username, Boolean isRememberMe) {
         this.lastAccessedTime = this.creationTime = System.currentTimeMillis();
         this.sessionId = sessionId;
         this.userId = userId;

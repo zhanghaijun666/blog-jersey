@@ -19,9 +19,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author zhanghaijun
  */
-public class TextAuthenticator implements Authenticator {
+public class LoginAuthenticatorForText implements Authenticator {
 
-    private static final Logger logger = LoggerFactory.getLogger(TextAuthenticator.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginAuthenticatorForText.class);
     private static final Pattern USERPARSER = Pattern.compile("(?<username>[^:]+):(?<password>[^:]+):(?<roleId>[^:]+)");
 
     @Override
