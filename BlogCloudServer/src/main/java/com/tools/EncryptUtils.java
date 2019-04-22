@@ -11,6 +11,16 @@ import java.util.logging.Logger;
  */
 public class EncryptUtils {
 
+    public static String sha1(byte[] buffer) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            digest.update(buffer);
+            return toHex(digest.digest());
+        } catch (NoSuchAlgorithmException ex) {
+        }
+        return null;
+    }
+
     private static String sha1(byte[] buffer, int start, int length, boolean bease64, boolean needSalt) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
