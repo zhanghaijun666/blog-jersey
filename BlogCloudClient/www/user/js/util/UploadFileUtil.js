@@ -1,3 +1,5 @@
+/* global Blob */
+
 window.hash_chunksize = 8 * 1024 * 1024;
 function UploadFilePool(inputFile) {
     var self = this;
@@ -46,7 +48,7 @@ UploadFile.prototype.readerFile = function () {
         }
         console.log(self.blobList.length);
         crypto.subtle.digest("SHA-1", self.blobList[0].data).then(function (hash) {
-            self.blobList[0].hash = new Rusha().digest(hash)
+            self.blobList[0].hash = new Rusha().digest(hash);
 //                Rusha.createHash().update(hash).digest('hex');
             console.log(new Rusha().digest(hash));
         }, function (error) {
