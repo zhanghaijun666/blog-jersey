@@ -1,6 +1,5 @@
 package com.blog.login;
 
-import com.blog.login.BlogSession;
 import com.blog.db.User;
 import com.tools.BlogUtils;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,7 +36,7 @@ public class BlogSessionFactory {
         String sessionId = null;
         for (Cookie cookie : request.getCookies()) {
             String cookieName = cookie.getName();
-            if ("cookie".equals(cookieName) || "session".equals(cookieName)) {
+            if (LoginAuthenticator.SESSION_KEY.equals(cookieName)) {
                 sessionId = cookie.getValue();
             }
         }

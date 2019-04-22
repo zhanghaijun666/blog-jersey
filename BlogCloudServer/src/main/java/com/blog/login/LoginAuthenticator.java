@@ -12,12 +12,14 @@ import org.simpleframework.http.Response;
  */
 public class LoginAuthenticator {
 
-    private static final List<Authenticator> AuthenticatorPlatform = new ArrayList<Authenticator>() {
-        {
-            add(new LoginAuthenticatorForSystem());
-            add(new LoginAuthenticatorForText());
-        }
-    };
+    public static final String SESSION_KEY = "blog_bogin_session";
+
+    private static final List<Authenticator> AuthenticatorPlatform = new ArrayList<Authenticator>();
+
+    static {
+        AuthenticatorPlatform.add(new LoginAuthenticatorForSystem());
+        AuthenticatorPlatform.add(new LoginAuthenticatorForText());
+    }
 
     public static BlogStore.ReturnCode authenticator(BlogStore.User requestUser, Response response) {
         if (StringUtils.isBlank(requestUser.getUsername()) || StringUtils.isBlank(requestUser.getPassword())) {
@@ -34,7 +36,7 @@ public class LoginAuthenticator {
             return BlogStore.ReturnCode.Return_USER_EMPTY;
         }
         BlogSession session = BlogSessionFactory.instance().createSession(dbUser, requestUser.getRememberMe());
-        response.setCookie("session", session.getId());
+        response.setCookie(LoginAuthenticator.SESSION_KEY, session.getId());
         return BlogStore.ReturnCode.Return_OK;
     }
 }
