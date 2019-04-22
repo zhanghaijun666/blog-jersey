@@ -63,9 +63,8 @@ UploadFile.prototype.abort = function () {
 };
 UploadFile.prototype.sendUplodFile = function () {
     var self = this;
-    console.log(self.blobList);
-//    data: bcstore.UserList.encode(req).finish()
-    getRequest("/uplod", {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf"}, function (data) {
+    console.log(self);
+    getRequest("/upload/file/"+self.file.name, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", formdata: self.file}, function (data) {
         var rspInfo = bcstore.RspInfo.decode(data);
         toastShowCode(rspInfo.code);
     });

@@ -31,9 +31,10 @@ function getRequest(url, options, callback, erroCallback) {
     if (options.data) {
         xhr.setRequestHeader("Content-Type", options["Content-Type"]);
         xhr.send(options.data);
-    } else if (options.formData) {
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-        xhr.send(jQuery.param(options.formdata, false));
+    } else if (options.formdata) {
+        var form = new FormData();
+        form.append("file", options.formdata);
+        xhr.send(form);
     } else {
         xhr.send();
     }

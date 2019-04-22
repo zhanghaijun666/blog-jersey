@@ -1,9 +1,11 @@
 package com.blog.controller;
 
-import com.blog.login.BlogSession;
+import com.blog.config.Configuration;
 import com.blog.proto.BlogStore;
-import com.blog.service.FileUploadService;
 import com.blog.utils.BlogMediaType;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
@@ -12,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
+import org.apache.commons.io.FileUtils;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
 
@@ -33,21 +36,17 @@ public class FileUploadContorller {
 //    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
-    public BlogStore.RspInfoList uploadFile(@PathParam("path") String filePath, BlogStore.TreeUpdateItemList list) {
-        BlogSession session = (BlogSession) security.getUserPrincipal();
+    public BlogStore.RspInfoList uploadFile(@PathParam("path") String filePath) {
+
         if (request.getContentLength() == 0) {
-            return BlogStore.RspInfoList.newBuilder().setCode(BlogStore.ReturnCode.Return_ERROR).build();
+            System.out.println(request.getContentLength());
         }
-        return FileUploadService.fileUpload(request, response);
+        File upload = new File(Configuration.getInstance().getFileStore(), UUID.randomUUID().toString() + "------" + filePath);
+        try {
+            FileUtils.copyInputStreamToFile(request.getInputStream(), upload);
+        } catch (IOException e) {
+        }
+        return BlogStore.RspInfoList.newBuilder().setCode(BlogStore.ReturnCode.Return_OK).build();
     }
 
-//    public String uploadFiledemo(String filePath) {
-////        request.getInputStream();
-//        if ("application/json".equalsIgnoreCase(request.getValue("Content-Type"))) {
-////            JsonFormat.parser().merge(new InputStreamReader(request.getInputStream(), "UTF-8"), CloudStore.TreeUpdateReq.newBuilder());
-//        } else {
-////            updateReq = CloudStore.TreeUpdateReq.parseFrom(req.getInputStream()).toBuilder();
-//        }
-//        return "OK!!!";
-//    }
 }
