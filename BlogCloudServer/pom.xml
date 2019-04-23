@@ -351,6 +351,7 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.8</version>
                 <executions>
+                    <!--                    
                     <execution>
                         <id>mkdir</id>
                         <phase>generate-sources</phase>
@@ -365,6 +366,7 @@
                             <goal>run</goal>
                         </goals>
                     </execution>
+                    -->
                     <execution>
                         <phase>process-resources</phase>
                         <configuration>
