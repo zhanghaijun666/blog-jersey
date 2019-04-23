@@ -8,7 +8,7 @@ function UserUtils(root) {
             }
         } else {
             getRequest("/user", {accept: "application/x-protobuf", timeout: 2000}, function (data, xhr) {
-                var user = bcstore.User.decode(data);
+                var user = bcstore.UserInfo.decode(data);
                 if (user.userId) {
                     self.user(new User(user, true));
                 }
