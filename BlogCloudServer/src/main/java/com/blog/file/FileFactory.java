@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author zhanghaijun
@@ -30,6 +31,17 @@ public class FileFactory {
             }
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeBlob, entry.getKey(), blob.build(), entry.getValue());
         }
+        if (code == BlogStore.ReturnCode.Return_OK) {
+            String rootHash = "";
+            if(StringUtils.isBlank(rootHash)){
+                
+            }
+            
+            
+            
+            
+        }
+
         return code;
     }
 }

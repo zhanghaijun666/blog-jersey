@@ -1,6 +1,8 @@
 package com.blog.controller;
 
 import com.blog.file.FileFactory;
+import com.blog.file.FileUrl;
+import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
 import com.blog.utils.BlogMediaType;
 import java.io.IOException;
@@ -54,7 +56,9 @@ public class FileUploadContorller {
         if (request.getContentLength() == 0) {
             return BlogStore.RspInfoList.newBuilder().setCode(BlogStore.ReturnCode.Return_ERROR).build();
         }
-        return BlogStore.RspInfoList.newBuilder().setCode(FileFactory.UploadFile(null, request.getInputStream())).build();
+        BlogSession session = (BlogSession) security.getUserPrincipal();
+        FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
+        return BlogStore.RspInfoList.newBuilder().setCode(FileFactory.UploadFile(fileUrl, request.getInputStream())).build();
     }
 
 }
