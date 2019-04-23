@@ -6,4 +6,7 @@ package com.blog.db;
 public interface Repository {
 
     public String getRootHash();
+    public String getName();
+    public String getNickname();
+    public Integer getStatus();
 }

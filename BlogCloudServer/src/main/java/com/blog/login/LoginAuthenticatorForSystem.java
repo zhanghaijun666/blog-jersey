@@ -9,7 +9,7 @@ import com.blog.proto.BlogStore;
 public class LoginAuthenticatorForSystem implements Authenticator {
 
     @Override
-    public User checkUserInfo(BlogStore.User requestUser) {
+    public User checkUserInfo(BlogStore.UserInfo requestUser) {
         return User.getSystemActiveUser(requestUser.getUsername(), requestUser.getPassword());
     }
 

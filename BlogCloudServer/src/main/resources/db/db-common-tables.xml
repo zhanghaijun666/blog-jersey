@@ -18,6 +18,22 @@
             <column name="phone" type="varchar(100)" defaultValue=""/>
             <column name="authenticator" type="int" defaultValueNumeric="1"/>
             <column name="role_id" type="int"/>
+            <column name="root_hash" type="varchar(100)" defaultValue=""/>
+            
+            <column name="status" type="int" defaultValueNumeric="0"/>
+            <column name="created_at" type="datetime" />
+            <column name="created_by" type = "int" />
+            <column name="updated_at" type="datetime" />
+            <column name="updated_by" type = "int" />
+        </createTable>
+    </changeSet>
+    <changeSet id="create-table-group" author="zhanghaijun">
+        <createTable tableName="group">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+            <column name="root_hash" type="varchar(100)" defaultValue=""/>
             
             <column name="status" type="int" defaultValueNumeric="0"/>
             <column name="created_at" type="datetime" />

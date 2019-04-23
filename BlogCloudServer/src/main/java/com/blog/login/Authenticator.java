@@ -8,5 +8,5 @@ import com.blog.proto.BlogStore;
  */
 public interface Authenticator {
 
-    public User checkUserInfo(BlogStore.User requestUser);
+    public User checkUserInfo(BlogStore.UserInfo requestUser);
 }

@@ -11,7 +11,7 @@ import org.javalite.activejdbc.annotations.Table;
  * @author zhanghaijun
  */
 @Table("users")
-public class User extends org.javalite.activejdbc.Model implements CommonModel {
+public class User extends org.javalite.activejdbc.Model implements CommonModel, Repository {
 
     private static final long serialVersionUID = 1L;
     public static final int DEFAULT_USER_ID = 0;
@@ -20,8 +20,28 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel {
         return getInteger("id");
     }
 
-    public String getUsername() {
+    @Override
+    public String getRootHash() {
+        return getString("root_hash");
+    }
+
+    @Override
+    public String getName() {
         return getString("username");
+    }
+
+    @Override
+    public String getNickname() {
+        String nick = getString("nickname");
+        if (null == nick || StringUtils.isBlank(nick)) {
+            return getName();
+        }
+        return nick;
+    }
+
+    @Override
+    public Integer getStatus() {
+        return getInteger("status");
     }
 
     public String getPassword() {
@@ -32,20 +52,8 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel {
         return getInteger("role_id");
     }
 
-    public Integer getStatus() {
-        return getInteger("status");
-    }
-
     public void setStatus(int status) {
         setInteger("status", status);
-    }
-
-    public String getNickname() {
-        String nick = getString("nickname");
-        if (null == nick || StringUtils.isBlank(nick)) {
-            return getUsername();
-        }
-        return nick;
     }
 
     public String getEmail() {
@@ -60,13 +68,13 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel {
         return getInteger("authenticator");
     }
 
-    public static BlogStore.User UserBuilder(User user) {
+    public static BlogStore.UserInfo UserBuilder(User user) {
         if (null == user) {
-            return BlogStore.User.getDefaultInstance();
+            return BlogStore.UserInfo.getDefaultInstance();
         }
-        return BlogStore.User.newBuilder()
+        return BlogStore.UserInfo.newBuilder()
                 .setUserId(user.getUserId())
-                .setUsername(user.getUsername())
+                .setUsername(user.getName())
                 .setNickname(user.getNickname())
                 .setEmail(user.getEmail())
                 .setPhone(user.getPhone())
@@ -76,7 +84,7 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel {
                 .build();
     }
 
-    public static User saveUser(BlogStore.User user, int userId, int AuthPlatform) {
+    public static User saveUser(BlogStore.UserInfo user, int userId, int AuthPlatform) {
         User dbUser = User.findFirst("username = ? AND status = ? AND authenticator = ? ", user.getUsername(), BlogStore.Status.StatusActive_VALUE, AuthPlatform);
         if (null == dbUser) {
             dbUser = User.create("username", user.getUsername(), "status", BlogStore.Status.StatusActive_VALUE, "authenticator", AuthPlatform, "created_by", userId);
@@ -93,7 +101,7 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel {
         return dbUser;
     }
 
-    public static int saveUser(BlogStore.User user, User dbUser, int userId) {
+    public static int saveUser(BlogStore.UserInfo user, User dbUser, int userId) {
         if (null == dbUser) {
             return BlogStore.ReturnCode.Return_USER_EMPTY_VALUE;
         }

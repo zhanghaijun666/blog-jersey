@@ -354,6 +354,113 @@ public final class BlogStore {
   }
 
   /**
+   * Protobuf enum {@code GtypeEnum}
+   */
+  public enum GtypeEnum
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>Default = 0;</code>
+     */
+    Default(0),
+    /**
+     * <code>User = 1;</code>
+     */
+    User(1),
+    /**
+     * <code>Group = 2;</code>
+     */
+    Group(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>Default = 0;</code>
+     */
+    public static final int Default_VALUE = 0;
+    /**
+     * <code>User = 1;</code>
+     */
+    public static final int User_VALUE = 1;
+    /**
+     * <code>Group = 2;</code>
+     */
+    public static final int Group_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static GtypeEnum valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static GtypeEnum forNumber(int value) {
+      switch (value) {
+        case 0: return Default;
+        case 1: return User;
+        case 2: return Group;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<GtypeEnum>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        GtypeEnum> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<GtypeEnum>() {
+            public GtypeEnum findValueByNumber(int number) {
+              return GtypeEnum.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(3);
+    }
+
+    private static final GtypeEnum[] VALUES = values();
+
+    public static GtypeEnum valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private GtypeEnum(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:GtypeEnum)
+  }
+
+  /**
    * Protobuf enum {@code ReturnCode}
    */
   public enum ReturnCode
@@ -479,7 +586,7 @@ public final class BlogStore {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(3);
+      return com.blog.proto.BlogStore.getDescriptor().getEnumTypes().get(4);
     }
 
     private static final ReturnCode[] VALUES = values();
@@ -505,8 +612,8 @@ public final class BlogStore {
     // @@protoc_insertion_point(enum_scope:ReturnCode)
   }
 
-  public interface UserOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:User)
+  public interface UserInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:UserInfo)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -593,17 +700,17 @@ public final class BlogStore {
     boolean getRememberMe();
   }
   /**
-   * Protobuf type {@code User}
+   * Protobuf type {@code UserInfo}
    */
-  public  static final class User extends
+  public  static final class UserInfo extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:User)
-      UserOrBuilder {
-    // Use User.newBuilder() to construct.
-    private User(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:UserInfo)
+      UserInfoOrBuilder {
+    // Use UserInfo.newBuilder() to construct.
+    private UserInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private User() {
+    private UserInfo() {
       username_ = "";
       nickname_ = "";
       password_ = "";
@@ -620,7 +727,7 @@ public final class BlogStore {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private User(
+    private UserInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -716,14 +823,14 @@ public final class BlogStore {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.blog.proto.BlogStore.internal_static_User_descriptor;
+      return com.blog.proto.BlogStore.internal_static_UserInfo_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.blog.proto.BlogStore.internal_static_User_fieldAccessorTable
+      return com.blog.proto.BlogStore.internal_static_UserInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.blog.proto.BlogStore.User.class, com.blog.proto.BlogStore.User.Builder.class);
+              com.blog.proto.BlogStore.UserInfo.class, com.blog.proto.BlogStore.UserInfo.Builder.class);
     }
 
     public static final int USERNAME_FIELD_NUMBER = 1;
@@ -1047,10 +1154,10 @@ public final class BlogStore {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.blog.proto.BlogStore.User)) {
+      if (!(obj instanceof com.blog.proto.BlogStore.UserInfo)) {
         return super.equals(obj);
       }
-      com.blog.proto.BlogStore.User other = (com.blog.proto.BlogStore.User) obj;
+      com.blog.proto.BlogStore.UserInfo other = (com.blog.proto.BlogStore.UserInfo) obj;
 
       boolean result = true;
       result = result && getUsername()
@@ -1114,58 +1221,58 @@ public final class BlogStore {
       return hash;
     }
 
-    public static com.blog.proto.BlogStore.User parseFrom(
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.blog.proto.BlogStore.User parseFrom(
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.User parseFrom(byte[] data)
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.blog.proto.BlogStore.User parseFrom(
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.User parseFrom(java.io.InputStream input)
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.blog.proto.BlogStore.User parseFrom(
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.User parseDelimitedFrom(java.io.InputStream input)
+    public static com.blog.proto.BlogStore.UserInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.blog.proto.BlogStore.User parseDelimitedFrom(
+    public static com.blog.proto.BlogStore.UserInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.User parseFrom(
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.blog.proto.BlogStore.User parseFrom(
+    public static com.blog.proto.BlogStore.UserInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1177,7 +1284,7 @@ public final class BlogStore {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.blog.proto.BlogStore.User prototype) {
+    public static Builder newBuilder(com.blog.proto.BlogStore.UserInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -1192,25 +1299,25 @@ public final class BlogStore {
       return builder;
     }
     /**
-     * Protobuf type {@code User}
+     * Protobuf type {@code UserInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:User)
-        com.blog.proto.BlogStore.UserOrBuilder {
+        // @@protoc_insertion_point(builder_implements:UserInfo)
+        com.blog.proto.BlogStore.UserInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.blog.proto.BlogStore.internal_static_User_descriptor;
+        return com.blog.proto.BlogStore.internal_static_UserInfo_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.blog.proto.BlogStore.internal_static_User_fieldAccessorTable
+        return com.blog.proto.BlogStore.internal_static_UserInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.blog.proto.BlogStore.User.class, com.blog.proto.BlogStore.User.Builder.class);
+                com.blog.proto.BlogStore.UserInfo.class, com.blog.proto.BlogStore.UserInfo.Builder.class);
       }
 
-      // Construct using com.blog.proto.BlogStore.User.newBuilder()
+      // Construct using com.blog.proto.BlogStore.UserInfo.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1256,23 +1363,23 @@ public final class BlogStore {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.blog.proto.BlogStore.internal_static_User_descriptor;
+        return com.blog.proto.BlogStore.internal_static_UserInfo_descriptor;
       }
 
-      public com.blog.proto.BlogStore.User getDefaultInstanceForType() {
-        return com.blog.proto.BlogStore.User.getDefaultInstance();
+      public com.blog.proto.BlogStore.UserInfo getDefaultInstanceForType() {
+        return com.blog.proto.BlogStore.UserInfo.getDefaultInstance();
       }
 
-      public com.blog.proto.BlogStore.User build() {
-        com.blog.proto.BlogStore.User result = buildPartial();
+      public com.blog.proto.BlogStore.UserInfo build() {
+        com.blog.proto.BlogStore.UserInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.blog.proto.BlogStore.User buildPartial() {
-        com.blog.proto.BlogStore.User result = new com.blog.proto.BlogStore.User(this);
+      public com.blog.proto.BlogStore.UserInfo buildPartial() {
+        com.blog.proto.BlogStore.UserInfo result = new com.blog.proto.BlogStore.UserInfo(this);
         result.username_ = username_;
         result.nickname_ = nickname_;
         result.password_ = password_;
@@ -1318,16 +1425,16 @@ public final class BlogStore {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.blog.proto.BlogStore.User) {
-          return mergeFrom((com.blog.proto.BlogStore.User)other);
+        if (other instanceof com.blog.proto.BlogStore.UserInfo) {
+          return mergeFrom((com.blog.proto.BlogStore.UserInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.blog.proto.BlogStore.User other) {
-        if (other == com.blog.proto.BlogStore.User.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.blog.proto.BlogStore.UserInfo other) {
+        if (other == com.blog.proto.BlogStore.UserInfo.getDefaultInstance()) return this;
         if (!other.getUsername().isEmpty()) {
           username_ = other.username_;
           onChanged();
@@ -1375,11 +1482,11 @@ public final class BlogStore {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.blog.proto.BlogStore.User parsedMessage = null;
+        com.blog.proto.BlogStore.UserInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.blog.proto.BlogStore.User) e.getUnfinishedMessage();
+          parsedMessage = (com.blog.proto.BlogStore.UserInfo) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1965,39 +2072,39 @@ public final class BlogStore {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:User)
+      // @@protoc_insertion_point(builder_scope:UserInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:User)
-    private static final com.blog.proto.BlogStore.User DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:UserInfo)
+    private static final com.blog.proto.BlogStore.UserInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.blog.proto.BlogStore.User();
+      DEFAULT_INSTANCE = new com.blog.proto.BlogStore.UserInfo();
     }
 
-    public static com.blog.proto.BlogStore.User getDefaultInstance() {
+    public static com.blog.proto.BlogStore.UserInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<User>
-        PARSER = new com.google.protobuf.AbstractParser<User>() {
-      public User parsePartialFrom(
+    private static final com.google.protobuf.Parser<UserInfo>
+        PARSER = new com.google.protobuf.AbstractParser<UserInfo>() {
+      public UserInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new User(input, extensionRegistry);
+          return new UserInfo(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<User> parser() {
+    public static com.google.protobuf.Parser<UserInfo> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<User> getParserForType() {
+    public com.google.protobuf.Parser<UserInfo> getParserForType() {
       return PARSER;
     }
 
-    public com.blog.proto.BlogStore.User getDefaultInstanceForType() {
+    public com.blog.proto.BlogStore.UserInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -2008,27 +2115,27 @@ public final class BlogStore {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    java.util.List<com.blog.proto.BlogStore.User> 
+    java.util.List<com.blog.proto.BlogStore.UserInfo> 
         getItemsList();
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    com.blog.proto.BlogStore.User getItems(int index);
+    com.blog.proto.BlogStore.UserInfo getItems(int index);
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
     int getItemsCount();
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    java.util.List<? extends com.blog.proto.BlogStore.UserOrBuilder> 
+    java.util.List<? extends com.blog.proto.BlogStore.UserInfoOrBuilder> 
         getItemsOrBuilderList();
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    com.blog.proto.BlogStore.UserOrBuilder getItemsOrBuilder(
+    com.blog.proto.BlogStore.UserInfoOrBuilder getItemsOrBuilder(
         int index);
   }
   /**
@@ -2073,11 +2180,11 @@ public final class BlogStore {
             }
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                items_ = new java.util.ArrayList<com.blog.proto.BlogStore.User>();
+                items_ = new java.util.ArrayList<com.blog.proto.BlogStore.UserInfo>();
                 mutable_bitField0_ |= 0x00000001;
               }
               items_.add(
-                  input.readMessage(com.blog.proto.BlogStore.User.parser(), extensionRegistry));
+                  input.readMessage(com.blog.proto.BlogStore.UserInfo.parser(), extensionRegistry));
               break;
             }
           }
@@ -2107,36 +2214,36 @@ public final class BlogStore {
     }
 
     public static final int ITEMS_FIELD_NUMBER = 1;
-    private java.util.List<com.blog.proto.BlogStore.User> items_;
+    private java.util.List<com.blog.proto.BlogStore.UserInfo> items_;
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    public java.util.List<com.blog.proto.BlogStore.User> getItemsList() {
+    public java.util.List<com.blog.proto.BlogStore.UserInfo> getItemsList() {
       return items_;
     }
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    public java.util.List<? extends com.blog.proto.BlogStore.UserOrBuilder> 
+    public java.util.List<? extends com.blog.proto.BlogStore.UserInfoOrBuilder> 
         getItemsOrBuilderList() {
       return items_;
     }
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
     public int getItemsCount() {
       return items_.size();
     }
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    public com.blog.proto.BlogStore.User getItems(int index) {
+    public com.blog.proto.BlogStore.UserInfo getItems(int index) {
       return items_.get(index);
     }
     /**
-     * <code>repeated .User items = 1;</code>
+     * <code>repeated .UserInfo items = 1;</code>
      */
-    public com.blog.proto.BlogStore.UserOrBuilder getItemsOrBuilder(
+    public com.blog.proto.BlogStore.UserInfoOrBuilder getItemsOrBuilder(
         int index) {
       return items_.get(index);
     }
@@ -2450,22 +2557,22 @@ public final class BlogStore {
       }
       private int bitField0_;
 
-      private java.util.List<com.blog.proto.BlogStore.User> items_ =
+      private java.util.List<com.blog.proto.BlogStore.UserInfo> items_ =
         java.util.Collections.emptyList();
       private void ensureItemsIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          items_ = new java.util.ArrayList<com.blog.proto.BlogStore.User>(items_);
+          items_ = new java.util.ArrayList<com.blog.proto.BlogStore.UserInfo>(items_);
           bitField0_ |= 0x00000001;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.blog.proto.BlogStore.User, com.blog.proto.BlogStore.User.Builder, com.blog.proto.BlogStore.UserOrBuilder> itemsBuilder_;
+          com.blog.proto.BlogStore.UserInfo, com.blog.proto.BlogStore.UserInfo.Builder, com.blog.proto.BlogStore.UserInfoOrBuilder> itemsBuilder_;
 
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public java.util.List<com.blog.proto.BlogStore.User> getItemsList() {
+      public java.util.List<com.blog.proto.BlogStore.UserInfo> getItemsList() {
         if (itemsBuilder_ == null) {
           return java.util.Collections.unmodifiableList(items_);
         } else {
@@ -2473,7 +2580,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public int getItemsCount() {
         if (itemsBuilder_ == null) {
@@ -2483,9 +2590,9 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public com.blog.proto.BlogStore.User getItems(int index) {
+      public com.blog.proto.BlogStore.UserInfo getItems(int index) {
         if (itemsBuilder_ == null) {
           return items_.get(index);
         } else {
@@ -2493,10 +2600,10 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder setItems(
-          int index, com.blog.proto.BlogStore.User value) {
+          int index, com.blog.proto.BlogStore.UserInfo value) {
         if (itemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2510,10 +2617,10 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder setItems(
-          int index, com.blog.proto.BlogStore.User.Builder builderForValue) {
+          int index, com.blog.proto.BlogStore.UserInfo.Builder builderForValue) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           items_.set(index, builderForValue.build());
@@ -2524,9 +2631,9 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public Builder addItems(com.blog.proto.BlogStore.User value) {
+      public Builder addItems(com.blog.proto.BlogStore.UserInfo value) {
         if (itemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2540,10 +2647,10 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder addItems(
-          int index, com.blog.proto.BlogStore.User value) {
+          int index, com.blog.proto.BlogStore.UserInfo value) {
         if (itemsBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -2557,10 +2664,10 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder addItems(
-          com.blog.proto.BlogStore.User.Builder builderForValue) {
+          com.blog.proto.BlogStore.UserInfo.Builder builderForValue) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           items_.add(builderForValue.build());
@@ -2571,10 +2678,10 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder addItems(
-          int index, com.blog.proto.BlogStore.User.Builder builderForValue) {
+          int index, com.blog.proto.BlogStore.UserInfo.Builder builderForValue) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           items_.add(index, builderForValue.build());
@@ -2585,10 +2692,10 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder addAllItems(
-          java.lang.Iterable<? extends com.blog.proto.BlogStore.User> values) {
+          java.lang.Iterable<? extends com.blog.proto.BlogStore.UserInfo> values) {
         if (itemsBuilder_ == null) {
           ensureItemsIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -2600,7 +2707,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder clearItems() {
         if (itemsBuilder_ == null) {
@@ -2613,7 +2720,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
       public Builder removeItems(int index) {
         if (itemsBuilder_ == null) {
@@ -2626,16 +2733,16 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public com.blog.proto.BlogStore.User.Builder getItemsBuilder(
+      public com.blog.proto.BlogStore.UserInfo.Builder getItemsBuilder(
           int index) {
         return getItemsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public com.blog.proto.BlogStore.UserOrBuilder getItemsOrBuilder(
+      public com.blog.proto.BlogStore.UserInfoOrBuilder getItemsOrBuilder(
           int index) {
         if (itemsBuilder_ == null) {
           return items_.get(index);  } else {
@@ -2643,9 +2750,9 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public java.util.List<? extends com.blog.proto.BlogStore.UserOrBuilder> 
+      public java.util.List<? extends com.blog.proto.BlogStore.UserInfoOrBuilder> 
            getItemsOrBuilderList() {
         if (itemsBuilder_ != null) {
           return itemsBuilder_.getMessageOrBuilderList();
@@ -2654,33 +2761,33 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public com.blog.proto.BlogStore.User.Builder addItemsBuilder() {
+      public com.blog.proto.BlogStore.UserInfo.Builder addItemsBuilder() {
         return getItemsFieldBuilder().addBuilder(
-            com.blog.proto.BlogStore.User.getDefaultInstance());
+            com.blog.proto.BlogStore.UserInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public com.blog.proto.BlogStore.User.Builder addItemsBuilder(
+      public com.blog.proto.BlogStore.UserInfo.Builder addItemsBuilder(
           int index) {
         return getItemsFieldBuilder().addBuilder(
-            index, com.blog.proto.BlogStore.User.getDefaultInstance());
+            index, com.blog.proto.BlogStore.UserInfo.getDefaultInstance());
       }
       /**
-       * <code>repeated .User items = 1;</code>
+       * <code>repeated .UserInfo items = 1;</code>
        */
-      public java.util.List<com.blog.proto.BlogStore.User.Builder> 
+      public java.util.List<com.blog.proto.BlogStore.UserInfo.Builder> 
            getItemsBuilderList() {
         return getItemsFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.blog.proto.BlogStore.User, com.blog.proto.BlogStore.User.Builder, com.blog.proto.BlogStore.UserOrBuilder> 
+          com.blog.proto.BlogStore.UserInfo, com.blog.proto.BlogStore.UserInfo.Builder, com.blog.proto.BlogStore.UserInfoOrBuilder> 
           getItemsFieldBuilder() {
         if (itemsBuilder_ == null) {
           itemsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.blog.proto.BlogStore.User, com.blog.proto.BlogStore.User.Builder, com.blog.proto.BlogStore.UserOrBuilder>(
+              com.blog.proto.BlogStore.UserInfo, com.blog.proto.BlogStore.UserInfo.Builder, com.blog.proto.BlogStore.UserInfoOrBuilder>(
                   items_,
                   ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
@@ -16100,10 +16207,10 @@ public final class BlogStore {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_User_descriptor;
+    internal_static_UserInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_User_fieldAccessorTable;
+      internal_static_UserInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_UserList_descriptor;
   private static final 
@@ -16188,59 +16295,60 @@ public final class BlogStore {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\025proto/structure.proto\"\272\001\n\004User\022\020\n\010user" +
-      "name\030\001 \001(\t\022\020\n\010nickname\030\002 \001(\t\022\020\n\010password" +
-      "\030\003 \001(\t\022\023\n\004role\030\004 \001(\0132\005.Role\022\r\n\005email\030\005 \001" +
-      "(\t\022\r\n\005phone\030\006 \001(\t\022\016\n\006status\030\007 \001(\005\022\016\n\006use" +
-      "rId\030\010 \001(\005\022\025\n\rauthenticator\030\t \001(\005\022\022\n\nreme" +
-      "mberMe\030\n \001(\010\" \n\010UserList\022\024\n\005items\030\001 \003(\0132" +
-      "\005.User\"P\n\004Role\022\n\n\002id\030\001 \001(\005\022\020\n\010roleName\030\002" +
-      " \001(\t\022\014\n\004note\030\003 \001(\t\022\016\n\006status\030\004 \001(\005\022\014\n\004ic" +
-      "on\030\005 \001(\t\" \n\010RoleList\022\024\n\005items\030\001 \003(\0132\005.Ro" +
-      "le\"\240\001\n\004Menu\022\016\n\006menuId\030\001 \001(\005\022\020\n\010parentId\030",
-      "\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014\n\004icon\030\004 \001(\t\022\020\n\010tem" +
-      "plate\030\005 \001(\t\022\014\n\004hash\030\006 \001(\t\022\023\n\013isDeletable" +
-      "\030\007 \001(\010\022\025\n\risDefaultShow\030\010 \001(\010\022\016\n\006status\030" +
-      "\t \001(\005\" \n\010MenuList\022\024\n\005items\030\001 \003(\0132\005.Menu\"" +
-      "1\n\007RspInfo\022\031\n\004code\030\001 \001(\0162\013.ReturnCode\022\013\n" +
-      "\003msg\030\002 \001(\t\"A\n\013RspInfoList\022\031\n\004code\030\001 \001(\0162" +
-      "\013.ReturnCode\022\027\n\005items\030\002 \003(\0132\010.RspInfo\"\364\001" +
-      "\n\007License\022\021\n\tlicenseId\030\001 \001(\t\022\017\n\007company\030" +
-      "\002 \001(\t\022\017\n\007edition\030\003 \001(\t\022\022\n\nvalidUntil\030\004 \001" +
-      "(\003\022\023\n\013productName\030\005 \001(\t\022\030\n\020shortProductN",
-      "ame\030\006 \001(\t\022\021\n\ttotalUser\030\007 \001(\005\022\023\n\013totalVol" +
-      "ume\030\010 \001(\003\022\r\n\005value\030\017 \001(\t\022\024\n\014createByName" +
-      "\030\020 \001(\t\022\022\n\ncreateById\030\021 \001(\005\022\020\n\010createAt\030\022" +
-      " \001(\003\"6\n\010Operator\022\014\n\004date\030\001 \001(\003\022\016\n\006gptype" +
-      "\030\002 \001(\005\022\014\n\004gpid\030\003 \001(\005\"u\n\013StoreCommit\022\014\n\004h" +
-      "ash\030\001 \001(\t\022\030\n\005owner\030\002 \001(\0132\t.Operator\022\034\n\tc" +
-      "ommitter\030\003 \001(\0132\t.Operator\022\016\n\006parent\030\004 \001(" +
-      "\t\022\020\n\010treeHash\030\005 \001(\t\"j\n\tStoreTree\022\014\n\004hash" +
-      "\030\001 \001(\t\022\030\n\005owner\030\002 \001(\0132\t.Operator\022\034\n\tcomm" +
-      "itter\030\003 \001(\0132\t.Operator\022\027\n\004item\030\004 \003(\0132\t.t",
-      "reeItem\"_\n\010treeItem\022\020\n\010blobHash\030\001 \003(\t\022\020\n" +
-      "\010treeHash\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\014\n\004size\030\004 " +
-      "\001(\003\022\023\n\013contentType\030\005 \001(\t\"t\n\tStoreBlob\022\014\n" +
-      "\004hash\030\001 \001(\t\022\030\n\005owner\030\002 \001(\0132\t.Operator\022\034\n" +
-      "\tcommitter\030\003 \001(\0132\t.Operator\022\014\n\004name\030\004 \001(" +
-      "\t\022\023\n\013contentType\030\005 \001(\t\"U\n\016TreeUpdateItem" +
-      "\022\022\n\noriginPath\030\005 \001(\t\022\020\n\010fileName\030\006 \001(\t\022\017" +
-      "\n\007content\030\007 \001(\014\022\014\n\004size\030\010 \001(\003\"3\n\022TreeUpd" +
-      "ateItemList\022\035\n\004item\030\004 \003(\0132\017.TreeUpdateIt" +
-      "em*@\n\006Status\022\021\n\rStatusDefault\020\000\022\020\n\014Statu",
-      "sActive\020\001\022\021\n\rStatusDeleted\020\002*u\n\rAuthenti" +
-      "cator\022\031\n\025DEFAULT_AUTHENTICATOR\020\000\022\030\n\024SYST" +
-      "EM_AUTHENTICATOR\020\001\022\026\n\022TEXT_AUTHENTICATOR" +
-      "\020\002\022\027\n\023EMAIL_AUTHENTICATOR\020\003*`\n\rStoreType" +
-      "Enum\022\024\n\020StoreTypeDefault\020\000\022\023\n\017StoreTypeC" +
-      "ommit\020\001\022\021\n\rStoreTypeTree\020\002\022\021\n\rStoreTypeB" +
-      "lob\020\003*\322\001\n\nReturnCode\022\027\n\023UNKNOWN_RETURN_C" +
-      "ODE\020\000\022\r\n\tReturn_OK\020\001\022\020\n\014Return_ERROR\020\002\022\025" +
-      "\n\021Return_USER_EXIST\0202\022\031\n\025Return_PASSWORD" +
-      "_ERROR\0203\022(\n$Return_USERNAME_OR_PASSWORD_",
-      "IS_EMPTY\0204\022\025\n\021Return_USER_EMPTY\0205\022\027\n\023Ret" +
-      "urn_NOT_YOURSELF\0206B\033\n\016com.blog.protoB\tBl" +
-      "ogStoreb\006proto3"
+      "\n\025proto/structure.proto\"\276\001\n\010UserInfo\022\020\n\010" +
+      "username\030\001 \001(\t\022\020\n\010nickname\030\002 \001(\t\022\020\n\010pass" +
+      "word\030\003 \001(\t\022\023\n\004role\030\004 \001(\0132\005.Role\022\r\n\005email" +
+      "\030\005 \001(\t\022\r\n\005phone\030\006 \001(\t\022\016\n\006status\030\007 \001(\005\022\016\n" +
+      "\006userId\030\010 \001(\005\022\025\n\rauthenticator\030\t \001(\005\022\022\n\n" +
+      "rememberMe\030\n \001(\010\"$\n\010UserList\022\030\n\005items\030\001 " +
+      "\003(\0132\t.UserInfo\"P\n\004Role\022\n\n\002id\030\001 \001(\005\022\020\n\010ro" +
+      "leName\030\002 \001(\t\022\014\n\004note\030\003 \001(\t\022\016\n\006status\030\004 \001" +
+      "(\005\022\014\n\004icon\030\005 \001(\t\" \n\010RoleList\022\024\n\005items\030\001 " +
+      "\003(\0132\005.Role\"\240\001\n\004Menu\022\016\n\006menuId\030\001 \001(\005\022\020\n\010p",
+      "arentId\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\014\n\004icon\030\004 \001(" +
+      "\t\022\020\n\010template\030\005 \001(\t\022\014\n\004hash\030\006 \001(\t\022\023\n\013isD" +
+      "eletable\030\007 \001(\010\022\025\n\risDefaultShow\030\010 \001(\010\022\016\n" +
+      "\006status\030\t \001(\005\" \n\010MenuList\022\024\n\005items\030\001 \003(\013" +
+      "2\005.Menu\"1\n\007RspInfo\022\031\n\004code\030\001 \001(\0162\013.Retur" +
+      "nCode\022\013\n\003msg\030\002 \001(\t\"A\n\013RspInfoList\022\031\n\004cod" +
+      "e\030\001 \001(\0162\013.ReturnCode\022\027\n\005items\030\002 \003(\0132\010.Rs" +
+      "pInfo\"\364\001\n\007License\022\021\n\tlicenseId\030\001 \001(\t\022\017\n\007" +
+      "company\030\002 \001(\t\022\017\n\007edition\030\003 \001(\t\022\022\n\nvalidU" +
+      "ntil\030\004 \001(\003\022\023\n\013productName\030\005 \001(\t\022\030\n\020short",
+      "ProductName\030\006 \001(\t\022\021\n\ttotalUser\030\007 \001(\005\022\023\n\013" +
+      "totalVolume\030\010 \001(\003\022\r\n\005value\030\017 \001(\t\022\024\n\014crea" +
+      "teByName\030\020 \001(\t\022\022\n\ncreateById\030\021 \001(\005\022\020\n\010cr" +
+      "eateAt\030\022 \001(\003\"6\n\010Operator\022\014\n\004date\030\001 \001(\003\022\016" +
+      "\n\006gptype\030\002 \001(\005\022\014\n\004gpid\030\003 \001(\005\"u\n\013StoreCom" +
+      "mit\022\014\n\004hash\030\001 \001(\t\022\030\n\005owner\030\002 \001(\0132\t.Opera" +
+      "tor\022\034\n\tcommitter\030\003 \001(\0132\t.Operator\022\016\n\006par" +
+      "ent\030\004 \001(\t\022\020\n\010treeHash\030\005 \001(\t\"j\n\tStoreTree" +
+      "\022\014\n\004hash\030\001 \001(\t\022\030\n\005owner\030\002 \001(\0132\t.Operator" +
+      "\022\034\n\tcommitter\030\003 \001(\0132\t.Operator\022\027\n\004item\030\004",
+      " \003(\0132\t.treeItem\"_\n\010treeItem\022\020\n\010blobHash\030" +
+      "\001 \003(\t\022\020\n\010treeHash\030\002 \001(\t\022\014\n\004name\030\003 \001(\t\022\014\n" +
+      "\004size\030\004 \001(\003\022\023\n\013contentType\030\005 \001(\t\"t\n\tStor" +
+      "eBlob\022\014\n\004hash\030\001 \001(\t\022\030\n\005owner\030\002 \001(\0132\t.Ope" +
+      "rator\022\034\n\tcommitter\030\003 \001(\0132\t.Operator\022\014\n\004n" +
+      "ame\030\004 \001(\t\022\023\n\013contentType\030\005 \001(\t\"U\n\016TreeUp" +
+      "dateItem\022\022\n\noriginPath\030\005 \001(\t\022\020\n\010fileName" +
+      "\030\006 \001(\t\022\017\n\007content\030\007 \001(\014\022\014\n\004size\030\010 \001(\003\"3\n" +
+      "\022TreeUpdateItemList\022\035\n\004item\030\004 \003(\0132\017.Tree" +
+      "UpdateItem*@\n\006Status\022\021\n\rStatusDefault\020\000\022",
+      "\020\n\014StatusActive\020\001\022\021\n\rStatusDeleted\020\002*u\n\r" +
+      "Authenticator\022\031\n\025DEFAULT_AUTHENTICATOR\020\000" +
+      "\022\030\n\024SYSTEM_AUTHENTICATOR\020\001\022\026\n\022TEXT_AUTHE" +
+      "NTICATOR\020\002\022\027\n\023EMAIL_AUTHENTICATOR\020\003*`\n\rS" +
+      "toreTypeEnum\022\024\n\020StoreTypeDefault\020\000\022\023\n\017St" +
+      "oreTypeCommit\020\001\022\021\n\rStoreTypeTree\020\002\022\021\n\rSt" +
+      "oreTypeBlob\020\003*-\n\tGtypeEnum\022\013\n\007Default\020\000\022" +
+      "\010\n\004User\020\001\022\t\n\005Group\020\002*\322\001\n\nReturnCode\022\027\n\023U" +
+      "NKNOWN_RETURN_CODE\020\000\022\r\n\tReturn_OK\020\001\022\020\n\014R" +
+      "eturn_ERROR\020\002\022\025\n\021Return_USER_EXIST\0202\022\031\n\025",
+      "Return_PASSWORD_ERROR\0203\022(\n$Return_USERNA" +
+      "ME_OR_PASSWORD_IS_EMPTY\0204\022\025\n\021Return_USER" +
+      "_EMPTY\0205\022\027\n\023Return_NOT_YOURSELF\0206B\033\n\016com" +
+      ".blog.protoB\tBlogStoreb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16254,11 +16362,11 @@ public final class BlogStore {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_User_descriptor =
+    internal_static_UserInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_User_fieldAccessorTable = new
+    internal_static_UserInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_User_descriptor,
+        internal_static_UserInfo_descriptor,
         new java.lang.String[] { "Username", "Nickname", "Password", "Role", "Email", "Phone", "Status", "UserId", "Authenticator", "RememberMe", });
     internal_static_UserList_descriptor =
       getDescriptor().getMessageTypes().get(1);

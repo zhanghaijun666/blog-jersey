@@ -27,7 +27,7 @@ public class BlogSessionFactory {
     }
 
     public BlogSession createSession(User user, Boolean isRememberMe) {
-        BlogSession session = new BlogSession(generatorSessionId(), user.getUserId(), user.getUsername(), isRememberMe);
+        BlogSession session = new BlogSession(generatorSessionId(), user.getUserId(), user.getName(), isRememberMe);
         LOGIN_APPSESSIONS.put(session.getId(), session);
         return session;
     }

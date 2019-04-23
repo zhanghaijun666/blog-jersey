@@ -21,7 +21,7 @@ public class LoginAuthenticator {
         AuthenticatorPlatform.add(new LoginAuthenticatorForText());
     }
 
-    public static BlogStore.ReturnCode authenticator(BlogStore.User requestUser, Response response) {
+    public static BlogStore.ReturnCode authenticator(BlogStore.UserInfo requestUser, Response response) {
         if (StringUtils.isBlank(requestUser.getUsername()) || StringUtils.isBlank(requestUser.getPassword())) {
             return BlogStore.ReturnCode.Return_USERNAME_OR_PASSWORD_IS_EMPTY;
         }

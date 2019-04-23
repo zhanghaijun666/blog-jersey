@@ -40,7 +40,7 @@ public class UserContorller {
     @Path("/login")
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-    public BlogStore.RspInfo login(BlogStore.User requestUser) {
+    public BlogStore.RspInfo login(BlogStore.UserInfo requestUser) {
         BlogStore.ReturnCode checkCode = LoginAuthenticator.authenticator(requestUser, response);
         return BlogStore.RspInfo.newBuilder().setCode(checkCode).build();
     }
@@ -62,7 +62,7 @@ public class UserContorller {
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
-    public BlogStore.RspInfo createNewUser(BlogStore.User user) {
+    public BlogStore.RspInfo createNewUser(BlogStore.UserInfo user) {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
         if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
@@ -97,10 +97,10 @@ public class UserContorller {
     @GET
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
-    public BlogStore.User getUser() {
+    public BlogStore.UserInfo getUser() {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         if (null == session) {
-            return BlogStore.User.getDefaultInstance();
+            return BlogStore.UserInfo.getDefaultInstance();
         }
         return User.UserBuilder(User.findById(session.getUserId()));
     }
@@ -109,7 +109,7 @@ public class UserContorller {
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("admin")
-    public BlogStore.RspInfo updataUser(BlogStore.User user) {
+    public BlogStore.RspInfo updataUser(BlogStore.UserInfo user) {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         BlogStore.RspInfo.Builder rspInfo = BlogStore.RspInfo.newBuilder();
         User dbUser = User.findById(user.getUserId());
@@ -133,7 +133,7 @@ public class UserContorller {
     public BlogStore.RspInfoList deleteUser(BlogStore.UserList users) {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         BlogStore.RspInfoList.Builder rspInfoList = BlogStore.RspInfoList.newBuilder();
-        for (BlogStore.User user : users.getItemsList()) {
+        for (BlogStore.UserInfo user : users.getItemsList()) {
             User dbUser = User.findById(user.getUserId());
             if (null == dbUser) {
                 rspInfoList.addItems(BlogStore.RspInfo.newBuilder().setCode(BlogStore.ReturnCode.Return_USER_EMPTY).setMsg(user.getUsername()).build());
