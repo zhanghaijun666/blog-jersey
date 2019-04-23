@@ -32,14 +32,11 @@ public class FileFactory {
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeBlob, entry.getKey(), blob.build(), entry.getValue());
         }
         if (code == BlogStore.ReturnCode.Return_OK) {
-            String rootHash = "";
-            if(StringUtils.isBlank(rootHash)){
+            String rootHash = fileUrl.getRootHash();
+            if (StringUtils.isBlank(rootHash)) {
                 
             }
-            
-            
-            
-            
+
         }
 
         return code;

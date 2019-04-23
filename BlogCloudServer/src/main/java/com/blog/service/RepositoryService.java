@@ -1,7 +1,7 @@
 package com.blog.service;
 
 import com.blog.db.Repository;
-import com.blog.proto.BlogStore;
+import static com.blog.proto.BlogStore.GtypeEnum;
 
 /**
  * @author zhanghaijun
@@ -9,7 +9,12 @@ import com.blog.proto.BlogStore;
 public class RepositoryService {
 
     public static Repository getRepository(int gptype, int gpid) {
-//        BlogStore.GtypeEnum
+        switch (gptype) {
+            case GtypeEnum.User_VALUE:
+                return com.blog.db.User.findById(gpid);
+            case GtypeEnum.Group_VALUE:
+                return com.blog.db.Group.findById(gpid);
+        }
         return null;
     }
 }
