@@ -143,9 +143,9 @@ public class StorageFile {
                 index++;
                 continue;
             }
-            for (BlogStore.treeItem item : tree.getItemList()) {
+            for (BlogStore.StoreTree item : tree.getTreeItemList()) {
                 if (pathName.equals(item.getName()) && StoreUtil.isFolder(item)) {
-                    tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, item.getTreeHash());
+                    tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, item.getHash());
                     break;
                 }
             }

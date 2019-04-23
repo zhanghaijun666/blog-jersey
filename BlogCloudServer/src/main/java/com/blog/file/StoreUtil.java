@@ -8,7 +8,7 @@ import com.blog.utils.BlogMediaType;
  */
 public class StoreUtil {
 
-    public static boolean isFolder(BlogStore.treeItem item) {
+    public static boolean isFolder(BlogStore.StoreTree item) {
         return BlogMediaType.DIRECTORY_CONTENTTYPE.equals(item.getContentType());
     }
 

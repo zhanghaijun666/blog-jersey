@@ -141,15 +141,19 @@ message StoreTree {
     string hash = 1;
     Operator owner = 2;
     Operator committer = 3;
-    repeated treeItem item = 4;
-}
-message treeItem{
-    repeated string blobHash = 1;
-    string treeHash = 2;
-    string name = 3;
-    int64 size = 4;
+    string name = 4;
     string contentType = 5;
-    
+    int64 size = 6;
+    repeated StoreTree treeItem = 10;
+    repeated StoreFile fileItem = 11;
+}
+message StoreFile {
+    repeated string hashItem = 1;
+    Operator owner = 2;
+    Operator committer = 3;
+    string name = 4;
+    string contentType = 5;
+    int64 size = 6;
 }
 message StoreBlob {
     string hash = 1;
@@ -157,6 +161,7 @@ message StoreBlob {
     Operator committer = 3;
     string name = 4;
     string contentType = 5;
+    int64 size = 6;
 }
 message TreeUpdateItem{
     string originPath = 5;
