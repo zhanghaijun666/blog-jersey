@@ -2,11 +2,13 @@ package com.blog.file;
 
 import com.blog.config.Configuration;
 import com.blog.proto.BlogStore;
+import com.tools.BasicConvertUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * @author zhanghaijun
@@ -18,6 +20,7 @@ public class StorageFile {
     private static final String BLOB_DIR = "blob";
     private static final String COMMIT_DIR = "commit";
     private static final String TREE_DIR = "tree";
+    private static final int FILE_HEADER_MESSAGE_LENGTH = 10;
 
     public static com.google.protobuf.Message readStorag(BlogStore.StoreTypeEnum type, String hash) {
         com.google.protobuf.Message message = null;
@@ -27,8 +30,12 @@ public class StorageFile {
         if (file.exists() && file.isFile() && file.canRead()) {
             try {
                 input = new FileInputStream(file);
-                byte[] databuf = new byte[input.available()];
-                input.read(databuf);
+                int available = input.available();
+                byte[] messageLengByte = new byte[Math.min(StorageFile.FILE_HEADER_MESSAGE_LENGTH, available)];
+                input.read(messageLengByte, 0, messageLengByte.length);
+                int messageLength = BasicConvertUtils.byteArrayToInt(messageLengByte);
+                byte[] databuf = new byte[Math.min(messageLength, available - messageLengByte.length)];
+                input.read(databuf, messageLengByte.length, messageLengByte.length + databuf.length);
                 switch (type) {
                     case StoreTypeCommit:
                         message = BlogStore.StoreCommit.parseFrom(databuf);
@@ -58,30 +65,41 @@ public class StorageFile {
         return message;
     }
 
-    public static BlogStore.ReturnCode writeStorag(BlogStore.StoreTypeEnum type, com.google.protobuf.Message message, String hash) {
-        String fileFullPath = StorageFile.getHashFullPath(type, hash);
-        File file = new File(fileFullPath);
+    private static BlogStore.ReturnCode writeStorag(byte[] byteArray, File file) {
+        if (file.exists()) {
+            return BlogStore.ReturnCode.Return_OK;
+        }
+        file.getParentFile().mkdirs();
         FileOutputStream out = null;
-        if (file.getParentFile().mkdirs()) {
-            try {
-                out = new FileOutputStream(file);
-                out.write(message.toByteArray());
-            } catch (FileNotFoundException ex) {
-                logger.error("Unable to write " + fileFullPath, ex);
-                return BlogStore.ReturnCode.Return_ERROR;
-            } catch (IOException ex) {
-                logger.error("Unable to write " + fileFullPath, ex);
-                return BlogStore.ReturnCode.Return_ERROR;
-            } finally {
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException ex) {
-                    }
+        try {
+            out = new FileOutputStream(file);
+            out.write(byteArray);
+        } catch (FileNotFoundException ex) {
+            logger.error("Unable to write {}", ex);
+            return BlogStore.ReturnCode.Return_ERROR;
+        } catch (IOException ex) {
+            logger.error("Unable to write {}", ex);
+            return BlogStore.ReturnCode.Return_ERROR;
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException ex) {
                 }
             }
         }
         return BlogStore.ReturnCode.Return_OK;
+    }
+
+    public static BlogStore.ReturnCode writeStorag(BlogStore.StoreTypeEnum type, String hash, com.google.protobuf.Message message) {
+        return StorageFile.writeStorag(type, hash, message, null);
+    }
+
+    public static BlogStore.ReturnCode writeStorag(BlogStore.StoreTypeEnum type, String hash, com.google.protobuf.Message message, byte[] blob) {
+        byte[] newBuff = new byte[StorageFile.FILE_HEADER_MESSAGE_LENGTH];
+        byte[] messageLengByte = BasicConvertUtils.intToByteArray(message.toByteArray().length);
+        System.arraycopy(messageLengByte, 0, newBuff, 0, Math.min(newBuff.length, messageLengByte.length));
+        return StorageFile.writeStorag(ArrayUtils.addAll(ArrayUtils.addAll(newBuff, message.toByteArray()), blob), new File(StorageFile.getHashFullPath(type, hash)));
     }
 
     private static String getHashFullPath(BlogStore.StoreTypeEnum type, String hash) {

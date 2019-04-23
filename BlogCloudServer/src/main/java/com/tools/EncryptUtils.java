@@ -3,8 +3,9 @@ package com.tools;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Collection;
+import java.util.Iterator;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * @author zhanghaijun
@@ -15,10 +16,23 @@ public class EncryptUtils {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
             digest.update(buffer);
-            return toHex(digest.digest());
+            return EncryptUtils.toHex(digest.digest());
         } catch (NoSuchAlgorithmException ex) {
+            return null;
         }
-        return null;
+    }
+
+    public static String sha1(Collection<String> collection) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-1");
+            Iterator<String> it = collection.iterator();
+            while (it.hasNext()) {
+                digest.update(it.next().getBytes());
+            }
+            return EncryptUtils.toHex(digest.digest());
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
     }
 
     private static String sha1(byte[] buffer, int start, int length, boolean bease64, boolean needSalt) {
@@ -36,9 +50,8 @@ public class EncryptUtils {
                 return toHex(result);
             }
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            Logger.getLogger(BlogUtils.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
-        return null;
     }
 
     public static String base64(byte[] result) {
@@ -47,10 +60,11 @@ public class EncryptUtils {
     }
 
     public static String toHex(byte[] result) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < result.length; i++) {
-            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-        }
-        return sb.toString();
+        return DigestUtils.sha1Hex(result);
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < result.length; i++) {
+//            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+//        }
+//        return sb.toString();
     }
 }

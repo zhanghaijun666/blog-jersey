@@ -66,7 +66,7 @@ UploadFile.prototype.abort = function () {
 UploadFile.prototype.sendUplodFile = function () {
     var self = this;
     console.log(self);
-    getRequest("/uploadfile/"+self.file.name, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", data: self.file}, function (data) {
+    getRequest("/uploadfile/" + self.file.name, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", data: self.file}, function (data) {
         var rspInfo = bcstore.RspInfo.decode(data);
         toastShowCode(rspInfo.code);
     });
