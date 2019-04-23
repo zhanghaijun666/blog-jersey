@@ -39,7 +39,7 @@ function initStore() {
             self.phone.extend({phoneUS: {message: l10n('validation.phoneError')}});
         }
     }
-    User.prototype = new Message("User");
+    User.prototype = new Message("UserInfo");
     User.prototype.getFullName = function () {
         return ko.unwrap(this.nickname) + ' ( ' + ko.unwrap(this.username) + ' ) ';
     };
