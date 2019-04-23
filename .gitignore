@@ -3,5 +3,6 @@
 
 /BlogCloudServer/src/main/java/com/blog/proto
 /BlogCloudServer/logs/
+/BlogCloudServer/store/
 /BlogCloudClient/www/resource/js/structure.js
 
