@@ -24,12 +24,18 @@ public class FileFactory {
             blobMap.put(EncryptUtils.sha1(blobList.get(i)), blobList.get(i));
         }
         String fileHash = EncryptUtils.sha1(blobMap.keySet());
-        BlogStore.StoreBlob.Builder blob = BlogStore.StoreBlob.newBuilder();
+
         BlogStore.ReturnCode code = BlogStore.ReturnCode.Return_OK;
         for (Map.Entry<String, byte[]> entry : blobMap.entrySet()) {
             if (code != BlogStore.ReturnCode.Return_OK) {
                 break;
             }
+            BlogStore.StoreBlob.Builder blob = BlogStore.StoreBlob.newBuilder();
+            blob.setHash(entry.getKey());
+            blob.setCommitter(BlogStore.Operator.newBuilder().setDate(System.currentTimeMillis()).setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build());
+            blob.setName(FileUtils.getName(fileUrl.getPath()));
+            blob.setContentType("");
+            blob.setSize(entry.getValue().length);
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeBlob, entry.getKey(), blob.build(), entry.getValue());
         }
         if (code == BlogStore.ReturnCode.Return_OK) {

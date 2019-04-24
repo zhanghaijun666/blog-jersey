@@ -157,11 +157,10 @@ message StoreFile {
 }
 message StoreBlob {
     string hash = 1;
-    Operator owner = 2;
-    Operator committer = 3;
-    string name = 4;
-    string contentType = 5;
-    int64 size = 6;
+    Operator committer = 2;
+    string name = 3;
+    string contentType = 4;
+    int64 size = 5;
 }
 message TreeUpdateItem{
     string originPath = 5;
