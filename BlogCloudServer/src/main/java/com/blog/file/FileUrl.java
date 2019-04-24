@@ -17,15 +17,17 @@ public class FileUrl {
     public static final int DEFAULT_GPTYPE = 0;
     public static final int DEFAULT_GPID = 0;
 
-    String rootHash;
-    int gpType;
-    int gpId;
-    String bucket;
-    String path;
-    String originPath;
+    private String rootHash;
+    private int gpType;
+    private int gpId;
+    private String bucket;
+    private String path;
+    private final String originPath;
+    private final int userId;
 
     public FileUrl(String originPath, int userId) {
         this.originPath = originPath;
+        this.userId = userId;
         Matcher matcher = standUrlPattern.matcher(originPath);
         if (matcher.matches()) {
             this.rootHash = BasicConvertUtils.toString(matcher.group("rootHash"), DEFAULT_ROOT_HASH);
@@ -59,6 +61,14 @@ public class FileUrl {
 
     public String getPath() {
         return path;
+    }
+
+    public String getOriginPath() {
+        return originPath;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
 }
