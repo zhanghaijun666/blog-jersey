@@ -91,7 +91,7 @@ public class StorageFactory {
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, newTree);
         }
         if (code == BlogStore.ReturnCode.Return_OK) {
-            BlogStore.StoreCommit.Builder newCommit = BlogStore.StoreCommit.newBuilder(commit);
+            BlogStore.StoreCommit.Builder newCommit = null == commit ? BlogStore.StoreCommit.newBuilder() : BlogStore.StoreCommit.newBuilder(commit);
             newCommit.setTreeHash(treeHash);
             newCommit.setParent(commitHash);
             String newCommitHash = EncryptUtils.sha1(newCommit.build().toByteArray());

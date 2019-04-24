@@ -34,10 +34,10 @@ public class StorageFile {
                 input = new FileInputStream(file);
                 int available = input.available();
                 byte[] messageLengByte = new byte[Math.min(StorageFile.FILE_HEADER_MESSAGE_LENGTH, available)];
-                input.read(messageLengByte, 0, messageLengByte.length);
+                input.read(messageLengByte);
                 int messageLength = BasicConvertUtils.byteArrayToInt(messageLengByte);
                 byte[] databuf = new byte[Math.min(messageLength, available - messageLengByte.length)];
-                input.read(databuf, messageLengByte.length, messageLengByte.length + databuf.length);
+                input.read(databuf);
                 switch (type) {
                     case StoreTypeCommit:
                         message = BlogStore.StoreCommit.parseFrom(databuf);
