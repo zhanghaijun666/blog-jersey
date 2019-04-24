@@ -102,6 +102,39 @@ public class StorageFactory {
         }
         return code;
     }
+
+    public static BlogStore.FileItemList getFileItemList(FileUrl fileUrl) {
+        BlogStore.FileItemList.Builder list = BlogStore.FileItemList.newBuilder();
+        List<StorageTreeAttr> storageTreeAttr = StorageUtil.getTreeItemList(fileUrl.getPath(), fileUrl.getRootHash());
+        if (storageTreeAttr.isEmpty()) {
+            return list.build();
+        }
+        StorageTreeAttr prentTreeArr = storageTreeAttr.get(storageTreeAttr.size() - 1);
+        BlogStore.StoreTree parentTree = prentTreeArr.getTree();
+        list.setParentFile(BlogStore.FileItem.newBuilder()
+                .setName(parentTree.getName())
+                .setContentType(parentTree.getContentType())
+                .setSize(parentTree.getSize())
+                .setCreateTime(parentTree.getCreateTime())
+                .setUpdateTime(parentTree.getUpdateTime())
+                .build());
+
+        if (prentTreeArr.isFolder()) {
+            for (String treeHash : parentTree.getTreeHashItemList()) {
+                BlogStore.StoreTree tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
+                if (null != tree) {
+                    list.addItem(BlogStore.FileItem.newBuilder()
+                            .setName(tree.getName())
+                            .setContentType(tree.getContentType())
+                            .setSize(tree.getSize())
+                            .setCreateTime(tree.getCreateTime())
+                            .setUpdateTime(tree.getUpdateTime())
+                            .build());
+                }
+            }
+        }
+        return list.build();
+    }
 }
 
 interface Action {

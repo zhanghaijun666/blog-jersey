@@ -21,7 +21,7 @@ import org.simpleframework.http.Response;
 /**
  * @author zhanghaijun
  */
-@Path("/uploadfile")
+@Path("/file")
 public class FileUploadContorller {
 
     @Inject
@@ -48,7 +48,7 @@ public class FileUploadContorller {
     }
 
     @POST
-    @Path("/{path: .*}")
+    @Path("/upload/{path: .*}")
 //    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")

@@ -99,7 +99,17 @@ message License {
     int32 createById = 17;
     int64 createAt = 18;
 }
-
+message FileItemList{
+    repeated FileItem item = 1;
+    FileItem parentFile = 2;
+}
+message FileItem{
+    string name = 1;
+    string contentType = 2;
+    int64 size = 3;
+    int64 createTime = 4;
+    int64 updateTime = 5;
+}
 
 
 
