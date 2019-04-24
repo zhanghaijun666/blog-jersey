@@ -131,11 +131,10 @@ message Operator {
     int32 gpid = 3;
 }
 message StoreCommit {
-    string hash = 1;
-    Operator owner = 2;
-    Operator committer = 3;
-    string parent = 4;
-    string treeHash = 5;
+    Operator owner = 1;
+    Operator committer = 2;
+    string parent = 3;
+    string treeHash = 4;
 }
 message StoreTree {
     string hash = 1;
@@ -156,11 +155,10 @@ message StoreFile {
     int64 size = 6;
 }
 message StoreBlob {
-    string hash = 1;
-    Operator committer = 2;
-    string name = 3;
-    string contentType = 4;
-    int64 size = 5;
+    Operator committer = 1;
+    string name = 2;
+    string contentType = 3;
+    int64 size = 4;
 }
 message TreeUpdateItem{
     string originPath = 5;

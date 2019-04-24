@@ -31,7 +31,6 @@ public class FileFactory {
                 break;
             }
             BlogStore.StoreBlob.Builder blob = BlogStore.StoreBlob.newBuilder();
-            blob.setHash(entry.getKey());
             blob.setCommitter(BlogStore.Operator.newBuilder().setDate(System.currentTimeMillis()).setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build());
             blob.setName(FileUtils.getName(fileUrl.getPath()));
             blob.setContentType("");
