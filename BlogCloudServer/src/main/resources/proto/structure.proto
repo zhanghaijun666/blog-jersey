@@ -137,22 +137,18 @@ message StoreCommit {
     string treeHash = 4;
 }
 message StoreTree {
-    string hash = 1;
-    Operator owner = 2;
-    Operator committer = 3;
-    string name = 4;
-    string contentType = 5;
-    int64 size = 6;
-    repeated StoreTree treeItem = 10;
-    repeated StoreFile fileItem = 11;
+    Operator owner = 1;
+    Operator committer = 2;
+    string name = 3;
+    string contentType = 4;
+    int64 size = 5;
+    int64 createTime = 6;
+    int64 updateTime = 7;
+    repeated string treeHashItem = 10;
+    repeated StringList fileItem = 11;
 }
-message StoreFile {
-    repeated string hashItem = 1;
-    Operator owner = 2;
-    Operator committer = 3;
-    string name = 4;
-    string contentType = 5;
-    int64 size = 6;
+message StringList {
+    repeated string imte = 1;
 }
 message StoreBlob {
     Operator committer = 1;

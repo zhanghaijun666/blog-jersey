@@ -3,7 +3,7 @@ package com.blog.controller;
 import com.blog.config.Configuration;
 import com.blog.login.BlogSession;
 import com.blog.utils.BlogMediaType;
-import com.tools.FileUtils;
+import com.blog.utils.FileUtils;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;

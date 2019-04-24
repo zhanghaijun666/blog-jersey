@@ -17,4 +17,10 @@ public class RepositoryService {
         }
         return null;
     }
+
+    public static void updateCommitHash(int gptype, int gpid, String newCommitHash) {
+        Repository repository = RepositoryService.getRepository(gptype, gpid);
+        repository.setRootHash(newCommitHash);
+        repository.saveIt();
+    }
 }

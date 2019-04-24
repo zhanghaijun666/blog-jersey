@@ -1,6 +1,6 @@
 package com.blog.controller;
 
-import com.blog.file.FileFactory;
+import com.blog.file.StorageFactory;
 import com.blog.file.FileUrl;
 import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
@@ -58,7 +58,7 @@ public class FileUploadContorller {
         }
         BlogSession session = (BlogSession) security.getUserPrincipal();
         FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
-        return BlogStore.RspInfoList.newBuilder().setCode(FileFactory.UploadFile(fileUrl, request.getInputStream())).build();
+        return BlogStore.RspInfoList.newBuilder().setCode(StorageFactory.UploadFile(fileUrl, request.getInputStream())).build();
     }
 
 }

@@ -26,6 +26,11 @@ public class User extends org.javalite.activejdbc.Model implements CommonModel, 
     }
 
     @Override
+    public void setRootHash(String rootHash) {
+        setString("root_hash", rootHash);
+    }
+
+    @Override
     public String getName() {
         return getString("username");
     }
