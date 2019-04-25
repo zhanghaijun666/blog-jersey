@@ -2,19 +2,16 @@ package com.blog.controller;
 
 import com.blog.file.StorageFactory;
 import com.blog.file.FileUrl;
-import com.blog.file.StorageFile;
-import com.blog.file.StorageTreeAttr;
-import com.blog.file.StorageUtil;
 import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
 import com.blog.utils.BlogMediaType;
-import com.blog.utils.FileUtils;
 import java.io.IOException;
-import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -63,6 +60,25 @@ public class FileContorller {
         return BlogStore.FileItemList.getDefaultInstance();
     }
 
+//    @POST
+//    @Path("/deldete")
+//    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+//    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+//    @RolesAllowed("user")
+//    public BlogStore.RspInfoList deleteFile() {
+//        BlogSession session = (BlogSession) security.getUserPrincipal();
+//        return BlogStore.RspInfoList.getDefaultInstance();
+//    }
+//
+//    @PUT
+//    @Path("/rename")
+//    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+//    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+//    @RolesAllowed("user")
+//    public BlogStore.RspInfo renameFile() {
+//        return BlogStore.RspInfo.getDefaultInstance();
+//    }
+
 //    @GET
 //    @Path("/download/{path: .*}")
 //    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -80,5 +96,4 @@ public class FileContorller {
 //
 //        }
 //    }
-
 }
