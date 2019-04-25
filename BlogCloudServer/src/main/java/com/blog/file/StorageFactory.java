@@ -27,7 +27,8 @@ public class StorageFactory {
         for (int i = 0; i < blobList.size(); i++) {
             blobMap.put(EncryptUtils.sha1(blobList.get(i)), blobList.get(i));
         }
-        String fileHash = EncryptUtils.sha1(blobMap.keySet());
+//        整个文件的哈市值
+//        String fileHash = EncryptUtils.sha1(blobMap.keySet());
 
         BlogStore.ReturnCode code = BlogStore.ReturnCode.Return_OK;
         for (Map.Entry<String, byte[]> entry : blobMap.entrySet()) {
@@ -50,7 +51,7 @@ public class StorageFactory {
                     .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
                     .setCreateTime(System.currentTimeMillis())
                     .setUpdateTime(System.currentTimeMillis())
-//                    .setFileName(FileUtils.getFileName(fileUrl.getPath()))
+                    .setFileName(FileUtils.getFileName(fileUrl.getPath()))
                     .setSize(fileByte.length)
                     .setContentType("")
                     .addFileItem(BlogStore.StringList.newBuilder().addAllImte(blobMap.keySet()).build())
@@ -58,17 +59,17 @@ public class StorageFactory {
             String treeHash = EncryptUtils.sha1(fileTree.toByteArray());
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, fileTree);
             if (code == BlogStore.ReturnCode.Return_OK) {
-//                code = StorageFactory.addTreeItem(fileUrl.getParent(), treeHash, fileByte.length);
+                code = StorageFactory.addTreeItem(fileUrl, treeHash, fileByte.length);
             }
         }
         return code;
     }
 
-//    public static BlogStore.ReturnCode addTreeItem(FileUrl fileUrl, String treeHash, long treeSize) {
-//        return StorageFactory.StorageFactory(fileUrl, (BlogStore.StorageItem oldStoreItem) -> {
-//            return null;
-//        });
-//    }
+    public static BlogStore.ReturnCode addTreeItem(FileUrl fileUrl, String treeHash, long treeSize) {
+        return StorageFactory.StorageFactory(fileUrl.getParent(), (BlogStore.StorageItem oldStoreItem) -> {
+            return StorageTreeAttr.buildFolderNewTree(oldStoreItem, "", 0, treeHash, treeSize);
+        });
+    }
 
     /**
      * 更新treeItem
@@ -83,7 +84,17 @@ public class StorageFactory {
         BlogStore.StorageItem newCommit = null;
         if (null == commit) {
             // 第一次更新文件
-            newCommit = action.perform(BlogStore.StorageItem.getDefaultInstance());
+            newCommit = action.perform(BlogStore.StorageItem.newBuilder()
+                    .setType(BlogStore.StoreTypeEnum.StoreTypeCommit)
+                    .setOwner(BlogStore.Operator.newBuilder().setGptype(fileUrl.getGpType()).setGpid(fileUrl.getGpId()).build())
+                    .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
+                    .setCreateTime(System.currentTimeMillis())
+                    .setUpdateTime(System.currentTimeMillis())
+                    .setFileName("")
+                    .setSize(0)
+                    .setContentType(BlogMediaType.DIRECTORY_CONTENTTYPE)
+                    .setParent("")
+                    .build());
         } else {
             List<StorageTreeAttr> list = StorageUtil.getTreeItemList(fileUrl.getPath(), commit);
             if (list.isEmpty()) {
@@ -94,15 +105,19 @@ public class StorageFactory {
                 StorageTreeAttr currentTreeAttr = null;
                 BlogStore.StorageItem newTree = null;
                 String treeHash = null;
-                for (int i = list.size() - 1; i > 0; i++) {
+                long oldTreeSize = 0;
+                long newTreeSize = 0;
+                for (int i = list.size() - 1; i >= 0; i++) {
                     if (returnCode != BlogStore.ReturnCode.Return_OK) {
                         break;
                     }
                     currentTreeAttr = list.get(i);
+                    oldTreeSize = currentTreeAttr.getStorageItem().getSize();
+                    newTreeSize = null == newTree ? 0 : newTree.getSize();
                     if (i == list.size() - 1) {
                         newTree = action.perform(currentTreeAttr.getStorageItem());
                     } else {
-                        newTree = list.get(i).buildNewTree(currentTreeAttr.getHash(), treeHash);
+                        newTree = StorageTreeAttr.buildFolderNewTree(currentTreeAttr.getStorageItem(), currentTreeAttr.getHash(), oldTreeSize, treeHash, newTreeSize);
                     }
                     treeHash = EncryptUtils.sha1(newTree.toByteArray());
                     returnCode = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, newTree);
@@ -116,11 +131,12 @@ public class StorageFactory {
                         newTreeHashList.add(hash);
                     }
                 }
-                newCommit = BlogStore.StorageItem.newBuilder()
+                newCommit = BlogStore.StorageItem.newBuilder(commit)
+                        .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
+                        .setUpdateTime(System.currentTimeMillis())
+                        .setSize(0)
                         .setParent(commitHash)
                         .addAllTreeHashItem(newTreeHashList)
-                        .setCreateTime(commit.getCreateTime())
-                        .setUpdateTime(commit.getUpdateTime())
                         .build();
             }
         }

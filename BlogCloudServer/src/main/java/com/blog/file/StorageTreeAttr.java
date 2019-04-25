@@ -36,17 +36,39 @@ public class StorageTreeAttr {
         return StringUtils.equals(BlogMediaType.DIRECTORY_CONTENTTYPE, storageItem.getContentType());
     }
 
-    public BlogStore.StorageItem buildNewTree(String oldTreeHash, String newTreeHash) {
-        List<String> oldTreeHashList = this.getStorageItem().getTreeHashItemList();
-        BlogStore.StorageItem.Builder tree = BlogStore.StorageItem.newBuilder(this.getStorageItem());
-        tree.getTreeHashItemList().clear();
-        for (String hash : oldTreeHashList) {
-            if (StringUtils.equals(hash, oldTreeHash)) {
-                tree.addTreeHashItem(oldTreeHash);
-            } else {
-                tree.addTreeHashItem(hash);
+    /**
+     *
+     * @param oldStorageItem 准备更新的StorageItem
+     * @param oldTreeHash 要替换的treeHash 为空表示新增
+     * @param oldSize 要替换的treeHash的大小
+     * @param newTreeHash 新增或替换的treeHash 不能为空
+     * @param newSize 新增或替换的treeHash大小
+     * @return 更新后的StorageItem
+     */
+    public static BlogStore.StorageItem buildFolderNewTree(BlogStore.StorageItem oldStorageItem, String oldTreeHash, long oldSize, String newTreeHash, long newSize) {
+        if (null == oldStorageItem) {
+            return null;
+        }
+        if (StringUtils.isBlank(newTreeHash)) {
+            return BlogStore.StorageItem.newBuilder(oldStorageItem).build();
+        }
+        List<String> oldTreeHashList = oldStorageItem.getTreeHashItemList();
+        BlogStore.StorageItem.Builder storage = BlogStore.StorageItem.newBuilder(oldStorageItem);
+        storage.setSize(oldStorageItem.getSize() - oldSize + newSize);
+        storage.setUpdateTime(System.currentTimeMillis());
+        if (StringUtils.isBlank(oldTreeHash)) {
+            storage.addTreeHashItem(newTreeHash);
+        } else {
+            storage.getTreeHashItemList().clear();
+            for (String hash : oldTreeHashList) {
+                if (StringUtils.equals(hash, oldTreeHash)) {
+                    storage.addTreeHashItem(oldTreeHash);
+                } else {
+                    storage.addTreeHashItem(hash);
+                }
             }
         }
-        return tree.build();
+        return storage.build();
     }
+
 }

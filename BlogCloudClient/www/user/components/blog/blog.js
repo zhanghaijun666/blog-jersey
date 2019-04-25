@@ -11,6 +11,16 @@
                     new MenuTab("上传文件夹", {icon: "fa-upload"})
                 ];
             };
+            self.getBlogFile = function () {
+                getRequest("/file/get/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/", {accept: "application/x-protobuf"}, function (data) {
+                    var fileList = bcstore.FileItemList.decode(data);
+                    console.log(fileList);
+                });
+            };
+
+
+
+            self.getBlogFile();
 
         }
         return {
