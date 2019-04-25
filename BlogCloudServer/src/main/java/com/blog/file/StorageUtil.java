@@ -20,32 +20,42 @@ public class StorageUtil {
      * 获取目录的tree集合
      *
      * @param filePath
-     * @param rootTreeHash
+     * @param commit
      * @return
      */
-    public static List<StorageTreeAttr> getTreeItemList(String filePath, String rootTreeHash) {
+    public static List<StorageTreeAttr> getTreeItemList(String filePath, BlogStore.StoreCommit commit) {
         List<StorageTreeAttr> list = new ArrayList<>();
-        if (StringUtils.isBlank(filePath) || StringUtils.isBlank(rootTreeHash) || StringUtils.equals(rootTreeHash, FileUrl.DEFAULT_ROOT_HASH)) {
+        if (StringUtils.isBlank(filePath) || null == commit || commit.getTreeHashItemList().isEmpty()) {
             return list;
         }
         List<String> dirctorieList = FileUtils.getParentDirctories("", filePath, true);
+        dirctorieList.add("/");//添加根目录
+        BlogStore.StoreTree.Builder rootTree = BlogStore.StoreTree.newBuilder();
+        rootTree.setOwner(commit.getOwner());
+        rootTree.setName("");
+        rootTree.setContentType(BlogMediaType.DIRECTORY_CONTENTTYPE);
+        rootTree.setSize(commit.getSize());
+        rootTree.addAllTreeHashItem(commit.getTreeHashItemList());
+        list.add(new StorageTreeAttr(dirctorieList.get(0), "", rootTree.build()));
+
+        List<String> treeHashList = commit.getTreeHashItemList();
         int index = 0;
-        String treeHash = rootTreeHash;
-        BlogStore.StoreTree tree = null;
-        do {
-            tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
+        while (!treeHashList.isEmpty()) {
+            BlogStore.StoreTree tree = null;
+            index++;
+            if (index >= dirctorieList.size()) {
+                break;
+            }
             String dirctorie = dirctorieList.get(index);
-            if (tree != null && StringUtils.isNotBlank(dirctorie)) {
-                list.add(new StorageTreeAttr(dirctorie, treeHash, tree));
-                treeHash = "";
-                for (String itemHash : tree.getTreeHashItemList()) {
-                    tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, itemHash);
-                    if (tree != null && StringUtils.equals(FileUtils.getFileName(dirctorie), tree.getName())) {
-                        treeHash = itemHash;
-                    }
+            for (String treeHash : commit.getTreeHashItemList()) {
+                tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
+                if (null != tree && StringUtils.equals(FileUtils.getFileName(dirctorie), tree.getName())) {
+                    list.add(new StorageTreeAttr(dirctorie, treeHash, tree));
+                    treeHashList = tree.getTreeHashItemList();
+                    break;
                 }
             }
-        } while (tree != null && StringUtils.isNotBlank(treeHash));
+        }
         return list;
     }
 }

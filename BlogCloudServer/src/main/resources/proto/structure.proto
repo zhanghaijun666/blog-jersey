@@ -144,7 +144,8 @@ message StoreCommit {
     Operator owner = 1;
     Operator committer = 2;
     string parent = 3;
-    string treeHash = 4;
+    repeated string treeHashItem = 4;
+    int64 size = 5;
 }
 message StoreTree {
     Operator owner = 1;

@@ -31,22 +31,6 @@ public class FileUploadContorller {
     @Context
     SecurityContext security;
 
-    @GET
-    @Path("/checkhash/{hash}")
-    @RolesAllowed("user")
-    public BlogStore.RspInfo isExistHash(@PathParam("hash") String fileHash) {
-
-        return BlogStore.RspInfo.newBuilder().setCode(BlogStore.ReturnCode.Return_OK).build();
-    }
-
-    @POST
-    @Path("/item")
-    @RolesAllowed("user")
-    public BlogStore.RspInfo uploadItem() {
-
-        return BlogStore.RspInfo.newBuilder().setCode(BlogStore.ReturnCode.Return_OK).build();
-    }
-
     @POST
     @Path("/upload/{path: .*}")
 //    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -59,6 +43,19 @@ public class FileUploadContorller {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
         return BlogStore.RspInfoList.newBuilder().setCode(StorageFactory.UploadFile(fileUrl, request.getInputStream())).build();
+    }
+
+    @GET
+    @Path("/get/{path: .*}")
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @RolesAllowed("user")
+    public BlogStore.FileItemList getFileItemList(@PathParam("path") String filePath) {
+        BlogSession session = (BlogSession) security.getUserPrincipal();
+        FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
+        if (fileUrl.getGpType() == BlogStore.GtypeEnum.User_VALUE && fileUrl.getGpId() == session.getUserId()) {
+            return StorageFactory.getFileItemList(fileUrl);
+        }
+        return BlogStore.FileItemList.getDefaultInstance();
     }
 
 }

@@ -40,7 +40,11 @@ public class FileUrl {
                 this.rootHash = repository.getRootHash();
             }
         }
+    }
 
+    public FileUrl getParent() {
+        String fileOriginPath = this.getOriginPath();
+        return new FileUrl(fileOriginPath.substring(0, fileOriginPath.lastIndexOf("/") + 1), this.getUserId());
     }
 
     public String getRootHash() {
