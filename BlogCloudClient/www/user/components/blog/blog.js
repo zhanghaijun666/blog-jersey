@@ -20,12 +20,7 @@
             self.getBlogFile = function () {
                 getRequest("/file/get/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/", {accept: "application/x-protobuf"}, function (data) {
                     var fileList = bcstore.FileItemList.decode(data);
-                    var TotalSize = 0;
-                    for (var i = 0; i < fileList.item.length; i++) {
-                        TotalSize = TotalSize + fileList.item[i].size;
-                    }
-                    console.log(TotalSize);
-                    console.log(fileList);
+                    self.blogFileLsit(fileList.item);
                 });
             };
 

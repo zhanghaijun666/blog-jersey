@@ -44,18 +44,10 @@
                 <custom-checkbox params="checked: $data.select"></custom-checkbox>
             </td>
             <!-- /ko -->
-            <td class="custom-card-content">
-                <span class="custom-card-icon"><i class="fa" data-bind="css: $data.role.icon || 'fa-user' "></i></span>
-                <!-- ko if: $data.status === bcstore.Status.StatusDeleted -->
-                <del data-bind="text: $data.getFullName() "></del>
-                <!-- /ko -->
-                <!-- ko ifnot: $data.status === bcstore.Status.StatusDeleted -->
-                <span data-bind="text: $data.getFullName() "></span>
-                <!-- /ko -->
-            </td>
+            <td class="custom-card-content" data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></td>
             <!-- ko if: $component.isShowSingleOperateMenu() -->
             <td class="custom-card-operation">
-                <ul data-bind="foreach: $component.getOperateMenu(window.CustomMenuType.SingleSlection)">
+                <ul data-bind="foreach: $component.getSingleOperateMenu()">
                     <li data-bind="click: function(){ $component.operateMenuClick($data,null,$parent);}">
                         <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
                         <div class=""><span data-bind="text: $data.text"></span></div>
@@ -68,5 +60,17 @@
 </table>
 
 <template id="folderCardLayout-template">
-    
+    <span class="custom-card-icon"><i class="fa" data-bind="css: 'fa-file' "></i></span>
+    <span data-bind="text: $data.fileName+''"></span>
+    <span data-bind="text: '//大小'+$data.size"></span>
+    <span data-bind="text: '//创建时间'+$data.createTime"></span>
+</template>
+<template id="userCardLayout-template">
+    <span class="custom-card-icon"><i class="fa" data-bind="css: $data.role.icon || 'fa-user' "></i></span>
+    <!-- ko if: $data.status === bcstore.Status.StatusDeleted -->
+    <del data-bind="text: $data.getFullName() "></del>
+    <!-- /ko -->
+    <!-- ko ifnot: $data.status === bcstore.Status.StatusDeleted -->
+    <span data-bind="text: $data.getFullName() "></span>
+    <!-- /ko -->
 </template>

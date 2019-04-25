@@ -3,7 +3,7 @@
         function CustomTableModel(params, componentInfo) {
             var defaultValue = {
                 itemList: [], // 数据源
-                cardHead: [], // 数据头信息
+                cardHeadTemplate: "", // 数据头信息
                 operateMenu: []     //数据操作，包括单选操作和多选操作 CustomMenuType枚举
             };
             var self = $.extend(this, defaultValue, params);
@@ -23,8 +23,6 @@
                     data.clickFun(item);
                 }
             };
-
-
             self.getMultipleOperateMenu = function () {
                 return self.getOperateMenu(window.CustomMenuType.MultipleSelection);
             };
@@ -46,9 +44,6 @@
                 });
                 return array;
             };
-
-
-
         }
         return {
             viewModel: {
