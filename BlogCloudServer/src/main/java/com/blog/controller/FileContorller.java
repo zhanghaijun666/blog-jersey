@@ -2,10 +2,15 @@ package com.blog.controller;
 
 import com.blog.file.StorageFactory;
 import com.blog.file.FileUrl;
+import com.blog.file.StorageFile;
+import com.blog.file.StorageTreeAttr;
+import com.blog.file.StorageUtil;
 import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
 import com.blog.utils.BlogMediaType;
+import com.blog.utils.FileUtils;
 import java.io.IOException;
+import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -22,7 +27,7 @@ import org.simpleframework.http.Response;
  * @author zhanghaijun
  */
 @Path("/file")
-public class FileUploadContorller {
+public class FileContorller {
 
     @Inject
     Request request;
@@ -57,5 +62,23 @@ public class FileUploadContorller {
         }
         return BlogStore.FileItemList.getDefaultInstance();
     }
+
+//    @GET
+//    @Path("/download/{path: .*}")
+//    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+//    @RolesAllowed("user")
+//    public void fileDownload(@PathParam("path") String filePath) {
+//        BlogSession session = (BlogSession) security.getUserPrincipal();
+//        FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
+//        BlogStore.StorageItem storage = StorageFactory.getStorage(fileUrl);
+//        if (FileUtils.isFolder(storage.getContentType())) {
+//
+//        } else {
+////            设置文件ContentType类型，会自动判断下载文件类型
+//            response.setContentType("multipart/form-data");
+////        response.setHeader("Content-Disposition", "attachment;fileName=" + FileUtils.getFileName(fileUrl.getPath()));
+//
+//        }
+//    }
 
 }

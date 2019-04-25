@@ -4,11 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.activation.MimetypesFileTypeMap;
 import org.apache.commons.lang.StringUtils;
 import org.h2.store.fs.FilePath;
 
@@ -23,24 +22,23 @@ public class FileUtils {
         return BlogMediaType.DIRECTORY_CONTENTTYPE.equals(contentType);
     }
 
+    /**
+     * @param fileUrl
+     * @return 该方式支持本地文件，也支持http/https远程文件
+     */
     public static String getFileContentType(String fileUrl) {
         String contentType = null;
         try {
-            contentType = Files.probeContentType(Paths.get(fileUrl));
-        } catch (IOException e) {
+            contentType = new MimetypesFileTypeMap().getContentType(new File(fileUrl));
+        } catch (Exception e) {
         }
         return contentType;
     }
 
-    public static String getFileContentType(File file) {
-        String contentType = null;
-        try {
-            contentType = Files.probeContentType(file.toPath());
-        } catch (IOException e) {
-        }
-        return contentType;
-    }
-
+    /**
+     * @param path
+     * @return 獲取文件名
+     */
     public static String getFileName(String path) {
         if (StringUtils.isBlank(path)) {
             return path;
@@ -49,12 +47,10 @@ public class FileUtils {
     }
 
     /**
-     * 获取父路径集合
-     *
      * @param urlPrefix
      * @param filePath
      * @param isContainCurrent
-     * @return
+     * @return 获取父路径集合
      */
     public static List<String> getParentDirctories(String urlPrefix, String filePath, boolean isContainCurrent) {
         List<String> list = new ArrayList<>();
@@ -72,10 +68,8 @@ public class FileUtils {
     }
 
     /**
-     * 读取InputStream的字节
-     *
      * @param in
-     * @return
+     * @return 读取InputStream的字节
      * @throws IOException
      */
     public static byte[] toByteArray(InputStream in) throws IOException {
@@ -89,11 +83,9 @@ public class FileUtils {
     }
 
     /**
-     * 按大小拆分字节数组
-     *
      * @param byteArray
      * @param maxSize
-     * @return
+     * @return 按大小拆分字节数组
      */
     public static List<byte[]> SplitList(byte[] byteArray, int maxSize) {
         List<byte[]> result = new ArrayList<>();

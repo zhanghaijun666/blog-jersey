@@ -68,7 +68,7 @@ public class ResourceContorller {
     public void getResource(@PathParam("path") String filePath) throws IOException {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         File file = new File(WEB_DIR, filePath);
-        String contentType = FileUtils.getFileContentType(file);
+        String contentType = FileUtils.getFileContentType(file.getAbsolutePath());
         if (StringUtils.isNotBlank(contentType)) {
             response.setContentType(contentType);
         }
