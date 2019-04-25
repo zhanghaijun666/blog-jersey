@@ -24,8 +24,8 @@ public class StorageFile {
     private static final String TREE_DIR = "tree";
     private static final int FILE_HEADER_MESSAGE_LENGTH = 10;
 
-    public static com.google.protobuf.Message readStorag(BlogStore.StoreTypeEnum type, String hash) {
-        com.google.protobuf.Message message = null;
+    public static BlogStore.StorageItem readStorag(BlogStore.StoreTypeEnum type, String hash) {
+        BlogStore.StorageItem storageItem = null;
         String fileFullPath = StorageFile.getHashFullPath(type, hash);
         File file = new File(fileFullPath);
         FileInputStream input = null;
@@ -38,19 +38,7 @@ public class StorageFile {
                 int messageLength = BasicConvertUtils.byteArrayToInt(messageLengByte);
                 byte[] databuf = new byte[Math.min(messageLength, available - messageLengByte.length)];
                 input.read(databuf);
-                switch (type) {
-                    case StoreTypeCommit:
-                        message = BlogStore.StoreCommit.parseFrom(databuf);
-                        break;
-                    case StoreTypeTree:
-                        message = BlogStore.StoreTree.parseFrom(databuf);
-                        break;
-                    case StoreTypeBlob:
-                        message = BlogStore.StoreBlob.parseFrom(databuf);
-                        break;
-                    default:
-                        message = null;
-                }
+                storageItem = BlogStore.StorageItem.parseFrom(databuf);
             } catch (FileNotFoundException ex) {
                 logger.error("Unable to open " + fileFullPath, ex);
             } catch (IOException ex) {
@@ -64,7 +52,7 @@ public class StorageFile {
                 }
             }
         }
-        return message;
+        return storageItem;
     }
 
     private static BlogStore.ReturnCode writeStorag(byte[] byteArray, File file) {
@@ -113,7 +101,7 @@ public class StorageFile {
             case StoreTypeTree:
                 store = StorageFile.TREE_DIR;
                 break;
-            case StoreTypeBlob:
+            case StoreTypeFile:
                 store = StorageFile.BLOB_DIR;
                 break;
         }

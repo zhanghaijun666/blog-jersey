@@ -18,7 +18,7 @@ public class StorageUtil {
      * @param commit
      * @return
      */
-    public static List<StorageTreeAttr> getTreeItemList(String filePath, BlogStore.StoreCommit commit) {
+    public static List<StorageTreeAttr> getTreeItemList(String filePath, BlogStore.StorageItem commit) {
         List<StorageTreeAttr> list = new ArrayList<>();
         if (StringUtils.isBlank(filePath) || null == commit || commit.getTreeHashItemList().isEmpty()) {
             return list;
@@ -27,15 +27,15 @@ public class StorageUtil {
         List<String> treeHashList = commit.getTreeHashItemList();
         int index = 0;
         while (!treeHashList.isEmpty()) {
-            BlogStore.StoreTree tree = null;
+            BlogStore.StorageItem tree = null;
             index++;
             if (index >= dirctorieList.size()) {
                 break;
             }
             String dirctorie = dirctorieList.get(index);
             for (String treeHash : commit.getTreeHashItemList()) {
-                tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
-                if (null != tree && StringUtils.equals(FileUtils.getFileName(dirctorie), tree.getName())) {
+                tree = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
+                if (null != tree && StringUtils.equals(FileUtils.getFileName(dirctorie), tree.getFileName())) {
                     list.add(new StorageTreeAttr(dirctorie, treeHash, tree));
                     treeHashList = tree.getTreeHashItemList();
                     break;

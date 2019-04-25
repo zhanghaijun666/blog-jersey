@@ -18,7 +18,7 @@ enum StoreTypeEnum {
     StoreTypeDefault = 0;
     StoreTypeCommit = 1;
     StoreTypeTree = 2;
-    StoreTypeBlob = 3;
+    StoreTypeFile = 3;
 }
 enum GtypeEnum {
     Default = 0;
@@ -104,7 +104,7 @@ message FileItemList{
     FileItem parentFile = 2;
 }
 message FileItem{
-    string name = 1;
+    string fileName = 1;
     string contentType = 2;
     int64 size = 3;
     int64 createTime = 4;
@@ -136,29 +136,22 @@ message FileItem{
 
 
 message Operator {
-    int64 date = 1;
-    int32 gptype = 2;
-    int32 gpid = 3;
+    int32 gptype = 1;
+    int32 gpid = 2;
 }
-message StoreCommit {
-    Operator owner = 1;
-    Operator committer = 2;
-    string parent = 3;
-    repeated string treeHashItem = 4;
-    int64 size = 5;
-    int64 createTime = 6;
-    int64 updateTime = 7;
-}
-message StoreTree {
-    Operator owner = 1;
-    Operator committer = 2;
-    string name = 3;
-    string contentType = 4;
-    int64 size = 5;
-    int64 createTime = 6;
-    int64 updateTime = 7;
-    repeated string treeHashItem = 10;
-    repeated StringList fileItem = 11;
+message StorageItem {
+    StoreTypeEnum type = 1;
+    Operator owner = 2;
+    Operator update = 3;
+    int64 createTime = 4;
+    int64 updateTime = 5;
+    string fileName = 6;
+    int64 size = 7;
+    string contentType = 8;
+
+    string parent = 10;
+    repeated string treeHashItem = 11;
+    repeated StringList fileItem = 12;
 }
 message StringList {
     repeated string imte = 1;

@@ -255,9 +255,9 @@ public final class BlogStore {
      */
     StoreTypeTree(2),
     /**
-     * <code>StoreTypeBlob = 3;</code>
+     * <code>StoreTypeFile = 3;</code>
      */
-    StoreTypeBlob(3),
+    StoreTypeFile(3),
     UNRECOGNIZED(-1),
     ;
 
@@ -274,9 +274,9 @@ public final class BlogStore {
      */
     public static final int StoreTypeTree_VALUE = 2;
     /**
-     * <code>StoreTypeBlob = 3;</code>
+     * <code>StoreTypeFile = 3;</code>
      */
-    public static final int StoreTypeBlob_VALUE = 3;
+    public static final int StoreTypeFile_VALUE = 3;
 
 
     public final int getNumber() {
@@ -300,7 +300,7 @@ public final class BlogStore {
         case 0: return StoreTypeDefault;
         case 1: return StoreTypeCommit;
         case 2: return StoreTypeTree;
-        case 3: return StoreTypeBlob;
+        case 3: return StoreTypeFile;
         default: return null;
       }
     }
@@ -10454,14 +10454,14 @@ public final class BlogStore {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string name = 1;</code>
+     * <code>optional string fileName = 1;</code>
      */
-    java.lang.String getName();
+    java.lang.String getFileName();
     /**
-     * <code>optional string name = 1;</code>
+     * <code>optional string fileName = 1;</code>
      */
     com.google.protobuf.ByteString
-        getNameBytes();
+        getFileNameBytes();
 
     /**
      * <code>optional string contentType = 2;</code>
@@ -10500,7 +10500,7 @@ public final class BlogStore {
       super(builder);
     }
     private FileItem() {
-      name_ = "";
+      fileName_ = "";
       contentType_ = "";
       size_ = 0L;
       createTime_ = 0L;
@@ -10535,7 +10535,7 @@ public final class BlogStore {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              name_ = s;
+              fileName_ = s;
               break;
             }
             case 18: {
@@ -10582,34 +10582,34 @@ public final class BlogStore {
               com.blog.proto.BlogStore.FileItem.class, com.blog.proto.BlogStore.FileItem.Builder.class);
     }
 
-    public static final int NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object name_;
+    public static final int FILENAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object fileName_;
     /**
-     * <code>optional string name = 1;</code>
+     * <code>optional string fileName = 1;</code>
      */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
+    public java.lang.String getFileName() {
+      java.lang.Object ref = fileName_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        name_ = s;
+        fileName_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string name = 1;</code>
+     * <code>optional string fileName = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
+        getFileNameBytes() {
+      java.lang.Object ref = fileName_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        name_ = b;
+        fileName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -10689,8 +10689,8 @@ public final class BlogStore {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      if (!getFileNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, fileName_);
       }
       if (!getContentTypeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, contentType_);
@@ -10711,8 +10711,8 @@ public final class BlogStore {
       if (size != -1) return size;
 
       size = 0;
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      if (!getFileNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, fileName_);
       }
       if (!getContentTypeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, contentType_);
@@ -10745,8 +10745,8 @@ public final class BlogStore {
       com.blog.proto.BlogStore.FileItem other = (com.blog.proto.BlogStore.FileItem) obj;
 
       boolean result = true;
-      result = result && getName()
-          .equals(other.getName());
+      result = result && getFileName()
+          .equals(other.getFileName());
       result = result && getContentType()
           .equals(other.getContentType());
       result = result && (getSize()
@@ -10765,8 +10765,8 @@ public final class BlogStore {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + FILENAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFileName().hashCode();
       hash = (37 * hash) + CONTENTTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getContentType().hashCode();
       hash = (37 * hash) + SIZE_FIELD_NUMBER;
@@ -10896,7 +10896,7 @@ public final class BlogStore {
       }
       public Builder clear() {
         super.clear();
-        name_ = "";
+        fileName_ = "";
 
         contentType_ = "";
 
@@ -10928,7 +10928,7 @@ public final class BlogStore {
 
       public com.blog.proto.BlogStore.FileItem buildPartial() {
         com.blog.proto.BlogStore.FileItem result = new com.blog.proto.BlogStore.FileItem(this);
-        result.name_ = name_;
+        result.fileName_ = fileName_;
         result.contentType_ = contentType_;
         result.size_ = size_;
         result.createTime_ = createTime_;
@@ -10974,8 +10974,8 @@ public final class BlogStore {
 
       public Builder mergeFrom(com.blog.proto.BlogStore.FileItem other) {
         if (other == com.blog.proto.BlogStore.FileItem.getDefaultInstance()) return this;
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
+        if (!other.getFileName().isEmpty()) {
+          fileName_ = other.fileName_;
           onChanged();
         }
         if (!other.getContentType().isEmpty()) {
@@ -11017,71 +11017,71 @@ public final class BlogStore {
         return this;
       }
 
-      private java.lang.Object name_ = "";
+      private java.lang.Object fileName_ = "";
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string fileName = 1;</code>
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
+      public java.lang.String getFileName() {
+        java.lang.Object ref = fileName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          name_ = s;
+          fileName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string fileName = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
+          getFileNameBytes() {
+        java.lang.Object ref = fileName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          name_ = b;
+          fileName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string fileName = 1;</code>
        */
-      public Builder setName(
+      public Builder setFileName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        name_ = value;
+        fileName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string fileName = 1;</code>
        */
-      public Builder clearName() {
+      public Builder clearFileName() {
         
-        name_ = getDefaultInstance().getName();
+        fileName_ = getDefaultInstance().getFileName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 1;</code>
+       * <code>optional string fileName = 1;</code>
        */
-      public Builder setNameBytes(
+      public Builder setFileNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        name_ = value;
+        fileName_ = value;
         onChanged();
         return this;
       }
@@ -11286,17 +11286,12 @@ public final class BlogStore {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 date = 1;</code>
-     */
-    long getDate();
-
-    /**
-     * <code>optional int32 gptype = 2;</code>
+     * <code>optional int32 gptype = 1;</code>
      */
     int getGptype();
 
     /**
-     * <code>optional int32 gpid = 3;</code>
+     * <code>optional int32 gpid = 2;</code>
      */
     int getGpid();
   }
@@ -11312,7 +11307,6 @@ public final class BlogStore {
       super(builder);
     }
     private Operator() {
-      date_ = 0L;
       gptype_ = 0;
       gpid_ = 0;
     }
@@ -11344,15 +11338,10 @@ public final class BlogStore {
             }
             case 8: {
 
-              date_ = input.readInt64();
-              break;
-            }
-            case 16: {
-
               gptype_ = input.readInt32();
               break;
             }
-            case 24: {
+            case 16: {
 
               gpid_ = input.readInt32();
               break;
@@ -11380,28 +11369,19 @@ public final class BlogStore {
               com.blog.proto.BlogStore.Operator.class, com.blog.proto.BlogStore.Operator.Builder.class);
     }
 
-    public static final int DATE_FIELD_NUMBER = 1;
-    private long date_;
-    /**
-     * <code>optional int64 date = 1;</code>
-     */
-    public long getDate() {
-      return date_;
-    }
-
-    public static final int GPTYPE_FIELD_NUMBER = 2;
+    public static final int GPTYPE_FIELD_NUMBER = 1;
     private int gptype_;
     /**
-     * <code>optional int32 gptype = 2;</code>
+     * <code>optional int32 gptype = 1;</code>
      */
     public int getGptype() {
       return gptype_;
     }
 
-    public static final int GPID_FIELD_NUMBER = 3;
+    public static final int GPID_FIELD_NUMBER = 2;
     private int gpid_;
     /**
-     * <code>optional int32 gpid = 3;</code>
+     * <code>optional int32 gpid = 2;</code>
      */
     public int getGpid() {
       return gpid_;
@@ -11419,14 +11399,11 @@ public final class BlogStore {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (date_ != 0L) {
-        output.writeInt64(1, date_);
-      }
       if (gptype_ != 0) {
-        output.writeInt32(2, gptype_);
+        output.writeInt32(1, gptype_);
       }
       if (gpid_ != 0) {
-        output.writeInt32(3, gpid_);
+        output.writeInt32(2, gpid_);
       }
     }
 
@@ -11435,17 +11412,13 @@ public final class BlogStore {
       if (size != -1) return size;
 
       size = 0;
-      if (date_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, date_);
-      }
       if (gptype_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, gptype_);
+          .computeInt32Size(1, gptype_);
       }
       if (gpid_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, gpid_);
+          .computeInt32Size(2, gpid_);
       }
       memoizedSize = size;
       return size;
@@ -11463,8 +11436,6 @@ public final class BlogStore {
       com.blog.proto.BlogStore.Operator other = (com.blog.proto.BlogStore.Operator) obj;
 
       boolean result = true;
-      result = result && (getDate()
-          == other.getDate());
       result = result && (getGptype()
           == other.getGptype());
       result = result && (getGpid()
@@ -11479,9 +11450,6 @@ public final class BlogStore {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + DATE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getDate());
       hash = (37 * hash) + GPTYPE_FIELD_NUMBER;
       hash = (53 * hash) + getGptype();
       hash = (37 * hash) + GPID_FIELD_NUMBER;
@@ -11604,8 +11572,6 @@ public final class BlogStore {
       }
       public Builder clear() {
         super.clear();
-        date_ = 0L;
-
         gptype_ = 0;
 
         gpid_ = 0;
@@ -11632,7 +11598,6 @@ public final class BlogStore {
 
       public com.blog.proto.BlogStore.Operator buildPartial() {
         com.blog.proto.BlogStore.Operator result = new com.blog.proto.BlogStore.Operator(this);
-        result.date_ = date_;
         result.gptype_ = gptype_;
         result.gpid_ = gpid_;
         onBuilt();
@@ -11676,9 +11641,6 @@ public final class BlogStore {
 
       public Builder mergeFrom(com.blog.proto.BlogStore.Operator other) {
         if (other == com.blog.proto.BlogStore.Operator.getDefaultInstance()) return this;
-        if (other.getDate() != 0L) {
-          setDate(other.getDate());
-        }
         if (other.getGptype() != 0) {
           setGptype(other.getGptype());
         }
@@ -11711,41 +11673,15 @@ public final class BlogStore {
         return this;
       }
 
-      private long date_ ;
-      /**
-       * <code>optional int64 date = 1;</code>
-       */
-      public long getDate() {
-        return date_;
-      }
-      /**
-       * <code>optional int64 date = 1;</code>
-       */
-      public Builder setDate(long value) {
-        
-        date_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 date = 1;</code>
-       */
-      public Builder clearDate() {
-        
-        date_ = 0L;
-        onChanged();
-        return this;
-      }
-
       private int gptype_ ;
       /**
-       * <code>optional int32 gptype = 2;</code>
+       * <code>optional int32 gptype = 1;</code>
        */
       public int getGptype() {
         return gptype_;
       }
       /**
-       * <code>optional int32 gptype = 2;</code>
+       * <code>optional int32 gptype = 1;</code>
        */
       public Builder setGptype(int value) {
         
@@ -11754,7 +11690,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional int32 gptype = 2;</code>
+       * <code>optional int32 gptype = 1;</code>
        */
       public Builder clearGptype() {
         
@@ -11765,13 +11701,13 @@ public final class BlogStore {
 
       private int gpid_ ;
       /**
-       * <code>optional int32 gpid = 3;</code>
+       * <code>optional int32 gpid = 2;</code>
        */
       public int getGpid() {
         return gpid_;
       }
       /**
-       * <code>optional int32 gpid = 3;</code>
+       * <code>optional int32 gpid = 2;</code>
        */
       public Builder setGpid(int value) {
         
@@ -11780,7 +11716,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional int32 gpid = 3;</code>
+       * <code>optional int32 gpid = 2;</code>
        */
       public Builder clearGpid() {
         
@@ -11837,1408 +11773,152 @@ public final class BlogStore {
 
   }
 
-  public interface StoreCommitOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:StoreCommit)
+  public interface StorageItemOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:StorageItem)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .Operator owner = 1;</code>
+     * <code>optional .StoreTypeEnum type = 1;</code>
+     */
+    int getTypeValue();
+    /**
+     * <code>optional .StoreTypeEnum type = 1;</code>
+     */
+    com.blog.proto.BlogStore.StoreTypeEnum getType();
+
+    /**
+     * <code>optional .Operator owner = 2;</code>
      */
     boolean hasOwner();
     /**
-     * <code>optional .Operator owner = 1;</code>
+     * <code>optional .Operator owner = 2;</code>
      */
     com.blog.proto.BlogStore.Operator getOwner();
     /**
-     * <code>optional .Operator owner = 1;</code>
+     * <code>optional .Operator owner = 2;</code>
      */
     com.blog.proto.BlogStore.OperatorOrBuilder getOwnerOrBuilder();
 
     /**
-     * <code>optional .Operator committer = 2;</code>
+     * <code>optional .Operator update = 3;</code>
      */
-    boolean hasCommitter();
+    boolean hasUpdate();
     /**
-     * <code>optional .Operator committer = 2;</code>
+     * <code>optional .Operator update = 3;</code>
      */
-    com.blog.proto.BlogStore.Operator getCommitter();
+    com.blog.proto.BlogStore.Operator getUpdate();
     /**
-     * <code>optional .Operator committer = 2;</code>
+     * <code>optional .Operator update = 3;</code>
      */
-    com.blog.proto.BlogStore.OperatorOrBuilder getCommitterOrBuilder();
+    com.blog.proto.BlogStore.OperatorOrBuilder getUpdateOrBuilder();
 
     /**
-     * <code>optional string parent = 3;</code>
-     */
-    java.lang.String getParent();
-    /**
-     * <code>optional string parent = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getParentBytes();
-
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    java.util.List<java.lang.String>
-        getTreeHashItemList();
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    int getTreeHashItemCount();
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    java.lang.String getTreeHashItem(int index);
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getTreeHashItemBytes(int index);
-
-    /**
-     * <code>optional int64 size = 5;</code>
-     */
-    long getSize();
-
-    /**
-     * <code>optional int64 createTime = 6;</code>
+     * <code>optional int64 createTime = 4;</code>
      */
     long getCreateTime();
 
     /**
-     * <code>optional int64 updateTime = 7;</code>
+     * <code>optional int64 updateTime = 5;</code>
      */
     long getUpdateTime();
-  }
-  /**
-   * Protobuf type {@code StoreCommit}
-   */
-  public  static final class StoreCommit extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:StoreCommit)
-      StoreCommitOrBuilder {
-    // Use StoreCommit.newBuilder() to construct.
-    private StoreCommit(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private StoreCommit() {
-      parent_ = "";
-      treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      size_ = 0L;
-      createTime_ = 0L;
-      updateTime_ = 0L;
-    }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private StoreCommit(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              com.blog.proto.BlogStore.Operator.Builder subBuilder = null;
-              if (owner_ != null) {
-                subBuilder = owner_.toBuilder();
-              }
-              owner_ = input.readMessage(com.blog.proto.BlogStore.Operator.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(owner_);
-                owner_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 18: {
-              com.blog.proto.BlogStore.Operator.Builder subBuilder = null;
-              if (committer_ != null) {
-                subBuilder = committer_.toBuilder();
-              }
-              committer_ = input.readMessage(com.blog.proto.BlogStore.Operator.parser(), extensionRegistry);
-              if (subBuilder != null) {
-                subBuilder.mergeFrom(committer_);
-                committer_ = subBuilder.buildPartial();
-              }
-
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              parent_ = s;
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                treeHashItem_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000008;
-              }
-              treeHashItem_.add(s);
-              break;
-            }
-            case 40: {
-
-              size_ = input.readInt64();
-              break;
-            }
-            case 48: {
-
-              createTime_ = input.readInt64();
-              break;
-            }
-            case 56: {
-
-              updateTime_ = input.readInt64();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-          treeHashItem_ = treeHashItem_.getUnmodifiableView();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.blog.proto.BlogStore.internal_static_StoreCommit_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.blog.proto.BlogStore.internal_static_StoreCommit_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.blog.proto.BlogStore.StoreCommit.class, com.blog.proto.BlogStore.StoreCommit.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int OWNER_FIELD_NUMBER = 1;
-    private com.blog.proto.BlogStore.Operator owner_;
     /**
-     * <code>optional .Operator owner = 1;</code>
+     * <code>optional string fileName = 6;</code>
      */
-    public boolean hasOwner() {
-      return owner_ != null;
-    }
+    java.lang.String getFileName();
     /**
-     * <code>optional .Operator owner = 1;</code>
-     */
-    public com.blog.proto.BlogStore.Operator getOwner() {
-      return owner_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : owner_;
-    }
-    /**
-     * <code>optional .Operator owner = 1;</code>
-     */
-    public com.blog.proto.BlogStore.OperatorOrBuilder getOwnerOrBuilder() {
-      return getOwner();
-    }
-
-    public static final int COMMITTER_FIELD_NUMBER = 2;
-    private com.blog.proto.BlogStore.Operator committer_;
-    /**
-     * <code>optional .Operator committer = 2;</code>
-     */
-    public boolean hasCommitter() {
-      return committer_ != null;
-    }
-    /**
-     * <code>optional .Operator committer = 2;</code>
-     */
-    public com.blog.proto.BlogStore.Operator getCommitter() {
-      return committer_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : committer_;
-    }
-    /**
-     * <code>optional .Operator committer = 2;</code>
-     */
-    public com.blog.proto.BlogStore.OperatorOrBuilder getCommitterOrBuilder() {
-      return getCommitter();
-    }
-
-    public static final int PARENT_FIELD_NUMBER = 3;
-    private volatile java.lang.Object parent_;
-    /**
-     * <code>optional string parent = 3;</code>
-     */
-    public java.lang.String getParent() {
-      java.lang.Object ref = parent_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        parent_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string parent = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getParentBytes() {
-      java.lang.Object ref = parent_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        parent_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TREEHASHITEM_FIELD_NUMBER = 4;
-    private com.google.protobuf.LazyStringList treeHashItem_;
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getTreeHashItemList() {
-      return treeHashItem_;
-    }
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    public int getTreeHashItemCount() {
-      return treeHashItem_.size();
-    }
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    public java.lang.String getTreeHashItem(int index) {
-      return treeHashItem_.get(index);
-    }
-    /**
-     * <code>repeated string treeHashItem = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getTreeHashItemBytes(int index) {
-      return treeHashItem_.getByteString(index);
-    }
-
-    public static final int SIZE_FIELD_NUMBER = 5;
-    private long size_;
-    /**
-     * <code>optional int64 size = 5;</code>
-     */
-    public long getSize() {
-      return size_;
-    }
-
-    public static final int CREATETIME_FIELD_NUMBER = 6;
-    private long createTime_;
-    /**
-     * <code>optional int64 createTime = 6;</code>
-     */
-    public long getCreateTime() {
-      return createTime_;
-    }
-
-    public static final int UPDATETIME_FIELD_NUMBER = 7;
-    private long updateTime_;
-    /**
-     * <code>optional int64 updateTime = 7;</code>
-     */
-    public long getUpdateTime() {
-      return updateTime_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (owner_ != null) {
-        output.writeMessage(1, getOwner());
-      }
-      if (committer_ != null) {
-        output.writeMessage(2, getCommitter());
-      }
-      if (!getParentBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, parent_);
-      }
-      for (int i = 0; i < treeHashItem_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, treeHashItem_.getRaw(i));
-      }
-      if (size_ != 0L) {
-        output.writeInt64(5, size_);
-      }
-      if (createTime_ != 0L) {
-        output.writeInt64(6, createTime_);
-      }
-      if (updateTime_ != 0L) {
-        output.writeInt64(7, updateTime_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (owner_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getOwner());
-      }
-      if (committer_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getCommitter());
-      }
-      if (!getParentBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, parent_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < treeHashItem_.size(); i++) {
-          dataSize += computeStringSizeNoTag(treeHashItem_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getTreeHashItemList().size();
-      }
-      if (size_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, size_);
-      }
-      if (createTime_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, createTime_);
-      }
-      if (updateTime_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, updateTime_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.blog.proto.BlogStore.StoreCommit)) {
-        return super.equals(obj);
-      }
-      com.blog.proto.BlogStore.StoreCommit other = (com.blog.proto.BlogStore.StoreCommit) obj;
-
-      boolean result = true;
-      result = result && (hasOwner() == other.hasOwner());
-      if (hasOwner()) {
-        result = result && getOwner()
-            .equals(other.getOwner());
-      }
-      result = result && (hasCommitter() == other.hasCommitter());
-      if (hasCommitter()) {
-        result = result && getCommitter()
-            .equals(other.getCommitter());
-      }
-      result = result && getParent()
-          .equals(other.getParent());
-      result = result && getTreeHashItemList()
-          .equals(other.getTreeHashItemList());
-      result = result && (getSize()
-          == other.getSize());
-      result = result && (getCreateTime()
-          == other.getCreateTime());
-      result = result && (getUpdateTime()
-          == other.getUpdateTime());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      if (hasOwner()) {
-        hash = (37 * hash) + OWNER_FIELD_NUMBER;
-        hash = (53 * hash) + getOwner().hashCode();
-      }
-      if (hasCommitter()) {
-        hash = (37 * hash) + COMMITTER_FIELD_NUMBER;
-        hash = (53 * hash) + getCommitter().hashCode();
-      }
-      hash = (37 * hash) + PARENT_FIELD_NUMBER;
-      hash = (53 * hash) + getParent().hashCode();
-      if (getTreeHashItemCount() > 0) {
-        hash = (37 * hash) + TREEHASHITEM_FIELD_NUMBER;
-        hash = (53 * hash) + getTreeHashItemList().hashCode();
-      }
-      hash = (37 * hash) + SIZE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getSize());
-      hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getCreateTime());
-      hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getUpdateTime());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.blog.proto.BlogStore.StoreCommit parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.blog.proto.BlogStore.StoreCommit prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code StoreCommit}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:StoreCommit)
-        com.blog.proto.BlogStore.StoreCommitOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.blog.proto.BlogStore.internal_static_StoreCommit_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.blog.proto.BlogStore.internal_static_StoreCommit_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.blog.proto.BlogStore.StoreCommit.class, com.blog.proto.BlogStore.StoreCommit.Builder.class);
-      }
-
-      // Construct using com.blog.proto.BlogStore.StoreCommit.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        if (ownerBuilder_ == null) {
-          owner_ = null;
-        } else {
-          owner_ = null;
-          ownerBuilder_ = null;
-        }
-        if (committerBuilder_ == null) {
-          committer_ = null;
-        } else {
-          committer_ = null;
-          committerBuilder_ = null;
-        }
-        parent_ = "";
-
-        treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        size_ = 0L;
-
-        createTime_ = 0L;
-
-        updateTime_ = 0L;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.blog.proto.BlogStore.internal_static_StoreCommit_descriptor;
-      }
-
-      public com.blog.proto.BlogStore.StoreCommit getDefaultInstanceForType() {
-        return com.blog.proto.BlogStore.StoreCommit.getDefaultInstance();
-      }
-
-      public com.blog.proto.BlogStore.StoreCommit build() {
-        com.blog.proto.BlogStore.StoreCommit result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.blog.proto.BlogStore.StoreCommit buildPartial() {
-        com.blog.proto.BlogStore.StoreCommit result = new com.blog.proto.BlogStore.StoreCommit(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (ownerBuilder_ == null) {
-          result.owner_ = owner_;
-        } else {
-          result.owner_ = ownerBuilder_.build();
-        }
-        if (committerBuilder_ == null) {
-          result.committer_ = committer_;
-        } else {
-          result.committer_ = committerBuilder_.build();
-        }
-        result.parent_ = parent_;
-        if (((bitField0_ & 0x00000008) == 0x00000008)) {
-          treeHashItem_ = treeHashItem_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000008);
-        }
-        result.treeHashItem_ = treeHashItem_;
-        result.size_ = size_;
-        result.createTime_ = createTime_;
-        result.updateTime_ = updateTime_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.blog.proto.BlogStore.StoreCommit) {
-          return mergeFrom((com.blog.proto.BlogStore.StoreCommit)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.blog.proto.BlogStore.StoreCommit other) {
-        if (other == com.blog.proto.BlogStore.StoreCommit.getDefaultInstance()) return this;
-        if (other.hasOwner()) {
-          mergeOwner(other.getOwner());
-        }
-        if (other.hasCommitter()) {
-          mergeCommitter(other.getCommitter());
-        }
-        if (!other.getParent().isEmpty()) {
-          parent_ = other.parent_;
-          onChanged();
-        }
-        if (!other.treeHashItem_.isEmpty()) {
-          if (treeHashItem_.isEmpty()) {
-            treeHashItem_ = other.treeHashItem_;
-            bitField0_ = (bitField0_ & ~0x00000008);
-          } else {
-            ensureTreeHashItemIsMutable();
-            treeHashItem_.addAll(other.treeHashItem_);
-          }
-          onChanged();
-        }
-        if (other.getSize() != 0L) {
-          setSize(other.getSize());
-        }
-        if (other.getCreateTime() != 0L) {
-          setCreateTime(other.getCreateTime());
-        }
-        if (other.getUpdateTime() != 0L) {
-          setUpdateTime(other.getUpdateTime());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.blog.proto.BlogStore.StoreCommit parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.blog.proto.BlogStore.StoreCommit) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private com.blog.proto.BlogStore.Operator owner_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> ownerBuilder_;
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public boolean hasOwner() {
-        return ownerBuilder_ != null || owner_ != null;
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public com.blog.proto.BlogStore.Operator getOwner() {
-        if (ownerBuilder_ == null) {
-          return owner_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : owner_;
-        } else {
-          return ownerBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public Builder setOwner(com.blog.proto.BlogStore.Operator value) {
-        if (ownerBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          owner_ = value;
-          onChanged();
-        } else {
-          ownerBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public Builder setOwner(
-          com.blog.proto.BlogStore.Operator.Builder builderForValue) {
-        if (ownerBuilder_ == null) {
-          owner_ = builderForValue.build();
-          onChanged();
-        } else {
-          ownerBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public Builder mergeOwner(com.blog.proto.BlogStore.Operator value) {
-        if (ownerBuilder_ == null) {
-          if (owner_ != null) {
-            owner_ =
-              com.blog.proto.BlogStore.Operator.newBuilder(owner_).mergeFrom(value).buildPartial();
-          } else {
-            owner_ = value;
-          }
-          onChanged();
-        } else {
-          ownerBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public Builder clearOwner() {
-        if (ownerBuilder_ == null) {
-          owner_ = null;
-          onChanged();
-        } else {
-          owner_ = null;
-          ownerBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public com.blog.proto.BlogStore.Operator.Builder getOwnerBuilder() {
-        
-        onChanged();
-        return getOwnerFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      public com.blog.proto.BlogStore.OperatorOrBuilder getOwnerOrBuilder() {
-        if (ownerBuilder_ != null) {
-          return ownerBuilder_.getMessageOrBuilder();
-        } else {
-          return owner_ == null ?
-              com.blog.proto.BlogStore.Operator.getDefaultInstance() : owner_;
-        }
-      }
-      /**
-       * <code>optional .Operator owner = 1;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> 
-          getOwnerFieldBuilder() {
-        if (ownerBuilder_ == null) {
-          ownerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder>(
-                  getOwner(),
-                  getParentForChildren(),
-                  isClean());
-          owner_ = null;
-        }
-        return ownerBuilder_;
-      }
-
-      private com.blog.proto.BlogStore.Operator committer_ = null;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> committerBuilder_;
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public boolean hasCommitter() {
-        return committerBuilder_ != null || committer_ != null;
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public com.blog.proto.BlogStore.Operator getCommitter() {
-        if (committerBuilder_ == null) {
-          return committer_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : committer_;
-        } else {
-          return committerBuilder_.getMessage();
-        }
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public Builder setCommitter(com.blog.proto.BlogStore.Operator value) {
-        if (committerBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          committer_ = value;
-          onChanged();
-        } else {
-          committerBuilder_.setMessage(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public Builder setCommitter(
-          com.blog.proto.BlogStore.Operator.Builder builderForValue) {
-        if (committerBuilder_ == null) {
-          committer_ = builderForValue.build();
-          onChanged();
-        } else {
-          committerBuilder_.setMessage(builderForValue.build());
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public Builder mergeCommitter(com.blog.proto.BlogStore.Operator value) {
-        if (committerBuilder_ == null) {
-          if (committer_ != null) {
-            committer_ =
-              com.blog.proto.BlogStore.Operator.newBuilder(committer_).mergeFrom(value).buildPartial();
-          } else {
-            committer_ = value;
-          }
-          onChanged();
-        } else {
-          committerBuilder_.mergeFrom(value);
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public Builder clearCommitter() {
-        if (committerBuilder_ == null) {
-          committer_ = null;
-          onChanged();
-        } else {
-          committer_ = null;
-          committerBuilder_ = null;
-        }
-
-        return this;
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public com.blog.proto.BlogStore.Operator.Builder getCommitterBuilder() {
-        
-        onChanged();
-        return getCommitterFieldBuilder().getBuilder();
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      public com.blog.proto.BlogStore.OperatorOrBuilder getCommitterOrBuilder() {
-        if (committerBuilder_ != null) {
-          return committerBuilder_.getMessageOrBuilder();
-        } else {
-          return committer_ == null ?
-              com.blog.proto.BlogStore.Operator.getDefaultInstance() : committer_;
-        }
-      }
-      /**
-       * <code>optional .Operator committer = 2;</code>
-       */
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> 
-          getCommitterFieldBuilder() {
-        if (committerBuilder_ == null) {
-          committerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder>(
-                  getCommitter(),
-                  getParentForChildren(),
-                  isClean());
-          committer_ = null;
-        }
-        return committerBuilder_;
-      }
-
-      private java.lang.Object parent_ = "";
-      /**
-       * <code>optional string parent = 3;</code>
-       */
-      public java.lang.String getParent() {
-        java.lang.Object ref = parent_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          parent_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string parent = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getParentBytes() {
-        java.lang.Object ref = parent_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          parent_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string parent = 3;</code>
-       */
-      public Builder setParent(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        parent_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string parent = 3;</code>
-       */
-      public Builder clearParent() {
-        
-        parent_ = getDefaultInstance().getParent();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string parent = 3;</code>
-       */
-      public Builder setParentBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        parent_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureTreeHashItemIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          treeHashItem_ = new com.google.protobuf.LazyStringArrayList(treeHashItem_);
-          bitField0_ |= 0x00000008;
-         }
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getTreeHashItemList() {
-        return treeHashItem_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public int getTreeHashItemCount() {
-        return treeHashItem_.size();
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public java.lang.String getTreeHashItem(int index) {
-        return treeHashItem_.get(index);
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getTreeHashItemBytes(int index) {
-        return treeHashItem_.getByteString(index);
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public Builder setTreeHashItem(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTreeHashItemIsMutable();
-        treeHashItem_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public Builder addTreeHashItem(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureTreeHashItemIsMutable();
-        treeHashItem_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public Builder addAllTreeHashItem(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureTreeHashItemIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, treeHashItem_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public Builder clearTreeHashItem() {
-        treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string treeHashItem = 4;</code>
-       */
-      public Builder addTreeHashItemBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureTreeHashItemIsMutable();
-        treeHashItem_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private long size_ ;
-      /**
-       * <code>optional int64 size = 5;</code>
-       */
-      public long getSize() {
-        return size_;
-      }
-      /**
-       * <code>optional int64 size = 5;</code>
-       */
-      public Builder setSize(long value) {
-        
-        size_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 size = 5;</code>
-       */
-      public Builder clearSize() {
-        
-        size_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long createTime_ ;
-      /**
-       * <code>optional int64 createTime = 6;</code>
-       */
-      public long getCreateTime() {
-        return createTime_;
-      }
-      /**
-       * <code>optional int64 createTime = 6;</code>
-       */
-      public Builder setCreateTime(long value) {
-        
-        createTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 createTime = 6;</code>
-       */
-      public Builder clearCreateTime() {
-        
-        createTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long updateTime_ ;
-      /**
-       * <code>optional int64 updateTime = 7;</code>
-       */
-      public long getUpdateTime() {
-        return updateTime_;
-      }
-      /**
-       * <code>optional int64 updateTime = 7;</code>
-       */
-      public Builder setUpdateTime(long value) {
-        
-        updateTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 updateTime = 7;</code>
-       */
-      public Builder clearUpdateTime() {
-        
-        updateTime_ = 0L;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:StoreCommit)
-    }
-
-    // @@protoc_insertion_point(class_scope:StoreCommit)
-    private static final com.blog.proto.BlogStore.StoreCommit DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.blog.proto.BlogStore.StoreCommit();
-    }
-
-    public static com.blog.proto.BlogStore.StoreCommit getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<StoreCommit>
-        PARSER = new com.google.protobuf.AbstractParser<StoreCommit>() {
-      public StoreCommit parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StoreCommit(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<StoreCommit> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<StoreCommit> getParserForType() {
-      return PARSER;
-    }
-
-    public com.blog.proto.BlogStore.StoreCommit getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface StoreTreeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:StoreTree)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .Operator owner = 1;</code>
-     */
-    boolean hasOwner();
-    /**
-     * <code>optional .Operator owner = 1;</code>
-     */
-    com.blog.proto.BlogStore.Operator getOwner();
-    /**
-     * <code>optional .Operator owner = 1;</code>
-     */
-    com.blog.proto.BlogStore.OperatorOrBuilder getOwnerOrBuilder();
-
-    /**
-     * <code>optional .Operator committer = 2;</code>
-     */
-    boolean hasCommitter();
-    /**
-     * <code>optional .Operator committer = 2;</code>
-     */
-    com.blog.proto.BlogStore.Operator getCommitter();
-    /**
-     * <code>optional .Operator committer = 2;</code>
-     */
-    com.blog.proto.BlogStore.OperatorOrBuilder getCommitterOrBuilder();
-
-    /**
-     * <code>optional string name = 3;</code>
-     */
-    java.lang.String getName();
-    /**
-     * <code>optional string name = 3;</code>
+     * <code>optional string fileName = 6;</code>
      */
     com.google.protobuf.ByteString
-        getNameBytes();
+        getFileNameBytes();
 
     /**
-     * <code>optional string contentType = 4;</code>
+     * <code>optional int64 size = 7;</code>
+     */
+    long getSize();
+
+    /**
+     * <code>optional string contentType = 8;</code>
      */
     java.lang.String getContentType();
     /**
-     * <code>optional string contentType = 4;</code>
+     * <code>optional string contentType = 8;</code>
      */
     com.google.protobuf.ByteString
         getContentTypeBytes();
 
     /**
-     * <code>optional int64 size = 5;</code>
+     * <code>optional string parent = 10;</code>
      */
-    long getSize();
+    java.lang.String getParent();
+    /**
+     * <code>optional string parent = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getParentBytes();
 
     /**
-     * <code>optional int64 createTime = 6;</code>
-     */
-    long getCreateTime();
-
-    /**
-     * <code>optional int64 updateTime = 7;</code>
-     */
-    long getUpdateTime();
-
-    /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     java.util.List<java.lang.String>
         getTreeHashItemList();
     /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     int getTreeHashItemCount();
     /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     java.lang.String getTreeHashItem(int index);
     /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     com.google.protobuf.ByteString
         getTreeHashItemBytes(int index);
 
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     java.util.List<com.blog.proto.BlogStore.StringList> 
         getFileItemList();
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     com.blog.proto.BlogStore.StringList getFileItem(int index);
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     int getFileItemCount();
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     java.util.List<? extends com.blog.proto.BlogStore.StringListOrBuilder> 
         getFileItemOrBuilderList();
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     com.blog.proto.BlogStore.StringListOrBuilder getFileItemOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code StoreTree}
+   * Protobuf type {@code StorageItem}
    */
-  public  static final class StoreTree extends
+  public  static final class StorageItem extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:StoreTree)
-      StoreTreeOrBuilder {
-    // Use StoreTree.newBuilder() to construct.
-    private StoreTree(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:StorageItem)
+      StorageItemOrBuilder {
+    // Use StorageItem.newBuilder() to construct.
+    private StorageItem(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private StoreTree() {
-      name_ = "";
-      contentType_ = "";
-      size_ = 0L;
+    private StorageItem() {
+      type_ = 0;
       createTime_ = 0L;
       updateTime_ = 0L;
+      fileName_ = "";
+      size_ = 0L;
+      contentType_ = "";
+      parent_ = "";
       treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       fileItem_ = java.util.Collections.emptyList();
     }
@@ -13248,7 +11928,7 @@ public final class BlogStore {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private StoreTree(
+    private StorageItem(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -13268,7 +11948,13 @@ public final class BlogStore {
               }
               break;
             }
-            case 10: {
+            case 8: {
+              int rawValue = input.readEnum();
+
+              type_ = rawValue;
+              break;
+            }
+            case 18: {
               com.blog.proto.BlogStore.Operator.Builder subBuilder = null;
               if (owner_ != null) {
                 subBuilder = owner_.toBuilder();
@@ -13281,59 +11967,65 @@ public final class BlogStore {
 
               break;
             }
-            case 18: {
+            case 26: {
               com.blog.proto.BlogStore.Operator.Builder subBuilder = null;
-              if (committer_ != null) {
-                subBuilder = committer_.toBuilder();
+              if (update_ != null) {
+                subBuilder = update_.toBuilder();
               }
-              committer_ = input.readMessage(com.blog.proto.BlogStore.Operator.parser(), extensionRegistry);
+              update_ = input.readMessage(com.blog.proto.BlogStore.Operator.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(committer_);
-                committer_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(update_);
+                update_ = subBuilder.buildPartial();
               }
 
               break;
             }
-            case 26: {
+            case 32: {
+
+              createTime_ = input.readInt64();
+              break;
+            }
+            case 40: {
+
+              updateTime_ = input.readInt64();
+              break;
+            }
+            case 50: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              name_ = s;
+              fileName_ = s;
               break;
             }
-            case 34: {
+            case 56: {
+
+              size_ = input.readInt64();
+              break;
+            }
+            case 66: {
               java.lang.String s = input.readStringRequireUtf8();
 
               contentType_ = s;
               break;
             }
-            case 40: {
-
-              size_ = input.readInt64();
-              break;
-            }
-            case 48: {
-
-              createTime_ = input.readInt64();
-              break;
-            }
-            case 56: {
-
-              updateTime_ = input.readInt64();
-              break;
-            }
             case 82: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+
+              parent_ = s;
+              break;
+            }
+            case 90: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
                 treeHashItem_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000080;
+                mutable_bitField0_ |= 0x00000200;
               }
               treeHashItem_.add(s);
               break;
             }
-            case 90: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
                 fileItem_ = new java.util.ArrayList<com.blog.proto.BlogStore.StringList>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000400;
               }
               fileItem_.add(
                   input.readMessage(com.blog.proto.BlogStore.StringList.parser(), extensionRegistry));
@@ -13347,10 +12039,10 @@ public final class BlogStore {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           treeHashItem_ = treeHashItem_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField0_ & 0x00000400) == 0x00000400)) {
           fileItem_ = java.util.Collections.unmodifiableList(fileItem_);
         }
         makeExtensionsImmutable();
@@ -13358,97 +12050,140 @@ public final class BlogStore {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.blog.proto.BlogStore.internal_static_StoreTree_descriptor;
+      return com.blog.proto.BlogStore.internal_static_StorageItem_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.blog.proto.BlogStore.internal_static_StoreTree_fieldAccessorTable
+      return com.blog.proto.BlogStore.internal_static_StorageItem_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.blog.proto.BlogStore.StoreTree.class, com.blog.proto.BlogStore.StoreTree.Builder.class);
+              com.blog.proto.BlogStore.StorageItem.class, com.blog.proto.BlogStore.StorageItem.Builder.class);
     }
 
     private int bitField0_;
-    public static final int OWNER_FIELD_NUMBER = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <code>optional .StoreTypeEnum type = 1;</code>
+     */
+    public int getTypeValue() {
+      return type_;
+    }
+    /**
+     * <code>optional .StoreTypeEnum type = 1;</code>
+     */
+    public com.blog.proto.BlogStore.StoreTypeEnum getType() {
+      com.blog.proto.BlogStore.StoreTypeEnum result = com.blog.proto.BlogStore.StoreTypeEnum.valueOf(type_);
+      return result == null ? com.blog.proto.BlogStore.StoreTypeEnum.UNRECOGNIZED : result;
+    }
+
+    public static final int OWNER_FIELD_NUMBER = 2;
     private com.blog.proto.BlogStore.Operator owner_;
     /**
-     * <code>optional .Operator owner = 1;</code>
+     * <code>optional .Operator owner = 2;</code>
      */
     public boolean hasOwner() {
       return owner_ != null;
     }
     /**
-     * <code>optional .Operator owner = 1;</code>
+     * <code>optional .Operator owner = 2;</code>
      */
     public com.blog.proto.BlogStore.Operator getOwner() {
       return owner_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : owner_;
     }
     /**
-     * <code>optional .Operator owner = 1;</code>
+     * <code>optional .Operator owner = 2;</code>
      */
     public com.blog.proto.BlogStore.OperatorOrBuilder getOwnerOrBuilder() {
       return getOwner();
     }
 
-    public static final int COMMITTER_FIELD_NUMBER = 2;
-    private com.blog.proto.BlogStore.Operator committer_;
+    public static final int UPDATE_FIELD_NUMBER = 3;
+    private com.blog.proto.BlogStore.Operator update_;
     /**
-     * <code>optional .Operator committer = 2;</code>
+     * <code>optional .Operator update = 3;</code>
      */
-    public boolean hasCommitter() {
-      return committer_ != null;
+    public boolean hasUpdate() {
+      return update_ != null;
     }
     /**
-     * <code>optional .Operator committer = 2;</code>
+     * <code>optional .Operator update = 3;</code>
      */
-    public com.blog.proto.BlogStore.Operator getCommitter() {
-      return committer_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : committer_;
+    public com.blog.proto.BlogStore.Operator getUpdate() {
+      return update_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : update_;
     }
     /**
-     * <code>optional .Operator committer = 2;</code>
+     * <code>optional .Operator update = 3;</code>
      */
-    public com.blog.proto.BlogStore.OperatorOrBuilder getCommitterOrBuilder() {
-      return getCommitter();
+    public com.blog.proto.BlogStore.OperatorOrBuilder getUpdateOrBuilder() {
+      return getUpdate();
     }
 
-    public static final int NAME_FIELD_NUMBER = 3;
-    private volatile java.lang.Object name_;
+    public static final int CREATETIME_FIELD_NUMBER = 4;
+    private long createTime_;
     /**
-     * <code>optional string name = 3;</code>
+     * <code>optional int64 createTime = 4;</code>
      */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    public static final int UPDATETIME_FIELD_NUMBER = 5;
+    private long updateTime_;
+    /**
+     * <code>optional int64 updateTime = 5;</code>
+     */
+    public long getUpdateTime() {
+      return updateTime_;
+    }
+
+    public static final int FILENAME_FIELD_NUMBER = 6;
+    private volatile java.lang.Object fileName_;
+    /**
+     * <code>optional string fileName = 6;</code>
+     */
+    public java.lang.String getFileName() {
+      java.lang.Object ref = fileName_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        name_ = s;
+        fileName_ = s;
         return s;
       }
     }
     /**
-     * <code>optional string name = 3;</code>
+     * <code>optional string fileName = 6;</code>
      */
     public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
+        getFileNameBytes() {
+      java.lang.Object ref = fileName_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        name_ = b;
+        fileName_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
-    public static final int CONTENTTYPE_FIELD_NUMBER = 4;
+    public static final int SIZE_FIELD_NUMBER = 7;
+    private long size_;
+    /**
+     * <code>optional int64 size = 7;</code>
+     */
+    public long getSize() {
+      return size_;
+    }
+
+    public static final int CONTENTTYPE_FIELD_NUMBER = 8;
     private volatile java.lang.Object contentType_;
     /**
-     * <code>optional string contentType = 4;</code>
+     * <code>optional string contentType = 8;</code>
      */
     public java.lang.String getContentType() {
       java.lang.Object ref = contentType_;
@@ -13463,7 +12198,7 @@ public final class BlogStore {
       }
     }
     /**
-     * <code>optional string contentType = 4;</code>
+     * <code>optional string contentType = 8;</code>
      */
     public com.google.protobuf.ByteString
         getContentTypeBytes() {
@@ -13479,91 +12214,98 @@ public final class BlogStore {
       }
     }
 
-    public static final int SIZE_FIELD_NUMBER = 5;
-    private long size_;
+    public static final int PARENT_FIELD_NUMBER = 10;
+    private volatile java.lang.Object parent_;
     /**
-     * <code>optional int64 size = 5;</code>
+     * <code>optional string parent = 10;</code>
      */
-    public long getSize() {
-      return size_;
+    public java.lang.String getParent() {
+      java.lang.Object ref = parent_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        parent_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string parent = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getParentBytes() {
+      java.lang.Object ref = parent_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        parent_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
-    public static final int CREATETIME_FIELD_NUMBER = 6;
-    private long createTime_;
-    /**
-     * <code>optional int64 createTime = 6;</code>
-     */
-    public long getCreateTime() {
-      return createTime_;
-    }
-
-    public static final int UPDATETIME_FIELD_NUMBER = 7;
-    private long updateTime_;
-    /**
-     * <code>optional int64 updateTime = 7;</code>
-     */
-    public long getUpdateTime() {
-      return updateTime_;
-    }
-
-    public static final int TREEHASHITEM_FIELD_NUMBER = 10;
+    public static final int TREEHASHITEM_FIELD_NUMBER = 11;
     private com.google.protobuf.LazyStringList treeHashItem_;
     /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     public com.google.protobuf.ProtocolStringList
         getTreeHashItemList() {
       return treeHashItem_;
     }
     /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     public int getTreeHashItemCount() {
       return treeHashItem_.size();
     }
     /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     public java.lang.String getTreeHashItem(int index) {
       return treeHashItem_.get(index);
     }
     /**
-     * <code>repeated string treeHashItem = 10;</code>
+     * <code>repeated string treeHashItem = 11;</code>
      */
     public com.google.protobuf.ByteString
         getTreeHashItemBytes(int index) {
       return treeHashItem_.getByteString(index);
     }
 
-    public static final int FILEITEM_FIELD_NUMBER = 11;
+    public static final int FILEITEM_FIELD_NUMBER = 12;
     private java.util.List<com.blog.proto.BlogStore.StringList> fileItem_;
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     public java.util.List<com.blog.proto.BlogStore.StringList> getFileItemList() {
       return fileItem_;
     }
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     public java.util.List<? extends com.blog.proto.BlogStore.StringListOrBuilder> 
         getFileItemOrBuilderList() {
       return fileItem_;
     }
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     public int getFileItemCount() {
       return fileItem_.size();
     }
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     public com.blog.proto.BlogStore.StringList getFileItem(int index) {
       return fileItem_.get(index);
     }
     /**
-     * <code>repeated .StringList fileItem = 11;</code>
+     * <code>repeated .StringList fileItem = 12;</code>
      */
     public com.blog.proto.BlogStore.StringListOrBuilder getFileItemOrBuilder(
         int index) {
@@ -13582,32 +12324,38 @@ public final class BlogStore {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (type_ != com.blog.proto.BlogStore.StoreTypeEnum.StoreTypeDefault.getNumber()) {
+        output.writeEnum(1, type_);
+      }
       if (owner_ != null) {
-        output.writeMessage(1, getOwner());
+        output.writeMessage(2, getOwner());
       }
-      if (committer_ != null) {
-        output.writeMessage(2, getCommitter());
-      }
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, name_);
-      }
-      if (!getContentTypeBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, contentType_);
-      }
-      if (size_ != 0L) {
-        output.writeInt64(5, size_);
+      if (update_ != null) {
+        output.writeMessage(3, getUpdate());
       }
       if (createTime_ != 0L) {
-        output.writeInt64(6, createTime_);
+        output.writeInt64(4, createTime_);
       }
       if (updateTime_ != 0L) {
-        output.writeInt64(7, updateTime_);
+        output.writeInt64(5, updateTime_);
+      }
+      if (!getFileNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, fileName_);
+      }
+      if (size_ != 0L) {
+        output.writeInt64(7, size_);
+      }
+      if (!getContentTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, contentType_);
+      }
+      if (!getParentBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, parent_);
       }
       for (int i = 0; i < treeHashItem_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, treeHashItem_.getRaw(i));
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, treeHashItem_.getRaw(i));
       }
       for (int i = 0; i < fileItem_.size(); i++) {
-        output.writeMessage(11, fileItem_.get(i));
+        output.writeMessage(12, fileItem_.get(i));
       }
     }
 
@@ -13616,31 +12364,38 @@ public final class BlogStore {
       if (size != -1) return size;
 
       size = 0;
+      if (type_ != com.blog.proto.BlogStore.StoreTypeEnum.StoreTypeDefault.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, type_);
+      }
       if (owner_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getOwner());
+          .computeMessageSize(2, getOwner());
       }
-      if (committer_ != null) {
+      if (update_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, getCommitter());
-      }
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, name_);
-      }
-      if (!getContentTypeBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, contentType_);
-      }
-      if (size_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, size_);
+          .computeMessageSize(3, getUpdate());
       }
       if (createTime_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, createTime_);
+          .computeInt64Size(4, createTime_);
       }
       if (updateTime_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(7, updateTime_);
+          .computeInt64Size(5, updateTime_);
+      }
+      if (!getFileNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, fileName_);
+      }
+      if (size_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, size_);
+      }
+      if (!getContentTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, contentType_);
+      }
+      if (!getParentBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, parent_);
       }
       {
         int dataSize = 0;
@@ -13652,7 +12407,7 @@ public final class BlogStore {
       }
       for (int i = 0; i < fileItem_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(11, fileItem_.get(i));
+          .computeMessageSize(12, fileItem_.get(i));
       }
       memoizedSize = size;
       return size;
@@ -13664,32 +12419,35 @@ public final class BlogStore {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.blog.proto.BlogStore.StoreTree)) {
+      if (!(obj instanceof com.blog.proto.BlogStore.StorageItem)) {
         return super.equals(obj);
       }
-      com.blog.proto.BlogStore.StoreTree other = (com.blog.proto.BlogStore.StoreTree) obj;
+      com.blog.proto.BlogStore.StorageItem other = (com.blog.proto.BlogStore.StorageItem) obj;
 
       boolean result = true;
+      result = result && type_ == other.type_;
       result = result && (hasOwner() == other.hasOwner());
       if (hasOwner()) {
         result = result && getOwner()
             .equals(other.getOwner());
       }
-      result = result && (hasCommitter() == other.hasCommitter());
-      if (hasCommitter()) {
-        result = result && getCommitter()
-            .equals(other.getCommitter());
+      result = result && (hasUpdate() == other.hasUpdate());
+      if (hasUpdate()) {
+        result = result && getUpdate()
+            .equals(other.getUpdate());
       }
-      result = result && getName()
-          .equals(other.getName());
-      result = result && getContentType()
-          .equals(other.getContentType());
-      result = result && (getSize()
-          == other.getSize());
       result = result && (getCreateTime()
           == other.getCreateTime());
       result = result && (getUpdateTime()
           == other.getUpdateTime());
+      result = result && getFileName()
+          .equals(other.getFileName());
+      result = result && (getSize()
+          == other.getSize());
+      result = result && getContentType()
+          .equals(other.getContentType());
+      result = result && getParent()
+          .equals(other.getParent());
       result = result && getTreeHashItemList()
           .equals(other.getTreeHashItemList());
       result = result && getFileItemList()
@@ -13704,27 +12462,31 @@ public final class BlogStore {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + type_;
       if (hasOwner()) {
         hash = (37 * hash) + OWNER_FIELD_NUMBER;
         hash = (53 * hash) + getOwner().hashCode();
       }
-      if (hasCommitter()) {
-        hash = (37 * hash) + COMMITTER_FIELD_NUMBER;
-        hash = (53 * hash) + getCommitter().hashCode();
+      if (hasUpdate()) {
+        hash = (37 * hash) + UPDATE_FIELD_NUMBER;
+        hash = (53 * hash) + getUpdate().hashCode();
       }
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      hash = (37 * hash) + CONTENTTYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getContentType().hashCode();
-      hash = (37 * hash) + SIZE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getSize());
       hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getCreateTime());
       hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getUpdateTime());
+      hash = (37 * hash) + FILENAME_FIELD_NUMBER;
+      hash = (53 * hash) + getFileName().hashCode();
+      hash = (37 * hash) + SIZE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getSize());
+      hash = (37 * hash) + CONTENTTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getContentType().hashCode();
+      hash = (37 * hash) + PARENT_FIELD_NUMBER;
+      hash = (53 * hash) + getParent().hashCode();
       if (getTreeHashItemCount() > 0) {
         hash = (37 * hash) + TREEHASHITEM_FIELD_NUMBER;
         hash = (53 * hash) + getTreeHashItemList().hashCode();
@@ -13738,58 +12500,58 @@ public final class BlogStore {
       return hash;
     }
 
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(byte[] data)
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(java.io.InputStream input)
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseDelimitedFrom(java.io.InputStream input)
+    public static com.blog.proto.BlogStore.StorageItem parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseDelimitedFrom(
+    public static com.blog.proto.BlogStore.StorageItem parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.blog.proto.BlogStore.StoreTree parseFrom(
+    public static com.blog.proto.BlogStore.StorageItem parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -13801,7 +12563,7 @@ public final class BlogStore {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.blog.proto.BlogStore.StoreTree prototype) {
+    public static Builder newBuilder(com.blog.proto.BlogStore.StorageItem prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -13816,25 +12578,25 @@ public final class BlogStore {
       return builder;
     }
     /**
-     * Protobuf type {@code StoreTree}
+     * Protobuf type {@code StorageItem}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:StoreTree)
-        com.blog.proto.BlogStore.StoreTreeOrBuilder {
+        // @@protoc_insertion_point(builder_implements:StorageItem)
+        com.blog.proto.BlogStore.StorageItemOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.blog.proto.BlogStore.internal_static_StoreTree_descriptor;
+        return com.blog.proto.BlogStore.internal_static_StorageItem_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.blog.proto.BlogStore.internal_static_StoreTree_fieldAccessorTable
+        return com.blog.proto.BlogStore.internal_static_StorageItem_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.blog.proto.BlogStore.StoreTree.class, com.blog.proto.BlogStore.StoreTree.Builder.class);
+                com.blog.proto.BlogStore.StorageItem.class, com.blog.proto.BlogStore.StorageItem.Builder.class);
       }
 
-      // Construct using com.blog.proto.BlogStore.StoreTree.newBuilder()
+      // Construct using com.blog.proto.BlogStore.StorageItem.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -13852,33 +12614,37 @@ public final class BlogStore {
       }
       public Builder clear() {
         super.clear();
+        type_ = 0;
+
         if (ownerBuilder_ == null) {
           owner_ = null;
         } else {
           owner_ = null;
           ownerBuilder_ = null;
         }
-        if (committerBuilder_ == null) {
-          committer_ = null;
+        if (updateBuilder_ == null) {
+          update_ = null;
         } else {
-          committer_ = null;
-          committerBuilder_ = null;
+          update_ = null;
+          updateBuilder_ = null;
         }
-        name_ = "";
-
-        contentType_ = "";
-
-        size_ = 0L;
-
         createTime_ = 0L;
 
         updateTime_ = 0L;
 
+        fileName_ = "";
+
+        size_ = 0L;
+
+        contentType_ = "";
+
+        parent_ = "";
+
         treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000200);
         if (fileItemBuilder_ == null) {
           fileItem_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000400);
         } else {
           fileItemBuilder_.clear();
         }
@@ -13887,49 +12653,51 @@ public final class BlogStore {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.blog.proto.BlogStore.internal_static_StoreTree_descriptor;
+        return com.blog.proto.BlogStore.internal_static_StorageItem_descriptor;
       }
 
-      public com.blog.proto.BlogStore.StoreTree getDefaultInstanceForType() {
-        return com.blog.proto.BlogStore.StoreTree.getDefaultInstance();
+      public com.blog.proto.BlogStore.StorageItem getDefaultInstanceForType() {
+        return com.blog.proto.BlogStore.StorageItem.getDefaultInstance();
       }
 
-      public com.blog.proto.BlogStore.StoreTree build() {
-        com.blog.proto.BlogStore.StoreTree result = buildPartial();
+      public com.blog.proto.BlogStore.StorageItem build() {
+        com.blog.proto.BlogStore.StorageItem result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public com.blog.proto.BlogStore.StoreTree buildPartial() {
-        com.blog.proto.BlogStore.StoreTree result = new com.blog.proto.BlogStore.StoreTree(this);
+      public com.blog.proto.BlogStore.StorageItem buildPartial() {
+        com.blog.proto.BlogStore.StorageItem result = new com.blog.proto.BlogStore.StorageItem(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
+        result.type_ = type_;
         if (ownerBuilder_ == null) {
           result.owner_ = owner_;
         } else {
           result.owner_ = ownerBuilder_.build();
         }
-        if (committerBuilder_ == null) {
-          result.committer_ = committer_;
+        if (updateBuilder_ == null) {
+          result.update_ = update_;
         } else {
-          result.committer_ = committerBuilder_.build();
+          result.update_ = updateBuilder_.build();
         }
-        result.name_ = name_;
-        result.contentType_ = contentType_;
-        result.size_ = size_;
         result.createTime_ = createTime_;
         result.updateTime_ = updateTime_;
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
+        result.fileName_ = fileName_;
+        result.size_ = size_;
+        result.contentType_ = contentType_;
+        result.parent_ = parent_;
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
           treeHashItem_ = treeHashItem_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000080);
+          bitField0_ = (bitField0_ & ~0x00000200);
         }
         result.treeHashItem_ = treeHashItem_;
         if (fileItemBuilder_ == null) {
-          if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          if (((bitField0_ & 0x00000400) == 0x00000400)) {
             fileItem_ = java.util.Collections.unmodifiableList(fileItem_);
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000400);
           }
           result.fileItem_ = fileItem_;
         } else {
@@ -13967,32 +12735,24 @@ public final class BlogStore {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.blog.proto.BlogStore.StoreTree) {
-          return mergeFrom((com.blog.proto.BlogStore.StoreTree)other);
+        if (other instanceof com.blog.proto.BlogStore.StorageItem) {
+          return mergeFrom((com.blog.proto.BlogStore.StorageItem)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.blog.proto.BlogStore.StoreTree other) {
-        if (other == com.blog.proto.BlogStore.StoreTree.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.blog.proto.BlogStore.StorageItem other) {
+        if (other == com.blog.proto.BlogStore.StorageItem.getDefaultInstance()) return this;
+        if (other.type_ != 0) {
+          setTypeValue(other.getTypeValue());
+        }
         if (other.hasOwner()) {
           mergeOwner(other.getOwner());
         }
-        if (other.hasCommitter()) {
-          mergeCommitter(other.getCommitter());
-        }
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          onChanged();
-        }
-        if (!other.getContentType().isEmpty()) {
-          contentType_ = other.contentType_;
-          onChanged();
-        }
-        if (other.getSize() != 0L) {
-          setSize(other.getSize());
+        if (other.hasUpdate()) {
+          mergeUpdate(other.getUpdate());
         }
         if (other.getCreateTime() != 0L) {
           setCreateTime(other.getCreateTime());
@@ -14000,10 +12760,25 @@ public final class BlogStore {
         if (other.getUpdateTime() != 0L) {
           setUpdateTime(other.getUpdateTime());
         }
+        if (!other.getFileName().isEmpty()) {
+          fileName_ = other.fileName_;
+          onChanged();
+        }
+        if (other.getSize() != 0L) {
+          setSize(other.getSize());
+        }
+        if (!other.getContentType().isEmpty()) {
+          contentType_ = other.contentType_;
+          onChanged();
+        }
+        if (!other.getParent().isEmpty()) {
+          parent_ = other.parent_;
+          onChanged();
+        }
         if (!other.treeHashItem_.isEmpty()) {
           if (treeHashItem_.isEmpty()) {
             treeHashItem_ = other.treeHashItem_;
-            bitField0_ = (bitField0_ & ~0x00000080);
+            bitField0_ = (bitField0_ & ~0x00000200);
           } else {
             ensureTreeHashItemIsMutable();
             treeHashItem_.addAll(other.treeHashItem_);
@@ -14014,7 +12789,7 @@ public final class BlogStore {
           if (!other.fileItem_.isEmpty()) {
             if (fileItem_.isEmpty()) {
               fileItem_ = other.fileItem_;
-              bitField0_ = (bitField0_ & ~0x00000100);
+              bitField0_ = (bitField0_ & ~0x00000400);
             } else {
               ensureFileItemIsMutable();
               fileItem_.addAll(other.fileItem_);
@@ -14027,7 +12802,7 @@ public final class BlogStore {
               fileItemBuilder_.dispose();
               fileItemBuilder_ = null;
               fileItem_ = other.fileItem_;
-              bitField0_ = (bitField0_ & ~0x00000100);
+              bitField0_ = (bitField0_ & ~0x00000400);
               fileItemBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getFileItemFieldBuilder() : null;
@@ -14048,11 +12823,11 @@ public final class BlogStore {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.blog.proto.BlogStore.StoreTree parsedMessage = null;
+        com.blog.proto.BlogStore.StorageItem parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.blog.proto.BlogStore.StoreTree) e.getUnfinishedMessage();
+          parsedMessage = (com.blog.proto.BlogStore.StorageItem) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -14063,17 +12838,61 @@ public final class BlogStore {
       }
       private int bitField0_;
 
+      private int type_ = 0;
+      /**
+       * <code>optional .StoreTypeEnum type = 1;</code>
+       */
+      public int getTypeValue() {
+        return type_;
+      }
+      /**
+       * <code>optional .StoreTypeEnum type = 1;</code>
+       */
+      public Builder setTypeValue(int value) {
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .StoreTypeEnum type = 1;</code>
+       */
+      public com.blog.proto.BlogStore.StoreTypeEnum getType() {
+        com.blog.proto.BlogStore.StoreTypeEnum result = com.blog.proto.BlogStore.StoreTypeEnum.valueOf(type_);
+        return result == null ? com.blog.proto.BlogStore.StoreTypeEnum.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>optional .StoreTypeEnum type = 1;</code>
+       */
+      public Builder setType(com.blog.proto.BlogStore.StoreTypeEnum value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        type_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .StoreTypeEnum type = 1;</code>
+       */
+      public Builder clearType() {
+        
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
       private com.blog.proto.BlogStore.Operator owner_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> ownerBuilder_;
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public boolean hasOwner() {
         return ownerBuilder_ != null || owner_ != null;
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public com.blog.proto.BlogStore.Operator getOwner() {
         if (ownerBuilder_ == null) {
@@ -14083,7 +12902,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public Builder setOwner(com.blog.proto.BlogStore.Operator value) {
         if (ownerBuilder_ == null) {
@@ -14099,7 +12918,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public Builder setOwner(
           com.blog.proto.BlogStore.Operator.Builder builderForValue) {
@@ -14113,7 +12932,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public Builder mergeOwner(com.blog.proto.BlogStore.Operator value) {
         if (ownerBuilder_ == null) {
@@ -14131,7 +12950,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public Builder clearOwner() {
         if (ownerBuilder_ == null) {
@@ -14145,7 +12964,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public com.blog.proto.BlogStore.Operator.Builder getOwnerBuilder() {
         
@@ -14153,7 +12972,7 @@ public final class BlogStore {
         return getOwnerFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       public com.blog.proto.BlogStore.OperatorOrBuilder getOwnerOrBuilder() {
         if (ownerBuilder_ != null) {
@@ -14164,7 +12983,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>optional .Operator owner = 1;</code>
+       * <code>optional .Operator owner = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> 
@@ -14180,195 +12999,273 @@ public final class BlogStore {
         return ownerBuilder_;
       }
 
-      private com.blog.proto.BlogStore.Operator committer_ = null;
+      private com.blog.proto.BlogStore.Operator update_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> committerBuilder_;
+          com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> updateBuilder_;
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public boolean hasCommitter() {
-        return committerBuilder_ != null || committer_ != null;
+      public boolean hasUpdate() {
+        return updateBuilder_ != null || update_ != null;
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public com.blog.proto.BlogStore.Operator getCommitter() {
-        if (committerBuilder_ == null) {
-          return committer_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : committer_;
+      public com.blog.proto.BlogStore.Operator getUpdate() {
+        if (updateBuilder_ == null) {
+          return update_ == null ? com.blog.proto.BlogStore.Operator.getDefaultInstance() : update_;
         } else {
-          return committerBuilder_.getMessage();
+          return updateBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public Builder setCommitter(com.blog.proto.BlogStore.Operator value) {
-        if (committerBuilder_ == null) {
+      public Builder setUpdate(com.blog.proto.BlogStore.Operator value) {
+        if (updateBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          committer_ = value;
+          update_ = value;
           onChanged();
         } else {
-          committerBuilder_.setMessage(value);
+          updateBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public Builder setCommitter(
+      public Builder setUpdate(
           com.blog.proto.BlogStore.Operator.Builder builderForValue) {
-        if (committerBuilder_ == null) {
-          committer_ = builderForValue.build();
+        if (updateBuilder_ == null) {
+          update_ = builderForValue.build();
           onChanged();
         } else {
-          committerBuilder_.setMessage(builderForValue.build());
+          updateBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public Builder mergeCommitter(com.blog.proto.BlogStore.Operator value) {
-        if (committerBuilder_ == null) {
-          if (committer_ != null) {
-            committer_ =
-              com.blog.proto.BlogStore.Operator.newBuilder(committer_).mergeFrom(value).buildPartial();
+      public Builder mergeUpdate(com.blog.proto.BlogStore.Operator value) {
+        if (updateBuilder_ == null) {
+          if (update_ != null) {
+            update_ =
+              com.blog.proto.BlogStore.Operator.newBuilder(update_).mergeFrom(value).buildPartial();
           } else {
-            committer_ = value;
+            update_ = value;
           }
           onChanged();
         } else {
-          committerBuilder_.mergeFrom(value);
+          updateBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public Builder clearCommitter() {
-        if (committerBuilder_ == null) {
-          committer_ = null;
+      public Builder clearUpdate() {
+        if (updateBuilder_ == null) {
+          update_ = null;
           onChanged();
         } else {
-          committer_ = null;
-          committerBuilder_ = null;
+          update_ = null;
+          updateBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public com.blog.proto.BlogStore.Operator.Builder getCommitterBuilder() {
+      public com.blog.proto.BlogStore.Operator.Builder getUpdateBuilder() {
         
         onChanged();
-        return getCommitterFieldBuilder().getBuilder();
+        return getUpdateFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
-      public com.blog.proto.BlogStore.OperatorOrBuilder getCommitterOrBuilder() {
-        if (committerBuilder_ != null) {
-          return committerBuilder_.getMessageOrBuilder();
+      public com.blog.proto.BlogStore.OperatorOrBuilder getUpdateOrBuilder() {
+        if (updateBuilder_ != null) {
+          return updateBuilder_.getMessageOrBuilder();
         } else {
-          return committer_ == null ?
-              com.blog.proto.BlogStore.Operator.getDefaultInstance() : committer_;
+          return update_ == null ?
+              com.blog.proto.BlogStore.Operator.getDefaultInstance() : update_;
         }
       }
       /**
-       * <code>optional .Operator committer = 2;</code>
+       * <code>optional .Operator update = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder> 
-          getCommitterFieldBuilder() {
-        if (committerBuilder_ == null) {
-          committerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getUpdateFieldBuilder() {
+        if (updateBuilder_ == null) {
+          updateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               com.blog.proto.BlogStore.Operator, com.blog.proto.BlogStore.Operator.Builder, com.blog.proto.BlogStore.OperatorOrBuilder>(
-                  getCommitter(),
+                  getUpdate(),
                   getParentForChildren(),
                   isClean());
-          committer_ = null;
+          update_ = null;
         }
-        return committerBuilder_;
+        return updateBuilder_;
       }
 
-      private java.lang.Object name_ = "";
+      private long createTime_ ;
       /**
-       * <code>optional string name = 3;</code>
+       * <code>optional int64 createTime = 4;</code>
        */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 createTime = 4;</code>
+       */
+      public Builder setCreateTime(long value) {
+        
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 createTime = 4;</code>
+       */
+      public Builder clearCreateTime() {
+        
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long updateTime_ ;
+      /**
+       * <code>optional int64 updateTime = 5;</code>
+       */
+      public long getUpdateTime() {
+        return updateTime_;
+      }
+      /**
+       * <code>optional int64 updateTime = 5;</code>
+       */
+      public Builder setUpdateTime(long value) {
+        
+        updateTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 updateTime = 5;</code>
+       */
+      public Builder clearUpdateTime() {
+        
+        updateTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fileName_ = "";
+      /**
+       * <code>optional string fileName = 6;</code>
+       */
+      public java.lang.String getFileName() {
+        java.lang.Object ref = fileName_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          name_ = s;
+          fileName_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>optional string fileName = 6;</code>
        */
       public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
+          getFileNameBytes() {
+        java.lang.Object ref = fileName_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          name_ = b;
+          fileName_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>optional string fileName = 6;</code>
        */
-      public Builder setName(
+      public Builder setFileName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        name_ = value;
+        fileName_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>optional string fileName = 6;</code>
        */
-      public Builder clearName() {
+      public Builder clearFileName() {
         
-        name_ = getDefaultInstance().getName();
+        fileName_ = getDefaultInstance().getFileName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string name = 3;</code>
+       * <code>optional string fileName = 6;</code>
        */
-      public Builder setNameBytes(
+      public Builder setFileNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        name_ = value;
+        fileName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long size_ ;
+      /**
+       * <code>optional int64 size = 7;</code>
+       */
+      public long getSize() {
+        return size_;
+      }
+      /**
+       * <code>optional int64 size = 7;</code>
+       */
+      public Builder setSize(long value) {
+        
+        size_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 size = 7;</code>
+       */
+      public Builder clearSize() {
+        
+        size_ = 0L;
         onChanged();
         return this;
       }
 
       private java.lang.Object contentType_ = "";
       /**
-       * <code>optional string contentType = 4;</code>
+       * <code>optional string contentType = 8;</code>
        */
       public java.lang.String getContentType() {
         java.lang.Object ref = contentType_;
@@ -14383,7 +13280,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>optional string contentType = 4;</code>
+       * <code>optional string contentType = 8;</code>
        */
       public com.google.protobuf.ByteString
           getContentTypeBytes() {
@@ -14399,7 +13296,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>optional string contentType = 4;</code>
+       * <code>optional string contentType = 8;</code>
        */
       public Builder setContentType(
           java.lang.String value) {
@@ -14412,7 +13309,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional string contentType = 4;</code>
+       * <code>optional string contentType = 8;</code>
        */
       public Builder clearContentType() {
         
@@ -14421,7 +13318,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>optional string contentType = 4;</code>
+       * <code>optional string contentType = 8;</code>
        */
       public Builder setContentTypeBytes(
           com.google.protobuf.ByteString value) {
@@ -14435,119 +13332,110 @@ public final class BlogStore {
         return this;
       }
 
-      private long size_ ;
+      private java.lang.Object parent_ = "";
       /**
-       * <code>optional int64 size = 5;</code>
+       * <code>optional string parent = 10;</code>
        */
-      public long getSize() {
-        return size_;
+      public java.lang.String getParent() {
+        java.lang.Object ref = parent_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          parent_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int64 size = 5;</code>
+       * <code>optional string parent = 10;</code>
        */
-      public Builder setSize(long value) {
-        
-        size_ = value;
+      public com.google.protobuf.ByteString
+          getParentBytes() {
+        java.lang.Object ref = parent_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          parent_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string parent = 10;</code>
+       */
+      public Builder setParent(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        parent_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 size = 5;</code>
+       * <code>optional string parent = 10;</code>
        */
-      public Builder clearSize() {
+      public Builder clearParent() {
         
-        size_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long createTime_ ;
-      /**
-       * <code>optional int64 createTime = 6;</code>
-       */
-      public long getCreateTime() {
-        return createTime_;
-      }
-      /**
-       * <code>optional int64 createTime = 6;</code>
-       */
-      public Builder setCreateTime(long value) {
-        
-        createTime_ = value;
+        parent_ = getDefaultInstance().getParent();
         onChanged();
         return this;
       }
       /**
-       * <code>optional int64 createTime = 6;</code>
+       * <code>optional string parent = 10;</code>
        */
-      public Builder clearCreateTime() {
+      public Builder setParentBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
         
-        createTime_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long updateTime_ ;
-      /**
-       * <code>optional int64 updateTime = 7;</code>
-       */
-      public long getUpdateTime() {
-        return updateTime_;
-      }
-      /**
-       * <code>optional int64 updateTime = 7;</code>
-       */
-      public Builder setUpdateTime(long value) {
-        
-        updateTime_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 updateTime = 7;</code>
-       */
-      public Builder clearUpdateTime() {
-        
-        updateTime_ = 0L;
+        parent_ = value;
         onChanged();
         return this;
       }
 
       private com.google.protobuf.LazyStringList treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureTreeHashItemIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
           treeHashItem_ = new com.google.protobuf.LazyStringArrayList(treeHashItem_);
-          bitField0_ |= 0x00000080;
+          bitField0_ |= 0x00000200;
          }
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public com.google.protobuf.ProtocolStringList
           getTreeHashItemList() {
         return treeHashItem_.getUnmodifiableView();
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public int getTreeHashItemCount() {
         return treeHashItem_.size();
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public java.lang.String getTreeHashItem(int index) {
         return treeHashItem_.get(index);
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public com.google.protobuf.ByteString
           getTreeHashItemBytes(int index) {
         return treeHashItem_.getByteString(index);
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public Builder setTreeHashItem(
           int index, java.lang.String value) {
@@ -14560,7 +13448,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public Builder addTreeHashItem(
           java.lang.String value) {
@@ -14573,7 +13461,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public Builder addAllTreeHashItem(
           java.lang.Iterable<java.lang.String> values) {
@@ -14584,16 +13472,16 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public Builder clearTreeHashItem() {
         treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
       /**
-       * <code>repeated string treeHashItem = 10;</code>
+       * <code>repeated string treeHashItem = 11;</code>
        */
       public Builder addTreeHashItemBytes(
           com.google.protobuf.ByteString value) {
@@ -14610,9 +13498,9 @@ public final class BlogStore {
       private java.util.List<com.blog.proto.BlogStore.StringList> fileItem_ =
         java.util.Collections.emptyList();
       private void ensureFileItemIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000400) == 0x00000400)) {
           fileItem_ = new java.util.ArrayList<com.blog.proto.BlogStore.StringList>(fileItem_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000400;
          }
       }
 
@@ -14620,7 +13508,7 @@ public final class BlogStore {
           com.blog.proto.BlogStore.StringList, com.blog.proto.BlogStore.StringList.Builder, com.blog.proto.BlogStore.StringListOrBuilder> fileItemBuilder_;
 
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public java.util.List<com.blog.proto.BlogStore.StringList> getFileItemList() {
         if (fileItemBuilder_ == null) {
@@ -14630,7 +13518,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public int getFileItemCount() {
         if (fileItemBuilder_ == null) {
@@ -14640,7 +13528,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public com.blog.proto.BlogStore.StringList getFileItem(int index) {
         if (fileItemBuilder_ == null) {
@@ -14650,7 +13538,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder setFileItem(
           int index, com.blog.proto.BlogStore.StringList value) {
@@ -14667,7 +13555,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder setFileItem(
           int index, com.blog.proto.BlogStore.StringList.Builder builderForValue) {
@@ -14681,7 +13569,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder addFileItem(com.blog.proto.BlogStore.StringList value) {
         if (fileItemBuilder_ == null) {
@@ -14697,7 +13585,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder addFileItem(
           int index, com.blog.proto.BlogStore.StringList value) {
@@ -14714,7 +13602,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder addFileItem(
           com.blog.proto.BlogStore.StringList.Builder builderForValue) {
@@ -14728,7 +13616,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder addFileItem(
           int index, com.blog.proto.BlogStore.StringList.Builder builderForValue) {
@@ -14742,7 +13630,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder addAllFileItem(
           java.lang.Iterable<? extends com.blog.proto.BlogStore.StringList> values) {
@@ -14757,12 +13645,12 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder clearFileItem() {
         if (fileItemBuilder_ == null) {
           fileItem_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000400);
           onChanged();
         } else {
           fileItemBuilder_.clear();
@@ -14770,7 +13658,7 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public Builder removeFileItem(int index) {
         if (fileItemBuilder_ == null) {
@@ -14783,14 +13671,14 @@ public final class BlogStore {
         return this;
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public com.blog.proto.BlogStore.StringList.Builder getFileItemBuilder(
           int index) {
         return getFileItemFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public com.blog.proto.BlogStore.StringListOrBuilder getFileItemOrBuilder(
           int index) {
@@ -14800,7 +13688,7 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public java.util.List<? extends com.blog.proto.BlogStore.StringListOrBuilder> 
            getFileItemOrBuilderList() {
@@ -14811,14 +13699,14 @@ public final class BlogStore {
         }
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public com.blog.proto.BlogStore.StringList.Builder addFileItemBuilder() {
         return getFileItemFieldBuilder().addBuilder(
             com.blog.proto.BlogStore.StringList.getDefaultInstance());
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public com.blog.proto.BlogStore.StringList.Builder addFileItemBuilder(
           int index) {
@@ -14826,7 +13714,7 @@ public final class BlogStore {
             index, com.blog.proto.BlogStore.StringList.getDefaultInstance());
       }
       /**
-       * <code>repeated .StringList fileItem = 11;</code>
+       * <code>repeated .StringList fileItem = 12;</code>
        */
       public java.util.List<com.blog.proto.BlogStore.StringList.Builder> 
            getFileItemBuilderList() {
@@ -14839,7 +13727,7 @@ public final class BlogStore {
           fileItemBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.blog.proto.BlogStore.StringList, com.blog.proto.BlogStore.StringList.Builder, com.blog.proto.BlogStore.StringListOrBuilder>(
                   fileItem_,
-                  ((bitField0_ & 0x00000100) == 0x00000100),
+                  ((bitField0_ & 0x00000400) == 0x00000400),
                   getParentForChildren(),
                   isClean());
           fileItem_ = null;
@@ -14857,39 +13745,39 @@ public final class BlogStore {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:StoreTree)
+      // @@protoc_insertion_point(builder_scope:StorageItem)
     }
 
-    // @@protoc_insertion_point(class_scope:StoreTree)
-    private static final com.blog.proto.BlogStore.StoreTree DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:StorageItem)
+    private static final com.blog.proto.BlogStore.StorageItem DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.blog.proto.BlogStore.StoreTree();
+      DEFAULT_INSTANCE = new com.blog.proto.BlogStore.StorageItem();
     }
 
-    public static com.blog.proto.BlogStore.StoreTree getDefaultInstance() {
+    public static com.blog.proto.BlogStore.StorageItem getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<StoreTree>
-        PARSER = new com.google.protobuf.AbstractParser<StoreTree>() {
-      public StoreTree parsePartialFrom(
+    private static final com.google.protobuf.Parser<StorageItem>
+        PARSER = new com.google.protobuf.AbstractParser<StorageItem>() {
+      public StorageItem parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new StoreTree(input, extensionRegistry);
+          return new StorageItem(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<StoreTree> parser() {
+    public static com.google.protobuf.Parser<StorageItem> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<StoreTree> getParserForType() {
+    public com.google.protobuf.Parser<StorageItem> getParserForType() {
       return PARSER;
     }
 
-    public com.blog.proto.BlogStore.StoreTree getDefaultInstanceForType() {
+    public com.blog.proto.BlogStore.StorageItem getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -17980,15 +16868,10 @@ public final class BlogStore {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Operator_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_StoreCommit_descriptor;
+    internal_static_StorageItem_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_StoreCommit_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_StoreTree_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_StoreTree_fieldAccessorTable;
+      internal_static_StorageItem_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_StringList_descriptor;
   private static final 
@@ -18043,41 +16926,38 @@ public final class BlogStore {
       "teByName\030\020 \001(\t\022\022\n\ncreateById\030\021 \001(\005\022\020\n\010cr" +
       "eateAt\030\022 \001(\003\"F\n\014FileItemList\022\027\n\004item\030\001 \003" +
       "(\0132\t.FileItem\022\035\n\nparentFile\030\002 \001(\0132\t.File" +
-      "Item\"c\n\010FileItem\022\014\n\004name\030\001 \001(\t\022\023\n\013conten" +
-      "tType\030\002 \001(\t\022\014\n\004size\030\003 \001(\003\022\022\n\ncreateTime\030" +
-      "\004 \001(\003\022\022\n\nupdateTime\030\005 \001(\003\"6\n\010Operator\022\014\n" +
-      "\004date\030\001 \001(\003\022\016\n\006gptype\030\002 \001(\005\022\014\n\004gpid\030\003 \001(" +
-      "\005\"\241\001\n\013StoreCommit\022\030\n\005owner\030\001 \001(\0132\t.Opera",
-      "tor\022\034\n\tcommitter\030\002 \001(\0132\t.Operator\022\016\n\006par" +
-      "ent\030\003 \001(\t\022\024\n\014treeHashItem\030\004 \003(\t\022\014\n\004size\030" +
-      "\005 \001(\003\022\022\n\ncreateTime\030\006 \001(\003\022\022\n\nupdateTime\030" +
-      "\007 \001(\003\"\321\001\n\tStoreTree\022\030\n\005owner\030\001 \001(\0132\t.Ope" +
-      "rator\022\034\n\tcommitter\030\002 \001(\0132\t.Operator\022\014\n\004n" +
-      "ame\030\003 \001(\t\022\023\n\013contentType\030\004 \001(\t\022\014\n\004size\030\005" +
-      " \001(\003\022\022\n\ncreateTime\030\006 \001(\003\022\022\n\nupdateTime\030\007" +
-      " \001(\003\022\024\n\014treeHashItem\030\n \003(\t\022\035\n\010fileItem\030\013" +
-      " \003(\0132\013.StringList\"\032\n\nStringList\022\014\n\004imte\030" +
-      "\001 \003(\t\"n\n\tStoreBlob\022\034\n\tcommitter\030\001 \001(\0132\t.",
-      "Operator\022\014\n\004name\030\002 \001(\t\022\023\n\013contentType\030\003 " +
-      "\001(\t\022\014\n\004size\030\004 \001(\003\022\022\n\ncreateTime\030\006 \001(\003\"U\n" +
-      "\016TreeUpdateItem\022\022\n\noriginPath\030\005 \001(\t\022\020\n\010f" +
-      "ileName\030\006 \001(\t\022\017\n\007content\030\007 \001(\014\022\014\n\004size\030\010" +
-      " \001(\003\"3\n\022TreeUpdateItemList\022\035\n\004item\030\004 \003(\013" +
-      "2\017.TreeUpdateItem*@\n\006Status\022\021\n\rStatusDef" +
-      "ault\020\000\022\020\n\014StatusActive\020\001\022\021\n\rStatusDelete" +
-      "d\020\002*u\n\rAuthenticator\022\031\n\025DEFAULT_AUTHENTI" +
-      "CATOR\020\000\022\030\n\024SYSTEM_AUTHENTICATOR\020\001\022\026\n\022TEX" +
-      "T_AUTHENTICATOR\020\002\022\027\n\023EMAIL_AUTHENTICATOR",
-      "\020\003*`\n\rStoreTypeEnum\022\024\n\020StoreTypeDefault\020" +
-      "\000\022\023\n\017StoreTypeCommit\020\001\022\021\n\rStoreTypeTree\020" +
-      "\002\022\021\n\rStoreTypeBlob\020\003*-\n\tGtypeEnum\022\013\n\007Def" +
-      "ault\020\000\022\010\n\004User\020\001\022\t\n\005Group\020\002*\322\001\n\nReturnCo" +
-      "de\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tReturn_OK" +
-      "\020\001\022\020\n\014Return_ERROR\020\002\022\025\n\021Return_USER_EXIS" +
-      "T\0202\022\031\n\025Return_PASSWORD_ERROR\0203\022(\n$Return" +
-      "_USERNAME_OR_PASSWORD_IS_EMPTY\0204\022\025\n\021Retu" +
-      "rn_USER_EMPTY\0205\022\027\n\023Return_NOT_YOURSELF\0206" +
-      "B\033\n\016com.blog.protoB\tBlogStoreb\006proto3"
+      "Item\"g\n\010FileItem\022\020\n\010fileName\030\001 \001(\t\022\023\n\013co" +
+      "ntentType\030\002 \001(\t\022\014\n\004size\030\003 \001(\003\022\022\n\ncreateT" +
+      "ime\030\004 \001(\003\022\022\n\nupdateTime\030\005 \001(\003\"(\n\010Operato" +
+      "r\022\016\n\006gptype\030\001 \001(\005\022\014\n\004gpid\030\002 \001(\005\"\202\002\n\013Stor" +
+      "ageItem\022\034\n\004type\030\001 \001(\0162\016.StoreTypeEnum\022\030\n",
+      "\005owner\030\002 \001(\0132\t.Operator\022\031\n\006update\030\003 \001(\0132" +
+      "\t.Operator\022\022\n\ncreateTime\030\004 \001(\003\022\022\n\nupdate" +
+      "Time\030\005 \001(\003\022\020\n\010fileName\030\006 \001(\t\022\014\n\004size\030\007 \001" +
+      "(\003\022\023\n\013contentType\030\010 \001(\t\022\016\n\006parent\030\n \001(\t\022" +
+      "\024\n\014treeHashItem\030\013 \003(\t\022\035\n\010fileItem\030\014 \003(\0132" +
+      "\013.StringList\"\032\n\nStringList\022\014\n\004imte\030\001 \003(\t" +
+      "\"n\n\tStoreBlob\022\034\n\tcommitter\030\001 \001(\0132\t.Opera" +
+      "tor\022\014\n\004name\030\002 \001(\t\022\023\n\013contentType\030\003 \001(\t\022\014" +
+      "\n\004size\030\004 \001(\003\022\022\n\ncreateTime\030\006 \001(\003\"U\n\016Tree" +
+      "UpdateItem\022\022\n\noriginPath\030\005 \001(\t\022\020\n\010fileNa",
+      "me\030\006 \001(\t\022\017\n\007content\030\007 \001(\014\022\014\n\004size\030\010 \001(\003\"" +
+      "3\n\022TreeUpdateItemList\022\035\n\004item\030\004 \003(\0132\017.Tr" +
+      "eeUpdateItem*@\n\006Status\022\021\n\rStatusDefault\020" +
+      "\000\022\020\n\014StatusActive\020\001\022\021\n\rStatusDeleted\020\002*u" +
+      "\n\rAuthenticator\022\031\n\025DEFAULT_AUTHENTICATOR" +
+      "\020\000\022\030\n\024SYSTEM_AUTHENTICATOR\020\001\022\026\n\022TEXT_AUT" +
+      "HENTICATOR\020\002\022\027\n\023EMAIL_AUTHENTICATOR\020\003*`\n" +
+      "\rStoreTypeEnum\022\024\n\020StoreTypeDefault\020\000\022\023\n\017" +
+      "StoreTypeCommit\020\001\022\021\n\rStoreTypeTree\020\002\022\021\n\r" +
+      "StoreTypeFile\020\003*-\n\tGtypeEnum\022\013\n\007Default\020",
+      "\000\022\010\n\004User\020\001\022\t\n\005Group\020\002*\322\001\n\nReturnCode\022\027\n" +
+      "\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tReturn_OK\020\001\022\020\n" +
+      "\014Return_ERROR\020\002\022\025\n\021Return_USER_EXIST\0202\022\031" +
+      "\n\025Return_PASSWORD_ERROR\0203\022(\n$Return_USER" +
+      "NAME_OR_PASSWORD_IS_EMPTY\0204\022\025\n\021Return_US" +
+      "ER_EMPTY\0205\022\027\n\023Return_NOT_YOURSELF\0206B\033\n\016c" +
+      "om.blog.protoB\tBlogStoreb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -18156,45 +17036,39 @@ public final class BlogStore {
     internal_static_FileItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_FileItem_descriptor,
-        new java.lang.String[] { "Name", "ContentType", "Size", "CreateTime", "UpdateTime", });
+        new java.lang.String[] { "FileName", "ContentType", "Size", "CreateTime", "UpdateTime", });
     internal_static_Operator_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_Operator_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Operator_descriptor,
-        new java.lang.String[] { "Date", "Gptype", "Gpid", });
-    internal_static_StoreCommit_descriptor =
+        new java.lang.String[] { "Gptype", "Gpid", });
+    internal_static_StorageItem_descriptor =
       getDescriptor().getMessageTypes().get(12);
-    internal_static_StoreCommit_fieldAccessorTable = new
+    internal_static_StorageItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_StoreCommit_descriptor,
-        new java.lang.String[] { "Owner", "Committer", "Parent", "TreeHashItem", "Size", "CreateTime", "UpdateTime", });
-    internal_static_StoreTree_descriptor =
-      getDescriptor().getMessageTypes().get(13);
-    internal_static_StoreTree_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_StoreTree_descriptor,
-        new java.lang.String[] { "Owner", "Committer", "Name", "ContentType", "Size", "CreateTime", "UpdateTime", "TreeHashItem", "FileItem", });
+        internal_static_StorageItem_descriptor,
+        new java.lang.String[] { "Type", "Owner", "Update", "CreateTime", "UpdateTime", "FileName", "Size", "ContentType", "Parent", "TreeHashItem", "FileItem", });
     internal_static_StringList_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_StringList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StringList_descriptor,
         new java.lang.String[] { "Imte", });
     internal_static_StoreBlob_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_StoreBlob_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StoreBlob_descriptor,
         new java.lang.String[] { "Committer", "Name", "ContentType", "Size", "CreateTime", });
     internal_static_TreeUpdateItem_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_TreeUpdateItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TreeUpdateItem_descriptor,
         new java.lang.String[] { "OriginPath", "FileName", "Content", "Size", });
     internal_static_TreeUpdateItemList_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_TreeUpdateItemList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TreeUpdateItemList_descriptor,

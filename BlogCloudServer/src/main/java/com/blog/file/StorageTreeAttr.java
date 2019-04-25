@@ -12,12 +12,12 @@ public class StorageTreeAttr {
 
     private final String filePath;
     private final String Hash;
-    private final BlogStore.StoreTree tree;
+    private final BlogStore.StorageItem storageItem;
 
-    public StorageTreeAttr(String filePath, String Hash, BlogStore.StoreTree tree) {
+    public StorageTreeAttr(String filePath, String Hash, BlogStore.StorageItem tree) {
         this.filePath = filePath;
         this.Hash = Hash;
-        this.tree = tree;
+        this.storageItem = tree;
     }
 
     public String getFilePath() {
@@ -28,17 +28,17 @@ public class StorageTreeAttr {
         return Hash;
     }
 
-    public BlogStore.StoreTree getTree() {
-        return tree;
+    public BlogStore.StorageItem getStorageItem() {
+        return storageItem;
     }
 
     public boolean isFolder() {
-        return StringUtils.equals(BlogMediaType.DIRECTORY_CONTENTTYPE, tree.getContentType());
+        return StringUtils.equals(BlogMediaType.DIRECTORY_CONTENTTYPE, storageItem.getContentType());
     }
 
-    public BlogStore.StoreTree buildNewTree(String oldTreeHash, String newTreeHash) {
-        List<String> oldTreeHashList = this.getTree().getTreeHashItemList();
-        BlogStore.StoreTree.Builder tree = BlogStore.StoreTree.newBuilder(this.getTree());
+    public BlogStore.StorageItem buildNewTree(String oldTreeHash, String newTreeHash) {
+        List<String> oldTreeHashList = this.getStorageItem().getTreeHashItemList();
+        BlogStore.StorageItem.Builder tree = BlogStore.StorageItem.newBuilder(this.getStorageItem());
         tree.getTreeHashItemList().clear();
         for (String hash : oldTreeHashList) {
             if (StringUtils.equals(hash, oldTreeHash)) {
