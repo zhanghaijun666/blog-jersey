@@ -2,11 +2,15 @@
     <!-- ko ifnot: itemSelect.getSelectedConut() > 0 -->
     <thead>
         <tr class="custom-card-single-header">
+            <!-- ko if: isShowMultipleOperateMenu() -->
             <td class="custom-card-checkbox">
                 <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
             </td>
+            <!-- /ko -->
             <td class="custom-card-content"><span data-bind="text: '用户'"></span></td>
+            <!-- ko if: isShowSingleOperateMenu() -->
             <td class="custom-card-operation"><span data-bind="text: '操作'"></span></td>
+            <!-- /ko -->
         </tr>
     </thead>
     <!-- /ko -->
@@ -19,7 +23,7 @@
             <td class="custom-card-content">
                 <ul>
                     <li><span data-bind="text: itemSelect.getSelectedStr()"></span></li>
-                    <!-- ko foreach: getOperateMenu(window.CustomMenuType.MultipleSelection) -->
+                    <!-- ko foreach: getMultipleOperateMenu() -->
                     <li data-bind="click: $component.operateMenuClick">
                         <span class="span-button">
                             <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
@@ -35,9 +39,11 @@
     <!-- /ko -->
     <tbody data-bind="foreach: itemList">
         <tr class="custom-card-info cursor_pointer">
+            <!-- ko if: $component.isShowMultipleOperateMenu() -->
             <td class="custom-card-checkbox">
                 <custom-checkbox params="checked: $data.select"></custom-checkbox>
             </td>
+            <!-- /ko -->
             <td class="custom-card-content">
                 <span class="custom-card-icon"><i class="fa" data-bind="css: $data.role.icon || 'fa-user' "></i></span>
                 <!-- ko if: $data.status === bcstore.Status.StatusDeleted -->
@@ -47,6 +53,7 @@
                 <span data-bind="text: $data.getFullName() "></span>
                 <!-- /ko -->
             </td>
+            <!-- ko if: $component.isShowSingleOperateMenu() -->
             <td class="custom-card-operation">
                 <ul data-bind="foreach: $component.getOperateMenu(window.CustomMenuType.SingleSlection)">
                     <li data-bind="click: function(){ $component.operateMenuClick($data,null,$parent);}">
@@ -55,6 +62,11 @@
                     </li>
                 </ul>
             </td>
+            <!-- /ko -->
         </tr>
     </tbody>
 </table>
+
+<template id="folderCardLayout-template">
+    
+</template>

@@ -36,29 +36,30 @@ UploadFile.prototype.readerFile = function () {
     if (!(self.file instanceof Blob)) {
         return;
     }
-    self.reader.onloadend = function (evt) {
-        var arraybuffer = evt.target.result;
-        self.total = evt.target.result.byteLength || evt.total;
-        self.blobList = [];
-        for (var startIndex = 0; startIndex < self.total; startIndex += window.hash_chunksize) {
-            self.blobList.push({
-                data: arraybuffer.slice(startIndex, Math.min(startIndex + window.hash_chunksize, self.total)),
-                blobIndex: startIndex
-            });
-        }
-        console.log(self.blobList.length);
-        crypto.subtle.digest("SHA-1", self.blobList[0].data).then(function (hash) {
-            self.blobList[0].hash = new Rusha().digest(hash);
-//                Rusha.createHash().update(hash).digest('hex');
-            console.log(new Rusha().digest(hash));
-        }, function (error) {
-            console.error("Unable to hash:" + error);
-        });
-        setTimeout(function () {
-            self.sendUplodFile();
-        }, 50);
-    };
-    self.reader.readAsArrayBuffer(self.file);
+    self.sendUplodFile();
+//    self.reader.onloadend = function (evt) {
+//        var arraybuffer = evt.target.result;
+//        self.total = evt.target.result.byteLength || evt.total;
+//        self.blobList = [];
+//        for (var startIndex = 0; startIndex < self.total; startIndex += window.hash_chunksize) {
+//            self.blobList.push({
+//                data: arraybuffer.slice(startIndex, Math.min(startIndex + window.hash_chunksize, self.total)),
+//                blobIndex: startIndex
+//            });
+//        }
+//        console.log(self.blobList.length);
+//        crypto.subtle.digest("SHA-1", self.blobList[0].data).then(function (hash) {
+//            self.blobList[0].hash = new Rusha().digest(hash);
+////                Rusha.createHash().update(hash).digest('hex');
+//            console.log(new Rusha().digest(hash));
+//        }, function (error) {
+//            console.error("Unable to hash:" + error);
+//        });
+//        setTimeout(function () {
+//            self.sendUplodFile();
+//        }, 50);
+//    };
+//    self.reader.readAsArrayBuffer(self.file);
 };
 UploadFile.prototype.abort = function () {
 
