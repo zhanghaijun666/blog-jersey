@@ -1,7 +1,6 @@
 package com.blog.file;
 
 import com.blog.proto.BlogStore;
-import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +10,6 @@ import org.apache.commons.lang.StringUtils;
  * @author zhanghaijun
  */
 public class StorageUtil {
-
-    public static boolean isFolder(BlogStore.StoreTree item) {
-        return BlogMediaType.DIRECTORY_CONTENTTYPE.equals(item.getContentType());
-    }
 
     /**
      * 获取目录的tree集合
@@ -29,15 +24,6 @@ public class StorageUtil {
             return list;
         }
         List<String> dirctorieList = FileUtils.getParentDirctories("", filePath, true);
-        dirctorieList.add("/");//添加根目录
-        BlogStore.StoreTree.Builder rootTree = BlogStore.StoreTree.newBuilder();
-        rootTree.setOwner(commit.getOwner());
-        rootTree.setName("");
-        rootTree.setContentType(BlogMediaType.DIRECTORY_CONTENTTYPE);
-        rootTree.setSize(commit.getSize());
-        rootTree.addAllTreeHashItem(commit.getTreeHashItemList());
-        list.add(new StorageTreeAttr(dirctorieList.get(0), "", rootTree.build()));
-
         List<String> treeHashList = commit.getTreeHashItemList();
         int index = 0;
         while (!treeHashList.isEmpty()) {

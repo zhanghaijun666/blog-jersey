@@ -19,6 +19,10 @@ import org.h2.store.fs.FilePath;
  */
 public class FileUtils {
 
+    public static boolean isFolder(String contentType) {
+        return BlogMediaType.DIRECTORY_CONTENTTYPE.equals(contentType);
+    }
+
     public static String getFileContentType(String fileUrl) {
         String contentType = null;
         try {

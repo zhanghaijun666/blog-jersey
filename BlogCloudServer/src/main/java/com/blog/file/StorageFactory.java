@@ -106,7 +106,7 @@ public class StorageFactory {
         }
         BlogStore.ReturnCode code = BlogStore.ReturnCode.Return_OK;
         if (list.size() > 1) {
-            
+
         }
 
         StorageTreeAttr currentTreeAttr = list.remove(list.size() - 1);
@@ -153,32 +153,43 @@ public class StorageFactory {
     public static BlogStore.FileItemList getFileItemList(FileUrl fileUrl) {
         BlogStore.FileItemList.Builder list = BlogStore.FileItemList.newBuilder();
         BlogStore.StoreCommit commit = (BlogStore.StoreCommit) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeCommit, fileUrl.getRootHash());
-        List<StorageTreeAttr> storageTreeAttr = StorageUtil.getTreeItemList(fileUrl.getPath(), commit);
-        if (storageTreeAttr.isEmpty()) {
+        if (null == commit) {
             return list.build();
         }
-        StorageTreeAttr prentTreeArr = storageTreeAttr.get(storageTreeAttr.size() - 1);
-        BlogStore.StoreTree parentTree = prentTreeArr.getTree();
-        list.setParentFile(BlogStore.FileItem.newBuilder()
-                .setName(parentTree.getName())
-                .setContentType(parentTree.getContentType())
-                .setSize(parentTree.getSize())
-                .setCreateTime(parentTree.getCreateTime())
-                .setUpdateTime(parentTree.getUpdateTime())
-                .build());
-
-        if (prentTreeArr.isFolder()) {
-            for (String treeHash : parentTree.getTreeHashItemList()) {
-                BlogStore.StoreTree tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
-                if (null != tree) {
-                    list.addItem(BlogStore.FileItem.newBuilder()
-                            .setName(tree.getName())
-                            .setContentType(tree.getContentType())
-                            .setSize(tree.getSize())
-                            .setCreateTime(tree.getCreateTime())
-                            .setUpdateTime(tree.getUpdateTime())
-                            .build());
-                }
+        List<StorageTreeAttr> storageTreeAttr = StorageUtil.getTreeItemList(fileUrl.getPath(), commit);
+        BlogStore.FileItem prentFile;
+        List<String> childTreeHashList;
+        if (storageTreeAttr.isEmpty()) {
+            childTreeHashList = commit.getTreeHashItemList();
+            prentFile = BlogStore.FileItem.newBuilder()
+                    .setName("")
+                    .setContentType(BlogMediaType.DIRECTORY_CONTENTTYPE)
+                    .setSize(commit.getSize())
+                    .setCreateTime(commit.getCreateTime())
+                    .setUpdateTime(commit.getUpdateTime())
+                    .build();
+        } else {
+            StorageTreeAttr prentTreeArr = storageTreeAttr.get(storageTreeAttr.size() - 1);
+            childTreeHashList = prentTreeArr.isFolder() ? prentTreeArr.getTree().getTreeHashItemList() : new ArrayList<>();
+            prentFile = BlogStore.FileItem.newBuilder()
+                    .setName(prentTreeArr.getTree().getName())
+                    .setContentType(prentTreeArr.getTree().getContentType())
+                    .setSize(prentTreeArr.getTree().getSize())
+                    .setCreateTime(prentTreeArr.getTree().getCreateTime())
+                    .setUpdateTime(prentTreeArr.getTree().getUpdateTime())
+                    .build();
+        }
+        list.setParentFile(prentFile);
+        for (String treeHash : childTreeHashList) {
+            BlogStore.StoreTree tree = (BlogStore.StoreTree) StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
+            if (null != tree) {
+                list.addItem(BlogStore.FileItem.newBuilder()
+                        .setName(tree.getName())
+                        .setContentType(tree.getContentType())
+                        .setSize(tree.getSize())
+                        .setCreateTime(tree.getCreateTime())
+                        .setUpdateTime(tree.getUpdateTime())
+                        .build());
             }
         }
         return list.build();

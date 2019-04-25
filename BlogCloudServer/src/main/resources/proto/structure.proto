@@ -146,6 +146,8 @@ message StoreCommit {
     string parent = 3;
     repeated string treeHashItem = 4;
     int64 size = 5;
+    int64 createTime = 6;
+    int64 updateTime = 7;
 }
 message StoreTree {
     Operator owner = 1;
@@ -166,6 +168,7 @@ message StoreBlob {
     string name = 2;
     string contentType = 3;
     int64 size = 4;
+    int64 createTime = 6;
 }
 message TreeUpdateItem{
     string originPath = 5;

@@ -11900,6 +11900,16 @@ public final class BlogStore {
      * <code>optional int64 size = 5;</code>
      */
     long getSize();
+
+    /**
+     * <code>optional int64 createTime = 6;</code>
+     */
+    long getCreateTime();
+
+    /**
+     * <code>optional int64 updateTime = 7;</code>
+     */
+    long getUpdateTime();
   }
   /**
    * Protobuf type {@code StoreCommit}
@@ -11916,6 +11926,8 @@ public final class BlogStore {
       parent_ = "";
       treeHashItem_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       size_ = 0L;
+      createTime_ = 0L;
+      updateTime_ = 0L;
     }
 
     @java.lang.Override
@@ -11987,6 +11999,16 @@ public final class BlogStore {
             case 40: {
 
               size_ = input.readInt64();
+              break;
+            }
+            case 48: {
+
+              createTime_ = input.readInt64();
+              break;
+            }
+            case 56: {
+
+              updateTime_ = input.readInt64();
               break;
             }
           }
@@ -12130,6 +12152,24 @@ public final class BlogStore {
       return size_;
     }
 
+    public static final int CREATETIME_FIELD_NUMBER = 6;
+    private long createTime_;
+    /**
+     * <code>optional int64 createTime = 6;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
+    public static final int UPDATETIME_FIELD_NUMBER = 7;
+    private long updateTime_;
+    /**
+     * <code>optional int64 updateTime = 7;</code>
+     */
+    public long getUpdateTime() {
+      return updateTime_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -12156,6 +12196,12 @@ public final class BlogStore {
       }
       if (size_ != 0L) {
         output.writeInt64(5, size_);
+      }
+      if (createTime_ != 0L) {
+        output.writeInt64(6, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        output.writeInt64(7, updateTime_);
       }
     }
 
@@ -12186,6 +12232,14 @@ public final class BlogStore {
       if (size_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, size_);
+      }
+      if (createTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, createTime_);
+      }
+      if (updateTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, updateTime_);
       }
       memoizedSize = size;
       return size;
@@ -12219,6 +12273,10 @@ public final class BlogStore {
           .equals(other.getTreeHashItemList());
       result = result && (getSize()
           == other.getSize());
+      result = result && (getCreateTime()
+          == other.getCreateTime());
+      result = result && (getUpdateTime()
+          == other.getUpdateTime());
       return result;
     }
 
@@ -12246,6 +12304,12 @@ public final class BlogStore {
       hash = (37 * hash) + SIZE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getSize());
+      hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCreateTime());
+      hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getUpdateTime());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -12382,6 +12446,10 @@ public final class BlogStore {
         bitField0_ = (bitField0_ & ~0x00000008);
         size_ = 0L;
 
+        createTime_ = 0L;
+
+        updateTime_ = 0L;
+
         return this;
       }
 
@@ -12423,6 +12491,8 @@ public final class BlogStore {
         }
         result.treeHashItem_ = treeHashItem_;
         result.size_ = size_;
+        result.createTime_ = createTime_;
+        result.updateTime_ = updateTime_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -12487,6 +12557,12 @@ public final class BlogStore {
         }
         if (other.getSize() != 0L) {
           setSize(other.getSize());
+        }
+        if (other.getCreateTime() != 0L) {
+          setCreateTime(other.getCreateTime());
+        }
+        if (other.getUpdateTime() != 0L) {
+          setUpdateTime(other.getUpdateTime());
         }
         onChanged();
         return this;
@@ -12934,6 +13010,58 @@ public final class BlogStore {
       public Builder clearSize() {
         
         size_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long createTime_ ;
+      /**
+       * <code>optional int64 createTime = 6;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 createTime = 6;</code>
+       */
+      public Builder setCreateTime(long value) {
+        
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 createTime = 6;</code>
+       */
+      public Builder clearCreateTime() {
+        
+        createTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long updateTime_ ;
+      /**
+       * <code>optional int64 updateTime = 7;</code>
+       */
+      public long getUpdateTime() {
+        return updateTime_;
+      }
+      /**
+       * <code>optional int64 updateTime = 7;</code>
+       */
+      public Builder setUpdateTime(long value) {
+        
+        updateTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 updateTime = 7;</code>
+       */
+      public Builder clearUpdateTime() {
+        
+        updateTime_ = 0L;
         onChanged();
         return this;
       }
@@ -15365,6 +15493,11 @@ public final class BlogStore {
      * <code>optional int64 size = 4;</code>
      */
     long getSize();
+
+    /**
+     * <code>optional int64 createTime = 6;</code>
+     */
+    long getCreateTime();
   }
   /**
    * Protobuf type {@code StoreBlob}
@@ -15381,6 +15514,7 @@ public final class BlogStore {
       name_ = "";
       contentType_ = "";
       size_ = 0L;
+      createTime_ = 0L;
     }
 
     @java.lang.Override
@@ -15436,6 +15570,11 @@ public final class BlogStore {
             case 32: {
 
               size_ = input.readInt64();
+              break;
+            }
+            case 48: {
+
+              createTime_ = input.readInt64();
               break;
             }
           }
@@ -15559,6 +15698,15 @@ public final class BlogStore {
       return size_;
     }
 
+    public static final int CREATETIME_FIELD_NUMBER = 6;
+    private long createTime_;
+    /**
+     * <code>optional int64 createTime = 6;</code>
+     */
+    public long getCreateTime() {
+      return createTime_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -15583,6 +15731,9 @@ public final class BlogStore {
       if (size_ != 0L) {
         output.writeInt64(4, size_);
       }
+      if (createTime_ != 0L) {
+        output.writeInt64(6, createTime_);
+      }
     }
 
     public int getSerializedSize() {
@@ -15603,6 +15754,10 @@ public final class BlogStore {
       if (size_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, size_);
+      }
+      if (createTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, createTime_);
       }
       memoizedSize = size;
       return size;
@@ -15631,6 +15786,8 @@ public final class BlogStore {
           .equals(other.getContentType());
       result = result && (getSize()
           == other.getSize());
+      result = result && (getCreateTime()
+          == other.getCreateTime());
       return result;
     }
 
@@ -15652,6 +15809,9 @@ public final class BlogStore {
       hash = (37 * hash) + SIZE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getSize());
+      hash = (37 * hash) + CREATETIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getCreateTime());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -15782,6 +15942,8 @@ public final class BlogStore {
 
         size_ = 0L;
 
+        createTime_ = 0L;
+
         return this;
       }
 
@@ -15812,6 +15974,7 @@ public final class BlogStore {
         result.name_ = name_;
         result.contentType_ = contentType_;
         result.size_ = size_;
+        result.createTime_ = createTime_;
         onBuilt();
         return result;
       }
@@ -15866,6 +16029,9 @@ public final class BlogStore {
         }
         if (other.getSize() != 0L) {
           setSize(other.getSize());
+        }
+        if (other.getCreateTime() != 0L) {
+          setCreateTime(other.getCreateTime());
         }
         onChanged();
         return this;
@@ -16170,6 +16336,32 @@ public final class BlogStore {
       public Builder clearSize() {
         
         size_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long createTime_ ;
+      /**
+       * <code>optional int64 createTime = 6;</code>
+       */
+      public long getCreateTime() {
+        return createTime_;
+      }
+      /**
+       * <code>optional int64 createTime = 6;</code>
+       */
+      public Builder setCreateTime(long value) {
+        
+        createTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 createTime = 6;</code>
+       */
+      public Builder clearCreateTime() {
+        
+        createTime_ = 0L;
         onChanged();
         return this;
       }
@@ -17855,36 +18047,37 @@ public final class BlogStore {
       "tType\030\002 \001(\t\022\014\n\004size\030\003 \001(\003\022\022\n\ncreateTime\030" +
       "\004 \001(\003\022\022\n\nupdateTime\030\005 \001(\003\"6\n\010Operator\022\014\n" +
       "\004date\030\001 \001(\003\022\016\n\006gptype\030\002 \001(\005\022\014\n\004gpid\030\003 \001(" +
-      "\005\"y\n\013StoreCommit\022\030\n\005owner\030\001 \001(\0132\t.Operat",
-      "or\022\034\n\tcommitter\030\002 \001(\0132\t.Operator\022\016\n\006pare" +
-      "nt\030\003 \001(\t\022\024\n\014treeHashItem\030\004 \003(\t\022\014\n\004size\030\005" +
-      " \001(\003\"\321\001\n\tStoreTree\022\030\n\005owner\030\001 \001(\0132\t.Oper" +
-      "ator\022\034\n\tcommitter\030\002 \001(\0132\t.Operator\022\014\n\004na" +
-      "me\030\003 \001(\t\022\023\n\013contentType\030\004 \001(\t\022\014\n\004size\030\005 " +
-      "\001(\003\022\022\n\ncreateTime\030\006 \001(\003\022\022\n\nupdateTime\030\007 " +
-      "\001(\003\022\024\n\014treeHashItem\030\n \003(\t\022\035\n\010fileItem\030\013 " +
-      "\003(\0132\013.StringList\"\032\n\nStringList\022\014\n\004imte\030\001" +
-      " \003(\t\"Z\n\tStoreBlob\022\034\n\tcommitter\030\001 \001(\0132\t.O" +
-      "perator\022\014\n\004name\030\002 \001(\t\022\023\n\013contentType\030\003 \001",
-      "(\t\022\014\n\004size\030\004 \001(\003\"U\n\016TreeUpdateItem\022\022\n\nor" +
-      "iginPath\030\005 \001(\t\022\020\n\010fileName\030\006 \001(\t\022\017\n\007cont" +
-      "ent\030\007 \001(\014\022\014\n\004size\030\010 \001(\003\"3\n\022TreeUpdateIte" +
-      "mList\022\035\n\004item\030\004 \003(\0132\017.TreeUpdateItem*@\n\006" +
-      "Status\022\021\n\rStatusDefault\020\000\022\020\n\014StatusActiv" +
-      "e\020\001\022\021\n\rStatusDeleted\020\002*u\n\rAuthenticator\022" +
-      "\031\n\025DEFAULT_AUTHENTICATOR\020\000\022\030\n\024SYSTEM_AUT" +
-      "HENTICATOR\020\001\022\026\n\022TEXT_AUTHENTICATOR\020\002\022\027\n\023" +
-      "EMAIL_AUTHENTICATOR\020\003*`\n\rStoreTypeEnum\022\024" +
-      "\n\020StoreTypeDefault\020\000\022\023\n\017StoreTypeCommit\020",
-      "\001\022\021\n\rStoreTypeTree\020\002\022\021\n\rStoreTypeBlob\020\003*" +
-      "-\n\tGtypeEnum\022\013\n\007Default\020\000\022\010\n\004User\020\001\022\t\n\005G" +
-      "roup\020\002*\322\001\n\nReturnCode\022\027\n\023UNKNOWN_RETURN_" +
-      "CODE\020\000\022\r\n\tReturn_OK\020\001\022\020\n\014Return_ERROR\020\002\022" +
-      "\025\n\021Return_USER_EXIST\0202\022\031\n\025Return_PASSWOR" +
-      "D_ERROR\0203\022(\n$Return_USERNAME_OR_PASSWORD" +
-      "_IS_EMPTY\0204\022\025\n\021Return_USER_EMPTY\0205\022\027\n\023Re" +
-      "turn_NOT_YOURSELF\0206B\033\n\016com.blog.protoB\tB" +
-      "logStoreb\006proto3"
+      "\005\"\241\001\n\013StoreCommit\022\030\n\005owner\030\001 \001(\0132\t.Opera",
+      "tor\022\034\n\tcommitter\030\002 \001(\0132\t.Operator\022\016\n\006par" +
+      "ent\030\003 \001(\t\022\024\n\014treeHashItem\030\004 \003(\t\022\014\n\004size\030" +
+      "\005 \001(\003\022\022\n\ncreateTime\030\006 \001(\003\022\022\n\nupdateTime\030" +
+      "\007 \001(\003\"\321\001\n\tStoreTree\022\030\n\005owner\030\001 \001(\0132\t.Ope" +
+      "rator\022\034\n\tcommitter\030\002 \001(\0132\t.Operator\022\014\n\004n" +
+      "ame\030\003 \001(\t\022\023\n\013contentType\030\004 \001(\t\022\014\n\004size\030\005" +
+      " \001(\003\022\022\n\ncreateTime\030\006 \001(\003\022\022\n\nupdateTime\030\007" +
+      " \001(\003\022\024\n\014treeHashItem\030\n \003(\t\022\035\n\010fileItem\030\013" +
+      " \003(\0132\013.StringList\"\032\n\nStringList\022\014\n\004imte\030" +
+      "\001 \003(\t\"n\n\tStoreBlob\022\034\n\tcommitter\030\001 \001(\0132\t.",
+      "Operator\022\014\n\004name\030\002 \001(\t\022\023\n\013contentType\030\003 " +
+      "\001(\t\022\014\n\004size\030\004 \001(\003\022\022\n\ncreateTime\030\006 \001(\003\"U\n" +
+      "\016TreeUpdateItem\022\022\n\noriginPath\030\005 \001(\t\022\020\n\010f" +
+      "ileName\030\006 \001(\t\022\017\n\007content\030\007 \001(\014\022\014\n\004size\030\010" +
+      " \001(\003\"3\n\022TreeUpdateItemList\022\035\n\004item\030\004 \003(\013" +
+      "2\017.TreeUpdateItem*@\n\006Status\022\021\n\rStatusDef" +
+      "ault\020\000\022\020\n\014StatusActive\020\001\022\021\n\rStatusDelete" +
+      "d\020\002*u\n\rAuthenticator\022\031\n\025DEFAULT_AUTHENTI" +
+      "CATOR\020\000\022\030\n\024SYSTEM_AUTHENTICATOR\020\001\022\026\n\022TEX" +
+      "T_AUTHENTICATOR\020\002\022\027\n\023EMAIL_AUTHENTICATOR",
+      "\020\003*`\n\rStoreTypeEnum\022\024\n\020StoreTypeDefault\020" +
+      "\000\022\023\n\017StoreTypeCommit\020\001\022\021\n\rStoreTypeTree\020" +
+      "\002\022\021\n\rStoreTypeBlob\020\003*-\n\tGtypeEnum\022\013\n\007Def" +
+      "ault\020\000\022\010\n\004User\020\001\022\t\n\005Group\020\002*\322\001\n\nReturnCo" +
+      "de\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tReturn_OK" +
+      "\020\001\022\020\n\014Return_ERROR\020\002\022\025\n\021Return_USER_EXIS" +
+      "T\0202\022\031\n\025Return_PASSWORD_ERROR\0203\022(\n$Return" +
+      "_USERNAME_OR_PASSWORD_IS_EMPTY\0204\022\025\n\021Retu" +
+      "rn_USER_EMPTY\0205\022\027\n\023Return_NOT_YOURSELF\0206" +
+      "B\033\n\016com.blog.protoB\tBlogStoreb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -17975,7 +18168,7 @@ public final class BlogStore {
     internal_static_StoreCommit_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StoreCommit_descriptor,
-        new java.lang.String[] { "Owner", "Committer", "Parent", "TreeHashItem", "Size", });
+        new java.lang.String[] { "Owner", "Committer", "Parent", "TreeHashItem", "Size", "CreateTime", "UpdateTime", });
     internal_static_StoreTree_descriptor =
       getDescriptor().getMessageTypes().get(13);
     internal_static_StoreTree_fieldAccessorTable = new
@@ -17993,7 +18186,7 @@ public final class BlogStore {
     internal_static_StoreBlob_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StoreBlob_descriptor,
-        new java.lang.String[] { "Committer", "Name", "ContentType", "Size", });
+        new java.lang.String[] { "Committer", "Name", "ContentType", "Size", "CreateTime", });
     internal_static_TreeUpdateItem_descriptor =
       getDescriptor().getMessageTypes().get(16);
     internal_static_TreeUpdateItem_fieldAccessorTable = new
