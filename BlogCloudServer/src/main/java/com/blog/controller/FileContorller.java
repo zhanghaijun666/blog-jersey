@@ -4,6 +4,7 @@ import com.blog.file.StorageFactory;
 import com.blog.file.FileUrl;
 import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
+import com.blog.service.FileService;
 import com.blog.utils.BlogMediaType;
 import java.io.IOException;
 import javax.annotation.security.RolesAllowed;
@@ -44,7 +45,7 @@ public class FileContorller {
         }
         BlogSession session = (BlogSession) security.getUserPrincipal();
         FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
-        return BlogStore.RspInfoList.newBuilder().setCode(StorageFactory.UploadFile(fileUrl, request.getInputStream())).build();
+        return BlogStore.RspInfoList.newBuilder().setCode(FileService.UploadFile(fileUrl, request.getInputStream())).build();
     }
 
     @GET
@@ -60,24 +61,25 @@ public class FileContorller {
         return BlogStore.FileItemList.getDefaultInstance();
     }
 
-//    @POST
-//    @Path("/deldete")
-//    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-//    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-//    @RolesAllowed("user")
-//    public BlogStore.RspInfoList deleteFile() {
-//        BlogSession session = (BlogSession) security.getUserPrincipal();
-//        return BlogStore.RspInfoList.getDefaultInstance();
-//    }
-//
-//    @PUT
-//    @Path("/rename")
-//    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-//    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-//    @RolesAllowed("user")
-//    public BlogStore.RspInfo renameFile() {
-//        return BlogStore.RspInfo.getDefaultInstance();
-//    }
+    @POST
+    @Path("/deldete/{path: .*}")
+    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @RolesAllowed("user")
+    public BlogStore.RspInfoList deleteFile(@PathParam("path") String filePath) {
+        BlogSession session = (BlogSession) security.getUserPrincipal();
+        return BlogStore.RspInfoList.newBuilder().setCode(FileService.deldeteFile(new FileUrl(filePath, session.getUserId()))).build();
+    }
+
+    @PUT
+    @Path("/rename{path: .*}")
+    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @RolesAllowed("user")
+    public BlogStore.RspInfo renameFile(@PathParam("path") String filePath, String newFileName) {
+        BlogSession session = (BlogSession) security.getUserPrincipal();
+        return BlogStore.RspInfo.newBuilder().setCode(FileService.renameFile(new FileUrl(filePath, session.getUserId()), newFileName)).build();
+    }
 
 //    @GET
 //    @Path("/download/{path: .*}")

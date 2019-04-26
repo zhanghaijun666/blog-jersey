@@ -5,12 +5,8 @@ import com.blog.service.RepositoryService;
 import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;
 import com.tools.EncryptUtils;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -18,57 +14,21 @@ import org.apache.commons.lang.StringUtils;
  */
 public class StorageFactory {
 
-    public static final int MAX_BLOB_SIZE = 32 * 1024 * 1024;
-
-    public static BlogStore.ReturnCode UploadFile(FileUrl fileUrl, InputStream inputStream) throws IOException {
-        byte[] fileByte = FileUtils.toByteArray(inputStream);
-        List<byte[]> blobList = FileUtils.SplitList(fileByte, StorageFactory.MAX_BLOB_SIZE);
-        Map<String, byte[]> blobMap = new HashMap<>();
-        for (int i = 0; i < blobList.size(); i++) {
-            blobMap.put(EncryptUtils.sha1(blobList.get(i)), blobList.get(i));
-        }
-        String contentType = FileUtils.getFileContentType(fileUrl.getPath());
-//        整个文件的哈市值
-//        String fileHash = EncryptUtils.sha1(blobMap.keySet());
-
-        BlogStore.ReturnCode code = BlogStore.ReturnCode.Return_OK;
-        for (Map.Entry<String, byte[]> entry : blobMap.entrySet()) {
-            if (code != BlogStore.ReturnCode.Return_OK) {
-                break;
-            }
-            BlogStore.StoreBlob blob = BlogStore.StoreBlob.newBuilder()
-                    .setCommitter(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
-                    .setName(FileUtils.getFileName(fileUrl.getPath()))
-                    .setContentType(contentType)
-                    .setSize(entry.getValue().length)
-                    .setCreateTime(System.currentTimeMillis())
-                    .build();
-            code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeFile, entry.getKey(), blob, entry.getValue());
-        }
-        if (code == BlogStore.ReturnCode.Return_OK) {
-            BlogStore.StorageItem fileTree = BlogStore.StorageItem.newBuilder()
-                    .setType(BlogStore.StoreTypeEnum.StoreTypeFile)
-                    .setOwner(BlogStore.Operator.newBuilder().setGptype(fileUrl.getGpType()).setGpid(fileUrl.getGpId()).build())
-                    .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
-                    .setCreateTime(System.currentTimeMillis())
-                    .setUpdateTime(System.currentTimeMillis())
-                    .setFileName(FileUtils.getFileName(fileUrl.getPath()))
-                    .setSize(fileByte.length)
-                    .setContentType(contentType)
-                    .addFileItem(BlogStore.StringList.newBuilder().addAllImte(blobMap.keySet()).build())
-                    .build();
-            String treeHash = EncryptUtils.sha1(fileTree.toByteArray());
-            code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, fileTree);
-            if (code == BlogStore.ReturnCode.Return_OK) {
-                code = StorageFactory.addTreeItem(fileUrl, treeHash, fileByte.length);
-            }
-        }
-        return code;
-    }
-
     public static BlogStore.ReturnCode addTreeItem(FileUrl fileUrl, String treeHash, long treeSize) {
         return StorageFactory.StorageFactory(fileUrl.getParent(), (BlogStore.StorageItem oldStoreItem) -> {
             return StorageTreeAttr.buildFolderNewTree(oldStoreItem, "", 0, treeHash, treeSize);
+        });
+    }
+
+    public static BlogStore.ReturnCode renameTreeItem(FileUrl fileUrl, String oldTreeHash, long oldTreeSize, String newTreeHash, long newTreeSize) {
+        return StorageFactory.StorageFactory(fileUrl.getParent(), (BlogStore.StorageItem oldStoreItem) -> {
+            return StorageTreeAttr.buildFolderNewTree(oldStoreItem, oldTreeHash, oldTreeSize, newTreeHash, newTreeSize);
+        });
+    }
+
+    public static BlogStore.ReturnCode deleteTreeItem(FileUrl fileUrl, String deldeteTreeHash, long deldeteTreeSize) {
+        return StorageFactory.StorageFactory(fileUrl.getParent(), (BlogStore.StorageItem oldStoreItem) -> {
+            return StorageTreeAttr.buildFolderNewTree(oldStoreItem, deldeteTreeHash, deldeteTreeSize, "", 0);
         });
     }
 
@@ -157,16 +117,16 @@ public class StorageFactory {
      * @param fileUrl
      * @return
      */
-    public static BlogStore.StorageItem getStorage(FileUrl fileUrl) {
+    public static StorageTreeAttr getStorage(FileUrl fileUrl) {
         BlogStore.StorageItem commit = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeCommit, fileUrl.getRootHash());
         if (null == commit) {
             return null;
         }
         List<StorageTreeAttr> storageAttr = StorageUtil.getTreeItemList(fileUrl.getPath(), commit);
         if (storageAttr.isEmpty()) {
-            return commit;
+            return new StorageTreeAttr("/", fileUrl.getRootHash(), commit);
         } else {
-            return storageAttr.get(storageAttr.size() - 1).getStorageItem();
+            return storageAttr.get(storageAttr.size() - 1);
         }
     }
 
@@ -178,17 +138,17 @@ public class StorageFactory {
      */
     public static BlogStore.FileItemList getFileItemList(FileUrl fileUrl) {
         BlogStore.FileItemList.Builder list = BlogStore.FileItemList.newBuilder();
-        BlogStore.StorageItem prentStorageArr = StorageFactory.getStorage(fileUrl);
-        if (null == prentStorageArr) {
+        BlogStore.StorageItem storageItem = StorageFactory.getStorage(fileUrl).getStorageItem();
+        if (null == storageItem) {
             return list.build();
         }
-        List<String> childTreeHashList = FileUtils.isFolder(prentStorageArr.getContentType()) ? prentStorageArr.getTreeHashItemList() : new ArrayList<>();
+        List<String> childTreeHashList = FileUtils.isFolder(storageItem.getContentType()) ? storageItem.getTreeHashItemList() : new ArrayList<>();
         list.setParentFile(BlogStore.FileItem.newBuilder()
-                .setFileName(prentStorageArr.getFileName())
-                .setContentType(prentStorageArr.getContentType())
-                .setSize(prentStorageArr.getSize())
-                .setCreateTime(prentStorageArr.getCreateTime())
-                .setUpdateTime(prentStorageArr.getUpdateTime())
+                .setFileName(storageItem.getFileName())
+                .setContentType(storageItem.getContentType())
+                .setSize(storageItem.getSize())
+                .setCreateTime(storageItem.getCreateTime())
+                .setUpdateTime(storageItem.getUpdateTime())
                 .build());
         for (String treeHash : childTreeHashList) {
             BlogStore.StorageItem tree = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);

@@ -49,16 +49,19 @@ public class StorageTreeAttr {
         if (null == oldStorageItem) {
             return null;
         }
-        if (StringUtils.isBlank(newTreeHash)) {
-            return BlogStore.StorageItem.newBuilder(oldStorageItem).build();
-        }
         List<String> oldTreeHashList = oldStorageItem.getTreeHashItemList();
         BlogStore.StorageItem.Builder storage = BlogStore.StorageItem.newBuilder(oldStorageItem);
         storage.setSize(oldStorageItem.getSize() - oldSize + newSize);
         storage.setUpdateTime(System.currentTimeMillis());
-        if (StringUtils.isBlank(oldTreeHash)) {
+
+        if (StringUtils.isBlank(newTreeHash) && StringUtils.isNotBlank(oldTreeHash)) {
+            //删除tree
+            storage.getTreeHashItemList().remove(oldTreeHash);
+        } else if (StringUtils.isBlank(oldTreeHash) && StringUtils.isNotBlank(newTreeHash)) {
+            //新增
             storage.addTreeHashItem(newTreeHash);
-        } else {
+        } else if (StringUtils.isNotBlank(oldTreeHash) && StringUtils.isNotBlank(newTreeHash)) {
+            //更新
             storage.getTreeHashItemList().clear();
             for (String hash : oldTreeHashList) {
                 if (StringUtils.equals(hash, oldTreeHash)) {
