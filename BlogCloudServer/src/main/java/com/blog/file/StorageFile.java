@@ -25,7 +25,11 @@ public class StorageFile {
     private static final int FILE_HEADER_MESSAGE_LENGTH = 10;
 
     public static byte[] readFile(FileUrl fileUrl) {
-        BlogStore.StorageItem storage = StorageFactory.getStorage(fileUrl).getStorageItem();
+        StorageTreeAttr storageAttr = StorageFactory.getStorage(fileUrl);
+        if (null == storageAttr) {
+            return null;
+        }
+        BlogStore.StorageItem storage = storageAttr.getStorageItem();
         if (storage.getType() != BlogStore.StoreTypeEnum.StoreTypeFile || storage.getBlobHashItemList().isEmpty()) {
             return null;
         }

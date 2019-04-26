@@ -138,7 +138,11 @@ public class StorageFactory {
      */
     public static BlogStore.FileItemList getFileItemList(FileUrl fileUrl) {
         BlogStore.FileItemList.Builder list = BlogStore.FileItemList.newBuilder();
-        BlogStore.StorageItem storageItem = StorageFactory.getStorage(fileUrl).getStorageItem();
+        StorageTreeAttr storageAttr = StorageFactory.getStorage(fileUrl);
+        if (null == storageAttr) {
+            return list.build();
+        }
+        BlogStore.StorageItem storageItem = storageAttr.getStorageItem();
         if (null == storageItem) {
             return list.build();
         }

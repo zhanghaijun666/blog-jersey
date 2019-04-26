@@ -89,6 +89,9 @@ public class FileService {
             return BlogStore.ReturnCode.Return_ERROR;
         }
         StorageTreeAttr storageAttr = StorageFactory.getStorage(fileUrl);
+        if (null == storageAttr) {
+            return BlogStore.ReturnCode.Return_ERROR;
+        }
         BlogStore.StorageItem storage = storageAttr.getStorageItem();
         if (storage.getType() != BlogStore.StoreTypeEnum.StoreTypeTree && storage.getType() != BlogStore.StoreTypeEnum.StoreTypeFile) {
             return BlogStore.ReturnCode.Return_ERROR;
@@ -111,6 +114,9 @@ public class FileService {
      */
     public static BlogStore.ReturnCode deldeteFile(FileUrl fileUrl) {
         StorageTreeAttr storageAttr = StorageFactory.getStorage(fileUrl);
+        if (null == storageAttr) {
+            return BlogStore.ReturnCode.Return_ERROR;
+        }
         BlogStore.StorageItem storage = storageAttr.getStorageItem();
         if (storage.getType() != BlogStore.StoreTypeEnum.StoreTypeTree && storage.getType() != BlogStore.StoreTypeEnum.StoreTypeFile) {
             return BlogStore.ReturnCode.Return_ERROR;

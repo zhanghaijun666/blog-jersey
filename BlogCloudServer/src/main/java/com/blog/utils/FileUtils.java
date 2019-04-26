@@ -29,8 +29,14 @@ public class FileUtils {
     public static String getFileContentType(String fileUrl) {
         String contentType = null;
         try {
-            contentType = new MimetypesFileTypeMap().getContentType(new File(fileUrl));
+            contentType = new MimetypesFileTypeMap().getContentType(fileUrl);
         } catch (Exception e) {
+        }
+        if (StringUtils.isBlank(contentType) || StringUtils.equals(contentType, BlogMediaType.FILE_UNKNOWN_CONTENTTYPE)) {
+            contentType = BlogMediaType.getFileContentType().get(fileUrl.substring(fileUrl.lastIndexOf('.')));
+        }
+        if (StringUtils.isBlank(contentType)) {
+            return BlogMediaType.FILE_UNKNOWN_CONTENTTYPE;
         }
         return contentType;
     }
