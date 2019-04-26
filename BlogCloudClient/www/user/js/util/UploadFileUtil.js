@@ -3,7 +3,7 @@
 window.hash_chunksize = 8 * 1024 * 1024;
 function UploadFilePool(inputFile) {
     var self = this;
-    self.syncUploadNumber = 3;
+    self.syncUploadNumber = 20;
     self.fileList = [];
     var files = inputFile && inputFile.files ? inputFile.files : [];
     for (var i = 0; i < files.length; i++) {
