@@ -44,7 +44,9 @@
                 <custom-checkbox params="checked: $data.select"></custom-checkbox>
             </td>
             <!-- /ko -->
-            <td class="custom-card-content" data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></td>
+            <td class="custom-card-content">
+                <div data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></div>
+            </td>
             <!-- ko if: $component.isShowSingleOperateMenu() -->
             <td class="custom-card-operation">
                 <ul data-bind="foreach: $component.getSingleOperateMenu()">
@@ -62,8 +64,7 @@
 <template id="folderCardLayout-template">
     <span class="custom-card-icon"><i class="fa" data-bind="css: 'fa-file' "></i></span>
     <span data-bind="text: $data.fileName+''"></span>
-    <span data-bind="text: '//大小'+$data.size"></span>
-    <span data-bind="text: '//创建时间'+$data.createTime"></span>
+    <span class="pull-right" data-bind="text: $data.size"></span>
 </template>
 <template id="userCardLayout-template">
     <span class="custom-card-icon"><i class="fa" data-bind="css: $data.role.icon || 'fa-user' "></i></span>

@@ -13,17 +13,60 @@
             };
             self.blogFileLsit = ko.observableArray([]);
             self.blogOperateMenu = [
-//                new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.confirmDeleteUser, menuType: CustomMenuType.SingleSlection}),
-//                new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.confirmDeleteUser, menuType: CustomMenuType.MultipleSelection})
+                new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: CustomMenuType.SingleSlection}),
+                new MenuTab(l10n('operate.rename'), {icon: 'fa-trash-o', clickFun: self.confirmRenameFile, menuType: CustomMenuType.SingleSlection}),
+                new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: CustomMenuType.MultipleSelection})
             ];
 
             self.getBlogFile = function () {
                 getRequest("/file/get/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/", {accept: "application/x-protobuf"}, function (data) {
                     var fileList = bcstore.FileItemList.decode(data);
-                    self.blogFileLsit(fileList.item);
+                    if (fileList.item && fileList.item instanceof Array) {
+                        for (var i = 0; i < fileList.item.length; i++) {
+                            self.blogFileLsit.push(new FileItem(fileList.item[i], true));
+                        }
+                    }
                 });
             };
-
+            self.deleteFile = function (fileIemList) {
+                showDialog({
+                    header: l10n("operate.tips"),
+                    bodyTemplate: "template-small-dialogMsg",
+                    tipsMsg: l10n('operate.confirmDelete'),
+                    dialogClass: "modal-sm",
+                    success: function () {
+                        fileIemList = fileIemList instanceof Array ? fileIemList : [fileIemList];
+                        var req = bcstore.FileItemList.create();
+                        for (var i = 0; i < fileIemList.length; i++) {
+                            req.item.push(fileIemList[i]);
+                        }
+                        getRequest("/file/deldete", {type: "application/x-protobuf", accept: "application/x-protobuf", data: bcstore.FileItemList.encode(req).finish()}, function (data) {
+                            var rspInfoList = bcstore.RspInfoList.decode(data);
+                            toastShowCode(rspInfoList.code);
+                            if (rspInfoList.code === bcstore.ReturnCode.Return_OK) {
+                                self.getBlogFile();
+                            }
+                        });
+                    }
+                });
+            };
+            self.confirmRenameFile = function (fileIem) {
+                self.renameFile(fileIem, "重命名文件名");
+            };
+            self.renameFile = function (fileIem, newFileName) {
+                if (fileIem.fullPath) {
+                    return;
+                }
+                var file = ko.deepObservableClone(fileIem);
+                file.fileName = newFileName;
+                getRequest("/file/rename", {type: "application/x-protobuf", accept: "application/x-protobuf", data: fileIem.toArrayBuffer()}, function (data) {
+                    var rspInfo = bcstore.RspInfo.decode(data);
+                    toastShowCode(rspInfo.code);
+                    if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
+                        self.getBlogFile();
+                    }
+                });
+            };
 
 
             self.getBlogFile();

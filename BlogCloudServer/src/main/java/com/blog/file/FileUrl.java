@@ -2,6 +2,7 @@ package com.blog.file;
 
 import com.blog.db.Repository;
 import com.blog.service.RepositoryService;
+import com.blog.utils.FileUtils;
 import com.tools.BasicConvertUtils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,6 +74,10 @@ public class FileUrl {
 
     public int getUserId() {
         return userId;
+    }
+
+    public String getFileName() {
+        return FileUtils.getFileName(this.getPath());
     }
 
 }

@@ -10487,6 +10487,16 @@ public final class BlogStore {
      * <code>optional int64 updateTime = 5;</code>
      */
     long getUpdateTime();
+
+    /**
+     * <code>optional string fullPath = 6;</code>
+     */
+    java.lang.String getFullPath();
+    /**
+     * <code>optional string fullPath = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getFullPathBytes();
   }
   /**
    * Protobuf type {@code FileItem}
@@ -10505,6 +10515,7 @@ public final class BlogStore {
       size_ = 0L;
       createTime_ = 0L;
       updateTime_ = 0L;
+      fullPath_ = "";
     }
 
     @java.lang.Override
@@ -10557,6 +10568,12 @@ public final class BlogStore {
             case 40: {
 
               updateTime_ = input.readInt64();
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              fullPath_ = s;
               break;
             }
           }
@@ -10677,6 +10694,40 @@ public final class BlogStore {
       return updateTime_;
     }
 
+    public static final int FULLPATH_FIELD_NUMBER = 6;
+    private volatile java.lang.Object fullPath_;
+    /**
+     * <code>optional string fullPath = 6;</code>
+     */
+    public java.lang.String getFullPath() {
+      java.lang.Object ref = fullPath_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        fullPath_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string fullPath = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getFullPathBytes() {
+      java.lang.Object ref = fullPath_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        fullPath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -10704,6 +10755,9 @@ public final class BlogStore {
       if (updateTime_ != 0L) {
         output.writeInt64(5, updateTime_);
       }
+      if (!getFullPathBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, fullPath_);
+      }
     }
 
     public int getSerializedSize() {
@@ -10728,6 +10782,9 @@ public final class BlogStore {
       if (updateTime_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(5, updateTime_);
+      }
+      if (!getFullPathBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, fullPath_);
       }
       memoizedSize = size;
       return size;
@@ -10755,6 +10812,8 @@ public final class BlogStore {
           == other.getCreateTime());
       result = result && (getUpdateTime()
           == other.getUpdateTime());
+      result = result && getFullPath()
+          .equals(other.getFullPath());
       return result;
     }
 
@@ -10778,6 +10837,8 @@ public final class BlogStore {
       hash = (37 * hash) + UPDATETIME_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getUpdateTime());
+      hash = (37 * hash) + FULLPATH_FIELD_NUMBER;
+      hash = (53 * hash) + getFullPath().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -10906,6 +10967,8 @@ public final class BlogStore {
 
         updateTime_ = 0L;
 
+        fullPath_ = "";
+
         return this;
       }
 
@@ -10933,6 +10996,7 @@ public final class BlogStore {
         result.size_ = size_;
         result.createTime_ = createTime_;
         result.updateTime_ = updateTime_;
+        result.fullPath_ = fullPath_;
         onBuilt();
         return result;
       }
@@ -10990,6 +11054,10 @@ public final class BlogStore {
         }
         if (other.getUpdateTime() != 0L) {
           setUpdateTime(other.getUpdateTime());
+        }
+        if (!other.getFullPath().isEmpty()) {
+          fullPath_ = other.fullPath_;
+          onChanged();
         }
         onChanged();
         return this;
@@ -11229,6 +11297,75 @@ public final class BlogStore {
       public Builder clearUpdateTime() {
         
         updateTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object fullPath_ = "";
+      /**
+       * <code>optional string fullPath = 6;</code>
+       */
+      public java.lang.String getFullPath() {
+        java.lang.Object ref = fullPath_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          fullPath_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string fullPath = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getFullPathBytes() {
+        java.lang.Object ref = fullPath_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          fullPath_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string fullPath = 6;</code>
+       */
+      public Builder setFullPath(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        fullPath_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string fullPath = 6;</code>
+       */
+      public Builder clearFullPath() {
+        
+        fullPath_ = getDefaultInstance().getFullPath();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string fullPath = 6;</code>
+       */
+      public Builder setFullPathBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        fullPath_ = value;
         onChanged();
         return this;
       }
@@ -16186,37 +16323,38 @@ public final class BlogStore {
       "teByName\030\020 \001(\t\022\022\n\ncreateById\030\021 \001(\005\022\020\n\010cr" +
       "eateAt\030\022 \001(\003\"F\n\014FileItemList\022\027\n\004item\030\001 \003" +
       "(\0132\t.FileItem\022\035\n\nparentFile\030\002 \001(\0132\t.File" +
-      "Item\"g\n\010FileItem\022\020\n\010fileName\030\001 \001(\t\022\023\n\013co" +
+      "Item\"y\n\010FileItem\022\020\n\010fileName\030\001 \001(\t\022\023\n\013co" +
       "ntentType\030\002 \001(\t\022\014\n\004size\030\003 \001(\003\022\022\n\ncreateT" +
-      "ime\030\004 \001(\003\022\022\n\nupdateTime\030\005 \001(\003\"(\n\010Operato" +
-      "r\022\016\n\006gptype\030\001 \001(\005\022\014\n\004gpid\030\002 \001(\005\"\371\001\n\013Stor" +
-      "ageItem\022\034\n\004type\030\001 \001(\0162\016.StoreTypeEnum\022\030\n",
-      "\005owner\030\002 \001(\0132\t.Operator\022\031\n\006update\030\003 \001(\0132" +
-      "\t.Operator\022\022\n\ncreateTime\030\004 \001(\003\022\022\n\nupdate" +
-      "Time\030\005 \001(\003\022\020\n\010fileName\030\006 \001(\t\022\014\n\004size\030\007 \001" +
-      "(\003\022\023\n\013contentType\030\010 \001(\t\022\016\n\006parent\030\n \001(\t\022" +
-      "\024\n\014treeHashItem\030\013 \003(\t\022\024\n\014blobHashItem\030\014 " +
-      "\003(\t\"n\n\tStoreBlob\022\034\n\tcommitter\030\001 \001(\0132\t.Op" +
-      "erator\022\014\n\004name\030\002 \001(\t\022\023\n\013contentType\030\003 \001(" +
-      "\t\022\014\n\004size\030\004 \001(\003\022\022\n\ncreateTime\030\006 \001(\003\"U\n\016T" +
-      "reeUpdateItem\022\022\n\noriginPath\030\005 \001(\t\022\020\n\010fil" +
-      "eName\030\006 \001(\t\022\017\n\007content\030\007 \001(\014\022\014\n\004size\030\010 \001",
-      "(\003\"3\n\022TreeUpdateItemList\022\035\n\004item\030\004 \003(\0132\017" +
-      ".TreeUpdateItem*@\n\006Status\022\021\n\rStatusDefau" +
-      "lt\020\000\022\020\n\014StatusActive\020\001\022\021\n\rStatusDeleted\020" +
-      "\002*u\n\rAuthenticator\022\031\n\025DEFAULT_AUTHENTICA" +
-      "TOR\020\000\022\030\n\024SYSTEM_AUTHENTICATOR\020\001\022\026\n\022TEXT_" +
-      "AUTHENTICATOR\020\002\022\027\n\023EMAIL_AUTHENTICATOR\020\003" +
-      "*`\n\rStoreTypeEnum\022\024\n\020StoreTypeDefault\020\000\022" +
-      "\023\n\017StoreTypeCommit\020\001\022\021\n\rStoreTypeTree\020\002\022" +
-      "\021\n\rStoreTypeFile\020\003*-\n\tGtypeEnum\022\013\n\007Defau" +
-      "lt\020\000\022\010\n\004User\020\001\022\t\n\005Group\020\002*\322\001\n\nReturnCode",
-      "\022\027\n\023UNKNOWN_RETURN_CODE\020\000\022\r\n\tReturn_OK\020\001" +
-      "\022\020\n\014Return_ERROR\020\002\022\025\n\021Return_USER_EXIST\020" +
-      "2\022\031\n\025Return_PASSWORD_ERROR\0203\022(\n$Return_U" +
-      "SERNAME_OR_PASSWORD_IS_EMPTY\0204\022\025\n\021Return" +
-      "_USER_EMPTY\0205\022\027\n\023Return_NOT_YOURSELF\0206B\033" +
-      "\n\016com.blog.protoB\tBlogStoreb\006proto3"
+      "ime\030\004 \001(\003\022\022\n\nupdateTime\030\005 \001(\003\022\020\n\010fullPat" +
+      "h\030\006 \001(\t\"(\n\010Operator\022\016\n\006gptype\030\001 \001(\005\022\014\n\004g" +
+      "pid\030\002 \001(\005\"\371\001\n\013StorageItem\022\034\n\004type\030\001 \001(\0162",
+      "\016.StoreTypeEnum\022\030\n\005owner\030\002 \001(\0132\t.Operato" +
+      "r\022\031\n\006update\030\003 \001(\0132\t.Operator\022\022\n\ncreateTi" +
+      "me\030\004 \001(\003\022\022\n\nupdateTime\030\005 \001(\003\022\020\n\010fileName" +
+      "\030\006 \001(\t\022\014\n\004size\030\007 \001(\003\022\023\n\013contentType\030\010 \001(" +
+      "\t\022\016\n\006parent\030\n \001(\t\022\024\n\014treeHashItem\030\013 \003(\t\022" +
+      "\024\n\014blobHashItem\030\014 \003(\t\"n\n\tStoreBlob\022\034\n\tco" +
+      "mmitter\030\001 \001(\0132\t.Operator\022\014\n\004name\030\002 \001(\t\022\023" +
+      "\n\013contentType\030\003 \001(\t\022\014\n\004size\030\004 \001(\003\022\022\n\ncre" +
+      "ateTime\030\006 \001(\003\"U\n\016TreeUpdateItem\022\022\n\norigi" +
+      "nPath\030\005 \001(\t\022\020\n\010fileName\030\006 \001(\t\022\017\n\007content",
+      "\030\007 \001(\014\022\014\n\004size\030\010 \001(\003\"3\n\022TreeUpdateItemLi" +
+      "st\022\035\n\004item\030\004 \003(\0132\017.TreeUpdateItem*@\n\006Sta" +
+      "tus\022\021\n\rStatusDefault\020\000\022\020\n\014StatusActive\020\001" +
+      "\022\021\n\rStatusDeleted\020\002*u\n\rAuthenticator\022\031\n\025" +
+      "DEFAULT_AUTHENTICATOR\020\000\022\030\n\024SYSTEM_AUTHEN" +
+      "TICATOR\020\001\022\026\n\022TEXT_AUTHENTICATOR\020\002\022\027\n\023EMA" +
+      "IL_AUTHENTICATOR\020\003*`\n\rStoreTypeEnum\022\024\n\020S" +
+      "toreTypeDefault\020\000\022\023\n\017StoreTypeCommit\020\001\022\021" +
+      "\n\rStoreTypeTree\020\002\022\021\n\rStoreTypeFile\020\003*-\n\t" +
+      "GtypeEnum\022\013\n\007Default\020\000\022\010\n\004User\020\001\022\t\n\005Grou",
+      "p\020\002*\322\001\n\nReturnCode\022\027\n\023UNKNOWN_RETURN_COD" +
+      "E\020\000\022\r\n\tReturn_OK\020\001\022\020\n\014Return_ERROR\020\002\022\025\n\021" +
+      "Return_USER_EXIST\0202\022\031\n\025Return_PASSWORD_E" +
+      "RROR\0203\022(\n$Return_USERNAME_OR_PASSWORD_IS" +
+      "_EMPTY\0204\022\025\n\021Return_USER_EMPTY\0205\022\027\n\023Retur" +
+      "n_NOT_YOURSELF\0206B\033\n\016com.blog.protoB\tBlog" +
+      "Storeb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16295,7 +16433,7 @@ public final class BlogStore {
     internal_static_FileItem_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_FileItem_descriptor,
-        new java.lang.String[] { "FileName", "ContentType", "Size", "CreateTime", "UpdateTime", });
+        new java.lang.String[] { "FileName", "ContentType", "Size", "CreateTime", "UpdateTime", "FullPath", });
     internal_static_Operator_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_Operator_fieldAccessorTable = new

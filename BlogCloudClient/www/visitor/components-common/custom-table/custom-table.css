@@ -68,3 +68,7 @@
 .custom-card-content{
     padding-left: 6px;
 }
+.custom-card-content>div{
+    width: 100%;
+    height: 100%;
+}

@@ -22,7 +22,7 @@ import org.simpleframework.http.Status;
  * @author zhanghaijun
  */
 public class FileService {
-
+    
     public static final int MAX_BLOB_SIZE = 32 * 1024 * 1024;
 
     /**
@@ -85,7 +85,7 @@ public class FileService {
      * @return 文件或文件夹重命名
      */
     public static BlogStore.ReturnCode renameFile(FileUrl fileUrl, String newFileName) {
-        if (StringUtils.isBlank(newFileName)) {
+        if (StringUtils.isBlank(newFileName) && StringUtils.equals(fileUrl.getFileName(), newFileName)) {
             return BlogStore.ReturnCode.Return_ERROR;
         }
         StorageTreeAttr storageAttr = StorageFactory.getStorage(fileUrl);
@@ -123,7 +123,7 @@ public class FileService {
         }
         return StorageFactory.deleteTreeItem(fileUrl, storageAttr.getHash(), storage.getSize());
     }
-
+    
     public static void downloadFile(FileUrl fileUrl, Response response) throws IOException {
         byte[] fileByte = StorageFile.readFile(fileUrl);
         if (null == fileByte) {
@@ -140,5 +140,5 @@ public class FileService {
         }
         response.close();
     }
-
+    
 }

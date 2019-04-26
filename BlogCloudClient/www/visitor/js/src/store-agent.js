@@ -67,6 +67,15 @@ function initStore() {
     Menu.prototype.getMenuName = function () {
         return ko.unwrap(this.name) ? l10n('menu.' + ko.unwrap(this.name)) : "";
     };
+    function FileItem(options, isObservable) {
+        var self = $.extend(this, getStoreFileds("FileItem"), options);
+        if (isObservable) {
+            self.select = ko.observable(false);
+            self.fileName = ko.observable(self.fileName);
+        }
+    }
+    FileItem.prototype = new Message("FileItem");
+
 
 
 
@@ -94,4 +103,5 @@ function initStore() {
 
     window.User = User;
     window.Menu = Menu;
+    window.FileItem = FileItem;
 }

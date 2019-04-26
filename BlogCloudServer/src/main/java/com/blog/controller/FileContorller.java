@@ -62,23 +62,33 @@ public class FileContorller {
     }
 
     @POST
-    @Path("/deldete/{path: .*}")
+    @Path("/deldete")
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
-    public BlogStore.RspInfoList deleteFile(@PathParam("path") String filePath) {
+    public BlogStore.RspInfoList deleteFile(BlogStore.FileItemList fileItemList) {
         BlogSession session = (BlogSession) security.getUserPrincipal();
-        return BlogStore.RspInfoList.newBuilder().setCode(FileService.deldeteFile(new FileUrl(filePath, session.getUserId()))).build();
+        BlogStore.RspInfoList.Builder rspInfoList = BlogStore.RspInfoList.newBuilder();
+        if (null == fileItemList || fileItemList.getItemList().isEmpty()) {
+            return rspInfoList.setCode(BlogStore.ReturnCode.Return_ERROR).build();
+        }
+        for (BlogStore.FileItem item : fileItemList.getItemList()) {
+            BlogStore.ReturnCode code = FileService.deldeteFile(new FileUrl(item.getFullPath(), session.getUserId()));
+            if (code != BlogStore.ReturnCode.Return_OK) {
+                rspInfoList.addItems(BlogStore.RspInfo.newBuilder().setCode(code).setMsg(item.getFullPath()).build());
+            }
+        }
+        return rspInfoList.build();
     }
 
     @PUT
-    @Path("/rename{path: .*}")
+    @Path("/rename")
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
-    public BlogStore.RspInfo renameFile(@PathParam("path") String filePath, String newFileName) {
+    public BlogStore.RspInfo renameFile(BlogStore.FileItem fileItem) {
         BlogSession session = (BlogSession) security.getUserPrincipal();
-        return BlogStore.RspInfo.newBuilder().setCode(FileService.renameFile(new FileUrl(filePath, session.getUserId()), newFileName)).build();
+        return BlogStore.RspInfo.newBuilder().setCode(FileService.renameFile(new FileUrl(fileItem.getFullPath(), session.getUserId()), fileItem.getFileName())).build();
     }
 
     @GET
