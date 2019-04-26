@@ -24,6 +24,46 @@ public class StorageFile {
     private static final String TREE_DIR = "tree";
     private static final int FILE_HEADER_MESSAGE_LENGTH = 10;
 
+    public static byte[] readFile(FileUrl fileUrl) {
+        BlogStore.StorageItem storage = StorageFactory.getStorage(fileUrl).getStorageItem();
+        if (storage.getType() != BlogStore.StoreTypeEnum.StoreTypeFile || storage.getBlobHashItemList().isEmpty()) {
+            return null;
+        }
+        byte[] allFileBlob = new byte[0];
+        byte[] blockFileBlob = null;
+        for (String blobHash : storage.getBlobHashItemList()) {
+            String fileFullPath = StorageFile.getHashFullPath(BlogStore.StoreTypeEnum.StoreTypeFile, blobHash);
+            File file = new File(fileFullPath);
+            FileInputStream input = null;
+            if (file.exists() && file.isFile() && file.canRead()) {
+                try {
+                    input = new FileInputStream(file);
+                    int available = input.available();
+                    byte[] messageLengByte = new byte[Math.min(StorageFile.FILE_HEADER_MESSAGE_LENGTH, available)];
+                    input.read(messageLengByte);
+                    int messageLength = BasicConvertUtils.byteArrayToInt(messageLengByte);
+                    byte[] databuf = new byte[Math.min(messageLength, available - messageLengByte.length)];
+                    input.read(databuf);
+                    blockFileBlob = new byte[Math.max(0, available - databuf.length - messageLengByte.length)];
+                    input.read(databuf);
+                } catch (FileNotFoundException ex) {
+                    logger.error("Unable to open " + fileFullPath, ex);
+                } catch (IOException ex) {
+                    logger.error("Unable to open " + fileFullPath, ex);
+                } finally {
+                    if (input != null) {
+                        try {
+                            input.close();
+                        } catch (IOException ex) {
+                        }
+                    }
+                }
+            }
+            allFileBlob = ArrayUtils.addAll(allFileBlob, blockFileBlob);
+        }
+        return allFileBlob;
+    }
+
     public static BlogStore.StorageItem readStorag(BlogStore.StoreTypeEnum type, String hash) {
         BlogStore.StorageItem storageItem = null;
         String fileFullPath = StorageFile.getHashFullPath(type, hash);

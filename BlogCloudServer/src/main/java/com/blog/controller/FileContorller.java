@@ -81,21 +81,12 @@ public class FileContorller {
         return BlogStore.RspInfo.newBuilder().setCode(FileService.renameFile(new FileUrl(filePath, session.getUserId()), newFileName)).build();
     }
 
-//    @GET
-//    @Path("/download/{path: .*}")
-//    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
-//    @RolesAllowed("user")
-//    public void fileDownload(@PathParam("path") String filePath) {
-//        BlogSession session = (BlogSession) security.getUserPrincipal();
-//        FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
-//        BlogStore.StorageItem storage = StorageFactory.getStorage(fileUrl);
-//        if (FileUtils.isFolder(storage.getContentType())) {
-//
-//        } else {
-////            设置文件ContentType类型，会自动判断下载文件类型
-//            response.setContentType("multipart/form-data");
-////        response.setHeader("Content-Disposition", "attachment;fileName=" + FileUtils.getFileName(fileUrl.getPath()));
-//
-//        }
-//    }
+    @GET
+    @Path("/download/{path: .*}")
+    @RolesAllowed("user")
+    public void fileDownload(@PathParam("path") String filePath) throws IOException {
+        BlogSession session = (BlogSession) security.getUserPrincipal();
+        FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
+        FileService.downloadFile(fileUrl, response);
+    }
 }

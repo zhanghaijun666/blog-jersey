@@ -6,13 +6,17 @@ import com.blog.file.StorageFile;
 import com.blog.file.StorageTreeAttr;
 import com.blog.proto.BlogStore;
 import com.blog.utils.FileUtils;
+import com.tools.BasicConvertUtils;
 import com.tools.EncryptUtils;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
+import org.simpleframework.http.Response;
+import org.simpleframework.http.Status;
 
 /**
  * @author zhanghaijun
@@ -63,7 +67,7 @@ public class FileService {
                     .setFileName(FileUtils.getFileName(fileUrl.getPath()))
                     .setSize(fileByte.length)
                     .setContentType(contentType)
-                    .addFileItem(BlogStore.StringList.newBuilder().addAllImte(blobMap.keySet()).build())
+                    .addAllBlobHashItem(blobMap.keySet())
                     .build();
             String treeHash = EncryptUtils.sha1(fileTree.toByteArray());
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, fileTree);
@@ -113,4 +117,22 @@ public class FileService {
         }
         return StorageFactory.deleteTreeItem(fileUrl, storageAttr.getHash(), storage.getSize());
     }
+
+    public static void downloadFile(FileUrl fileUrl, Response response) throws IOException {
+        byte[] fileByte = StorageFile.readFile(fileUrl);
+        if (null == fileByte) {
+            return;
+        }
+//        response.setContentType("multipart/form-data");
+//        response.setHeader("Content-Disposition", "attachment;fileName=" + FileUtils.getFileName(fileUrl.getPath()));
+        response.setContentType("text/html;charset=UTF-8");
+        response.setStatus(Status.OK);
+        response.setValue("Server-Time", BasicConvertUtils.toString(System.currentTimeMillis(), ""));
+        try (OutputStream out = response.getOutputStream()) {
+            out.write(fileByte);
+            out.flush();
+        }
+        response.close();
+    }
+
 }
