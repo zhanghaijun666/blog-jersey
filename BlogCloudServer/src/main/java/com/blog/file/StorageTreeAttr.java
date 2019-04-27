@@ -53,19 +53,17 @@ public class StorageTreeAttr {
         BlogStore.StorageItem.Builder storage = BlogStore.StorageItem.newBuilder(oldStorageItem);
         storage.setSize(oldStorageItem.getSize() - oldSize + newSize);
         storage.setUpdateTime(System.currentTimeMillis());
-
-        if (StringUtils.isBlank(newTreeHash) && StringUtils.isNotBlank(oldTreeHash)) {
-            //删除tree
-            storage.getTreeHashItemList().remove(oldTreeHash);
-        } else if (StringUtils.isBlank(oldTreeHash) && StringUtils.isNotBlank(newTreeHash)) {
+        if (StringUtils.isBlank(oldTreeHash) && StringUtils.isNotBlank(newTreeHash)) {
             //新增
             storage.addTreeHashItem(newTreeHash);
-        } else if (StringUtils.isNotBlank(oldTreeHash) && StringUtils.isNotBlank(newTreeHash)) {
-            //更新
-            storage.getTreeHashItemList().clear();
+        } else if (StringUtils.isNotBlank(oldTreeHash)) {
+            //更新 删除
+            storage.clearTreeHashItem();
             for (String hash : oldTreeHashList) {
                 if (StringUtils.equals(hash, oldTreeHash)) {
-                    storage.addTreeHashItem(oldTreeHash);
+                    if (StringUtils.isNotBlank(newTreeHash)) {
+                        storage.addTreeHashItem(newTreeHash);
+                    }
                 } else {
                     storage.addTreeHashItem(hash);
                 }
