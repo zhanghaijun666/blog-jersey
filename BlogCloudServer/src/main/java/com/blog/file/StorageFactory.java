@@ -40,12 +40,11 @@ public class StorageFactory {
      */
     private static BlogStore.ReturnCode StorageFactory(FileUrl fileUrl, Action action) {
         String commitHash = fileUrl.getRootHash();
-        BlogStore.StorageItem commit = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeCommit, commitHash);
+        List<StorageTreeAttr> list = StorageUtil.getTreeItemList(fileUrl.getPath(), commitHash);
         BlogStore.ReturnCode returnCode = BlogStore.ReturnCode.Return_OK;
-        BlogStore.StorageItem newCommit = null;
-        if (null == commit) {
+        if (list.isEmpty()) {
             // 第一次更新文件
-            newCommit = action.perform(BlogStore.StorageItem.newBuilder()
+            BlogStore.StorageItem newCommit = action.perform(BlogStore.StorageItem.newBuilder()
                     .setType(BlogStore.StoreTypeEnum.StoreTypeCommit)
                     .setOwner(BlogStore.Operator.newBuilder().setGptype(fileUrl.getGpType()).setGpid(fileUrl.getGpId()).build())
                     .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
@@ -56,56 +55,30 @@ public class StorageFactory {
                     .setContentType(BlogMediaType.DIRECTORY_CONTENTTYPE)
                     .setParent("")
                     .build());
-        } else {
-            List<StorageTreeAttr> list = StorageUtil.getTreeItemList(fileUrl.getPath(), commit);
-            if (list.isEmpty()) {
-                //根目录下更新文件
-                newCommit = action.perform(commit);
-            } else {
-                //其他目录下更新文件
-                StorageTreeAttr currentTreeAttr = null;
-                BlogStore.StorageItem newTree = null;
-                String treeHash = null;
-                long oldTreeSize = 0;
-                long newTreeSize = 0;
-                for (int i = list.size() - 1; i >= 0; i++) {
-                    if (returnCode != BlogStore.ReturnCode.Return_OK) {
-                        break;
-                    }
-                    currentTreeAttr = list.get(i);
-                    oldTreeSize = currentTreeAttr.getStorageItem().getSize();
-                    newTreeSize = null == newTree ? 0 : newTree.getSize();
-                    if (i == list.size() - 1) {
-                        newTree = action.perform(currentTreeAttr.getStorageItem());
-                    } else {
-                        newTree = StorageTreeAttr.buildFolderNewTree(currentTreeAttr.getStorageItem(), currentTreeAttr.getHash(), oldTreeSize, treeHash, newTreeSize);
-                    }
-                    treeHash = EncryptUtils.sha1(newTree.toByteArray());
-                    returnCode = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, newTree);
-                }
-                List<String> oldTreeHashList = commit.getTreeHashItemList();
-                List<String> newTreeHashList = new ArrayList<>();
-                for (String hash : oldTreeHashList) {
-                    if (StringUtils.equals(hash, currentTreeAttr.getHash())) {
-                        newTreeHashList.add(currentTreeAttr.getHash());
-                    } else {
-                        newTreeHashList.add(hash);
-                    }
-                }
-                newCommit = BlogStore.StorageItem.newBuilder(commit)
-                        .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
-                        .setUpdateTime(System.currentTimeMillis())
-                        .setSize(0)
-                        .setParent(commitHash)
-                        .addAllTreeHashItem(newTreeHashList)
-                        .build();
-            }
-        }
-        if (returnCode == BlogStore.ReturnCode.Return_OK) {
             String newCommitHash = EncryptUtils.sha1(newCommit.toByteArray());
             returnCode = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeCommit, newCommitHash, newCommit);
             if (returnCode == BlogStore.ReturnCode.Return_OK) {
                 RepositoryService.updateCommitHash(fileUrl.getGpType(), fileUrl.getGpId(), newCommitHash);
+            }
+        } else {
+            //根目录下更新文件 //其他目录下更新文件
+            StorageTreeAttr newChildTreeAttr = null;
+            for (int i = list.size() - 1; i >= 0; i++) {
+                if (returnCode != BlogStore.ReturnCode.Return_OK) {
+                    break;
+                }
+                BlogStore.StorageItem newTree = null;
+                if (i == list.size() - 1) {
+                    newTree = action.perform(list.get(i).getStorageItem());
+                } else {
+                    newTree = StorageTreeAttr.buildFolderNewTree(list.get(i).getStorageItem(), list.get(i + 1).getHash(), list.get(i + 1).getStorageItem().getSize(), newChildTreeAttr.getHash(), newChildTreeAttr.getStorageItem().getSize());
+                }
+                String treeHash = EncryptUtils.sha1(newTree.toByteArray());
+                newChildTreeAttr = new StorageTreeAttr("", treeHash, newTree);
+                returnCode = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, newTree);
+            }
+            if (returnCode == BlogStore.ReturnCode.Return_OK) {
+                RepositoryService.updateCommitHash(fileUrl.getGpType(), fileUrl.getGpId(), newChildTreeAttr.getHash());
             }
         }
         return returnCode;
@@ -118,13 +91,9 @@ public class StorageFactory {
      * @return
      */
     public static StorageTreeAttr getStorage(FileUrl fileUrl) {
-        BlogStore.StorageItem commit = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeCommit, fileUrl.getRootHash());
-        if (null == commit) {
-            return null;
-        }
-        List<StorageTreeAttr> storageAttr = StorageUtil.getTreeItemList(fileUrl.getPath(), commit);
+        List<StorageTreeAttr> storageAttr = StorageUtil.getTreeItemList(fileUrl.getPath(), fileUrl.getRootHash());
         if (storageAttr.isEmpty()) {
-            return new StorageTreeAttr("/", fileUrl.getRootHash(), commit);
+            return null;
         } else {
             return storageAttr.get(storageAttr.size() - 1);
         }
@@ -149,6 +118,7 @@ public class StorageFactory {
         List<String> childTreeHashList = FileUtils.isFolder(storageItem.getContentType()) ? storageItem.getTreeHashItemList() : new ArrayList<>();
         list.setParentFile(BlogStore.FileItem.newBuilder()
                 .setFileName(storageItem.getFileName())
+                .setFullPath(fileUrl.getOriginPath())
                 .setContentType(storageItem.getContentType())
                 .setSize(storageItem.getSize())
                 .setCreateTime(storageItem.getCreateTime())
@@ -159,6 +129,7 @@ public class StorageFactory {
             if (null != tree) {
                 list.addItem(BlogStore.FileItem.newBuilder()
                         .setFileName(tree.getFileName())
+                        .setFullPath(fileUrl.getChild(tree.getFileName()).getOriginPath())
                         .setContentType(tree.getContentType())
                         .setSize(tree.getSize())
                         .setCreateTime(tree.getCreateTime())
