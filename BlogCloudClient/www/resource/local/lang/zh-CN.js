@@ -52,12 +52,12 @@
         }, "tab": {
             "return": "返回"
         }, "returnCode": {
-            "ok": "操作成功",
-            "error": "操作失败",
-            "user_exist": "用户已存在",
-            "password_error": "密码错误",
-            "username_or_password_is_empty": "用户名或密码为空",
-            "not_yourself": "不能是自己"
+            "return_ok": "操作成功",
+            "return_error": "操作失败",
+            "return_user_exist": "用户已存在",
+            "return_password_error": "密码错误",
+            "return_username_or_password_is_empty": "用户名或密码为空",
+            "return_not_yourself": "不能是自己"
         }, "validation": {
             "nameEmpty": "用户名称不能为空",
             "passwordEmpty": "密码不能为空",

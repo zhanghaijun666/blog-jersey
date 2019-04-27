@@ -53,12 +53,12 @@
         }, "tab": {
             "return": "Return"
         }, "returnCode": {
-            "ok": "Successful",
-            "error": "failed",
-            "user_exist": "User already exists",
-            "password_error": "Password error",
-            "username_or_password_is_empty": "Null username or password",
-            "not_yourself": "Can't be yourself"
+            "return_ok": "Successful",
+            "return_error": "failed",
+            "return_user_exist": "User already exists",
+            "return_password_error": "Password error",
+            "return_username_or_password_is_empty": "Null username or password",
+            "return_not_yourself": "Can't be yourself"
         }, "validation": {
             "nameEmpty": "name is required.",
             "passwordEmpty": "password is required.",

@@ -24,21 +24,15 @@ function UserUtils(root) {
         }
     };
     self.logout = function () {
-        showDialog({
-            header: l10n("operate.tips"),
-            bodyTemplate: "template-small-dialogMsg",
-            tipsMsg: l10n('operate.confirmLogout'),
-            dialogClass: "modal-sm",
-            success: function () {
-                getRequest("/user/logout", {accept: "application/x-protobuf"}, function (data) {
-                    var rspInfo = bcstore.RspInfo.decode(data);
-                    toastShowCode(rspInfo.code);
-                    if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
-                        self.user(null);
-                        self.app.refresh();
-                    }
-                });
-            }
+        confirmTipsDialog(l10n('operate.confirmLogout'), function () {
+            getRequest("/user/logout", {accept: "application/x-protobuf"}, function (data) {
+                var rspInfo = bcstore.RspInfo.decode(data);
+                toastShowCode(rspInfo.code);
+                if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
+                    self.user(null);
+                    self.app.refresh();
+                }
+            });
         });
     };
 

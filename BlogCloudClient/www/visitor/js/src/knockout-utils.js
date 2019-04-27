@@ -2,11 +2,14 @@
     //深度克隆
     function deepClone(object, isUnwrapObservable) {
         var result = {}, oClass = getClass(object);
+
         if (oClass === "Observable") {
             return isUnwrapObservable ? ko.unwrap(object) : ko.observable(ko.unwrap(object));
         } else if (oClass === "Object") {
             ko.utils.arrayForEach(Object.keys(object), function (obj) {
-                result[obj] = deepClone(object[obj], isUnwrapObservable);
+                if (obj.indexOf("$") === -1 && obj !== "constructor") {
+                    result[obj] = deepClone(object[obj], isUnwrapObservable);
+                }
             });
         } else if (oClass === "Array") {
             ko.utils.arrayForEach(object, function (obj) {

@@ -78,6 +78,11 @@ public class FileContorller {
                 rspInfoList.addItems(BlogStore.RspInfo.newBuilder().setCode(code).setMsg(item.getFullPath()).build());
             }
         }
+        if (rspInfoList.getItemsBuilderList().isEmpty()) {
+            rspInfoList.setCode(BlogStore.ReturnCode.Return_OK);
+        } else {
+            rspInfoList.setCode(BlogStore.ReturnCode.Return_ERROR);
+        }
         return rspInfoList.build();
     }
 

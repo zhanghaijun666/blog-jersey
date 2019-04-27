@@ -32,14 +32,8 @@
                 });
             };
             self.confirmDeleteUser = function (user, event) {
-                showDialog({
-                    header: l10n("operate.tips"),
-                    bodyTemplate: "template-small-dialogMsg",
-                    tipsMsg: l10n('operate.confirmDelete'),
-                    dialogClass: "modal-sm",
-                    success: function () {
-                        doDeleteUser(user instanceof Array ? user : [user]);
-                    }
+                confirmTipsDialog(l10n('operate.confirmDelete'), function () {
+                    doDeleteUser(user instanceof Array ? user : [user]);
                 });
             };
             function userInfoDialog(user = {}, callback){

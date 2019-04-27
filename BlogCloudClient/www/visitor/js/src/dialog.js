@@ -20,12 +20,12 @@
                 "			</div>" +
                 "			<!-- /ko -->" +
                 "			<div class=\"modal-body\" style=\"padding: 0px;\">" +
-                "                           <!-- ko if: ko.components.isRegistered($data.bodyTemplate) -->"+
-                "                           <!-- ko component: {name: $data.bodyTemplate, params: $data } --><!-- /ko -->"+
-                "                           <!-- /ko -->"+
-                "                           <!-- ko ifnot: ko.components.isRegistered($data.bodyTemplate) -->"+
-                "                           <!-- ko template: {name: $data.bodyTemplate, data: $data} --><!-- /ko -->"+
-                "                           <!-- /ko -->"+
+                "                           <!-- ko if: ko.components.isRegistered($data.bodyTemplate) -->" +
+                "                           <!-- ko component: {name: $data.bodyTemplate, params: $data } --><!-- /ko -->" +
+                "                           <!-- /ko -->" +
+                "                           <!-- ko ifnot: ko.components.isRegistered($data.bodyTemplate) -->" +
+                "                           <!-- ko template: {name: $data.bodyTemplate, data: $data} --><!-- /ko -->" +
+                "                           <!-- /ko -->" +
                 "			</div>" +
                 "			<!-- ko ifnot: $data.isHideFoot -->" +
                 "			<div class=\"modal-footer\">" +
@@ -63,4 +63,34 @@
         };
     }
     exports.showDialog = showDialog;
+    exports.confirmTipsDialog = function (tipsMsg, callbask) {
+        showDialog({
+            header: l10n("operate.tips"),
+            bodyTemplate: "template-small-dialogMsg",
+            tipsMsg: tipsMsg,
+            dialogClass: "modal-sm",
+            success: function () {
+                if(isFunction(callbask)){
+                    callbask();
+                }
+            }
+        });
+    };
+    exports.TipsInputDialog = function (value, callbask) {
+        var inputValue = ko.observable(ko.unwrap(value));
+        showDialog({
+            header: l10n("operate.tips"),
+            bodyTemplate: "template-small-dialogInput",
+            value: inputValue,
+            dialogClass: "modal-sm",
+            success: function () {
+                if(isFunction(callbask)){
+                    callbask(inputValue());
+                }
+            }
+        });
+    };
+
+
+
 })(this);

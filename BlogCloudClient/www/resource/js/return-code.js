@@ -20,7 +20,7 @@
         var self = this;
         options = options || {};
         self.returnCode = options.returnCode;
-        self.message = options.message || "未知提示";
+        self.message = options.message || l10n("returnCode.")||"未知提示";
         self.headText = options.headText || "提示信息";
 
     }
