@@ -15,23 +15,21 @@ public class StorageUtil {
      * 获取目录的tree集合
      *
      * @param filePath
-     * @param commit
+     * @param comitHash
      * @return
      */
-    public static List<StorageTreeAttr> getTreeItemList(String filePath, BlogStore.StorageItem commit) {
+    public static List<StorageTreeAttr> getTreeItemList(String filePath, String comitHash) {
+        BlogStore.StorageItem commit = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeCommit, comitHash);
         List<StorageTreeAttr> list = new ArrayList<>();
-        if (StringUtils.isBlank(filePath) || null == commit || commit.getTreeHashItemList().isEmpty()) {
+        if (StringUtils.isBlank(filePath) || null == commit) {
             return list;
         }
+        list.add(new StorageTreeAttr("/", comitHash, commit));
         List<String> dirctorieList = FileUtils.getParentDirctories("", filePath, true);
         List<String> treeHashList = commit.getTreeHashItemList();
         int index = 0;
-        while (!treeHashList.isEmpty()) {
+        while (!treeHashList.isEmpty() && dirctorieList.size() > index) {
             BlogStore.StorageItem tree = null;
-            index++;
-            if (index >= dirctorieList.size()) {
-                break;
-            }
             String dirctorie = dirctorieList.get(index);
             for (String treeHash : commit.getTreeHashItemList()) {
                 tree = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
@@ -41,6 +39,7 @@ public class StorageUtil {
                     break;
                 }
             }
+            index++;
         }
         return list;
     }

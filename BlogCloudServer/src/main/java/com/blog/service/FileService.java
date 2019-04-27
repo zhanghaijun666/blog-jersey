@@ -22,7 +22,7 @@ import org.simpleframework.http.Status;
  * @author zhanghaijun
  */
 public class FileService {
-    
+
     public static final int MAX_BLOB_SIZE = 32 * 1024 * 1024;
 
     /**
@@ -45,9 +45,6 @@ public class FileService {
 
         BlogStore.ReturnCode code = BlogStore.ReturnCode.Return_OK;
         for (Map.Entry<String, byte[]> entry : blobMap.entrySet()) {
-            if (code != BlogStore.ReturnCode.Return_OK) {
-                break;
-            }
             BlogStore.StoreBlob blob = BlogStore.StoreBlob.newBuilder()
                     .setCommitter(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
                     .setName(FileUtils.getFileName(fileUrl.getPath()))
@@ -56,6 +53,9 @@ public class FileService {
                     .setCreateTime(System.currentTimeMillis())
                     .build();
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeFile, entry.getKey(), blob, entry.getValue());
+            if (code != BlogStore.ReturnCode.Return_OK) {
+                break;
+            }
         }
         if (code == BlogStore.ReturnCode.Return_OK) {
             BlogStore.StorageItem fileTree = BlogStore.StorageItem.newBuilder()
@@ -93,9 +93,6 @@ public class FileService {
             return BlogStore.ReturnCode.Return_ERROR;
         }
         BlogStore.StorageItem storage = storageAttr.getStorageItem();
-        if (storage.getType() != BlogStore.StoreTypeEnum.StoreTypeTree && storage.getType() != BlogStore.StoreTypeEnum.StoreTypeFile) {
-            return BlogStore.ReturnCode.Return_ERROR;
-        }
         BlogStore.StorageItem newStorage = BlogStore.StorageItem.newBuilder(storage)
                 .setFileName(newFileName)
                 .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
@@ -118,12 +115,9 @@ public class FileService {
             return BlogStore.ReturnCode.Return_ERROR;
         }
         BlogStore.StorageItem storage = storageAttr.getStorageItem();
-        if (storage.getType() != BlogStore.StoreTypeEnum.StoreTypeTree && storage.getType() != BlogStore.StoreTypeEnum.StoreTypeFile) {
-            return BlogStore.ReturnCode.Return_ERROR;
-        }
         return StorageFactory.deleteTreeItem(fileUrl, storageAttr.getHash(), storage.getSize());
     }
-    
+
     public static void downloadFile(FileUrl fileUrl, Response response) throws IOException {
         byte[] fileByte = StorageFile.readFile(fileUrl);
         if (null == fileByte) {
@@ -140,5 +134,5 @@ public class FileService {
         }
         response.close();
     }
-    
+
 }

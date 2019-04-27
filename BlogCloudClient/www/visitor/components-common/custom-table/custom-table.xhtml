@@ -63,8 +63,8 @@
 
 <template id="folderCardLayout-template">
     <span class="custom-card-icon"><i class="fa" data-bind="css: 'fa-file' "></i></span>
-    <span data-bind="text: $data.fileName+''"></span>
-    <span class="pull-right" data-bind="text: $data.size"></span>
+    <span data-bind="text: $data.fileName"></span>
+    <span class="pull-right" data-bind="text: formatLongSize($data.size)"></span>
 </template>
 <template id="userCardLayout-template">
     <span class="custom-card-icon"><i class="fa" data-bind="css: $data.role.icon || 'fa-user' "></i></span>

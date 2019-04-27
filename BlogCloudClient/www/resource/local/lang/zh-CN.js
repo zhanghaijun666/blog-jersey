@@ -30,7 +30,6 @@
             "userInfo": "用户信息",
             "edit": "修改",
             "delete": "删除",
-            "rename": "重命名",
             "pwdNotSame": "两次输入的密码不一致，请重新输入"
         }, "menu": {
             "user-home": "用户首页",
@@ -48,6 +47,7 @@
             "confirmDelete": "确定删除？",
             "confirmLogout": "确定退出登陆？",
             "delete": "删除",
+            "rename": "重命名",
             "edit": "编辑"
         }, "tab": {
             "return": "返回"

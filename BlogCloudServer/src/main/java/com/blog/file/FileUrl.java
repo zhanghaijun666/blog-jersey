@@ -44,8 +44,15 @@ public class FileUrl {
     }
 
     public FileUrl getParent() {
+        if (this.getPath().length() < 2) {
+            return null;
+        }
         String fileOriginPath = this.getOriginPath();
         return new FileUrl(fileOriginPath.substring(0, fileOriginPath.lastIndexOf("/") + 1), this.getUserId());
+    }
+
+    public FileUrl getChild(String childName) {
+        return new FileUrl(this.getOriginPath() + (this.getOriginPath().endsWith("/") ? "" : "/") + childName, this.getUserId());
     }
 
     public String getRootHash() {

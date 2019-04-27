@@ -7,7 +7,6 @@ import com.blog.utils.FileUtils;
 import com.tools.EncryptUtils;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * @author zhanghaijun
@@ -44,7 +43,7 @@ public class StorageFactory {
         BlogStore.ReturnCode returnCode = BlogStore.ReturnCode.Return_OK;
         if (list.isEmpty()) {
             // 第一次更新文件
-            BlogStore.StorageItem newCommit = action.perform(BlogStore.StorageItem.newBuilder()
+            list.add(new StorageTreeAttr("", "", BlogStore.StorageItem.newBuilder()
                     .setType(BlogStore.StoreTypeEnum.StoreTypeCommit)
                     .setOwner(BlogStore.Operator.newBuilder().setGptype(fileUrl.getGpType()).setGpid(fileUrl.getGpId()).build())
                     .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(fileUrl.getUserId()).build())
@@ -54,32 +53,31 @@ public class StorageFactory {
                     .setSize(0)
                     .setContentType(BlogMediaType.DIRECTORY_CONTENTTYPE)
                     .setParent("")
-                    .build());
-            String newCommitHash = EncryptUtils.sha1(newCommit.toByteArray());
-            returnCode = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeCommit, newCommitHash, newCommit);
-            if (returnCode == BlogStore.ReturnCode.Return_OK) {
-                RepositoryService.updateCommitHash(fileUrl.getGpType(), fileUrl.getGpId(), newCommitHash);
+                    .build()));
+        }
+        //依次向上更新tree
+        StorageTreeAttr newChildTreeAttr = null;
+        for (int i = list.size() - 1; i >= 0; i--) {
+            BlogStore.StorageItem newTree = null;
+            if (i == list.size() - 1) {
+                newTree = action.perform(list.get(i).getStorageItem());
+            } else {
+                newTree = StorageTreeAttr.buildFolderNewTree(list.get(i).getStorageItem(), list.get(i + 1).getHash(), list.get(i + 1).getStorageItem().getSize(), newChildTreeAttr.getHash(), newChildTreeAttr.getStorageItem().getSize());
             }
-        } else {
-            //根目录下更新文件 //其他目录下更新文件
-            StorageTreeAttr newChildTreeAttr = null;
-            for (int i = list.size() - 1; i >= 0; i++) {
-                if (returnCode != BlogStore.ReturnCode.Return_OK) {
-                    break;
-                }
-                BlogStore.StorageItem newTree = null;
-                if (i == list.size() - 1) {
-                    newTree = action.perform(list.get(i).getStorageItem());
-                } else {
-                    newTree = StorageTreeAttr.buildFolderNewTree(list.get(i).getStorageItem(), list.get(i + 1).getHash(), list.get(i + 1).getStorageItem().getSize(), newChildTreeAttr.getHash(), newChildTreeAttr.getStorageItem().getSize());
-                }
-                String treeHash = EncryptUtils.sha1(newTree.toByteArray());
-                newChildTreeAttr = new StorageTreeAttr("", treeHash, newTree);
-                returnCode = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, newTree);
+            BlogStore.StoreTypeEnum storeType = BlogStore.StoreTypeEnum.StoreTypeTree;
+            if (newTree.getType() == BlogStore.StoreTypeEnum.StoreTypeCommit) {
+                newTree = newTree.toBuilder().setParent(list.get(i).getHash()).build();
+                storeType = BlogStore.StoreTypeEnum.StoreTypeCommit;
             }
-            if (returnCode == BlogStore.ReturnCode.Return_OK) {
-                RepositoryService.updateCommitHash(fileUrl.getGpType(), fileUrl.getGpId(), newChildTreeAttr.getHash());
+            String treeHash = EncryptUtils.sha1(newTree.toByteArray());
+            newChildTreeAttr = new StorageTreeAttr("", treeHash, newTree);
+            returnCode = StorageFile.writeStorag(storeType, treeHash, newTree);
+            if (returnCode != BlogStore.ReturnCode.Return_OK) {
+                break;
             }
+        }
+        if (returnCode == BlogStore.ReturnCode.Return_OK) {
+            RepositoryService.updateCommitHash(fileUrl.getGpType(), fileUrl.getGpId(), newChildTreeAttr.getHash());
         }
         return returnCode;
     }

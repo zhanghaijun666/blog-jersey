@@ -31,7 +31,6 @@
             "userInfo": "User Info",
             "edit": "Edit",
             "delete": "Delete",
-            "rename": "rename",
             "pwdNotSame": "Password is not the same"
         }, "menu": {
             "user-home": "用户首页",
@@ -49,6 +48,7 @@
             "confirmDelete": "Confirm Deletion ?",
             "confirmLogout": "Confirm Logout ?",
             "delete": "Delete",
+            "rename": "Rename",
             "edit": "Edit"
         }, "tab": {
             "return": "Return"

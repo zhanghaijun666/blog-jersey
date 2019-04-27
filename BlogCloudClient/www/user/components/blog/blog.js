@@ -12,11 +12,13 @@
                 ];
             };
             self.blogFileLsit = ko.observableArray([]);
-            self.blogOperateMenu = [
-                new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: CustomMenuType.SingleSlection}),
-                new MenuTab(l10n('operate.rename'), {icon: 'fa-trash-o', clickFun: self.confirmRenameFile, menuType: CustomMenuType.SingleSlection}),
-                new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: CustomMenuType.MultipleSelection})
-            ];
+            self.getBlogOperateMenu = function () {
+                return [
+                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: global.CustomMenuType.SingleSlection}),
+                    new MenuTab(l10n('operate.rename'), {icon: 'fa-edit', clickFun: self.confirmRenameFile, menuType: global.CustomMenuType.SingleSlection}),
+                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: global.CustomMenuType.MultipleSelection})
+                ];
+            };
 
             self.getBlogFile = function () {
                 getRequest("/file/get/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/", {accept: "application/x-protobuf"}, function (data) {
@@ -40,7 +42,7 @@
                         for (var i = 0; i < fileIemList.length; i++) {
                             req.item.push(fileIemList[i]);
                         }
-                        getRequest("/file/deldete", {type: "application/x-protobuf", accept: "application/x-protobuf", data: bcstore.FileItemList.encode(req).finish()}, function (data) {
+                        getRequest("/file/deldete", {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", data: bcstore.FileItemList.encode(req).finish()}, function (data) {
                             var rspInfoList = bcstore.RspInfoList.decode(data);
                             toastShowCode(rspInfoList.code);
                             if (rspInfoList.code === bcstore.ReturnCode.Return_OK) {
@@ -59,7 +61,7 @@
                 }
                 var file = ko.deepObservableClone(fileIem);
                 file.fileName = newFileName;
-                getRequest("/file/rename", {type: "application/x-protobuf", accept: "application/x-protobuf", data: fileIem.toArrayBuffer()}, function (data) {
+                getRequest("/file/rename", {method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: fileIem.toArrayBuffer()}, function (data) {
                     var rspInfo = bcstore.RspInfo.decode(data);
                     toastShowCode(rspInfo.code);
                     if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
