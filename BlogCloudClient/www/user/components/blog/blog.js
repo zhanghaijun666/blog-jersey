@@ -1,3 +1,5 @@
+/* global uploadAllFile */
+
 (function (global) {
     define(["text!./blog.xhtml", "css!./blog.css"], function (pageView) {
         function BlogModel(params, componentInfo) {
@@ -7,10 +9,15 @@
 
             self.uploadFilesMenuItems = function () {
                 return [
-                    new MenuTab("上传文件", {icon: "fa-upload", clickFun: global.simulateClick.bind(null, document.getElementById('fileToUpload'))}),
-                    new MenuTab("上传文件夹", {icon: "fa-upload"})
+                    new MenuTab("上传文件", {icon: "fa-upload", clickFun: uploadFile})
+//                    ,new MenuTab("上传文件夹", {icon: "fa-upload"})
                 ];
             };
+            function uploadFile() {
+                uploadAllFile(function () {
+                    self.getBlogFile();
+                });
+            }
             self.blogFileLsit = ko.observableArray([]);
             self.getBlogOperateMenu = function () {
                 return [
