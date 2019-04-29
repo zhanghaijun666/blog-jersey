@@ -5,6 +5,7 @@ import com.blog.file.StorageFactory;
 import com.blog.file.StorageFile;
 import com.blog.file.StorageTreeAttr;
 import com.blog.proto.BlogStore;
+import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;
 import com.tools.BasicConvertUtils;
 import com.tools.EncryptUtils;
@@ -72,7 +73,7 @@ public class FileService {
             String treeHash = EncryptUtils.sha1(fileTree.toByteArray());
             code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, fileTree);
             if (code == BlogStore.ReturnCode.Return_OK) {
-                code = StorageFactory.addTreeItem(fileUrl, treeHash, fileByte.length);
+                code = StorageFactory.addTreeItem(fileUrl.getParent(), treeHash, fileByte.length);
             }
         }
         return code;
@@ -116,6 +117,32 @@ public class FileService {
         }
         BlogStore.StorageItem storage = storageAttr.getStorageItem();
         return StorageFactory.deleteTreeItem(fileUrl, storageAttr.getHash(), storage.getSize());
+    }
+
+    public static BlogStore.ReturnCode addFolder(FileUrl parentFileUrl, String folderName) {
+        if (StringUtils.isBlank(folderName)) {
+            return BlogStore.ReturnCode.Return_ERROR;
+        }
+        StorageTreeAttr storageAttr = StorageFactory.getStorage(parentFileUrl);
+        if (null == storageAttr) {
+            return BlogStore.ReturnCode.Return_ERROR;
+        }
+        BlogStore.StorageItem newFolderTree = BlogStore.StorageItem.newBuilder()
+                .setType(BlogStore.StoreTypeEnum.StoreTypeTree)
+                .setOwner(BlogStore.Operator.newBuilder().setGptype(parentFileUrl.getGpType()).setGpid(parentFileUrl.getGpId()).build())
+                .setUpdate(BlogStore.Operator.newBuilder().setGptype(BlogStore.GtypeEnum.User_VALUE).setGpid(parentFileUrl.getUserId()).build())
+                .setCreateTime(System.currentTimeMillis())
+                .setUpdateTime(System.currentTimeMillis())
+                .setFileName(folderName)
+                .setSize(0)
+                .setContentType(BlogMediaType.DIRECTORY_CONTENTTYPE)
+                .build();
+        String treeHash = EncryptUtils.sha1(newFolderTree.toByteArray());
+        BlogStore.ReturnCode code = StorageFile.writeStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash, newFolderTree);
+        if (code == BlogStore.ReturnCode.Return_OK) {
+            code = StorageFactory.addTreeItem(parentFileUrl, treeHash, newFolderTree.getSize());
+        }
+        return code;
     }
 
     public static void downloadFile(FileUrl fileUrl, Response response) throws IOException {

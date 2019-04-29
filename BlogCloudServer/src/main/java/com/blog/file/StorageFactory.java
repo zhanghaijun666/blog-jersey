@@ -6,15 +6,17 @@ import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;
 import com.tools.EncryptUtils;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * @author zhanghaijun
  */
 public class StorageFactory {
 
-    public static BlogStore.ReturnCode addTreeItem(FileUrl fileUrl, String treeHash, long treeSize) {
-        return StorageFactory.StorageFactory(fileUrl.getParent(), (BlogStore.StorageItem oldStoreItem) -> {
+    public static BlogStore.ReturnCode addTreeItem(FileUrl parentFileUrl, String treeHash, long treeSize) {
+        return StorageFactory.StorageFactory(parentFileUrl, (BlogStore.StorageItem oldStoreItem) -> {
             return StorageTreeAttr.buildFolderNewTree(oldStoreItem, "", 0, treeHash, treeSize);
         });
     }
@@ -122,10 +124,11 @@ public class StorageFactory {
                 .setCreateTime(storageItem.getCreateTime())
                 .setUpdateTime(storageItem.getUpdateTime())
                 .build());
+        List<BlogStore.FileItem> childFileItems = new ArrayList<>();
         for (String treeHash : childTreeHashList) {
             BlogStore.StorageItem tree = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
             if (null != tree) {
-                list.addItem(BlogStore.FileItem.newBuilder()
+                childFileItems.add(BlogStore.FileItem.newBuilder()
                         .setFileName(tree.getFileName())
                         .setFullPath(fileUrl.getChild(tree.getFileName()).getOriginPath())
                         .setContentType(tree.getContentType())
@@ -135,6 +138,16 @@ public class StorageFactory {
                         .build());
             }
         }
+        childFileItems.sort((o1, o2) -> {
+            if (StringUtils.equals(o1.getContentType(), BlogMediaType.DIRECTORY_CONTENTTYPE) && !StringUtils.equals(o2.getContentType(), BlogMediaType.DIRECTORY_CONTENTTYPE)) {
+                return -1;
+            }
+            if (!StringUtils.equals(o1.getContentType(), BlogMediaType.DIRECTORY_CONTENTTYPE) && StringUtils.equals(o2.getContentType(), BlogMediaType.DIRECTORY_CONTENTTYPE)) {
+                return 1;
+            }
+            return o1.getFileName().compareTo(o2.getFileName());
+        });
+        list.addAllItem(childFileItems);
         return list.build();
     }
 }

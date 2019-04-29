@@ -1,7 +1,7 @@
 <div class="user-blog">
     <div class="user-blog-head">
         <drop-down params="headText: '上传', isShowSelect: false, headIcon: 'fa-upload',dropdownCss:'button-dropdown',menuItems: uploadFilesMenuItems()"></drop-down>
-        <button class="btn btn-default" data-bind="text: '新建文件夹'"></button>
+        <button class="btn btn-default" data-bind="text: '新建文件夹',click: addFolder"></button>
     </div>
     <div class="user-blog-body">
         <custom-table params="itemList: blogFileLsit, operateMenu: getBlogOperateMenu(),cardHeadTemplate:'folderCardLayout-template'"></custom-table>

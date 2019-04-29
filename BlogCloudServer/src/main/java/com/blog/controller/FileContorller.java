@@ -6,6 +6,7 @@ import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
 import com.blog.service.FileService;
 import com.blog.utils.BlogMediaType;
+import com.blog.utils.FileUtils;
 import java.io.IOException;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -26,14 +27,14 @@ import org.simpleframework.http.Response;
  */
 @Path("/file")
 public class FileContorller {
-
+    
     @Inject
     Request request;
     @Inject
     Response response;
     @Context
     SecurityContext security;
-
+    
     @POST
     @Path("/upload/{path: .*}")
 //    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -47,7 +48,7 @@ public class FileContorller {
         FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
         return BlogStore.RspInfoList.newBuilder().setCode(FileService.UploadFile(fileUrl, request.getInputStream())).build();
     }
-
+    
     @GET
     @Path("/get/{path: .*}")
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -60,7 +61,7 @@ public class FileContorller {
         }
         return BlogStore.FileItemList.getDefaultInstance();
     }
-
+    
     @POST
     @Path("/deldete")
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -85,7 +86,7 @@ public class FileContorller {
         }
         return rspInfoList.build();
     }
-
+    
     @PUT
     @Path("/rename")
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
@@ -95,7 +96,20 @@ public class FileContorller {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         return BlogStore.RspInfo.newBuilder().setCode(FileService.renameFile(new FileUrl(fileItem.getFullPath(), session.getUserId()), fileItem.getFileName())).build();
     }
-
+    
+    @POST
+    @Path("/addfolder/{path: .*}")
+    @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
+    @RolesAllowed("user")
+    public BlogStore.RspInfo addFolder(@PathParam("path") String filePath) {
+        BlogSession session = (BlogSession) security.getUserPrincipal();
+        FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
+        return BlogStore.RspInfo.newBuilder()
+                .setCode(FileService.addFolder(fileUrl.getParent(), FileUtils.getFileName(fileUrl.getPath())))
+                .build();
+    }
+    
     @GET
     @Path("/download/{path: .*}")
     @RolesAllowed("user")

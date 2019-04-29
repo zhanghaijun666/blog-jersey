@@ -10,7 +10,6 @@
             self.uploadFilesMenuItems = function () {
                 return [
                     new MenuTab("上传文件", {icon: "fa-upload", clickFun: uploadFile})
-//                    ,new MenuTab("上传文件夹", {icon: "fa-upload"})
                 ];
             };
             function uploadFile() {
@@ -62,6 +61,20 @@
                     var file = new FileItem(fileIem);
                     file.fileName(value);
                     getRequest("/file/rename", {method: "PUT", type: "application/x-protobuf", accept: "application/x-protobuf", data: fileIem.toArrayBuffer()}, function (data) {
+                        var rspInfo = bcstore.RspInfo.decode(data);
+                        toastShowCode(rspInfo.code);
+                        if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
+                            self.getBlogFile();
+                        }
+                    });
+                });
+            };
+            self.addFolder = function () {
+                TipsInputDialog("", function (value) {
+                    if (!value) {
+                        return;
+                    }
+                    getRequest("/file/addfolder/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/" + value, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf"}, function (data) {
                         var rspInfo = bcstore.RspInfo.decode(data);
                         toastShowCode(rspInfo.code);
                         if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
