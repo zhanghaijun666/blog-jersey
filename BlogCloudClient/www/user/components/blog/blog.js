@@ -4,20 +4,26 @@
     define(["text!./blog.xhtml", "css!./blog.css"], function (pageView) {
         function BlogModel(params, componentInfo) {
             var defaultValue = {
+                fileUrl: new FileUrl("default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/")
             };
             var self = $.extend(this, defaultValue, params);
-
+            self.blogFileLsit = ko.observableArray([]);
+            self.blogPathEntry = ko.observable(new PathEntry(self.fileUrl.originPath));
             self.uploadFilesMenuItems = function () {
                 return [
                     new MenuTab("上传文件", {icon: "fa-upload", clickFun: uploadFile})
                 ];
             };
+
+
+
+
+
             function uploadFile() {
-                uploadAllFile(function () {
+                uploadAllFile(self.blogPathEntry().getCurrentUrl().originPath, function () {
                     self.getBlogFile();
                 });
             }
-            self.blogFileLsit = ko.observableArray([]);
             self.getBlogOperateMenu = function () {
                 return [
                     new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: global.CustomMenuType.SingleSlection}),
@@ -25,9 +31,8 @@
                     new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: global.CustomMenuType.MultipleSelection})
                 ];
             };
-
             self.getBlogFile = function () {
-                getRequest("/file/get/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/", {accept: "application/x-protobuf"}, function (data) {
+                getRequest("/file/get/" + self.blogPathEntry().getCurrentUrl().originPath, {accept: "application/x-protobuf"}, function (data) {
                     var fileList = bcstore.FileItemList.decode(data);
                     self.blogFileLsit([]);
                     if (fileList.item && fileList.item instanceof Array) {
@@ -74,7 +79,7 @@
                     if (!value) {
                         return;
                     }
-                    getRequest("/file/addfolder/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/" + value, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf"}, function (data) {
+                    getRequest("/file/addfolder/" + self.blogPathEntry().getCurrentUrl().originPath + "/" + value, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf"}, function (data) {
                         var rspInfo = bcstore.RspInfo.decode(data);
                         toastShowCode(rspInfo.code);
                         if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
@@ -83,10 +88,7 @@
                     });
                 });
             };
-
-
             self.getBlogFile();
-
         }
         return {
             viewModel: {

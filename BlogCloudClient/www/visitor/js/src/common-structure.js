@@ -60,7 +60,26 @@
         }
         return sizestr;
     };
-
+    exports.getParentFilUrlList = function (originfileUrl) {
+        var pathList = new Array();
+        if (originfileUrl instanceof FileUrl) {
+            var fileurl = originfileUrl;
+            while (fileurl.path) {
+                pathList.unshift(fileurl);
+                var path;
+                if (new RegExp("^\/[^\/]+$").test(fileurl.path)) {
+                    path = "/";
+                } else {
+                    path = fileurl.path.substring(0, fileurl.path.lastIndexOf("/"));
+                }
+                fileurl = new FileUrl(fileurl.getPathPrefix() + path);
+            }
+        }
+        return pathList;
+    };
+    exports.getFileName = function (filepath) {
+        return filepath.substring(filepath.lastIndexOf("/") + 1, filepath.length);
+    };
 //--------------------------------*****************************-------------------------------
 
     exports.standUrlPattern = new RegExp("\\/?(?<rootHash>[^/]+)?\\/(?<gtype>[\\d]+)\\/(?<gpid>-?[\\d]+)\\/(?<bucket>[^/]+)(?<path>\\/?.*)");
@@ -69,7 +88,7 @@
         SingleSlection: 1,
         MultipleSelection: 2
     };
-    exports.MenuTab = function (text, options) {
+    MenuTab = function (text, options) {
         options = options || {};
         this.text = text;
         this.icon = options.icon;
@@ -78,25 +97,37 @@
         this.clickFun = options.clickFun;
         this.menuType = options.menuType; //CustomMenuType
     };
-    exports.FileUrl = function (originPath) {
+    FileUrl = function (originPath) {
         var matcher = {groups: {}};
         if (exports.standUrlPattern.test(originPath)) {
             matcher = exports.standUrlPattern.exec(originPath);
         }
+        this.originPath = originPath;
         this.rootHash = matcher.groups.rootHash;
         this.gpType = matcher.groups.gtype;
         this.gpId = matcher.groups.gpid;
         this.bucket = matcher.groups.bucket;
         this.path = matcher.groups.path;
     };
-    exports.PathEntry = function (originPath) {
-        var fileurl = new FileUrl(originPath);
-        this.pathNames = new Array();
-        if (fileurl.path) {
-            this.pathNames = fileurl.path.split("/");
-        }
-
+    FileUrl.prototype.getPathPrefix = function () {
+        return this.rootHash + "/" + this.gpType + "/" + this.gpId + "/" + this.bucket;
     };
+    FileUrl.prototype.getFileName = function () {
+        return exports.getFileName(this.path);
+    };
+    PathEntry = function (originPath, changePath) {
+        this.pathList = exports.getParentFilUrlList(new FileUrl(originPath));
+        this.changePath = isFunction(changePath) ? changePath : function () {};
+    };
+    PathEntry.prototype.getCurrentUrl = function () {
+        if (this.pathList.length > 0) {
+            return this.pathList[this.pathList.length - 1];
+        }
+        return null;
+    };
+    exports.MenuTab = MenuTab;
+    exports.FileUrl = FileUrl;
+    exports.PathEntry = PathEntry;
 })(this);
 
 

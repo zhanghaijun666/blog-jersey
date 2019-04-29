@@ -1,7 +1,7 @@
 /* global Blob, simulateClick */
 (function (exports) {
     exports.hash_chunksize = 8 * 1024 * 1024;
-    exports.uploadAllFile = function (callback, isMultiple, accept) {
+    exports.uploadAllFile = function (fullPath, callback, isMultiple, accept) {
         var fileToUpload = document.createElement("input");
         fileToUpload.setAttribute("type", "file");
         fileToUpload.setAttribute("style", "display: none");
@@ -19,7 +19,7 @@
                 return;
             }
             var file = fileToUpload.files[0];
-            getRequest("/file/upload/default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/" + file.name, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", data: file}, function (data) {
+            getRequest("/file/upload/" + fullPath + "/" + file.name, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", data: file}, function (data) {
                 var rspInfo = bcstore.RspInfo.decode(data);
                 if (isFunction(callback)) {
                     callback(rspInfo);
