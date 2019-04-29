@@ -5,7 +5,7 @@
 }
 .user-blog-head{
     width: 100%;
-    height: 100px;
+    height: 90px;
     border-bottom: 1px solid #eee;
     position: absolute;
     top: 0;
@@ -16,3 +16,14 @@
     height: 100%;
     padding-top: 100px;
 }
+
+/*------------ 路径导航 -------start-----*/
+.path_entry{
+    max-height: 40px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+.path_entry>.breadcrumb{
+    margin-bottom: 0px;
+}
+/*------------ 路径导航 -------end-----*/

@@ -59,9 +59,11 @@
             return sizestr.substring(0, len) + sizestr.substr(len + 3, 2);
         }
         return sizestr;
-    }
+    };
 
 //--------------------------------*****************************-------------------------------
+
+    exports.standUrlPattern = new RegExp("\\/?(?<rootHash>[^/]+)?\\/(?<gtype>[\\d]+)\\/(?<gpid>-?[\\d]+)\\/(?<bucket>[^/]+)(?<path>\\/?.*)");
 
     exports.CustomMenuType = {
         SingleSlection: 1,
@@ -75,6 +77,25 @@
         this.isActive = ko.observable(!!ko.unwrap(options.isActive));
         this.clickFun = options.clickFun;
         this.menuType = options.menuType; //CustomMenuType
+    };
+    exports.FileUrl = function (originPath) {
+        var matcher = {groups: {}};
+        if (exports.standUrlPattern.test(originPath)) {
+            matcher = exports.standUrlPattern.exec(originPath);
+        }
+        this.rootHash = matcher.groups.rootHash;
+        this.gpType = matcher.groups.gtype;
+        this.gpId = matcher.groups.gpid;
+        this.bucket = matcher.groups.bucket;
+        this.path = matcher.groups.path;
+    };
+    exports.PathEntry = function (originPath) {
+        var fileurl = new FileUrl(originPath);
+        this.pathNames = new Array();
+        if (fileurl.path) {
+            this.pathNames = fileurl.path.split("/");
+        }
+
     };
 })(this);
 
