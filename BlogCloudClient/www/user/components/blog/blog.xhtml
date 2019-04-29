@@ -4,16 +4,10 @@
         <button class="btn btn-default" data-bind="text: '新建文件夹',click: addFolder"></button>
         <div class="path_entry" data-bind="with: blogPathEntry">
             <ul class="breadcrumb" data-bind="foreach: pathList">
-                <!-- ko ifnot: $data.getFileName() -->
-                <li><a href="#">全部文件</a></li>
-                <!-- /ko -->
-                <!-- ko if: $data.getFileName() -->
-                <li><a href="#" data-bind="text: $data.getFileName()"></a></li>
-                <!-- /ko -->
-                <!--<li><a href="#" data-bind="text: $data.getFileName()"></a></li>-->
+                <li data-bind="css:{active:$index===$parent.pathList.length}">
+                    <a href="javacript:void(0);" data-bind="text: $data.getFileName()?$data.getFileName():'全部文件'"></a>
+                </li>
                 <!--<li><a href="#">返回上一级</a></li>-->
-                <!--<li><a href="#">全部文件</a></li>-->
-                <!--<li class="active">十一月</li>-->
             </ul>
         </div>
     </div>
