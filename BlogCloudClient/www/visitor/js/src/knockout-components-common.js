@@ -30,8 +30,21 @@
                     if (ko.unwrap(self.contentType)) {
                         if (ko.unwrap(self.contentType) === "application/cc-directory") {
                             self.icon("fa fa-folder-open-o");
+                        } else if (new RegExp("^audio.*$").test(ko.unwrap(self.contentType))) {
+                            self.icon("fa fa-file-sound-o");
+                        } else if (new RegExp("^image.*$").test(ko.unwrap(self.contentType))) {
+                            self.icon("fa fa-file-image-o");
+                        } else if (new RegExp("^application\/pdf.*$").test(ko.unwrap(self.contentType))) {
+                            self.icon("fa fa-file-pdf-o");
+                        } else if (new RegExp("^text\/html.*$").test(ko.unwrap(self.contentType))) {
+                            self.icon("fa fa-file-code-o");
+                        } else if (new RegExp("^application\/x-javascript.*$").test(ko.unwrap(self.contentType))) {
+                            self.icon("fa fa-file-code-o");
+                        } else if (new RegExp("^application\/zip.*$").test(ko.unwrap(self.contentType))) {
+                            self.icon("fa fa-file-zip-o");
+                        } else {
+                            self.icon("fa fa-file");
                         }
-                        self.icon("fa fa-file");
                     }
                 }
                 return new CheckboxViewModel(params, componentInfo);
