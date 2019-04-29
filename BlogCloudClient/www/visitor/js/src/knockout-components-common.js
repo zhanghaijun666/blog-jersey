@@ -43,7 +43,7 @@
                         } else if (new RegExp("^application\/zip.*$").test(ko.unwrap(self.contentType))) {
                             self.icon("fa fa-file-zip-o");
                         } else {
-                            self.icon("fa fa-file");
+                            self.icon("fa fa-file-o");
                         }
                     }
                 }
