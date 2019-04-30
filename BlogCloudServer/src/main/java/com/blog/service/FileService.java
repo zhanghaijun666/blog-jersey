@@ -146,20 +146,31 @@ public class FileService {
     }
 
     public static void downloadFile(FileUrl fileUrl, Response response) throws IOException {
-        byte[] fileByte = StorageFile.readFile(fileUrl);
+        StorageTreeAttr storageAttr = StorageFactory.getStorage(fileUrl);
+        byte[] fileByte = StorageFile.readFile(storageAttr);
         if (null == fileByte) {
             return;
         }
+//        response.setContentType(storageAttr.getStorageItem().getContentType());
+//        response.setDate("Last-Modified", System.currentTimeMillis());
+//        response.setValue("Accept-Ranges", "bytes");
+//        response.setValue("Content-Encoding", "UTF-8");
+//        response.setValue("Cache-Control", "must-revalidate,max-age=0");
 //        response.setContentType("multipart/form-data");
 //        response.setHeader("Content-Disposition", "attachment;fileName=" + FileUtils.getFileName(fileUrl.getPath()));
-        response.setContentType("text/html;charset=UTF-8");
-        response.setStatus(Status.OK);
-        response.setValue("Server-Time", BasicConvertUtils.toString(System.currentTimeMillis(), ""));
+//        response.setContentType("text/html;charset=UTF-8");
+//        response.setStatus(Status.OK);
+//        response.setValue("Server-Time", BasicConvertUtils.toString(System.currentTimeMillis(), ""));
+
+//        response.reset();
+        response.addValue("Content-Disposition", "attachment;filename=" + FileUtils.getFileName(fileUrl.getPath()));
+        response.addValue("Content-Length", "" + fileByte.length);
+        response.setContentType(storageAttr.getStorageItem().getContentType());
+
         try (OutputStream out = response.getOutputStream()) {
             out.write(fileByte);
             out.flush();
         }
-        response.close();
     }
 
 }

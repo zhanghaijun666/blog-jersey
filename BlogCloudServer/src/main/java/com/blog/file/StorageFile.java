@@ -24,8 +24,7 @@ public class StorageFile {
     private static final String TREE_DIR = "tree";
     private static final int FILE_HEADER_MESSAGE_LENGTH = 10;
 
-    public static byte[] readFile(FileUrl fileUrl) {
-        StorageTreeAttr storageAttr = StorageFactory.getStorage(fileUrl);
+    public static byte[] readFile(StorageTreeAttr storageAttr) {
         if (null == storageAttr) {
             return null;
         }
