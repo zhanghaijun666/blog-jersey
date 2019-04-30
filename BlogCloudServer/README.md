@@ -1,5 +1,8 @@
 #### 技术
-[Jersey](https://jersey.github.io/) , [liquibase](http://www.liquibase.org/) , [activejdbc](http://javalite.io/record_selection)
+[Jersey](https://jersey.github.io/)
+ , [simpleframework](https://github.com/ngallagher/simpleframework)
+ , [liquibase](http://www.liquibase.org/)
+ , [activejdbc](http://javalite.io/record_selection)
  , [protobuf](https://developers.google.com/protocol-buffers/)
 
 #### 数据库支持
