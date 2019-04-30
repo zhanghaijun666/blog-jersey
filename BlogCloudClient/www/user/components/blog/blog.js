@@ -100,7 +100,7 @@
                 if (!fileIem.fullPath) {
                     return;
                 }
-                getRequest("/file/download/" + fileIem.fullPath, {method: "GET", type: "application/x-protobuf", accept: "application/x-protobuf"});
+                window.open(getServerUrl("/file/download/" + fileIem.fullPath));
             };
             self.getBlogFile();
         }

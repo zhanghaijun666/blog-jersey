@@ -113,10 +113,10 @@ public class FileContorller {
     @GET
     @Path("/download/{path: .*}")
     @RolesAllowed("user")
-    public Response fileDownload(@PathParam("path") String filePath) throws IOException {
+    @Produces({"application/octet-stream"})
+    public void fileDownload(@PathParam("path") String filePath) throws IOException {
         BlogSession session = (BlogSession) security.getUserPrincipal();
         FileUrl fileUrl = new FileUrl(filePath, session.getUserId());
         FileService.downloadFile(fileUrl, response);
-        return response;
     }
 }
