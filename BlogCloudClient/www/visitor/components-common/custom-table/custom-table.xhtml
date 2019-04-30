@@ -64,7 +64,7 @@
 <template id="folderCardLayout-template">
     <div class="row" style="height: 100%;">
         <div class="col-md-10" style="height: 100%;">
-            <my-icon params="contentType: $data.contentType"></my-icon>
+            <my-icon params="contentType: $data.contentType,clickFun: $component.itemClick.bind(null,$data)"></my-icon>
             <span data-bind="text: $data.fileName,click: $component.itemClick"></span>
         </div>
         <div class="col-md-2" style="height: 100%;">

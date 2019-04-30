@@ -23,7 +23,8 @@
             createViewModel: function (params, componentInfo) {
                 function CheckboxViewModel(params, componentInfo) {
                     var defaultValue = {
-                        contentType: ""
+                        contentType: "",
+                        clickFun: function () {}
                     };
                     var self = $.extend(this, defaultValue, params);
                     self.icon = ko.observable("fa fa-file");
