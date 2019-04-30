@@ -48,7 +48,8 @@
             "confirmLogout": "确定退出登陆？",
             "delete": "删除",
             "rename": "重命名",
-            "edit": "编辑"
+            "edit": "编辑",
+            "download": "下载"
         }, "tab": {
             "return": "返回"
         }, "returnCode": {

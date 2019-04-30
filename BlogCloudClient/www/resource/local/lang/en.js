@@ -49,7 +49,8 @@
             "confirmLogout": "Confirm Logout ?",
             "delete": "Delete",
             "rename": "Rename",
-            "edit": "Edit"
+            "edit": "Edit",
+            "download": "download"
         }, "tab": {
             "return": "Return"
         }, "returnCode": {

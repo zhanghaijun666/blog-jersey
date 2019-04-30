@@ -1,4 +1,4 @@
-/* global uploadAllFile, FileUrl */
+/* global uploadAllFile, FileUrl, CustomMenuType, directory_contenttype */
 
 (function (global) {
     define(["text!./blog.xhtml", "css!./blog.css"], function (pageView) {
@@ -18,7 +18,7 @@
 //                self.getBlogFile();
 //            });
             self.openDirectory = function (item) {
-                if (item instanceof FileItem && item.contentType === global.directory_contenttype) {
+                if (item instanceof FileItem && item.contentType === directory_contenttype) {
                     self.blogPathEntry(new PathEntry(item.fullPath, self.openDirectory));
                     self.getBlogFile();
                 } else if (item instanceof FileUrl && item.originPath) {
@@ -33,9 +33,10 @@
             };
             self.getBlogOperateMenu = function () {
                 return [
-                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: global.CustomMenuType.SingleSlection}),
-                    new MenuTab(l10n('operate.rename'), {icon: 'fa-edit', clickFun: self.renameFile, menuType: global.CustomMenuType.SingleSlection}),
-                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: global.CustomMenuType.MultipleSelection})
+                    new MenuTab(l10n('operate.download'), {icon: 'fa-download', clickFun: self.fileDownload, menuType: CustomMenuType.SingleSlection}),
+                    new MenuTab(l10n('operate.rename'), {icon: 'fa-edit', clickFun: self.renameFile, menuType: CustomMenuType.SingleSlection}),
+                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: CustomMenuType.SingleSlection}),
+                    new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: CustomMenuType.MultipleSelection})
                 ];
             };
             self.getBlogFile = function () {
@@ -94,6 +95,12 @@
                         }
                     });
                 });
+            };
+            self.fileDownload = function (fileIem) {
+                if (!fileIem.fullPath) {
+                    return;
+                }
+                getRequest("/file/download/" + fileIem.fullPath, {method: "GET", type: "application/x-protobuf", accept: "application/x-protobuf"});
             };
             self.getBlogFile();
         }
