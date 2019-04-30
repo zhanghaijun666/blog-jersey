@@ -31,7 +31,7 @@ public class StorageUtil {
         while (!treeHashList.isEmpty() && dirctorieList.size() > index) {
             BlogStore.StorageItem tree = null;
             String dirctorie = dirctorieList.get(index);
-            for (String treeHash : commit.getTreeHashItemList()) {
+            for (String treeHash : treeHashList) {
                 tree = StorageFile.readStorag(BlogStore.StoreTypeEnum.StoreTypeTree, treeHash);
                 if (null != tree && StringUtils.equals(FileUtils.getFileName(dirctorie), tree.getFileName())) {
                     list.add(new StorageTreeAttr(dirctorie, treeHash, tree));
