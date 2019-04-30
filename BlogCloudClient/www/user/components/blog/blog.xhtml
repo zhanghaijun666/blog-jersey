@@ -10,7 +10,7 @@
                 </li>
                 <!-- /ko -->
                 <!-- ko foreach: pathList -->
-                <li data-bind="css:{active:$index===$parent.pathList.length},click: $parent.changePath">
+                <li data-bind="css:{active:$index()+1===$parent.pathList.length},click: $parent.changePath">
                     <a href="javacript:void(0);" data-bind="text: $data.getFileName()?$data.getFileName():'全部文件'"></a>
                 </li>
                 <!-- /ko -->
