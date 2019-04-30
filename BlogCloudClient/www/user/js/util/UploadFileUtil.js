@@ -19,7 +19,7 @@
                 return;
             }
             var file = fileToUpload.files[0];
-            getRequest("/file/upload/" + fullPath + "/" + file.name, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", data: file}, function (data) {
+            getRequest("/file/upload/" + new FileUrl(fullPath).getChild(file.name).originPath, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf", data: file}, function (data) {
                 var rspInfo = bcstore.RspInfo.decode(data);
                 if (isFunction(callback)) {
                     callback(rspInfo);
