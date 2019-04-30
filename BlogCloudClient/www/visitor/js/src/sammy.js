@@ -23,8 +23,8 @@ function SammyPage(options) {
             root.setRootTemplate('menu-nav-tabs-template');
         });
         this.get(/\#messages(.*)/, function () {
+            root.setRootTemplate('home-message-template');
             toastShowMsg("暂未开发，尽情期待！！！");
-            this.redirect("#login");
         });
         this.get(/\#admin(.*)/, function () {
             toastShowMsg("暂未开发，尽情期待！！！");
