@@ -1,4 +1,4 @@
-/* global uploadAllFile */
+/* global uploadAllFile, FileUrl */
 
 (function (global) {
     define(["text!./blog.xhtml", "css!./blog.css"], function (pageView) {
@@ -8,22 +8,29 @@
             };
             var self = $.extend(this, defaultValue, params);
             self.blogFileLsit = ko.observableArray([]);
-            self.blogPathEntry = ko.observable(new PathEntry(self.fileUrl.originPath));
+            self.blogPathEntry = ko.observable(new PathEntry(self.fileUrl.originPath, self.openDirectory));
             self.uploadFilesMenuItems = function () {
                 return [
-                    new MenuTab("上传文件", {icon: "fa-upload", clickFun: uploadFile})
+                    new MenuTab("上传文件", {icon: "fa-upload", clickFun: self.uploadFile})
                 ];
             };
-
-
-
-
-
-            function uploadFile() {
+//            self.blogPathEntry.subscribe(function (data) {
+//                self.getBlogFile();
+//            });
+            self.openDirectory = function (item) {
+                if (item instanceof FileItem && item.contentType === global.directory_contenttype) {
+                    self.blogPathEntry(new PathEntry(item.fullPath, self.openDirectory));
+                    self.getBlogFile();
+                } else if (item instanceof FileUrl && item.originPath) {
+                    self.blogPathEntry(new PathEntry(item.originPath, self.openDirectory));
+                    self.getBlogFile();
+                }
+            };
+            self.uploadFile = function () {
                 uploadAllFile(self.blogPathEntry().getCurrentUrl().originPath, function () {
                     self.getBlogFile();
                 });
-            }
+            };
             self.getBlogOperateMenu = function () {
                 return [
                     new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: global.CustomMenuType.SingleSlection}),

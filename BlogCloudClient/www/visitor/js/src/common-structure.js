@@ -1,4 +1,12 @@
 (function (exports) {
+    exports.directory_contenttype = "application/cc-directory";
+    exports.standUrlPattern = new RegExp("\\/?(?<rootHash>[^/]+)?\\/(?<gtype>[\\d]+)\\/(?<gpid>-?[\\d]+)\\/(?<bucket>[^/]+)(?<path>\\/?.*)");
+
+    exports.CustomMenuType = {
+        SingleSlection: 1,
+        MultipleSelection: 2
+    };
+
     exports.getStoreArray = function (storeKey) {
         var storage = window.localStorage;
         if (storage) {
@@ -81,13 +89,6 @@
         return filepath.substring(filepath.lastIndexOf("/") + 1, filepath.length);
     };
 //--------------------------------*****************************-------------------------------
-
-    exports.standUrlPattern = new RegExp("\\/?(?<rootHash>[^/]+)?\\/(?<gtype>[\\d]+)\\/(?<gpid>-?[\\d]+)\\/(?<bucket>[^/]+)(?<path>\\/?.*)");
-
-    exports.CustomMenuType = {
-        SingleSlection: 1,
-        MultipleSelection: 2
-    };
     MenuTab = function (text, options) {
         options = options || {};
         this.text = text;
@@ -115,13 +116,38 @@
     FileUrl.prototype.getFileName = function () {
         return exports.getFileName(this.path);
     };
+    FileUrl.prototype.getParent = function () {
+        var arr = getParentFilUrlList(this);
+        if (arr.length > 1) {
+            return arr[arr.length - 2];
+        }
+        return null;
+    };
+    FileUrl.prototype.getChild = function (childName) {
+        if (this.path && childName) {
+            if (new RegExp("\/$").test(this.originPath)) {
+                return new FileUrl(this.originPath + childName);
+            } else {
+                return new FileUrl(this.originPath + "/" + childName);
+            }
+        }
+        return null;
+    };
     PathEntry = function (originPath, changePath) {
         this.pathList = exports.getParentFilUrlList(new FileUrl(originPath));
-        this.changePath = isFunction(changePath) ? changePath : function () {};
+        this.changePath = isFunction(changePath) ? changePath : function (fileUrl) {};
     };
     PathEntry.prototype.getCurrentUrl = function () {
         if (this.pathList.length > 0) {
+
             return this.pathList[this.pathList.length - 1];
+        }
+        return null;
+    };
+    PathEntry.prototype.getPrevUrl = function () {
+        var current = this.getCurrentUrl();
+        if (current) {
+            return current.getParent();
         }
         return null;
     };
