@@ -6,17 +6,9 @@ function SammyPage(options) {
             this.redirect("#login");
         });
         this.get(/\#login(.*)/, function () {
-            if (root.isLogin()) {
-                this.redirect("#menu");
-            } else {
-                root.setRootTemplate('login-page');
-            }
+            root.setRootTemplate('login-page');
         });
         this.get(/\#menu(.*)/, function () {
-            if (!root.isLogin()) {
-                this.redirect("#login");
-                return;
-            }
             var params = this.params['splat'][0];
             root.currentMenu(params.substring(1));
             root.getMenu();
@@ -33,7 +25,16 @@ function SammyPage(options) {
             this.redirect("#menu");
         });
         this.around(function (callback) {
-            root.getUser(callback);
+            root.getUser(function () {
+                if (root.isLogin() && RootView.isHash("login")) {
+                    this.redirect("#menu");
+                    return;
+                } else if (!root.isLogin() && !RootView.isHash("login")) {
+                    this.redirect("#login");
+                } else {
+                    callback();
+                }
+            }.bind(this));
         });
     }).run();
     return sammy;
