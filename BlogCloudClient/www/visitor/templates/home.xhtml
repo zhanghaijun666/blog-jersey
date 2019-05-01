@@ -60,30 +60,3 @@
 <template id="menu-nav-tabs-template">
     <menu-nav-tabs params="menuList: RootView.menuList, currentMenu: RootView.currentMenu"></menu-nav-tabs>
 </template>
-<template id="home-message-template">
-    <div class="message-body row">
-        <div class="col-md-3 message-contacts">
-            <div class="message-contacts-user">
-                <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0"/>
-                <span data-bind="text: RootView.user().nickname"></span>
-            </div>
-            <div class="message-contacts-class row">
-                <div class="col-md-6">
-                    <i class="fa fa-commenting-o fa-2x"></i>
-                </div>
-                <div class="col-md-6">
-                    <i class="fa fa-address-book-o fa-2x"></i>
-                </div>
-            </div>
-            <div class="message-contacts-list" data-bind="foreach: new Array(12)">
-                <div class="message-contacts-user">
-                    <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0"/>
-                    <span data-bind="text: '王者灭霸归来'"></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-9 message-window">
-
-        </div>
-    </div>
-</template>

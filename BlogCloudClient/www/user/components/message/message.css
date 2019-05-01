@@ -1,0 +1,70 @@
+.message-body{
+    height: 100%;
+    width: 1200px;
+    border: 1px solid #000;
+    margin: auto;
+    min-height: 260px;
+    overflow: hidden;
+}
+.message-body>div{
+    height: 100%;
+    padding: 0px;
+}
+.message-contacts{
+    border-right: 1px solid #000;
+}
+.message-contacts-head{
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    top: 0px;
+}
+.message-contacts-list{
+    width: 100%;
+    position: absolute;
+    top: 100px;
+    bottom: 0px;
+    overflow: auto;
+}
+.message-contacts-user{
+    height: 60px;
+    width: 100%;
+    padding: 10px 20px;
+    border: 0.5px solid #eee;
+    cursor:pointer;
+}
+.message-contacts-class{
+    margin: 0px;
+    height: 40px;
+    cursor:pointer;
+}
+.message-contacts-class>div{
+    text-align: center;
+}
+.message-window{
+
+}
+.message-window-head{
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+    border-bottom: 1px solid #000;
+
+}
+.message-window-send{
+    height: 180px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    border-top: 1px solid #000;
+}
+.message-window-list{
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    bottom: 180px;
+    overflow: auto;
+}
+

@@ -3,5 +3,6 @@
 
     ko.components.register('blog', {require: 'static/user/components/blog/blog.js'});
     ko.components.register('user-home', {require: 'static/user/components/user-home/home.js'});
+    ko.components.register('message', {require: 'static/user/components/message/message.js'});
 
 })(this, ko);

@@ -1,0 +1,35 @@
+<div style="width: 100%;height: 100%;">
+    <div class="message-body row">
+        <div class="col-md-3 message-contacts">
+            <div class="message-contacts-head"> 
+                <div class="message-contacts-user">
+                    <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0"/>
+                    <span data-bind="text: RootView.user().nickname"></span>
+                </div>
+                <div class="message-contacts-class row">
+                    <div class="col-md-6">
+                        <i class="fa fa-commenting-o fa-2x"></i>
+                    </div>
+                    <div class="col-md-6">
+                        <i class="fa fa-address-book-o fa-2x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="message-contacts-list" data-bind="foreach: new Array(12)">
+                <div class="message-contacts-user">
+                    <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0"/>
+                    <span data-bind="text: '王者灭霸归来'"></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 message-window">
+            <div class="message-window-head" data-bind="">
+                <span data-bind="text: '聊天对象昵称'"></span>
+            </div>
+            <div class="message-window-list" data-bind="foreach: new Array(23)">
+                <div>555555</div>
+            </div>
+            <div class="message-window-send" data-bind=""></div>
+        </div>
+    </div>
+</div>
