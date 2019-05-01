@@ -22,7 +22,7 @@ function SammyPage(options) {
             root.getMenu();
             root.setRootTemplate('menu-nav-tabs-template');
         });
-        this.get(/\#messages(.*)/, function () {
+        this.get(/\#message(.*)/, function () {
             root.setRootTemplate('message');
         });
         this.get(/\#admin(.*)/, function () {

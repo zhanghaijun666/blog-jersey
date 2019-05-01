@@ -18,7 +18,7 @@ function PageUtils(root) {
     self.blogNavigator = function () {
         let arr = [];
         arr.push(new MenuTab('我的博客', {icon: 'fa-book', isActive: true, clickFun: self.changeHash.bind(null, "menu")}));
-        arr.push(new MenuTab('消息', {icon: 'fa-comments-o', isActive: false, clickFun: self.changeHash.bind(null, "messages")}));
+        arr.push(new MenuTab('消息', {icon: 'fa-comments-o', isActive: false, clickFun: self.changeHash.bind(null, "message")}));
         arr.push(new MenuTab('系统管理', {icon: 'fa-coffee', isActive: false, clickFun: self.changeHash.bind(null, "admin")}));
         if (self.isSmallScreen()) {
             arr.push(new MenuTab('我的', {icon: 'fa-home', isActive: false, clickFun: self.changeHash.bind(null, "menu")}));

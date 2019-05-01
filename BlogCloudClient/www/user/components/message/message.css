@@ -2,6 +2,7 @@
     height: 100%;
     width: 1200px;
     border: 1px solid #000;
+    border-radius: 6px;
     margin: auto;
     min-height: 260px;
     overflow: hidden;

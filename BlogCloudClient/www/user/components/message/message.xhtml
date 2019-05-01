@@ -15,10 +15,10 @@
                     </div>
                 </div>
             </div>
-            <div class="message-contacts-list" data-bind="foreach: new Array(12)">
+            <div class="message-contacts-list" data-bind="foreach: contactsList">
                 <div class="message-contacts-user">
                     <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0"/>
-                    <span data-bind="text: '王者灭霸归来'"></span>
+                    <span data-bind="text: $data.nickname"></span>
                 </div>
             </div>
         </div>
