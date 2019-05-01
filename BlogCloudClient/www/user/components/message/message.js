@@ -5,6 +5,7 @@
             };
             var self = $.extend(this, defaultValue, params);
             self.contactsList = ko.observableArray([]);
+            self.talkingTarget = ko.observable();
 
             self.getContactsList = function () {
                 self.contactsList.push(new User({username: "sssss", nickname: "王者灭霸归来"}));
@@ -16,6 +17,7 @@
                 self.contactsList.push(new User({username: "zhangsan6", nickname: "张三6"}));
                 self.contactsList.push(new User({username: "zhangsan7", nickname: "张三7"}));
                 self.contactsList.push(new User({username: "zhangsan8", nickname: "张三8"}));
+                self.talkingTarget(self.contactsList()[0]);
             };
 
 

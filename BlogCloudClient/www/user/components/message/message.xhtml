@@ -23,13 +23,21 @@
             </div>
         </div>
         <div class="col-md-9 message-window">
-            <div class="message-window-head" data-bind="">
-                <span data-bind="text: '聊天对象昵称'"></span>
+            <div class="message-window-head" data-bind="with: talkingTarget">
+                <img src="/static/resource/images/hear.png" height="30px" width="30px" alt="0"/>
+                <span data-bind="text: $data.nickname"></span>
             </div>
             <div class="message-window-list" data-bind="foreach: new Array(23)">
                 <div>555555</div>
             </div>
-            <div class="message-window-send" data-bind=""></div>
+            <div class="message-window-send" data-bind="">
+                <div class="send-button">
+                    <button class="btn btn-default pull-right" data-bind="text: '发送'"></button>
+                </div>
+                <div class="send-input">
+                    <textArea></textarea>
+                </div>
+            </div>
         </div>
     </div>
 </div>
