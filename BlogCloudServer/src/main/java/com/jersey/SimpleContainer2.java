@@ -1,8 +1,9 @@
 package com.jersey;
 
-import com.blog.factory.DBFactory;
+import com.blog.config.Configuration;
 import com.blog.login.BologSecurityContext;
 import com.blog.factory.ServerLogs;
+import com.blog.proto.ConfigStore;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
@@ -37,6 +38,7 @@ import org.glassfish.jersey.server.internal.ContainerUtils;
 import org.glassfish.jersey.server.spi.Container;
 import org.glassfish.jersey.server.spi.ContainerResponseWriter;
 import org.glassfish.jersey.server.spi.ContainerResponseWriter.TimeoutHandler;
+import org.javalite.activejdbc.Base;
 import org.javalite.activejdbc.DB;
 
 import org.simpleframework.common.thread.DaemonFactory;
@@ -277,7 +279,7 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
         final URI baseUri = getBaseUri(request);
         final URI requestUri = getRequestUri(request, baseUri);
 
-        DB db = null;
+//        DB db = null;
         try {
             final ContainerRequest requestContext = new ContainerRequest(baseUri, requestUri,
                     request.getMethod(), getSecurityContext(request), new MapPropertiesDelegate());
@@ -291,15 +293,16 @@ public final class SimpleContainer2 implements org.simpleframework.http.core.Con
                 injectionManager.<Ref<Response>>getInstance(ResponseTYPE).set(response);
             });
 
-            db = DBFactory.open();
+            ConfigStore.DB db = Configuration.getInstance().getConfig().getDb();
+            Base.open(db.getDriver(), db.getUrl(), db.getUser(), db.getPassword());
+            Base.openTransaction();
             appHandler.handle(requestContext);
-        } catch (final Exception ex) {
+            Base.commitTransaction();
+        } catch (final IOException ex) {
             logger.warn("handle " + request.getTarget() + " catch an error", ex);
             throw new RuntimeException(ex);
         } finally {
-            if (db != null) {
-                db.close();
-            }
+            Base.close();
             if (!responseWriter.isSuspended()) {
                 close(response);
             }
