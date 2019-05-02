@@ -41,7 +41,7 @@
                     ko.utils.arrayForEach(self.getSelected(), function (item) {
                         text = text + ko.unwrap(item.text) + ",";
                     });
-                    text = text.substring(0, text.length - 1)
+                    text = text.substring(0, text.length - 1);
                 }
                 if (text === "") {
                     text = ko.unwrap(self.headText);

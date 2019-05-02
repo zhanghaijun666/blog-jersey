@@ -1,66 +1,79 @@
-<table class="custom-card-table">
-    <!-- ko ifnot: itemSelect.getSelectedConut() > 0 -->
-    <thead>
-        <tr class="custom-card-single-header">
-            <!-- ko if: isShowMultipleOperateMenu() -->
-            <td class="custom-card-checkbox">
-                <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
-            </td>
-            <!-- /ko -->
-            <td class="custom-card-content"><span data-bind="text: '用户'"></span></td>
-            <!-- ko if: isShowSingleOperateMenu() -->
-            <td class="custom-card-operation"><span data-bind="text: '操作'"></span></td>
-            <!-- /ko -->
-        </tr>
-    </thead>
-    <!-- /ko -->
-    <!-- ko if: itemSelect.getSelectedConut() > 0 -->
-    <thead>
-        <tr class="custom-card-multi-header">
-            <td class="custom-card-checkbox">
-                <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
-            </td>
-            <td class="custom-card-content">
-                <ul>
-                    <li><span data-bind="text: itemSelect.getSelectedStr()"></span></li>
-                    <!-- ko foreach: getMultipleOperateMenu() -->
-                    <li data-bind="click: $component.operateMenuClick">
-                        <span class="span-button">
-                            <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
-                            <span data-bind="text: $data.text"></span>
-                        </span>
-                    </li>
+<div style="width: 100%;height: 100%">
+    <div class="card-data">
+        <table class="custom-card-table">
+            <!-- ko ifnot: itemSelect.getSelectedConut() > 0 -->
+            <thead>
+                <tr class="custom-card-single-header">
+                    <!-- ko if: isShowMultipleOperateMenu() -->
+                    <td class="custom-card-checkbox">
+                        <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
+                    </td>
                     <!-- /ko -->
-                </ul>
-            </td>
-            <td></td>
-        </tr>
-    </thead>
-    <!-- /ko -->
-    <tbody data-bind="foreach: itemList">
-        <tr class="custom-card-info cursor_pointer">
-            <!-- ko if: $component.isShowMultipleOperateMenu() -->
-            <td class="custom-card-checkbox">
-                <custom-checkbox params="checked: $data.select"></custom-checkbox>
-            </td>
+                    <td class="custom-card-content"><span data-bind="text: '用户'"></span></td>
+                    <!-- ko if: isShowSingleOperateMenu() -->
+                    <td class="custom-card-operation"><span data-bind="text: '操作'"></span></td>
+                    <!-- /ko -->
+                </tr>
+            </thead>
             <!-- /ko -->
-            <td class="custom-card-content">
-                <div data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></div>
-            </td>
-            <!-- ko if: $component.isShowSingleOperateMenu() -->
-            <td class="custom-card-operation">
-                <ul data-bind="foreach: $component.getSingleOperateMenu()">
-                    <li data-bind="click: function(){ $component.operateMenuClick($data,null,$parent);}">
-                        <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
-                        <div class=""><span data-bind="text: $data.text"></span></div>
-                    </li>
-                </ul>
-            </td>
+            <!-- ko if: itemSelect.getSelectedConut() > 0 -->
+            <thead>
+                <tr class="custom-card-multi-header">
+                    <td class="custom-card-checkbox">
+                        <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
+                    </td>
+                    <td class="custom-card-content">
+                        <ul>
+                            <li><span data-bind="text: itemSelect.getSelectedStr()"></span></li>
+                            <!-- ko foreach: getMultipleOperateMenu() -->
+                            <li data-bind="click: $component.operateMenuClick">
+                                <span class="span-button">
+                                    <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
+                                    <span data-bind="text: $data.text"></span>
+                                </span>
+                            </li>
+                            <!-- /ko -->
+                        </ul>
+                    </td>
+                    <td></td>
+                </tr>
+            </thead>
             <!-- /ko -->
-        </tr>
-    </tbody>
-</table>
-
+            <tbody data-bind="foreach: itemList">
+                <tr class="custom-card-info cursor_pointer">
+                    <!-- ko if: $component.isShowMultipleOperateMenu() -->
+                    <td class="custom-card-checkbox">
+                        <custom-checkbox params="checked: $data.select"></custom-checkbox>
+                    </td>
+                    <!-- /ko -->
+                    <td class="custom-card-content">
+                        <div data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></div>
+                    </td>
+                    <!-- ko if: $component.isShowSingleOperateMenu() -->
+                    <td class="custom-card-operation">
+                        <ul data-bind="foreach: $component.getSingleOperateMenu()">
+                            <li data-bind="click: function(){ $component.operateMenuClick($data,null,$parent);}">
+                                <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
+                                <div class=""><span data-bind="text: $data.text"></span></div>
+                            </li>
+                        </ul>
+                    </td>
+                    <!-- /ko -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-paging">
+        <ul class="pagination">
+            <li><span data-bind="text: '上一页'"></span></li>
+            <li  class="active disabled"><span data-bind="text: '1'"></span></li>
+            <li><span data-bind="text: '2'"></span></li>
+            <li><span data-bind="text: '3'"></span></li>
+            <li><span data-bind="text: '下一页'"></span></li>
+            <li><drop-down params="menuItems: pageSizeOption(), dropdownCss: 'dropup'"></drop-down></li>
+        </ul>
+    </div>
+</div>
 <template id="folderCardLayout-template">
     <div class="row" style="height: 100%;">
         <div class="col-md-10" style="height: 100%;">

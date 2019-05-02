@@ -1,7 +1,7 @@
 .user-blog{
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: relative;
 }
 .user-blog-head{
     width: 100%;
@@ -13,8 +13,10 @@
 }
 .user-blog-body{
     width: 100%;
-    height: 100%;
-    padding-top: 100px;
+    position: absolute;
+    top: 100px;
+    bottom: 0px;
+    overflow: auto;
 }
 
 /*------------ 路径导航 -------start-----*/
