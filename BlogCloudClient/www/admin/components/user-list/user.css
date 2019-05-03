@@ -1,38 +1,6 @@
 .user-info{
     margin: 20px 100px 20px 100px;
 }
-/*.custom-table .custom-table-head>div>div,.custom-table .custom-table-body>div>div{
-    border: 1px solid #000;
-}*/
-.custom-table div{
-    margin: 0px;
-    padding: 0px;
-}
-.custom-table .custom-table-head{
-    font-weight: bold;
-}
-.custom-table .custom-table-head>div{
-    border-bottom: 1px solid #ddd;
-}
-.custom-table .custom-table-body>div:hover{
-    background-color: #F5F5F5;
-}
-.custom-table .row{
-    border-top: 1px solid #ddd;
-    height: 38px;
-}
-.custom-table{
-    border-bottom: 1px solid #ddd;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-}
-.custom-table .row>div{
-    border-left: 1px solid #ddd;
-    height: 38px;
-    line-height: 38px;
-    padding: 0px 8px;
-}
-
 .input-group-menu{
     padding: 0px;
 }
@@ -42,4 +10,15 @@
     margin-bottom: 15px;
     color: red;
     padding-left: 80px;
+}
+.user-card-top{
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #e2edfc;
+}
+.user-card{
+    position: absolute;
+    top: 40px;
+    bottom: 0px;
+    width: 100%;
 }

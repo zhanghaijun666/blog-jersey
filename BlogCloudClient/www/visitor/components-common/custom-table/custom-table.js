@@ -10,7 +10,7 @@
             var self = $.extend(this, defaultValue, params);
             self.itemSelect = new ItemSelect(self.itemList);
             self.dataPaging = new DataPaging(96, function (perPage, currentPage) {
-                console.log(perPage + "--**--   " + currentPage);
+//                console.log(perPage + "--**--   " + currentPage);
             });
 
 

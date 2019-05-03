@@ -39,9 +39,11 @@
                     new MenuTab(l10n('operate.delete'), {icon: 'fa-trash-o', clickFun: self.deleteFile, menuType: CustomMenuType.MultipleSelection})
                 ];
             };
+            window.blog = self;
             self.getBlogFile = function () {
                 getRequest("/file/get/" + self.blogPathEntry().getCurrentUrl().originPath, {accept: "application/x-protobuf"}, function (data) {
                     var fileList = bcstore.FileItemList.decode(data);
+                    console.log(fileList.item.length);
                     self.blogFileLsit([]);
                     if (fileList.item && fileList.item instanceof Array) {
                         for (var i = 0; i < fileList.item.length; i++) {

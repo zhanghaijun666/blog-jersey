@@ -34,11 +34,8 @@
 .custom-card-table{
     width: 100%;
 }
-.custom-card-top-operation{
-    height: 40px;
-    width: 100%;
-}
-.custom-card-info,.custom-card-top-operation,.custom-card-single-header,.custom-card-multi-header{
+
+.custom-card-info,.custom-card-single-header,.custom-card-multi-header{
     border-bottom: 1px solid #e2edfc;
 }
 .custom-card-info>td{
