@@ -101,7 +101,7 @@
             <!-- /ko -->
             <!-- ko if: $data.isShowNextButton() -->
             <li data-bind="click: $data.changePage.bind($data,$data.currentPage()+1)"><span data-bind="text: '下一页'"></span></li>
-            <li data-bind="click: $data.changePage.bind($data,$data.getMaxPage())"><span data-bind="text: '尾页'"></span></li>
+            <li data-bind="click: $data.changePage.bind($data,$data.getTotalPage())"><span data-bind="text: '尾页'"></span></li>
             <!-- /ko -->
             <li><drop-down params="menuItems: pageSizeOption, dropdownCss: 'dropup'"></drop-down></li>
         </ul>

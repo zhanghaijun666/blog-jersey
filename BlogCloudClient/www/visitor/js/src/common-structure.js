@@ -166,6 +166,7 @@
             new MenuTab("15/页", {value: 15, isActive: false, clickFun: pageSizeFun.bind(this, 15, 1)}),
             new MenuTab("20/页", {value: 20, isActive: false, clickFun: pageSizeFun.bind(this, 20, 1)})
         ]);
+        this.updateDataFun(this.getPerPageNumber(), ko.unwrap(this.currentPage));
     }
     DataPaging.prototype.getPerPageNumber = function () {
         var arr = this.pageSizeOption();
@@ -184,7 +185,7 @@
     DataPaging.prototype.isShowNextButton = function () {
         return ko.unwrap(this.currentPage) * this.getPerPageNumber() < this.totalNumber;
     };
-    DataPaging.prototype.getMaxPage = function () {
+    DataPaging.prototype.getTotalPage  = function () {
         return Math.ceil(this.totalNumber / this.getPerPageNumber());
     };
     DataPaging.prototype.getPageNumerArray = function () {
@@ -198,7 +199,7 @@
             }
             return 1;
         }
-        var maxPage = this.getMaxPage();
+        var maxPage = this.getTotalPage();
         var startNumber = Math.max(1, maxPage - ko.unwrap(this.currentPage) < 5 ? maxPage - 10 + 1 : getStartPage(ko.unwrap(this.currentPage)));
         var endNumber = Math.min(maxPage, startNumber + 10 - 1);
         var arr = new Array();
