@@ -91,7 +91,8 @@
 //--------------------------------*****************************-------------------------------
     MenuTab = function (text, options) {
         options = options || {};
-        this.text = text;
+        this.text = text;//用于页面显示
+        this.value = options.value;//用于js逻辑处理
         this.icon = options.icon;
         this.title = options.title || "";
         this.isActive = ko.observable(!!ko.unwrap(options.isActive));
@@ -151,9 +152,79 @@
         }
         return null;
     };
+    function DataPaging(TotalNumber) {
+        this.totalNumber = TotalNumber || 196;
+        this.currentPage = 1;
+        this.perPageNumber = 5;
+        this.updateDataFun = function (perPage, currentPage) {};
+        this.jumpValue = ko.observable(ko.unwrap(this.currentPage));
+    }
+    DataPaging.prototype.pageSizeOption = function () {
+        return [
+            new MenuTab("05/页", {value: 5, isActive: false, clickFun: function () {}}),
+            new MenuTab("10/页", {value: 10, isActive: true, clickFun: function () {}}),
+            new MenuTab("15/页", {value: 15, isActive: false, clickFun: function () {}}),
+            new MenuTab("20/页", {value: 20, isActive: false, clickFun: function () {}})
+        ];
+    };
+    DataPaging.prototype.getPerPageNumber = function () {
+        var arr = this.pageSizeOption();
+        if (arr instanceof Array) {
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i] instanceof MenuTab && ko.unwrap(arr[i].isActive)) {
+                    return ko.unwrap(arr[i].value);
+                }
+            }
+        }
+        return null;
+    };
+    DataPaging.prototype.isShowLastButton = function () {
+        return this.currentPage > 1;
+    };
+    DataPaging.prototype.isShowNextButton = function () {
+        return this.currentPage * this.getPerPageNumber() < this.totalNumber;
+    };
+    DataPaging.prototype.getMaxPage = function () {
+        return Math.ceil(this.totalNumber / this.getPerPageNumber());
+    };
+    DataPaging.prototype.getPageNumerArray = function () {
+        function getStartPage(currentPage) {
+            var index = 1;
+            while (true) {
+                if (currentPage <= 5 * index) {
+                    return index === 1 ? 1 : 5 * (index - 1);
+                }
+                index = index + 1;
+            }
+            return 1;
+        }
+        var maxPage = this.getMaxPage();
+        var startNumber = Math.max(1, maxPage - this.currentPage < 5 ? maxPage - 10 + 1 : getStartPage(this.currentPage));
+        var endNumber = Math.min(maxPage, startNumber + 10 - 1);
+        var arr = new Array();
+        var index = 0;
+        while (startNumber + index <= endNumber) {
+            arr.push(startNumber + index);
+            index = index + 1;
+        }
+        return arr;
+    };
+    DataPaging.prototype.changePage = function (pageNumber) {
+        if (pageNumber < 1 || pageNumber === this.currentPage) {
+            return;
+        }
+
+        if (isFunction(this.updateDataFun)) {
+            this.updateDataFun(this.getPerPageNumber(), pageNumber);
+        }
+    };
+
+
+
     exports.MenuTab = MenuTab;
     exports.FileUrl = FileUrl;
     exports.PathEntry = PathEntry;
+    exports.DataPaging = DataPaging;
 })(this);
 
 

@@ -45,14 +45,6 @@
                 });
                 return array;
             };
-            self.pageSizeOption = function () {
-                return [
-                    new MenuTab("05/页", {isActive: true, clickFun: function () {}}),
-                    new MenuTab("10/页", {isActive: false, clickFun: function () {}}),
-                    new MenuTab("15/页", {isActive: false, clickFun: function () {}}),
-                    new MenuTab("20/页", {isActive: false, clickFun: function () {}})
-                ];
-            };
         }
         return {
             viewModel: {
