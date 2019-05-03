@@ -4,11 +4,11 @@
         <i class="fa" data-bind="css: $data.headIcon"></i>
         <!-- /ko -->
         <span data-bind="text: getHeadText()"></span>
-        <!-- ko if: menuItems.length > 0 -->
+        <!-- ko if: ko.unwrap(menuItems).length > 0 -->
         <span class="caret"></span>
         <!-- /ko -->
     </div>
-    <!-- ko if: menuItems.length > 0 -->
+    <!-- ko if: ko.unwrap(menuItems).length > 0 -->
     <ul class="dropdown-menu" role="menu" data-bind=" style: {'min-width': menuMinWidth()}, foreach: menuItems">
         <li role="presentation" data-bind="click: $parent.dropdownMenuClick">
             <a role="menuitem" tabindex="-1" href="javascript:void(0)">

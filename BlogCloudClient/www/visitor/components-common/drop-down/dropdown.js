@@ -25,7 +25,7 @@
                 }
                 if (self.isSingleSelected) {
                     ko.utils.arrayForEach(ko.unwrap(self.menuItems), function (item) {
-                        item.isActive(item == menu);
+                        item.isActive(item === menu);
                     });
                 } else {
                     event.stopPropagation();

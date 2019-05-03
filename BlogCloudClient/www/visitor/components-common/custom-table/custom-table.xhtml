@@ -63,7 +63,7 @@
             </tbody>
         </table>
     </div>
-    <div class="card-paging" data-bind="template: {name: 'data-paging-template',data: new DataPaging()}"></div>
+    <div class="card-paging" data-bind="template: {name: 'data-paging-template',data: dataPaging}"></div>
 </div>
 <template id="folderCardLayout-template">
     <div class="row" style="height: 100%;">
@@ -90,20 +90,20 @@
         <ul class="pagination">
             <!-- ko if: $data.isShowLastButton() -->
             <li data-bind="click: $data.changePage.bind($data,1)"><span data-bind="text: '首页'"></span></li>
-            <li data-bind="click: $data.changePage.bind($data,$data.currentPage-1)">
+            <li data-bind="click: $data.changePage.bind($data,$data.currentPage()-1)">
                 <span data-bind="text: '上一页'"></span>
             </li>
             <!-- /ko -->
             <!-- ko foreach: $data.getPageNumerArray() -->
-            <li  data-bind="css:{active: $data===$parent.currentPage,disabled: $data===$parent.currentPage},click: $parent.changePage.bind($parent,$data)">
+            <li  data-bind="css:{active: $data==$parent.currentPage()},click: $parent.changePage.bind($parent,$data)">
                 <span data-bind="text: $data"></span>
             </li>
             <!-- /ko -->
             <!-- ko if: $data.isShowNextButton() -->
-            <li data-bind="click: $data.changePage.bind($data,$data.currentPage+1)"><span data-bind="text: '下一页'"></span></li>
+            <li data-bind="click: $data.changePage.bind($data,$data.currentPage()+1)"><span data-bind="text: '下一页'"></span></li>
             <li data-bind="click: $data.changePage.bind($data,$data.getMaxPage())"><span data-bind="text: '尾页'"></span></li>
             <!-- /ko -->
-            <li><drop-down params="menuItems: pageSizeOption(), dropdownCss: 'dropup'"></drop-down></li>
+            <li><drop-down params="menuItems: pageSizeOption, dropdownCss: 'dropup'"></drop-down></li>
         </ul>
         <input class="jump-input"type="text" data-bind="textInput: jumpValue"/>
         <button class="btn btn-default" data-bind="click: $data.changePage.bind($data,$data.jumpValue())">

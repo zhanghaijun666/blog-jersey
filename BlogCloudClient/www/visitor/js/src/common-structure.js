@@ -1,12 +1,10 @@
 (function (exports) {
     exports.directory_contenttype = "application/cc-directory";
     exports.standUrlPattern = new RegExp("\\/?(?<rootHash>[^/]+)?\\/(?<gtype>[\\d]+)\\/(?<gpid>-?[\\d]+)\\/(?<bucket>[^/]+)(?<path>\\/?.*)");
-
     exports.CustomMenuType = {
         SingleSlection: 1,
         MultipleSelection: 2
     };
-
     exports.getStoreArray = function (storeKey) {
         var storage = window.localStorage;
         if (storage) {
@@ -91,8 +89,8 @@
 //--------------------------------*****************************-------------------------------
     MenuTab = function (text, options) {
         options = options || {};
-        this.text = text;//用于页面显示
-        this.value = options.value;//用于js逻辑处理
+        this.text = text; //用于页面显示
+        this.value = options.value; //用于js逻辑处理
         this.icon = options.icon;
         this.title = options.title || "";
         this.isActive = ko.observable(!!ko.unwrap(options.isActive));
@@ -152,21 +150,23 @@
         }
         return null;
     };
-    function DataPaging(TotalNumber) {
-        this.totalNumber = TotalNumber || 196;
-        this.currentPage = 1;
+    function DataPaging(totalNumber, updateDataFun) {
+        this.totalNumber = totalNumber && totalNumber > 0 ? totalNumber : 1;
+        this.currentPage = ko.observable(1);
         this.perPageNumber = 5;
-        this.updateDataFun = function (perPage, currentPage) {};
+        this.updateDataFun = isFunction(updateDataFun) ? updateDataFun : function (perPage, currentPage) {};
         this.jumpValue = ko.observable(ko.unwrap(this.currentPage));
+        function pageSizeFun(perPage, currentPage) {
+            this.currentPage(1);
+            this.updateDataFun(perPage, 1);
+        }
+        this.pageSizeOption = ko.observableArray([
+            new MenuTab("05/页", {value: 5, isActive: false, clickFun: pageSizeFun.bind(this, 5, 1)}),
+            new MenuTab("10/页", {value: 10, isActive: true, clickFun: pageSizeFun.bind(this, 10, 1)}),
+            new MenuTab("15/页", {value: 15, isActive: false, clickFun: pageSizeFun.bind(this, 15, 1)}),
+            new MenuTab("20/页", {value: 20, isActive: false, clickFun: pageSizeFun.bind(this, 20, 1)})
+        ]);
     }
-    DataPaging.prototype.pageSizeOption = function () {
-        return [
-            new MenuTab("05/页", {value: 5, isActive: false, clickFun: function () {}}),
-            new MenuTab("10/页", {value: 10, isActive: true, clickFun: function () {}}),
-            new MenuTab("15/页", {value: 15, isActive: false, clickFun: function () {}}),
-            new MenuTab("20/页", {value: 20, isActive: false, clickFun: function () {}})
-        ];
-    };
     DataPaging.prototype.getPerPageNumber = function () {
         var arr = this.pageSizeOption();
         if (arr instanceof Array) {
@@ -179,10 +179,10 @@
         return null;
     };
     DataPaging.prototype.isShowLastButton = function () {
-        return this.currentPage > 1;
+        return ko.unwrap(this.currentPage) > 1;
     };
     DataPaging.prototype.isShowNextButton = function () {
-        return this.currentPage * this.getPerPageNumber() < this.totalNumber;
+        return ko.unwrap(this.currentPage) * this.getPerPageNumber() < this.totalNumber;
     };
     DataPaging.prototype.getMaxPage = function () {
         return Math.ceil(this.totalNumber / this.getPerPageNumber());
@@ -199,7 +199,7 @@
             return 1;
         }
         var maxPage = this.getMaxPage();
-        var startNumber = Math.max(1, maxPage - this.currentPage < 5 ? maxPage - 10 + 1 : getStartPage(this.currentPage));
+        var startNumber = Math.max(1, maxPage - ko.unwrap(this.currentPage) < 5 ? maxPage - 10 + 1 : getStartPage(ko.unwrap(this.currentPage)));
         var endNumber = Math.min(maxPage, startNumber + 10 - 1);
         var arr = new Array();
         var index = 0;
@@ -210,17 +210,12 @@
         return arr;
     };
     DataPaging.prototype.changePage = function (pageNumber) {
-        if (pageNumber < 1 || pageNumber === this.currentPage) {
+        if (pageNumber < 1 || pageNumber === ko.unwrap(this.currentPage)) {
             return;
         }
-
-        if (isFunction(this.updateDataFun)) {
-            this.updateDataFun(this.getPerPageNumber(), pageNumber);
-        }
+        this.currentPage(pageNumber);
+        this.updateDataFun(this.getPerPageNumber(), pageNumber);
     };
-
-
-
     exports.MenuTab = MenuTab;
     exports.FileUrl = FileUrl;
     exports.PathEntry = PathEntry;
