@@ -11,20 +11,11 @@
     padding: 0;
     margin: 0;
 }
-.leftMenu{
+.leftmenu{
     padding: 0px;
     border-right: 1px solid #eee;
     height: 100%;
     overflow: auto;
-}
-.leftMenu .panel-heading,.leftMenu ul>li{
-    cursor:pointer;
-}
-.leftMenu ul>li:hover{
-    background:#C4E3F3;
-}
-.leftMenu .list-group .list-group-item{
-    padding-left: 30px;
 }
 .centre_tabs{
     padding: 0px;height: 100%;

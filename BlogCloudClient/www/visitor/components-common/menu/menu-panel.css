@@ -2,3 +2,12 @@
     width: 100%;
     height: 100%;
 }
+.menu-panel .panel-heading,.menu-panel ul>li{
+    cursor:pointer;
+}
+.menu-panel ul>li:hover{
+    background:#C4E3F3;
+}
+.menu-panel .list-group .list-group-item{
+    padding-left: 30px;
+}
