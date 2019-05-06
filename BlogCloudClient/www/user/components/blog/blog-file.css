@@ -1,1 +1,28 @@
+/*------------ my-file-template ------- start -----*/
+.user-blog-head{
+    width: 100%;
+    height: 90px;
+    border-bottom: 1px solid #eee;
+    position: absolute;
+    top: 0;
 
+}
+.user-blog-body{
+    width: 100%;
+    position: absolute;
+    top: 100px;
+    bottom: 0px;
+    overflow: auto;
+}
+
+/*------------ 路径导航 -------start-----*/
+.path_entry{
+    max-height: 40px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+.path_entry>.breadcrumb{
+    margin-bottom: 0px;
+}
+/*------------ 路径导航 -------end-----*/
+/*------------ my-file-template ------- end -----*/

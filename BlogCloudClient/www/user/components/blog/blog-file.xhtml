@@ -1,1 +1,27 @@
-<menu-nav-tabs params="menuList: leftMenuList"></menu-nav-tabs>
+<menu-nav-tabs params="menuList: leftMenuList,centreView:''"></menu-nav-tabs>
+
+
+
+<template id="my-file-template">
+    <div class="user-blog-head">
+        <drop-down params="headText: '上传', isShowSelect: false, headIcon: 'fa-upload',dropdownCss:'button-dropdown',menuItems: uploadFilesMenuItems()"></drop-down>
+        <button class="btn btn-default" data-bind="text: '新建文件夹',click: addFolder"></button>
+        <div class="path_entry" data-bind="with: blogPathEntry">
+            <ul class="breadcrumb">
+                <!-- ko if: pathList.length > 1 -->
+                <li data-bind="click: $data.changePath.bind(null,$data.getPrevUrl())">
+                    <a href="javacript:void(0);">返回上一级</a>
+                </li>
+                <!-- /ko -->
+                <!-- ko foreach: pathList -->
+                <li data-bind="css:{active:$index()+1===$parent.pathList.length},click: $parent.changePath">
+                    <a href="javacript:void(0);" data-bind="text: $data.getFileName()?$data.getFileName():'全部文件'"></a>
+                </li>
+                <!-- /ko -->
+            </ul>
+        </div>
+    </div>
+    <div class="user-blog-body">
+        <custom-table params="itemList: blogFileLsit,itemClick: openDirectory, operateMenu: getBlogOperateMenu(),cardHeadTemplate:'folderCardLayout-template'"></custom-table>
+    </div>
+</template>

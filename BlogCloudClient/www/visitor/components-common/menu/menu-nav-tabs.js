@@ -3,7 +3,8 @@
         function MenuNavTabs(params, componentInfo) {
             var defaultValue = {
                 menuList: ko.observableArray([]),
-                currentMenu: ko.observable("")
+                currentMenu: ko.observable(""),
+                centreView: ""
             };
             var self = $.extend(this, defaultValue, params);
             self.isShowLargeLeftMenu = ko.observable(true);

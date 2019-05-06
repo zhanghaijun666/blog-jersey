@@ -1,10 +1,11 @@
 (function (global) {
-    define(["text!./blog-file.xhtml", "css!./blog-file.css"], function (pageView) {
+    define(["text!./blog-file.xhtml", "./my-blog.js", "css!./blog-file.css"], function (pageView, myBlog) {
         function BlogFileModel(params, componentInfo) {
             var defaultValue = {
                 fileUrl: new FileUrl("default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/")
             };
-            var self = $.extend(this, defaultValue, params);
+            var self = $.extend(this, defaultValue, params, myBlog);
+            self.currentTemplate = ko.observable("my-file-template");
             self.leftMenuList = ko.observableArray([
                 new Menu({name: '我的文件', icon: 'fa fa-book', menuId: 1001, isActive: true, clickFun: menuClickFun}),
                 new Menu({name: '图片', icon: 'fa fa-picture-o', parentId: 1001, clickFun: menuClickFun}),

@@ -2,8 +2,10 @@
     <div class="leftmenu col-md-2 col-lg-2 visible-md-block visible-lg-block">
         <div class="leftmenu-head">
             <span data-bind="visible: isShowLargeLeftMenu,text: ' 导航区'"></span>
+            <!--            
             <i class="fa fa-chevron-circle-left fa-lg" data-bind="visible: isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(false);}"></i>
             <i class="fa fa-chevron-circle-right fa-lg" data-bind="visible: !isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(true);}"></i>
+            -->
         </div>
         <div class="leftmenu-body">
             <menu-panel params="menuList: menuList"></menu-panel>
@@ -28,6 +30,9 @@
             -->
         </div>
         <div class="rightcentre-body">
+            <!-- ko if: ko.unwrap(centreView) -->
+            <!-- ko template: {name:'component-temlate',data:{name: ko.unwrap(centreView)}} --><!-- /ko -->
+            <!-- /ko -->
             <!--
             <div class="tab-content" data-bind="foreach: getAllMenuTemplate()">
                 <div role="tabpanel" class="tab-pane fade" data-bind="template: {name:'component-temlate',data:{name:$data.template}}"></div>

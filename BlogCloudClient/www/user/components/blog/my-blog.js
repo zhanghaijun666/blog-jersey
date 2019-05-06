@@ -1,8 +1,8 @@
 /* global uploadAllFile, FileUrl, CustomMenuType, directory_contenttype */
 
 (function (global) {
-    define(["text!./blog.xhtml", "css!./blog.css"], function (pageView) {
-        function BlogModel(params, componentInfo) {
+    define(["knockout"], function (ko) {
+        function BlogModel(params) {
             var defaultValue = {
                 fileUrl: new FileUrl("default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/")
             };
@@ -14,9 +14,6 @@
                     new MenuTab("上传文件", {icon: "fa-upload", clickFun: self.uploadFile})
                 ];
             };
-//            self.blogPathEntry.subscribe(function (data) {
-//                self.getBlogFile();
-//            });
             self.openDirectory = function (item) {
                 if (item instanceof FileItem && item.contentType === directory_contenttype) {
                     self.blogPathEntry(new PathEntry(item.fullPath, self.openDirectory));
@@ -105,13 +102,6 @@
             };
             self.getBlogFile();
         }
-        return {
-            viewModel: {
-                createViewModel: function (params, componentInfo) {
-                    return new BlogModel(params, componentInfo);
-                }
-            },
-            template: pageView
-        };
+        return new BlogModel();
     });
 })(this);
