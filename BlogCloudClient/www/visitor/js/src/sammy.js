@@ -8,6 +8,9 @@ function SammyPage(options) {
         this.get(/\#login(.*)/, function () {
             root.setRootTemplate('login-page');
         });
+        this.get(/\#file(.*)/, function () {
+            root.setRootTemplate('blog-file');
+        });
         this.get(/\#menu(.*)/, function () {
             var params = this.params['splat'][0];
             root.currentMenu(params.substring(1));

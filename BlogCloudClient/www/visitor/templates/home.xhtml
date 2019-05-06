@@ -1,5 +1,5 @@
-<template id="template-Blog-home">
-    <div class="home-header" data-bind="template: { name: 'template-Blog-home-header', data: $data }"></div>
+<template id="blog-cloud-home-template">
+    <div class="home-head-nav visible-md-block visible-lg-block" data-bind="template: 'large-home-haad-nav-template'"></div>
     <div class="home-body">
         <!-- ko if: RootView.rootTemplate() -->
         <!-- ko if: ko.components.isRegistered(RootView.rootTemplate()) -->
@@ -10,19 +10,15 @@
         <!-- /ko -->
         <!-- /ko -->
     </div>
-    <!-- ko if: RootView.isLogin() -->
-    <div class="home-foot visible-xs-block visible-sm-block">
+    <div class="home-foot-nav visible-sm-block visible-xs-block">
         <menu-list params="menus: RootView.blogNavigator(), isCenter: true, menuClass:'small-nav'"></menu-list>
     </div>
-    <!-- /ko -->
     <div id="not_display_lements_id" style="display: none"></div>
 </template>
-<template id="template-Blog-home-header">
-    <div class="home-header-logo visible-md-block visible-lg-block">
-        <!-- ko template: 'logo-template' --><!-- /ko -->
-    </div>
-    <div class="home-header-nav">
-        <div class="visible-md-block visible-lg-block">
+<template id="large-home-haad-nav-template">
+    <div class="home-nav">
+        <div class="home-nav-logo" data-bind="template: 'logo-template'"></div>
+        <div class="home-nav-body">
             <!-- ko if: RootView.isLogin() -->
             <div class="pull-left">
                 <menu-list params="menus: RootView.blogNavigator(),menuClass: 'home-menu-nav'"></menu-list>
@@ -32,25 +28,15 @@
             </div>
             <!-- /ko -->
         </div>
-        <div class="visible-sm-block visible-xs-block">
-            <!-- ko ifnot: RootView.isLogin() -->
-            <!-- ko template: 'logo-template' --><!-- /ko -->
-            <!-- /ko -->
-            <!-- ko if: RootView.isLogin() -->
-            <small-head params="leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList}"></small-head>
-            <!-- /ko -->
-        </div>
-    </div>
-    <div class="home-heade-clock visible-md-block visible-lg-block">
-        <clock></clock>
+        <div class="home-nav-clock" data-bind="component: 'clock'"></div>
     </div>
 </template>
 <template id="logo-template">
-    <div class="logo-body">
+    <div style="text-align: center">
         <img src="/static/resource/images/logo.png" width="200px" height="50px" alt="logo"/>
-        <!--<span data-bind="text: '晨谨知识库'"></span>-->
     </div>
 </template>
+
 <template id="user-center-template">
     <div>
         <img src="/static/resource/images/hear.png" height="40px" width="40px" alt="0" />

@@ -7,71 +7,78 @@
 
  大屏幕（大桌面显示器，大于等于 1200px） 
 @media (min-width: @screen-lg-min) {}
-*/
-.home-header{
-    position: absolute;
-    width: 100%;
-    height: 50px;
-    z-index: 0;
-    position: absolute;
-}
-.logo-body{
-    border-right: 1px solid #eee;
-    text-align: center;
-}
-.logo-body>span{
-    font-size: 20px;
-    margin-left: 10px;
-}
-
-.home-header-logo{
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 200px;
-    border-right: 1px solid #eee;
-}
-.home-header-nav{
-    width: 100%;
-    height: 100%;
-}
 @media (min-width: 992px) {
     .home-header-nav{
         padding-left: 200px;
         padding-right: 230px;
     }
 }
-.home-header-nav>div{
-    text-align: center;
-    line-height: 50px;
+*/
+
+/* ------ blog-cloud-home-template ----- start ------*/
+body{
     width: 100%;
     height: 100%;
 }
-.home-heade-clock{
-    border-left: 1px solid #eee;
-    height: 100%;
-    width: 230px;
+.home-head-nav{
+    background-color: #eee; 
     position: absolute;
-    right: 0;
-    top: 0;
+    width: 100%;
+    height: 50px;
+    top: 0px;
+}
+.home-foot-nav{
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    bottom: 0px;
+    background-color: #eee;
 }
 .home-body{
     position: absolute;
-    top: 0px;
-    left: 0px;
+    width: 100%;
+}
+@media (min-width: 992px) {
+    .home-body{
+        top: 50px;
+        bottom: 0px;
+    }
+}
+@media (max-width: 992px) {
+    .home-body{
+        top: 0px;
+        bottom: 50px;
+    }
+}
+/* ------ blog-cloud-home-template ----- end ------*/
+/* ------ large-home-haad-nav-template ----- start ------*/
+.home-nav{
     width: 100%;
     height: 100%;
-    padding-top: 50px;
-    overflow: auto;
-    z-index: -1;
-    overflow: hidden;
+    position: relative;
 }
-.home-foot{
+.home-nav>.home-nav-logo{
+    height: 100%;
     position: absolute;
-    bottom: 0px;
     left: 0px;
-    width: 100%;
-    height: 50px;
+    width: 260px;
+    border-right: 1px solid #eee;
 }
+.home-nav>.home-nav-body{
+    height: 100%;
+    position: absolute;
+    left: 260px;
+    right: 230px;
+    vertical-align: central;
+}
+.home-nav>.home-nav-body>div{
+    height: 100%;
+}
+.home-nav>.home-nav-clock{
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    width: 230px;
+}
+/* ------ large-home-haad-nav-template ----- end ------*/
 

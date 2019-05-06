@@ -6,7 +6,6 @@
     overflow: auto;
 }
 .nav_body>div{
-    width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
@@ -15,8 +14,27 @@
     padding: 0px;
     border-right: 1px solid #eee;
     height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+.leftmenu>.leftmenu-head{
+    width: 100%;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+}
+.leftmenu>.leftmenu-body{
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    bottom: 0px;
     overflow: auto;
 }
+.rightcentre{
+
+}
+
+
 .centre_tabs{
     padding: 0px;height: 100%;
 }

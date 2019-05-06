@@ -1,6 +1,16 @@
 <div class="nav_body">
-    <div class="visible-md-block visible-lg-block" data-bind="template: 'large-screen-tabs-temlate'"></div>
-    <div class="col-sm-12 visible-xs-block visible-sm-block" data-bind="template: { name:'tab-content-body-temlate',data: getLsatMenuTab()}"></div>
+    <div class="leftmenu col-md-2 col-lg-2 visible-md-block visible-lg-block">
+        <div class="leftmenu-head">
+            <span data-bind="text: ' 导航区'"></span>
+            <i class="fa fa-chevron-circle-left fa-lg"></i>
+            <i class="fa fa-chevron-circle-right fa-lg"></i>
+        </div>
+        <div class="leftmenu-body">
+            <menu-panel params="menuList: menuList"></menu-panel>
+        </div>
+    </div>
+    <div class="rightcentre col-md-10 col-lg-10 col-md-12 col-xs-12">
+    </div>
 </div>
 
 <template id="large-screen-tabs-temlate">
