@@ -22,6 +22,19 @@
     height: 30px;
     position: absolute;
     top: 0px;
+    text-align: center;
+    padding-top: 6px;
+    background-color: #e8e8e8;
+}
+.leftmenu>.leftmenu-head>span{
+    font-size: 16px;
+    font-weight: bold;
+}
+.leftmenu>.leftmenu-head>i{
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    cursor: pointer;
 }
 .leftmenu>.leftmenu-body{
     width: 100%;

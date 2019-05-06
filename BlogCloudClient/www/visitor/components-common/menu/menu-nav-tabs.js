@@ -6,6 +6,7 @@
                 currentMenu: ko.observable("")
             };
             var self = $.extend(this, defaultValue, params);
+            self.isShowLargeLeftMenu = ko.observable(true);
             self.menuTabs = ko.observableArray([]);
             self.showMenu = ko.observable();
 

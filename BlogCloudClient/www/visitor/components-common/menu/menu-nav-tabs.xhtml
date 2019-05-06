@@ -1,9 +1,9 @@
 <div class="nav_body">
     <div class="leftmenu col-md-2 col-lg-2 visible-md-block visible-lg-block">
         <div class="leftmenu-head">
-            <span data-bind="text: ' 导航区'"></span>
-            <i class="fa fa-chevron-circle-left fa-lg"></i>
-            <i class="fa fa-chevron-circle-right fa-lg"></i>
+            <span data-bind="visible: isShowLargeLeftMenu,text: ' 导航区'"></span>
+            <i class="fa fa-chevron-circle-left fa-lg" data-bind="visible: isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(false);}"></i>
+            <i class="fa fa-chevron-circle-right fa-lg" data-bind="visible: !isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(true);}"></i>
         </div>
         <div class="leftmenu-body">
             <menu-panel params="menuList: menuList"></menu-panel>

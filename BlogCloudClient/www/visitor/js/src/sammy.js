@@ -2,13 +2,12 @@ function SammyPage(options) {
     options = options || {};
     var root = options.view;
     var sammy = Sammy(function () {
-        this.get("/", function () {
-            this.redirect("#login");
-        });
         this.get(/\#login(.*)/, function () {
             root.setRootTemplate('login-page');
         });
         this.get(/\#file(.*)/, function () {
+            var path = this.params['splat'][0];
+            console.log(path);
             root.setRootTemplate('blog-file');
         });
         this.get(/\#menu(.*)/, function () {
