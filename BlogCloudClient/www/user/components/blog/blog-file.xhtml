@@ -1,4 +1,15 @@
-<menu-nav-tabs params="menuList: leftMenuList,centreView:''"></menu-nav-tabs>
+<div class="width-layout">
+    <div class="left-menu col-md-2 col-lg-2 visible-md-block visible-lg-block">
+        <menu-panel params="menuList: leftMenuList"></menu-panel>
+    </div>
+    <div class="right-centre col-md-10 col-lg-10 col-md-12 col-xs-12">
+        <div class="small-haed visible-sm-block visible-xs-block">
+            <small-head params="leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList}"></small-head>
+        </div>
+        <div class="centre-content" data-bind="template: currentTemplate"></div>
+    </div>
+</div>
+<!--<menu-nav-tabs params="menuList: leftMenuList,centreView:''"></menu-nav-tabs>-->
 
 
 

@@ -15,7 +15,6 @@
     overflow: auto;
 }
 
-/*------------ 路径导航 -------start-----*/
 .path_entry{
     max-height: 40px;
     overflow: hidden;
@@ -24,5 +23,4 @@
 .path_entry>.breadcrumb{
     margin-bottom: 0px;
 }
-/*------------ 路径导航 -------end-----*/
 /*------------ my-file-template ------- end -----*/
