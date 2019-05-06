@@ -46,6 +46,7 @@ function initStore() {
 
     function Menu(options, isObservable, isValidate) {
         var self = $.extend(this, getStoreFileds("Menu"), options);
+        self.parentId = self.parentId || 0;
         self.isActive = ko.observable(!!ko.unwrap(self.isActive));
         self.element = ko.observable();
         if (isObservable) {
@@ -65,7 +66,11 @@ function initStore() {
     }
     Menu.prototype = new Message("Menu");
     Menu.prototype.getMenuName = function () {
-        return ko.unwrap(this.name) ? l10n('menu.' + ko.unwrap(this.name)) : "";
+        if (ko.unwrap(this.name)) {
+            var name = l10n('menu.' + ko.unwrap(this.name));
+            return name.indexOf(".") === -1 ? name : this.name;
+        }
+        return "";
     };
     function FileItem(options, isObservable) {
         var self = $.extend(this, getStoreFileds("FileItem"), options);

@@ -10,38 +10,29 @@
         </div>
     </div>
     <div class="rightcentre col-md-10 col-lg-10 col-md-12 col-xs-12">
-    </div>
-</div>
-
-<template id="large-screen-tabs-temlate">
-    <div class="col-md-2  leftmenu">
-        <menu-panel params="menuList: menuList"></menu-panel>
-    </div>
-    <div class="col-md-10 centre_tabs">
-        <ul class="nav nav-tabs" role="tablist" data-bind="foreach: { data: menuTabs } ">
-            <li role="presentation" data-bind="elementCallback: {init: function(element){$(element).find('a').tab('show');$data.element(element)}}">
-                <a role="tab" data-toggle="tab" data-bind="attr: { href: '#content'+$data.menuId, id: 'tab'+$data.menuId}">
-                    <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.getMenuName()"></span>
-                    <!-- ko if: $component.isShowDeletable($data) -->
-                    <i class="pull-right fa fa-times cursor_pointer" aria-hidden="true" data-bind="click: $component.romveMenuTabs"></i>
-                    <!-- /ko -->
-                </a>
-            </li>
-        </ul>
-        <div class="tab-content" data-bind="foreach: getAllMenuTemplate()">
-            <div role="tabpanel" class="tab-pane fade" data-bind="attr: { id: 'content'+$data.menuId}">
-                <!-- ko template: 'tab-content-body-temlate' --><!-- /ko -->
+        <div class="rightcentre-small-haed visible-sm-block visible-xs-block">
+            <small-head params="leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList}"></small-head>
+        </div>
+        <div class="rightcentre-large-haed visible-md-block visible-lg-block">
+            <!--            
+            <ul class="nav nav-tabs" data-bind="foreach: { data: menuTabs } ">
+                <li role="presentation" data-bind="elementCallback: {init: function(element){$(element).find('a').tab('show');$data.element(element)}}">
+                    <a role="tab" data-toggle="tab" data-bind="attr: { href: '#content'+$data.menuId, id: 'tab'+$data.menuId}">
+                        <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.getMenuName()"></span>
+                         ko if: $component.isShowDeletable($data) 
+                        <i class="pull-right fa fa-times cursor_pointer" aria-hidden="true" data-bind="click: $component.romveMenuTabs"></i>
+                         /ko 
+                    </a>
+                </li>
+            </ul>
+            -->
+        </div>
+        <div class="rightcentre-body">
+            <!--
+            <div class="tab-content" data-bind="foreach: getAllMenuTemplate()">
+                <div role="tabpanel" class="tab-pane fade" data-bind="template: {name:'component-temlate',data:{name:$data.template}}"></div>
             </div>
+            -->
         </div>
     </div>
-</template>
-<template id="tab-content-body-temlate">
-    <div style="width: 100%;height: 100%;position: relative;">
-        <!-- ko if: ko.components.isRegistered($data.template) -->
-        <!-- ko component: $data.template --><!-- /ko -->
-        <!-- /ko -->
-        <!-- ko ifnot: ko.components.isRegistered($data.template) -->
-        <!-- ko template: $data.template --><!-- /ko -->
-        <!-- /ko -->
-    </div>
-</template>
+</div>

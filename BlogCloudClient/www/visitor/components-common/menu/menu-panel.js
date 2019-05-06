@@ -29,7 +29,9 @@
                 return menuArray;
             };
             self.switchMenu = function (data, event) {
-                if (RootView.isHash("menu") && ko.unwrap(data.name)) {
+                if (isFunction(data.clickFun)) {
+                    data.clickFun(data);
+                } else if (RootView.isHash("menu") && ko.unwrap(data.name)) {
                     RootView.changeHash("#menu/" + ko.unwrap(data.name));
                     if (self.dialogRef) {
                         self.dialogRef.modal("hide");
