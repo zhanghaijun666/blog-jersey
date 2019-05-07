@@ -1,7 +1,7 @@
 /*------------ my-file-template ------- start -----*/
 .user-blog-head{
     width: 100%;
-    height: 90px;
+    height: 82px;
     border-bottom: 1px solid #eee;
     position: absolute;
     top: 0;
@@ -10,7 +10,7 @@
 .user-blog-body{
     width: 100%;
     position: absolute;
-    top: 100px;
+    top: 82px;
     bottom: 0px;
     overflow: auto;
 }

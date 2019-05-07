@@ -3,6 +3,11 @@
     position: absolute;
     top: 0px;
     bottom: 35px;
+    overflow: hidden;
+}
+.card-data>div{
+    width: 100%;
+    height: 100%;
     overflow: auto;
 }
 .card-paging{
@@ -11,8 +16,53 @@
     bottom: 0px;
     height: 35px;
     border-top: 1px solid #eee;
-    /*padding-left: 100px;*/
 }
+/* ------ large-screen-card-data-template ------ start ------*/
+
+/* ------ large-screen-card-data-template ------ end ------*/
+/* ------ small-screen-card-data-template ------ start ------*/
+
+/* ------ small-screen-card-data-template ------ end ------*/
+/* ------ file-card-Layout-template ------ start ------*/
+div.file-card{
+    height: 100%;
+    width: 100%;
+    position: relative;
+    border-bottom: 1px solid #eee;
+}
+div.file-card>.file-icon{
+    height: 100%;
+    width: 45px;
+    position: absolute;
+    left: 0px;
+    padding-left: 15px;
+}
+div.file-card>.file-choose{
+    height: 100%;
+    width: 42px;
+    position: absolute;
+    right: 0px;
+}
+div.file-card>.file-info{
+    height: 100%;
+    position: absolute;
+    left: 45px;
+    right: 42px;
+    overflow: hidden;
+    padding-left: 8px;
+}
+@media (min-width: 992px) {
+    div.file-card>.file-info{
+        right: 0px;
+    }
+}
+@media (max-width: 992px) {
+    div.file-card>.file-info{
+        right: 42px;
+    }
+}
+/* ------ file-card-Layout-template ------ end ------*/
+/* ------ card-paging-template ------ start ------*/
 .data-paging{
     width: 100%;
     height: 34px;
@@ -31,27 +81,59 @@
     margin: 0px;
     cursor: pointer;
 }
-.custom-card-table{
+/* ------ card-paging-template ------ end ------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+table.custom-card-table{
     width: 100%;
 }
+table.custom-card-table>thead{
+}
 
-.custom-card-info,.custom-card-single-header,.custom-card-multi-header{
+.custom-card-info,.custom-card-header{
     border-bottom: 1px solid #e2edfc;
 }
 .custom-card-info>td{
     height: 48px;
 }
-.custom-card-single-header>td,.custom-card-multi-header>td{
+.custom-card-header>td{
     height: 38px;
 }
-.custom-card-multi-header ul{
+.custom-card-header ul{
     list-style: none;
     margin: 0px;
     padding: 9px 10px;
     width: 100%;
     height: 100%;
 }
-.custom-card-multi-header ul>li{
+.custom-card-header ul>li{
     float: left;
 }
 .custom-card-info:hover .custom-card-operation>ul li span{

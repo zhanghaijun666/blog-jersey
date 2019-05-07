@@ -29,7 +29,7 @@
                     var self = $.extend(this, defaultValue, params);
                     self.icon = ko.observable("fa fa-file");
                     if (ko.unwrap(self.contentType)) {
-                        if (ko.unwrap(self.contentType) === global.directory_contenttype) {
+                        if (ko.unwrap(self.contentType) === global.DIRECTORY_CONTENTTYPE) {
                             self.icon("fa fa-folder-open-o");
                         } else if (new RegExp("^audio.*$").test(ko.unwrap(self.contentType))) {
                             self.icon("fa fa-file-sound-o");

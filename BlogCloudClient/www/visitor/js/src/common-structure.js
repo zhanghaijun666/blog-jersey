@@ -1,5 +1,5 @@
 (function (exports) {
-    exports.directory_contenttype = "application/cc-directory";
+    exports.DIRECTORY_CONTENTTYPE = "application/cc-directory";
     exports.standUrlPattern = new RegExp("\\/?(?<rootHash>[^/]+)?\\/(?<gtype>[\\d]+)\\/(?<gpid>-?[\\d]+)\\/(?<bucket>[^/]+)(?<path>\\/?.*)");
     exports.CustomMenuType = {
         SingleSlection: 1,
@@ -153,7 +153,6 @@
     function DataPaging(totalNumber, updateDataFun) {
         this.totalNumber = totalNumber && totalNumber > 0 ? totalNumber : 1;
         this.currentPage = ko.observable(1);
-        this.perPageNumber = 5;
         this.updateDataFun = isFunction(updateDataFun) ? updateDataFun : function (perPage, currentPage) {};
         this.jumpValue = ko.observable(ko.unwrap(this.currentPage));
         function pageSizeFun(perPage, currentPage) {

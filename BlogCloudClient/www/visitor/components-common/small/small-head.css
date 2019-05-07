@@ -1,7 +1,8 @@
 .small-header{
     width: 100%;
-    height: 100%;
-    text-align: center
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
 }
 .small-header>.small-header-left{
     width: 50px;

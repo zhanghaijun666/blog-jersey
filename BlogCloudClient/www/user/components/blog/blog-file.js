@@ -1,3 +1,5 @@
+/* global FileUrl, CustomMenuType */
+
 (function (global) {
     define(["text!./blog-file.xhtml", "./blog-util.js", "css!./blog-file.css"], function (pageView, myBlog) {
         function BlogFileModel(params, componentInfo) {
@@ -8,25 +10,17 @@
             self.blogFileLsit = ko.observableArray([]);
             self.blogPathEntry = ko.observable(new PathEntry(self.fileUrl.originPath, self.openDirectory));
             self.currentTemplate = ko.observable("my-file-template");
-
             function menuClickFun(menu) {
                 console.log(menu);
             }
-            self.leftMenuList = ko.observableArray([
-                new Menu({name: '我的文件', icon: 'fa fa-book', menuId: 1001, isActive: true, clickFun: menuClickFun}),
-                new Menu({name: '图片', icon: 'fa fa-picture-o', parentId: 1001, clickFun: menuClickFun}),
-                new Menu({name: '文档', icon: 'fa fa-file-text-o', parentId: 1001, clickFun: menuClickFun}),
-                new Menu({name: '视频', icon: 'fa fa-file-video-o', parentId: 1001, clickFun: menuClickFun}),
-                new Menu({name: '音乐', icon: 'fa fa-headphones', parentId: 1001, clickFun: menuClickFun}),
-                new Menu({name: '其他', icon: 'fa fa-file-o', parentId: 1001, clickFun: menuClickFun})
-            ]);
+            self.leftMenuList = ko.observableArray(self.getLeftMenuList(menuClickFun));
             self.uploadFilesMenuItems = function () {
                 return [
                     new MenuTab("上传文件", {icon: "fa-upload", clickFun: self.uploadFile})
                 ];
             };
             self.openDirectory = function (item) {
-                if (item instanceof FileItem && item.contentType === directory_contenttype) {
+                if (item instanceof FileItem && item.contentType === global.DIRECTORY_CONTENTTYPE) {
                     self.blogPathEntry(new PathEntry(item.fullPath, self.openDirectory));
                     self.getBlogFile();
                 } else if (item instanceof FileUrl && item.originPath) {
@@ -48,14 +42,8 @@
                 ];
             };
             self.getBlogFile = function () {
-                getRequest("/file/get/" + self.blogPathEntry().getCurrentUrl().originPath, {accept: "application/x-protobuf"}, function (data) {
-                    var fileList = bcstore.FileItemList.decode(data);
-                    self.blogFileLsit([]);
-                    if (fileList.item && fileList.item instanceof Array) {
-                        for (var i = 0; i < fileList.item.length; i++) {
-                            self.blogFileLsit.push(new FileItem(fileList.item[i], true));
-                        }
-                    }
+                self.findFileItemList("/file/get/" + self.blogPathEntry().getCurrentUrl().originPath, function (fileList) {
+                    self.blogFileLsit(fileList);
                 });
             };
             self.deleteFile = function (fileIemList) {
