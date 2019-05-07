@@ -35,7 +35,7 @@ div.file-card>.file-icon{
     width: 45px;
     position: absolute;
     left: 0px;
-    padding-left: 15px;
+    padding-left: 10px;
 }
 div.file-card>.file-choose{
     height: 100%;
@@ -52,11 +52,17 @@ div.file-card>.file-info{
     padding-left: 8px;
 }
 @media (min-width: 992px) {
+    div.file-card>.file-icon{
+        padding-left: 10px;
+    }
     div.file-card>.file-info{
         right: 0px;
     }
 }
 @media (max-width: 992px) {
+    div.file-card>.file-icon{
+        padding-left: 15px;
+    }
     div.file-card>.file-info{
         right: 42px;
     }

@@ -6,7 +6,6 @@ import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;
 import com.tools.EncryptUtils;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
 

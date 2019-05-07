@@ -4,16 +4,34 @@
     define(["text!./blog-file.xhtml", "./blog-util.js", "css!./blog-file.css"], function (pageView, myBlog) {
         function BlogFileModel(params, componentInfo) {
             var defaultValue = {
-                fileUrl: new FileUrl("default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/")
+                filePath: RootView.currentFilePath,
             };
             var self = $.extend(this, defaultValue, params, myBlog);
             self.blogFileLsit = ko.observableArray([]);
-            self.blogPathEntry = ko.observable(new PathEntry(self.fileUrl.originPath, self.openDirectory));
-            self.currentTemplate = ko.observable("my-file-template");
+            self.blogPathEntry = ko.observable();
+            self.currentTemplate = ko.observable();
+            self.leftMenuList = ko.observableArray();
+            self.initFun = function () {
+                self.leftMenuList(self.getLeftMenuList(menuClickFun));
+                self.blogPathEntry(new PathEntry(ko.unwrap(self.filePath), self.openDirectory));
+                self.currentTemplate("my-file-template");
+                self.getBlogFile();
+            };
+            self.filePathSubscribe = null;
+            if (ko.isObservable(self.filePath)) {
+                self.filePathSubscribe = self.filePath.subscribe(function (value) {
+                    self.initFun();
+                });
+            }
+            self.elementDispose = function () {
+                if (self.filePathSubscribe) {
+                    self.filePathSubscribe.dispose();
+                }
+            };
+
             function menuClickFun(menu) {
                 console.log(menu);
             }
-            self.leftMenuList = ko.observableArray(self.getLeftMenuList(menuClickFun));
             self.uploadFilesMenuItems = function () {
                 return [
                     new MenuTab("上传文件", {icon: "fa-upload", clickFun: self.uploadFile})
@@ -21,15 +39,13 @@
             };
             self.openDirectory = function (item) {
                 if (item instanceof FileItem && item.contentType === global.DIRECTORY_CONTENTTYPE) {
-                    self.blogPathEntry(new PathEntry(item.fullPath, self.openDirectory));
-                    self.getBlogFile();
-                } else if (item instanceof FileUrl && item.originPath) {
-                    self.blogPathEntry(new PathEntry(item.originPath, self.openDirectory));
-                    self.getBlogFile();
+                    RootView.changeHash("#file" + (new RegExp("^\/").test(item.fullPath) ? "" : "/") + item.fullPath);
+                } else if (item instanceof FileUrl && item.getOriginPath()) {
+                    RootView.changeHash("#file/" + item.getOriginPath());
                 }
             };
             self.uploadFile = function () {
-                uploadAllFile(self.blogPathEntry().getCurrentUrl().originPath, function () {
+                uploadAllFile(self.blogPathEntry().getCurrentUrl().getOriginPath(), function () {
                     self.getBlogFile();
                 });
             };
@@ -42,8 +58,10 @@
                 ];
             };
             self.getBlogFile = function () {
-                self.findFileItemList("/file/get/" + self.blogPathEntry().getCurrentUrl().originPath, function (fileList) {
+                self.findFileItemList("/file/get/" + self.blogPathEntry().getCurrentUrl().getOriginPath(), function (fileList) {
+                    console.log("data:" + fileList.length);
                     self.blogFileLsit(fileList);
+                    console.log("file:" + self.blogFileLsit.length);
                 });
             };
             self.deleteFile = function (fileIemList) {
@@ -83,7 +101,7 @@
                     if (!value) {
                         return;
                     }
-                    getRequest("/file/addfolder/" + self.blogPathEntry().getCurrentUrl().originPath + "/" + value, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf"}, function (data) {
+                    getRequest("/file/addfolder/" + self.blogPathEntry().getCurrentUrl().getOriginPath() + "/" + value, {method: "POST", type: "application/x-protobuf", accept: "application/x-protobuf"}, function (data) {
                         var rspInfo = bcstore.RspInfo.decode(data);
                         toastShowCode(rspInfo.code);
                         if (rspInfo.code === bcstore.ReturnCode.Return_OK) {
@@ -98,8 +116,7 @@
                 }
                 window.open(getServerUrl("/file/download/" + fileIem.fullPath));
             };
-
-            self.getBlogFile();
+            self.initFun();
         }
         return {
             viewModel: {

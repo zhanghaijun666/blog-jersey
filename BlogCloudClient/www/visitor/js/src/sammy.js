@@ -1,3 +1,5 @@
+/* global FileUrl */
+
 function SammyPage(options) {
     options = options || {};
     var root = options.view;
@@ -7,12 +9,15 @@ function SammyPage(options) {
         });
         this.get(/\#file(.*)/, function () {
             var path = this.params['splat'][0];
-            console.log(path);
+            if (!FileUrl.isValidFilePath(path)) {
+                path = "default/" + bcstore.GtypeEnum.User + "/" + RootView.user().userId + "/directory/";
+            }
+            root.currentFilePath(path);
             root.setRootTemplate('blog-file');
         });
         this.get(/\#menu(.*)/, function () {
-            var params = this.params['splat'][0];
-            root.currentMenu(params.substring(1));
+            var menu = this.params['splat'][0];
+            root.currentMenu(menu.substring(1));
             root.getMenu();
             root.setRootTemplate('menu-nav-tabs-template');
         });

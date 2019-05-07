@@ -102,7 +102,6 @@
         if (exports.standUrlPattern.test(originPath)) {
             matcher = exports.standUrlPattern.exec(originPath);
         }
-        this.originPath = originPath;
         this.rootHash = matcher.groups.rootHash;
         this.gpType = matcher.groups.gtype;
         this.gpId = matcher.groups.gpid;
@@ -111,6 +110,9 @@
     };
     FileUrl.prototype.getPathPrefix = function () {
         return this.rootHash + "/" + this.gpType + "/" + this.gpId + "/" + this.bucket;
+    };
+    FileUrl.prototype.getOriginPath = function () {
+        return this.rootHash + "/" + this.gpType + "/" + this.gpId + "/" + this.bucket + this.path;
     };
     FileUrl.prototype.getFileName = function () {
         return exports.getFileName(this.path);
@@ -124,13 +126,17 @@
     };
     FileUrl.prototype.getChild = function (childName) {
         if (this.path && childName) {
-            if (new RegExp("\/$").test(this.originPath)) {
-                return new FileUrl(this.originPath + childName);
+            var originPath = this.getOriginPath();
+            if (new RegExp("\/$").test(originPath)) {
+                return new FileUrl(originPath + childName);
             } else {
-                return new FileUrl(this.originPath + "/" + childName);
+                return new FileUrl(originPath + "/" + childName);
             }
         }
         return null;
+    };
+    FileUrl.isValidFilePath = function (filePath) {
+        return !!(filePath && exports.standUrlPattern.test(filePath));
     };
     PathEntry = function (originPath, changePath) {
         this.pathList = exports.getParentFilUrlList(new FileUrl(originPath));
@@ -184,7 +190,7 @@
     DataPaging.prototype.isShowNextButton = function () {
         return ko.unwrap(this.currentPage) * this.getPerPageNumber() < this.totalNumber;
     };
-    DataPaging.prototype.getTotalPage  = function () {
+    DataPaging.prototype.getTotalPage = function () {
         return Math.ceil(this.totalNumber / this.getPerPageNumber());
     };
     DataPaging.prototype.getPageNumerArray = function () {

@@ -9,6 +9,7 @@ requirejs(["bcstore"], function (bcstore) {
         new MenuUtils(self);
         new PageUtils(self);
         new UserUtils(self);
+        self.currentFilePath = ko.observable();//通过hash来记录当前文件路径
         self.app = new SammyPage({view: self});
 //        self.app.refresh();
 
