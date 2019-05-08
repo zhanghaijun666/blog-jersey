@@ -59,9 +59,7 @@
             };
             self.getBlogFile = function () {
                 self.findFileItemList("/file/get/" + self.blogPathEntry().getCurrentUrl().getOriginPath(), function (fileList) {
-                    console.log("data:" + fileList.length);
                     self.blogFileLsit(fileList);
-                    console.log("file:" + self.blogFileLsit.length);
                 });
             };
             self.deleteFile = function (fileIemList) {

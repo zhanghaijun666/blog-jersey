@@ -5,11 +5,6 @@
     bottom: 35px;
     overflow: hidden;
 }
-.card-data>div{
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
 .card-paging{
     width: 100%;
     position: absolute;
@@ -17,18 +12,84 @@
     height: 35px;
     border-top: 1px solid #eee;
 }
-/* ------ large-screen-card-data-template ------ start ------*/
-
-/* ------ large-screen-card-data-template ------ end ------*/
-/* ------ small-screen-card-data-template ------ start ------*/
-
-/* ------ small-screen-card-data-template ------ end ------*/
+.card-data>.card-data-head{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 36px;
+}
+.card-data>.card-data-body{
+    position: absolute;
+    top: 36px;
+    bottom: 0px;
+    width: 100%;
+    overflow: auto;
+}
+.card-data>.card-data-body>div{
+    border-top: 1px solid #eee;
+    position: relative;
+    height: 48px;
+    cursor: pointer;
+}
+.card-data>.card-data-body>div:hover{
+    /*background-color: #e7e7e7;*/
+    background-color: #efefef;
+}
+.card-data .card-choose{
+    position: absolute;
+    left: 0px;
+    width: 32px;
+    height: 100%;
+    border-right: 1px solid #eee;
+    text-align: center;
+    line-height: 48px;
+}
+.card-data .card-operate{
+    position: absolute;
+    right: 0px;
+    width: 240px;
+    height: 100%;
+    line-height: 36px;
+}
+@media (min-width: 992px) {
+    .card-data .card-content{
+        position: absolute;
+        left: 32px;
+        right: 240px;
+        height: 100%;
+        line-height: 36px;
+    }
+    .card-data .card-content>.card-data-info{
+        height: 100%;
+        width: 100%;
+    }
+}
+@media (max-width: 992px) {
+    .card-data .card-content{
+        width: 100%;
+        height: 100%;
+    }
+    .card-data .card-content>.card-small-choose{
+        position: absolute;
+        right: 0px;
+        height: 100%;
+        width: 42px;
+        text-align: center;
+        line-height: 48px;
+        padding-right: 8px;
+    }
+    .card-data .card-content>.card-data-info{
+        position: absolute;
+        left: 0px;
+        right: 42px;
+        height: 100%;
+    }
+}
 /* ------ file-card-Layout-template ------ start ------*/
 div.file-card{
     height: 100%;
     width: 100%;
     position: relative;
-    border-bottom: 1px solid #eee;
 }
 div.file-card>.file-icon{
     height: 100%;
@@ -37,17 +98,11 @@ div.file-card>.file-icon{
     left: 0px;
     padding-left: 10px;
 }
-div.file-card>.file-choose{
-    height: 100%;
-    width: 42px;
-    position: absolute;
-    right: 0px;
-}
 div.file-card>.file-info{
     height: 100%;
     position: absolute;
     left: 45px;
-    right: 42px;
+    right: 0px;
     overflow: hidden;
     padding-left: 8px;
 }
@@ -55,16 +110,10 @@ div.file-card>.file-info{
     div.file-card>.file-icon{
         padding-left: 10px;
     }
-    div.file-card>.file-info{
-        right: 0px;
-    }
 }
 @media (max-width: 992px) {
     div.file-card>.file-icon{
         padding-left: 15px;
-    }
-    div.file-card>.file-info{
-        right: 42px;
     }
 }
 /* ------ file-card-Layout-template ------ end ------*/

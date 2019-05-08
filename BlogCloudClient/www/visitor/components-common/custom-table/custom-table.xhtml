@@ -1,10 +1,49 @@
 <div style="width: 100%;height: 100%">
     <div class="card-data">
+        <div class="card-data-head">
+            <div class="card-choose visible-md-block visible-lg-block">
+                <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
+            </div>
+            <div class="card-content">
+                <!-- ko ifnot: itemSelect.getSelectedConut() > 0 -->
+                <span data-bind="text: '用户'"></span>
+                <!-- /ko -->
+                <!-- ko if: itemSelect.getSelectedConut() > 0 -->
+                <span data-bind="text: itemSelect.getSelectedStr()"></span>
+                <menu-list params="menus: getMultipleOperateMenu(),menuClass:''"></menu-list>
+                <!-- /ko -->
+            </div>
+            <div class="card-operate visible-md-block visible-lg-block">
+                <span data-bind="text: '操作'"></span>
+            </div>
+        </div>
+        <div class="card-data-body" data-bind="foreach: itemList">
+            <div>
+                <div class="card-choose visible-md-block visible-lg-block">
+                    <custom-checkbox params="checked: $data.select"></custom-checkbox>
+                </div>
+                <div class="card-content">
+                    <div class="card-data-info" data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></div>
+                    <div class="card-small-choose visible-sm-block visible-xs-block">
+                        <custom-checkbox params="checked: $data.select"></custom-checkbox>
+                    </div>
+                </div>
+                <div class="card-operate visible-md-block visible-lg-block">
+                    <menu-list params="menus: $component.getSingleOperateMenu()"></menu-list>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-paging" data-bind="template: {name: 'data-paging-template',data: dataPaging}"></div>
+</div>
+<!--
+<div style="width: 100%;height: 100%">
+    <div class="card-data">
         <div class="visible-md-block visible-lg-block" data-bind="template: 'large-screen-card-data-template'"></div>
         <div class="visible-sm-block visible-xs-block" data-bind="template: 'small-screen-card-data-template'"></div>
     </div>
     <div class="card-paging" data-bind="template: {name: 'data-paging-template',data: dataPaging}"></div>
-</div>
+</div>-->
 
 <template id="large-screen-card-data-template">
     <table class="custom-card-table">
@@ -102,9 +141,6 @@
         <div class="file-info">
             <span data-bind="text: $data.fileName,click: $component.itemClick"></span><br/>
             <span data-bind="text: formatLongSize($data.size)"></span>
-        </div>
-        <div class="file-choose visible-sm-block visible-xs-block">
-            <custom-checkbox params="checked: $data.select"></custom-checkbox>
         </div>
     </div>
 </template>
