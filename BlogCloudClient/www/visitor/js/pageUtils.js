@@ -15,15 +15,18 @@ function PageUtils(root) {
         return self.isSmallScreen() && !self.isHash("login");
     }, self);
 
-    self.blogNavigator = function () {
+    self.largeBlogNavigator = function () {
         let arr = [];
-        arr.push(new MenuTab('我的博客', {icon: 'fa-book', isActive: true, clickFun: self.changeHash.bind(null, "file")}));
+        arr.push(new MenuTab('我的博客', {icon: 'fa-book', isActive: false, clickFun: self.changeHash.bind(null, "file")}));
         arr.push(new MenuTab('Demo', {icon: 'fa-book', isActive: false, clickFun: self.changeHash.bind(null, "menu")}));
         arr.push(new MenuTab('消息', {icon: 'fa-comments-o', isActive: false, clickFun: self.changeHash.bind(null, "message")}));
         arr.push(new MenuTab('系统管理', {icon: 'fa-coffee', isActive: false, clickFun: self.changeHash.bind(null, "admin")}));
-        if (self.isSmallScreen()) {
-            arr.push(new MenuTab('我的', {icon: 'fa-home', isActive: false, clickFun: self.changeHash.bind(null, "menu")}));
-        }
+        return arr;
+    };
+    self.smallBlogNavigator = function () {
+        var arr = [];
+        arr.push.apply(arr, self.largeBlogNavigator());
+        arr.push(new MenuTab('我的', {icon: 'fa-home', isActive: false, clickFun: self.changeHash.bind(null, "menu")}));
         return arr;
     };
     self.getPersonalCenter = function () {

@@ -27,35 +27,6 @@
             <column name="updated_by" type = "int" />
         </createTable>
     </changeSet>
-    <changeSet author="zhanghaijun" id = "insert_menus_blog">
-        <insert tableName = "menus">
-            <column name="id" value="1"/>
-            <column name="parent_id" value="0"/>
-            <column name="name" value="myblog"/>
-            <column name="icon" value="fa-book"/>
-            <column name="hash" value="menu"/>
-            <column name="role_id" value="0"/>
-            <column name="status" value="1"/>
-            <column name="created_at" value="${now}" />
-            <column name="created_by" value = "0" />
-            <column name="updated_at" value="${now}" />
-            <column name="updated_by" value = "0" />
-        </insert>
-        <insert tableName = "menus">
-            <column name="id" value="2"/>
-            <column name="parent_id" value="1"/>
-            <column name="name" value="blog"/>
-            <column name="icon" value="fa-file"/>
-            <column name="template" value="blog"/>
-            <column name="hash" value="menu"/>
-            <column name="role_id" value="0"/>
-            <column name="status" value="1"/>
-            <column name="created_at" value="${now}" />
-            <column name="created_by" value = "0" />
-            <column name="updated_at" value="${now}" />
-            <column name="updated_by" value = "0" />
-        </insert>
-    </changeSet>
     <changeSet author="zhanghaijun" id = "insert_menus_user">
         <insert tableName = "menus">
             <column name="id" value="11"/>

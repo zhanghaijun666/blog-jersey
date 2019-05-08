@@ -1,43 +1,32 @@
-<div class="nav_body">
-    <div class="leftmenu col-md-2 col-lg-2 visible-md-block visible-lg-block">
-        <div class="leftmenu-head">
-            <span data-bind="visible: isShowLargeLeftMenu,text: ' 导航区'"></span>
-            <!--            
-            <i class="fa fa-chevron-circle-left fa-lg" data-bind="visible: isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(false);}"></i>
-            <i class="fa fa-chevron-circle-right fa-lg" data-bind="visible: !isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(true);}"></i>
-            -->
-        </div>
-        <div class="leftmenu-body">
-            <menu-panel params="menuList: menuList"></menu-panel>
-        </div>
+<div class="width-layout">
+    <div class="left-menu col-md-2 col-lg-2 visible-md-block visible-lg-block">
+        <!--        
+        <span data-bind="visible: isShowLargeLeftMenu,text: ' 导航区'"></span>
+        <i class="fa fa-chevron-circle-left fa-lg" data-bind="visible: isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(false);}"></i>
+        <i class="fa fa-chevron-circle-right fa-lg" data-bind="visible: !isShowLargeLeftMenu(),click: function(){isShowLargeLeftMenu(true);}"></i>
+        -->
+        <menu-panel params="menuList: menuList"></menu-panel>
     </div>
-    <div class="rightcentre col-md-10 col-lg-10 col-md-12 col-xs-12">
-        <div class="rightcentre-small-haed visible-sm-block visible-xs-block">
+    <div class="right-centre col-md-10 col-lg-10 col-md-12 col-xs-12">
+        <div class="small-haed visible-sm-block visible-xs-block">
             <small-head params="leftTemplateName: 'menu-panel',leftTemplateData: {menuList: RootView.menuList}"></small-head>
         </div>
-        <div class="rightcentre-large-haed visible-md-block visible-lg-block">
-            <!--            
-            <ul class="nav nav-tabs" data-bind="foreach: { data: menuTabs } ">
-                <li role="presentation" data-bind="elementCallback: {init: function(element){$(element).find('a').tab('show');$data.element(element)}}">
-                    <a role="tab" data-toggle="tab" data-bind="attr: { href: '#content'+$data.menuId, id: 'tab'+$data.menuId}">
-                        <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.getMenuName()"></span>
-                         ko if: $component.isShowDeletable($data) 
-                        <i class="pull-right fa fa-times cursor_pointer" aria-hidden="true" data-bind="click: $component.romveMenuTabs"></i>
-                         /ko 
-                    </a>
-                </li>
-            </ul>
-            -->
-        </div>
-        <div class="rightcentre-body">
-            <!-- ko if: ko.unwrap(centreView) -->
-            <!-- ko template: {name:'component-temlate',data:{name: ko.unwrap(centreView)}} --><!-- /ko -->
-            <!-- /ko -->
-            <!--
-            <div class="tab-content" data-bind="foreach: getAllMenuTemplate()">
-                <div role="tabpanel" class="tab-pane fade" data-bind="template: {name:'component-temlate',data:{name:$data.template}}"></div>
+        <div class="centre-content">
+            <div class="nav-tab-list visible-md-block visible-lg-block">
+                <ul class="nav nav-tabs" data-bind="foreach: { data: menuTabs } ">
+                    <li role="presentation" data-bind="css: {active: 0===$index()}">
+                        <a role="tab" data-toggle="tab">
+                            <i class="fa" data-bind="css: $data.icon"></i><span data-bind="text: $data.getMenuName()"></span>
+                            <!--ko if: $component.isShowDeletable($data)--> 
+                            <i class="pull-right fa fa-times cursor_pointer" aria-hidden="true" data-bind="click: $component.romveMenuTabs"></i>
+                            <!--/ko-->
+                        </a>
+                    </li>
+                </ul>
             </div>
-            -->
+            <div class="nav-tab-content tab-content" data-bind="foreach: getAllMenuTemplate()">
+                <div data-bind="css: {active: 0===$index()},template: {name:'component-temlate', data:{name:$data.template}}"></div>
+            </div>
         </div>
     </div>
 </div>

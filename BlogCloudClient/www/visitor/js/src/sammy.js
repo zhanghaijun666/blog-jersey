@@ -29,12 +29,12 @@ function SammyPage(options) {
             this.redirect("#login");
         });
         this.get(/.+/, function () {
-            this.redirect("#menu");
+            this.redirect("#file");
         });
         this.around(function (callback) {
             root.getUser(function () {
                 if (root.isLogin() && RootView.isHash("login")) {
-                    this.redirect("#menu");
+                    this.redirect("#file");
                     return;
                 } else if (!root.isLogin() && !RootView.isHash("login")) {
                     this.redirect("#login");

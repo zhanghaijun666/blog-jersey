@@ -6,7 +6,7 @@
         <!-- /ko -->
     </div>
     <div class="home-foot-nav visible-sm-block visible-xs-block">
-        <menu-list params="menus: RootView.blogNavigator(), isCenter: true, menuClass:'small-nav'"></menu-list>
+        <menu-list params="menus: RootView.smallBlogNavigator(), isCenter: true, menuClass:'small-nav'"></menu-list>
     </div>
     <div id="not_display_lements_id" style="display: none"></div>
 </template>
@@ -16,7 +16,7 @@
         <div class="home-nav-body">
             <!-- ko if: RootView.isLogin() -->
             <div class="pull-left">
-                <menu-list params="menus: RootView.blogNavigator(),menuClass: 'home-menu-nav'"></menu-list>
+                <menu-list params="menus: RootView.largeBlogNavigator(),menuClass: 'home-menu-nav'"></menu-list>
             </div>
             <div class="pull-right">
                 <menu-list params="menus: RootView.getPersonalCenter()"></menu-list>
