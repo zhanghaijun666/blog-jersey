@@ -11,6 +11,7 @@ import com.tools.EncryptUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,7 +162,7 @@ public class FileService {
 //        response.setValue("Server-Time", BasicConvertUtils.toString(System.currentTimeMillis(), ""));
 
 //        response.reset();
-        response.addValue("Content-Disposition", "attachment;filename=" + FileUtils.getFileName(fileUrl.getPath()));
+        response.addValue("Content-Disposition", "attachment;filename=" + URLEncoder.encode(FileUtils.getFileName(fileUrl.getPath()), "utf-8"));
         response.addValue("Content-Length", "" + fileByte.length);
         response.setContentType(storageAttr.getStorageItem().getContentType());
 
