@@ -1,7 +1,7 @@
 <div class="menu-list" data-bind="css: menuClass">
     <ul data-bind="foreach: menus">
         <!-- ko ifnot: $data.template -->
-        <li data-bind="css: {active: isActive()}, click: clickFun, style: {width: $parent.menuWidth}, attr: {title: title}" >
+        <li data-bind="css: {active: isActive()}, click: clickFun.bind(null,$parent.clickParameter), style: {width: $parent.menuWidth}, attr: {title: title}" >
             <!-- ko if: icon -->
             <i class="fa" data-bind="css: icon"></i>
             <!-- /ko -->

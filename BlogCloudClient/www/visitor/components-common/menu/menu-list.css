@@ -9,6 +9,7 @@
     padding: 0;
     margin: 0;
     width: 100%;
+    height: 100%;
 }
 .menu-list li{
     list-style:none;
@@ -20,7 +21,7 @@
     cursor: pointer;
 }
 .menu-list li:hover{
-    color: #555;
+   background-color: #eee;
 }
 
 /* ------ menuClass ------ start ------*/
@@ -44,6 +45,55 @@
     display: block;
     height: 50%;
     line-height: 25px;
+}
+.card-single-menu>ul>li{
+    width: 60px;
+    height: 100%;
+}
+
+.card-single-menu>ul>li>i{
+    display: block;
+    height: 60%;
+    text-align: center;
+    line-height: 36px;
+}
+.card-single-menu>ul>li>span{
+    display: block;
+    height: 40%;
+    text-align: center;
+    line-height: 16px;
+}
+/*
+.card-single-menu>ul>li:hover .card-single-menu>ul>li span{
+    display: block;
+}
+.card-single-menu>ul>li>span{
+    display: none;
+}
+*/
+.card-multiple-menu>ul>li{
+    border: 1px solid #666;
+    border-radius: 4px;
+    padding: 0px 6px;
+    margin: 4px 2px;
+    height: 30px;
+    line-height: 28px;
+}
+.card-small-menu>ul>li{
+    height: 100%;
+    width: 16%;
+}
+.card-small-menu>ul>li>i{
+    display: inline-block;
+    width: 100%;
+    height: 60%;
+    font-size: 20px;
+    line-height: 40px;
+}
+.card-small-menu>ul>li>span{
+    display: inline-block;
+    width: 100%;
+    height: 40%;
 }
 /* ------ menuClass ------ end ------*/
 

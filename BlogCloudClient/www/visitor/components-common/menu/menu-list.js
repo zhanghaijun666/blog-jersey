@@ -4,7 +4,8 @@
             var defaultParams = {
                 menuClass: "default-menu",
                 menus: [], //new MenuTab() / {template: '', data: {}}
-                isCenter: false
+                isCenter: false,
+                clickParameter: ""
             };
             var self = this;
             self = $.extend(this, defaultParams, params);

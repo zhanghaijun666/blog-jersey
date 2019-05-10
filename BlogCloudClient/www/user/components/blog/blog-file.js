@@ -63,6 +63,7 @@
                 });
             };
             self.deleteFile = function (fileIemList) {
+                fileIemList = ko.unwrap(fileIemList);
                 confirmTipsDialog(l10n('operate.confirmDelete'), function () {
                     fileIemList = fileIemList instanceof Array ? fileIemList : [fileIemList];
                     var req = bcstore.FileItemList.create();
@@ -79,6 +80,7 @@
                 });
             };
             self.renameFile = function (fileIem) {
+                fileIem = ko.unwrap(fileIem);
                 if (!fileIem.fullPath) {
                     return;
                 }
@@ -109,6 +111,7 @@
                 });
             };
             self.fileDownload = function (fileIem) {
+                fileIem = ko.unwrap(fileIem);
                 if (!fileIem.fullPath) {
                     return;
                 }

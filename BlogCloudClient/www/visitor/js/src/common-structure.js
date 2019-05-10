@@ -5,6 +5,25 @@
         SingleSlection: 1,
         MultipleSelection: 2
     };
+    if (!Date.prototype.simpleFormat) {
+        Date.prototype.simpleFormat = function (pattern) {
+            var date = this;
+            var z = {
+                M: date.getMonth() + 1,
+                d: date.getDate(),
+                H: date.getHours(),
+                m: date.getMinutes(),
+                s: date.getSeconds()
+            };
+            pattern = pattern.replace(/M+|d+|H+|m+|s+/g, function (m) {
+                return ((m.length > 1 ? "0" : "") + z[m.slice(-1)]).slice(-2);
+            });
+
+            return pattern.replace(/y+/g, function (m) {
+                return date.getFullYear().toString().slice(-m.length);
+            });
+        };
+    }
     exports.getStoreArray = function (storeKey) {
         var storage = window.localStorage;
         if (storage) {
@@ -66,6 +85,21 @@
         }
         return sizestr;
     };
+    exports.timestampformTime = function (timestamp, format) {
+        format = format || "yyyy-MM-dd HH:mm";
+        var date;
+        if (!timestamp) {
+            date = new Date();
+        } else if (timestamp instanceof Date) {
+            date = timestamp;
+        } else if (!isNaN(timestamp)) {
+            date = new Date(timestamp);
+        }
+        if (date) {
+            return date.simpleFormat(format);
+        }
+        return "";
+    };
     exports.getParentFilUrlList = function (originfileUrl) {
         var pathList = new Array();
         if (originfileUrl instanceof FileUrl) {
@@ -94,7 +128,7 @@
         this.icon = options.icon;
         this.title = options.title || "";
         this.isActive = ko.observable(!!ko.unwrap(options.isActive));
-        this.clickFun = options.clickFun;
+        this.clickFun = options.clickFun || function () {};
         this.menuType = options.menuType; //CustomMenuType
     };
     FileUrl = function (originPath) {

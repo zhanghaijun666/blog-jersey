@@ -1,6 +1,6 @@
 <div style="width: 100%;height: 100%">
-    <div class="card-data">
-        <div class="card-data-head">
+    <div class="card-data" data-bind="style: {bottom: isShowPaging ? '35px':'0'}">
+        <div class="card-data-head visible-md-block visible-lg-block">
             <div class="card-choose visible-md-block visible-lg-block">
                 <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
             </div>
@@ -10,7 +10,7 @@
                 <!-- /ko -->
                 <!-- ko if: itemSelect.getSelectedConut() > 0 -->
                 <span data-bind="text: itemSelect.getSelectedStr()"></span>
-                <menu-list params="menus: getMultipleOperateMenu(),menuClass:''"></menu-list>
+                <div style="display: inline-block;height: 100%;" data-bind="component: {name:'menu-list', params:{menus: getMultipleOperateMenu(),clickParameter: itemSelect.getSelectedItem(),menuClass: 'card-multiple-menu'}}"></div>
                 <!-- /ko -->
             </div>
             <div class="card-operate visible-md-block visible-lg-block">
@@ -29,82 +29,20 @@
                     </div>
                 </div>
                 <div class="card-operate visible-md-block visible-lg-block">
-                    <menu-list params="menus: $component.getSingleOperateMenu()"></menu-list>
+                    <menu-list params="menus: $component.getSingleOperateMenu($data),clickParameter: $data, menuClass: 'card-single-menu'"></menu-list>
                 </div>
             </div>
         </div>
+        <!-- ko if: itemSelect.getSelectedConut() > 0 -->
+        <div class="small-option visible-sm-block visible-xs-block">
+            <menu-list params="menus: getMultipleOperateMenu(),clickParameter: itemSelect.getSelectedItem(), menuClass: 'card-small-menu'"></menu-list>
+        </div>
+        <!-- /ko -->
     </div>
-    <div class="card-paging" data-bind="template: {name: 'data-paging-template',data: dataPaging}"></div>
+    <!-- ko if: isShowPaging -->
+    <div class="card-paging" data-bind="visible: isShowPaging, template: {name: 'data-paging-template',data: dataPaging}"></div>
+    <!-- /ko -->
 </div>
-<!--
-<div style="width: 100%;height: 100%">
-    <div class="card-data">
-        <div class="visible-md-block visible-lg-block" data-bind="template: 'large-screen-card-data-template'"></div>
-        <div class="visible-sm-block visible-xs-block" data-bind="template: 'small-screen-card-data-template'"></div>
-    </div>
-    <div class="card-paging" data-bind="template: {name: 'data-paging-template',data: dataPaging}"></div>
-</div>-->
-
-<template id="large-screen-card-data-template">
-    <table class="custom-card-table">
-        <thead>
-            <tr class="custom-card-header custom-card-multi-header">
-                <td class="custom-card-checkbox">
-                    <custom-checkbox params="checked: itemSelect.isAll"></custom-checkbox>
-                </td>
-                <td class="custom-card-content">
-                    <!-- ko ifnot: itemSelect.getSelectedConut() > 0 -->
-                    <span data-bind="text: '用户'"></span>
-                    <!-- /ko -->
-                    <!-- ko if: itemSelect.getSelectedConut() > 0 -->
-                    <ul>
-                        <li><span data-bind="text: itemSelect.getSelectedStr()"></span></li>
-                        <!-- ko foreach: getMultipleOperateMenu() -->
-                        <li data-bind="click: $component.operateMenuClick">
-                            <span class="span-button">
-                                <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
-                                <span data-bind="text: $data.text"></span>
-                            </span>
-                        </li>
-                        <!-- /ko -->
-                    </ul>
-                    <!-- /ko -->
-                </td>
-                <!-- ko if: isShowSingleOperateMenu() -->
-                <td class="custom-card-operation"><span data-bind="text: '操作'"></span></td>
-                <!-- /ko -->
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: itemList">
-            <tr class="custom-card-info cursor_pointer">
-                <!-- ko if: $component.isShowMultipleOperateMenu() -->
-                <td class="custom-card-checkbox">
-                    <custom-checkbox params="checked: $data.select"></custom-checkbox>
-                </td>
-                <!-- /ko -->
-                <td class="custom-card-content">
-                    <div data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></div>
-                </td>
-                <!-- ko if: $component.isShowSingleOperateMenu() -->
-                <td class="custom-card-operation">
-                    <ul data-bind="foreach: $component.getSingleOperateMenu()">
-                        <li data-bind="click: function(){ $component.operateMenuClick($data,null,$parent);}">
-                            <!-- ko if: $data.icon --><i class="fa" data-bind="css: $data.icon"></i><!-- /ko -->
-                            <div class=""><span data-bind="text: $data.text"></span></div>
-                        </li>
-                    </ul>
-                </td>
-                <!-- /ko -->
-            </tr>
-        </tbody>
-    </table>
-</template>
-
-<template id="small-screen-card-data-template">
-    <div data-bind="foreach: itemList">
-        <div style="height: 47px;" data-bind="template:{name: $component.cardHeadTemplate,data: $data}"></div>
-    </div>
-</template>
 
 <template id="data-paging-template">
     <div class="data-paging">
@@ -138,9 +76,13 @@
         <div class="file-icon">
             <my-icon params="contentType: $data.contentType, clickFun: $component.itemClick.bind(null, $data)"></my-icon>
         </div>
-        <div class="file-info">
-            <span data-bind="text: $data.fileName,click: $component.itemClick"></span><br/>
-            <span data-bind="text: formatLongSize($data.size)"></span>
+        <div class="file-info height-layout-span">
+            <span data-bind="text: $data.fileName,click: $component.itemClick"></span>
+            <span>
+                <span data-bind="text:'大小:'+formatLongSize($data.size)"></span>&nbsp;&nbsp;
+                <span data-bind="text:'创建时间:'+timestampformTime($data.createTime)"></span>&nbsp;&nbsp;
+                <span data-bind="text:'更新时间:'+timestampformTime($data.updateTime)"></span>
+            </span>
         </div>
     </div>
 </template>

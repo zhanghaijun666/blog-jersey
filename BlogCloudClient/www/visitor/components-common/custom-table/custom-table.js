@@ -5,7 +5,8 @@
                 itemList: [], // 数据源
                 itemClick: function (item) {},
                 cardHeadTemplate: "", // 数据头信息
-                operateMenu: []     //数据操作，包括单选操作和多选操作 CustomMenuType枚举
+                operateMenu: [], //数据操作，包括单选操作和多选操作 CustomMenuType枚举
+                isShowPaging: false
             };
             var self = $.extend(this, defaultValue, params);
             self.itemSelect = new ItemSelect(self.itemList);
