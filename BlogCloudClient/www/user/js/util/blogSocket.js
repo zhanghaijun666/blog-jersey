@@ -6,7 +6,6 @@ function BlogSocket() {
     var blogSocket = new WebSocket((/^https/.test(location.protocol) ? "wss://" : "ws://") + window.location.host + "/socket");
 //    self.blogSocket.binaryType = "arraybuffer";
     self.blogSocket.onopen = function (event) {
-        self.blogSocket.send("发送数据");
         console.log("webSocket 连接已建立,{}", event);
     };
     self.blogSocket.onmessage = function (event) {
