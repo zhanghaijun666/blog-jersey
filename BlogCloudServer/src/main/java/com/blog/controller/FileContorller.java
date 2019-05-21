@@ -1,7 +1,7 @@
 package com.blog.controller;
 
-import com.blog.file.StorageFactory;
-import com.blog.file.FileUrl;
+import com.blog.service.file.StorageFactory;
+import com.blog.service.file.FileUrl;
 import com.blog.login.BlogSession;
 import com.blog.proto.BlogStore;
 import com.blog.service.FileService;

@@ -1,4 +1,4 @@
-package com.blog.file;
+package com.blog.service.file;
 
 import com.blog.config.Configuration;
 import com.blog.proto.BlogStore;
