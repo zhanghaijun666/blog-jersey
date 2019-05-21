@@ -1,5 +1,9 @@
 package com.blog.socket;
 
+import com.blog.login.BlogSession;
+import com.blog.login.BlogSessionFactory;
+import java.io.IOException;
+import java.util.logging.Level;
 import org.simpleframework.http.Cookie;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.socket.DataFrame;
@@ -17,10 +21,10 @@ import org.slf4j.LoggerFactory;
 public class BlogChatListener implements FrameListener {
 
     private static final Logger logger = LoggerFactory.getLogger(BlogChatListener.class);
-    private final BlogChat room;
+    private final BlogChat blogChatRoom;
 
-    public BlogChatListener(BlogChat room) {
-        this.room = room;
+    public BlogChatListener(BlogChat blogChat) {
+        this.blogChatRoom = blogChat;
     }
 
     @Override
@@ -28,11 +32,17 @@ public class BlogChatListener implements FrameListener {
         FrameType type = frame.getType();
         String text = frame.getText();
         Request request = session.getRequest();
-        Cookie user = request.getCookie("user");
-        String name = user.getValue();
-        if (type == FrameType.TEXT) {
-            Frame replay = new DataFrame(type, "(" + name + ") " + text);
-            room.distribute(name, replay);
+        BlogSession blogSession = BlogSessionFactory.instance().getSession(request);
+        if (null == blogSession) {
+            return;
+        }
+        try {
+            if (type == FrameType.TEXT) {
+                Frame replay = new DataFrame(type, "(" + blogSession.getName() + ") " + text);
+                blogChatRoom.distribute(blogSession.getUserId(), replay);
+            }
+        } catch (IOException ex) {
+            logger.error("onFrame error: {}", ex.getMessage());
         }
         logger.info("onFrame(" + type + ")");
     }

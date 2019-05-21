@@ -1,11 +1,10 @@
 package com.blog.socket;
 
+import com.blog.login.BlogSession;
+import com.blog.login.BlogSessionFactory;
 import java.io.IOException;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArraySet;
-import org.simpleframework.http.Cookie;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.socket.Frame;
 import org.simpleframework.http.socket.FrameChannel;
@@ -18,51 +17,33 @@ import org.simpleframework.http.socket.service.Service;
 public class BlogChat implements Service {
 
     private final BlogChatListener listener;
-    private final Map<String, FrameChannel> sockets;
-    private final Set<String> users;
+    private final Map<Integer, FrameChannel> sockets;
 
     public BlogChat() {
         this.listener = new BlogChatListener(this);
         this.sockets = new ConcurrentHashMap<>();
-        this.users = new CopyOnWriteArraySet<>();
     }
 
     @Override
     public void connect(Session connection) {
-        FrameChannel socket = connection.getChannel();
-        Request req = connection.getRequest();
-        Cookie user = req.getCookie("user");
-        if (user == null) {
-            user = new Cookie("user", "anonymous");
+        Request request = connection.getRequest();
+        BlogSession blogSession = BlogSessionFactory.instance().getSession(request);
+        if (null == blogSession) {
+            return;
         }
-        String name = user.getValue();
         try {
+            FrameChannel socket = connection.getChannel();
             socket.register(listener);
-            join(name, socket);
+            sockets.put(blogSession.getUserId(), socket);
         } catch (IOException e) {
         }
     }
 
-    public void join(String user, FrameChannel operation) {
-        sockets.put(user, operation);
-        users.add(user);
-    }
-
-    public void distribute(String from, Frame frame) {
-        try {
-            for (String user : users) {
-                FrameChannel operation = sockets.get(user);
-                try {
-                    if (!from.equals(user)) {
-                        operation.send(frame);
-                    }
-                } catch (Exception e) {
-                    sockets.remove(user);
-                    users.remove(user);
-                    operation.close();
-                }
-            }
-        } catch (IOException e) {
+    public void distribute(Integer userId, Frame frame) throws IOException {
+        FrameChannel operation = sockets.get(userId);
+        if (null == operation) {
+            return;
         }
+        operation.send(frame);
     }
 }
