@@ -1,29 +1,28 @@
 package com.blog.socket;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import org.simpleframework.http.Cookie;
 import org.simpleframework.http.Request;
-import org.simpleframework.http.Response;
 import org.simpleframework.http.socket.Frame;
 import org.simpleframework.http.socket.FrameChannel;
 import org.simpleframework.http.socket.Session;
-import org.simpleframework.http.socket.service.Router;
 import org.simpleframework.http.socket.service.Service;
 
 /**
  * @author zhanghaijun
  */
-public class ChatRoom implements Router, Service {
+public class BlogChat implements Service {
 
-    private final ChatRoomListener listener;
+    private final BlogChatListener listener;
     private final Map<String, FrameChannel> sockets;
     private final Set<String> users;
 
-    public ChatRoom() {
-        this.listener = new ChatRoomListener(this);
+    public BlogChat() {
+        this.listener = new BlogChatListener(this);
         this.sockets = new ConcurrentHashMap<>();
         this.users = new CopyOnWriteArraySet<>();
     }
@@ -40,7 +39,7 @@ public class ChatRoom implements Router, Service {
         try {
             socket.register(listener);
             join(name, socket);
-        } catch (Exception e) {
+        } catch (IOException e) {
         }
     }
 
@@ -63,12 +62,7 @@ public class ChatRoom implements Router, Service {
                     operation.close();
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
         }
-    }
-
-    @Override
-    public Service route(Request request, Response response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

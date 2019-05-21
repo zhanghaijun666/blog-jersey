@@ -14,12 +14,12 @@ import org.slf4j.LoggerFactory;
 /**
  * @author zhanghaijun
  */
-public class ChatRoomListener implements FrameListener {
+public class BlogChatListener implements FrameListener {
 
-    private static final Logger logger = LoggerFactory.getLogger(ChatRoomListener.class);
-    private final ChatRoom room;
+    private static final Logger logger = LoggerFactory.getLogger(BlogChatListener.class);
+    private final BlogChat room;
 
-    public ChatRoomListener(ChatRoom room) {
+    public BlogChatListener(BlogChat room) {
         this.room = room;
     }
 

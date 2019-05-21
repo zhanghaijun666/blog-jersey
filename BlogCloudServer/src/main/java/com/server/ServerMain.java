@@ -22,6 +22,13 @@ import org.glassfish.jersey.simple.SimpleServer;
  */
 public class ServerMain {
 
+    public static void main(String[] args) throws IOException, JoranException {
+        Configuration.getInstance().loadConfig();
+        ServerLogs.logInit();
+        ServerLiquibase.initLiquibase();
+        final SimpleServer server = startServer();
+    }
+
     public static SimpleServer startServer() {
         ConfigStore.Server configServer = Configuration.getInstance().getConfig().getServer();
         final URI BASE_URI = UriBuilder.fromUri("http://" + configServer.getHost()).port(configServer.getPort()).build();
@@ -33,12 +40,5 @@ public class ServerMain {
         resourceConfig.register(RolesAllowedDynamicFeature.class);
         resourceConfig.register(MultiPartFeature.class);
         return SimpleContainerFactory2.create(BASE_URI, resourceConfig);
-    }
-
-    public static void main(String[] args) throws IOException, JoranException {
-        Configuration.getInstance().loadConfig();
-        ServerLogs.logInit();
-        ServerLiquibase.initLiquibase();
-        final SimpleServer server = startServer();
     }
 }

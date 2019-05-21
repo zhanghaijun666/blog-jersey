@@ -1,6 +1,8 @@
 package com.blog.controller;
 
-import com.blog.socket.ChatRoom;
+import com.blog.socket.BlogChat;
+import com.blog.socket.SocketService;
+import com.blog.socket.WSSession;
 import com.blog.utils.BlogMediaType;
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,20 +33,28 @@ public class SocketController {
     @Context
     SecurityContext security;
 
+    private PathRouter path_Router_Socket = null;
+
+    public PathRouter getPathRouter() throws IOException {
+        if (path_Router_Socket == null) {
+            Map<String, Service> registry = new HashMap<>();
+            registry.put("chat", new BlogChat());
+            path_Router_Socket = new PathRouter(registry, new SocketService());
+        }
+        return path_Router_Socket;
+    }
+
     @GET
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
-    public Service connectSocket() {
+    public void connectSocket() {
         try {
-            Map<String, Service> registry = new HashMap<>();
-            Service primary = new ChatRoom();
-            registry.put("chat", primary);
-            PathRouter pathRouter = new PathRouter(registry, primary);
-            return pathRouter.route(request, response);
+            Service service = getPathRouter().route(request, response);
+            service.connect(new WSSession(request, response, null));
+
         } catch (IOException ex) {
             System.out.println("com.blog.controller.SocketController.connectSocket()");
         }
-        return null;
     }
 }
