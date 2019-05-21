@@ -2,7 +2,6 @@ package com.blog.controller;
 
 import com.blog.socket.BlogChat;
 import com.blog.socket.SocketService;
-import com.blog.socket.WSSession;
 import com.blog.utils.BlogMediaType;
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
+import org.simpleframework.http.Status;
 import org.simpleframework.http.socket.service.PathRouter;
 import org.simpleframework.http.socket.service.Service;
 
@@ -25,17 +25,17 @@ import org.simpleframework.http.socket.service.Service;
  */
 @Path("/socket")
 public class SocketController {
-    
+
     @Inject
     Request request;
     @Inject
     Response response;
     @Context
     SecurityContext security;
-    
+
     private PathRouter path_Router_Socket = null;
     private final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(SocketController.class);
-    
+
     public PathRouter getPathRouter() throws IOException {
         if (path_Router_Socket == null) {
             Map<String, Service> registry = new HashMap<>();
@@ -44,17 +44,17 @@ public class SocketController {
         }
         return path_Router_Socket;
     }
-    
+
     @GET
-    @Path("/{.*}")
+    @Path("{path:.*}")
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
     public void connectSocket() {
         try {
             Service service = getPathRouter().route(request, response);
-            service.connect(new WSSession(request, response, null));
-            
+//            service.connect(new WSSession(request, response, null));
+            response.setStatus(Status.OK);
         } catch (IOException ex) {
             logger.error("IOException : {}", ex.getMessage());
         }
