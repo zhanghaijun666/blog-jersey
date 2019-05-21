@@ -3,7 +3,7 @@ function BlogSocket() {
         alert("您的浏览器不支持 WebSocket!");
     }
     var self = this;
-    var blogSocket = new WebSocket((/^https/.test(location.protocol) ? "wss://" : "ws://") + window.location.host + "/socket");
+    var blogSocket = new WebSocket((/^https/.test(location.protocol) ? "wss://" : "ws://") + window.location.host + "/socket/chat");
 //    self.blogSocket.binaryType = "arraybuffer";
     self.blogSocket.onopen = function (event) {
         console.log("webSocket 连接已建立,{}", event);

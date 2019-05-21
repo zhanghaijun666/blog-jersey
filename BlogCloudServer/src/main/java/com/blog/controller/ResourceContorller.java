@@ -72,8 +72,8 @@ public class ResourceContorller {
         if (StringUtils.isNotBlank(contentType)) {
             response.setContentType(contentType);
         }
-        response.setDate("Last-Modified", System.currentTimeMillis());
-        response.setValue("Cache-Control", "max-age=604800"); //client always revalidates the content one week
+//        response.setDate("Last-Modified", System.currentTimeMillis());
+//        response.setValue("Cache-Control", "max-age=604800"); //client always revalidates the content one week
 //        response.setValue("Cache-Control", "must-revalidate,max-age=0");//client always revalidates the content before serving it from the client cache
 //        response.setValue("Cache-Control", "private, max-age=0");
         try (OutputStream out = response.getOutputStream()) {

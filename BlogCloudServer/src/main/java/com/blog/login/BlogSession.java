@@ -29,7 +29,8 @@ public class BlogSession implements Principal, HttpSession {
     private final Boolean isRememberMe;
 
     public BlogSession(String sessionId, int userId, String username, Boolean isRememberMe) {
-        this.lastAccessedTime = this.creationTime = System.currentTimeMillis();
+        this.lastAccessedTime = System.currentTimeMillis();
+        this.creationTime = System.currentTimeMillis();
         this.sessionId = sessionId;
         this.userId = userId;
         this.username = username;
@@ -60,7 +61,7 @@ public class BlogSession implements Principal, HttpSession {
                 }
             }
         }
-        return roles;
+        return Collections.unmodifiableList(roles);
     }
 
     public int getUserId() {
