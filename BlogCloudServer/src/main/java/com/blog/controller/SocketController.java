@@ -25,26 +25,28 @@ import org.simpleframework.http.socket.service.Service;
  */
 @Path("/socket")
 public class SocketController {
-
+    
     @Inject
     Request request;
     @Inject
     Response response;
     @Context
     SecurityContext security;
-
+    
     private PathRouter path_Router_Socket = null;
-
+    private final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(SocketController.class);
+    
     public PathRouter getPathRouter() throws IOException {
         if (path_Router_Socket == null) {
             Map<String, Service> registry = new HashMap<>();
-            registry.put("chat", new BlogChat());
+            registry.put("/socket/chat", new BlogChat());
             path_Router_Socket = new PathRouter(registry, new SocketService());
         }
         return path_Router_Socket;
     }
-
+    
     @GET
+    @Path("/{.*}")
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
@@ -52,9 +54,9 @@ public class SocketController {
         try {
             Service service = getPathRouter().route(request, response);
             service.connect(new WSSession(request, response, null));
-
+            
         } catch (IOException ex) {
-            System.out.println("com.blog.controller.SocketController.connectSocket()");
+            logger.error("IOException : {}", ex.getMessage());
         }
     }
 }
