@@ -3,8 +3,6 @@ package com.blog.socket;
 import com.blog.login.BlogSession;
 import com.blog.login.BlogSessionFactory;
 import java.io.IOException;
-import java.util.logging.Level;
-import org.simpleframework.http.Cookie;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.socket.DataFrame;
 import org.simpleframework.http.socket.Frame;
