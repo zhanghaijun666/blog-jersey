@@ -16,9 +16,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
-import org.simpleframework.http.Status;
 import org.simpleframework.http.socket.service.PathRouter;
 import org.simpleframework.http.socket.service.Service;
+import static org.simpleframework.http.socket.service.ServiceEvent.DISPATCH_SOCKET;
+import static org.simpleframework.http.socket.service.ServiceEvent.ERROR;
+import org.simpleframework.transport.Channel;
+import org.simpleframework.transport.trace.Trace;
 
 /**
  * @author haijun.zhang
@@ -51,11 +54,16 @@ public class SocketController {
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
     public void connectSocket() {
+        Channel channel = request.getChannel();
+        Trace trace = channel.getTrace();
+        trace.trace(DISPATCH_SOCKET);
         try {
+//            channel.getSocket();
             Service service = getPathRouter().route(request, response);
 //            service.connect(new WSSession(request, response, null));
-            response.setStatus(Status.OK);
+//            response.setStatus(Status.OK);
         } catch (IOException ex) {
+            trace.trace(ERROR, ex);
             logger.error("IOException : {}", ex.getMessage());
         }
     }

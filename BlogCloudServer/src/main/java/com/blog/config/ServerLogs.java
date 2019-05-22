@@ -36,8 +36,8 @@ public class ServerLogs {
 
     }
 
-    private static String getRequestUrl(Request request) {
-        return (request.getMajor() == 1 ? "http" : "https") + "://" + request.getValue("Host") + request.getTarget();
+    private static String getRequestUrl(final Request request) {
+        return (request.isSecure() ? "https" : "http") + "://" + request.getValue("Host") + request.getTarget();
     }
 
 //    //.*不匹配换行符
