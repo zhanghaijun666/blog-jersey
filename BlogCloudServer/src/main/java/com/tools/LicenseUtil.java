@@ -1,6 +1,6 @@
 package com.tools;
 
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.verhas.licensor.ExtendedLicense;
 import java.io.ByteArrayInputStream;
 import java.io.File;

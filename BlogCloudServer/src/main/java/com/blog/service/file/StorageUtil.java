@@ -1,6 +1,6 @@
 package com.blog.service.file;
 
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.blog.utils.FileUtils;
 import java.util.ArrayList;
 import java.util.List;

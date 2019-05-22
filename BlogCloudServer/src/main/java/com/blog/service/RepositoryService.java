@@ -1,7 +1,7 @@
 package com.blog.service;
 
 import com.blog.db.Repository;
-import static com.blog.proto.BlogStore.GtypeEnum;
+import static com.blog.config.BlogStore.GtypeEnum;
 
 /**
  * @author zhanghaijun

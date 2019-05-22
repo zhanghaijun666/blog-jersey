@@ -1,7 +1,7 @@
 package com.blog.controller;
 
 import com.blog.db.User;
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.blog.login.BlogSession;
 import com.blog.utils.BlogMediaType;
 import com.blog.login.BlogSessionFactory;

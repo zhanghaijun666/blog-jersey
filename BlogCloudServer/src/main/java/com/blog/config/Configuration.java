@@ -1,6 +1,5 @@
 package com.blog.config;
 
-import com.blog.proto.ConfigStore;
 import com.googlecode.protobuf.format.JsonFormat;
 import java.io.File;
 import java.io.FileInputStream;

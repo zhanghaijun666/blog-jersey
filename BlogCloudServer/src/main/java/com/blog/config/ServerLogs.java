@@ -1,4 +1,4 @@
-package com.blog.factory;
+package com.blog.config;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;

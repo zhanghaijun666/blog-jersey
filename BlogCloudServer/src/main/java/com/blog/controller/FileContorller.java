@@ -3,7 +3,7 @@ package com.blog.controller;
 import com.blog.service.file.StorageFactory;
 import com.blog.service.file.FileUrl;
 import com.blog.login.BlogSession;
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.blog.service.FileService;
 import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;

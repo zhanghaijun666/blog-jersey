@@ -1,6 +1,6 @@
 package com.blog.service.file;
 
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.blog.utils.BlogMediaType;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;

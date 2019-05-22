@@ -1,7 +1,7 @@
-package com.blog.factory;
+package com.blog.config;
 
 import com.blog.config.Configuration;
-import com.blog.proto.ConfigStore.DB;
+import com.blog.config.ConfigStore.DB;
 import org.javalite.activejdbc.Base;
 
 /**

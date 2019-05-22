@@ -1,6 +1,6 @@
 package com.blog.service.file;
 
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.blog.service.RepositoryService;
 import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;

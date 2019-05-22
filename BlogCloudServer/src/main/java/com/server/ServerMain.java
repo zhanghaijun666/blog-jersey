@@ -1,10 +1,10 @@
 package com.server;
 
-import com.blog.factory.ServerLiquibase;
-import com.blog.factory.ServerLogs;
+import com.blog.config.ServerLiquibase;
+import com.blog.config.ServerLogs;
 import ch.qos.logback.core.joran.spi.JoranException;
 import com.blog.config.Configuration;
-import com.blog.proto.ConfigStore;
+import com.blog.config.ConfigStore;
 import com.jersey.SimpleContainerFactory2;
 import com.server.filter.BlogFilter;
 import com.server.filter.SecurityRequestFilter;

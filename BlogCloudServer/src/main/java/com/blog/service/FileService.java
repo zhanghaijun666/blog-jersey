@@ -4,7 +4,7 @@ import com.blog.service.file.FileUrl;
 import com.blog.service.file.StorageFactory;
 import com.blog.service.file.StorageFile;
 import com.blog.service.file.StorageTreeAttr;
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.blog.utils.BlogMediaType;
 import com.blog.utils.FileUtils;
 import com.tools.EncryptUtils;

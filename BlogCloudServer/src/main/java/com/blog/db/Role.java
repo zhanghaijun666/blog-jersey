@@ -1,6 +1,6 @@
 package com.blog.db;
 
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.tools.BasicConvertUtils;
 import java.util.List;
 import org.javalite.activejdbc.annotations.Table;

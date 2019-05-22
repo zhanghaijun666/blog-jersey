@@ -2,8 +2,8 @@ package com.jersey;
 
 import com.blog.config.Configuration;
 import com.blog.login.BologSecurityContext;
-import com.blog.factory.ServerLogs;
-import com.blog.proto.ConfigStore;
+import com.blog.config.ServerLogs;
+import com.blog.config.ConfigStore;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Type;

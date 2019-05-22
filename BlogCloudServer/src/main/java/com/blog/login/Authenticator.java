@@ -1,7 +1,7 @@
 package com.blog.login;
 
 import com.blog.db.User;
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 
 /**
  * @author zhanghaijun

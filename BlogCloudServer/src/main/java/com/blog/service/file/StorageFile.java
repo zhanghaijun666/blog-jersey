@@ -1,7 +1,7 @@
 package com.blog.service.file;
 
 import com.blog.config.Configuration;
-import com.blog.proto.BlogStore;
+import com.blog.config.BlogStore;
 import com.tools.BasicConvertUtils;
 import java.io.File;
 import java.io.FileInputStream;
