@@ -4,6 +4,7 @@
  , [liquibase](http://www.liquibase.org/)
  , [activejdbc](http://javalite.io/record_selection)
  , [protobuf](https://developers.google.com/protocol-buffers/)
+ , [Fail2ban](https://www.jianshu.com/p/4fdec5794d08)
 
 #### 数据库支持
 [mysql](https://www.mysql.com/) , [H2](http://www.h2database.com/html/main.html)
