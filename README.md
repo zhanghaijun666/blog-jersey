@@ -8,3 +8,4 @@
 ,[Tengine](http://tengine.taobao.org/)
 ,[优化Nginx配置](https://www.digitalocean.com/community/tutorials/how-to-optimize-nginx-configuration)
 ,[PF4J-plugin](https://github.com/pf4j/pf4j)
+,[gitlab](https://gitlab.com/gitlab-org/gitlab-ce/tree/master)
