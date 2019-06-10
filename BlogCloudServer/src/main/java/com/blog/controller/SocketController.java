@@ -16,12 +16,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.SecurityContext;
 import org.simpleframework.http.Request;
 import org.simpleframework.http.Response;
+import org.simpleframework.http.Status;
 import org.simpleframework.http.socket.service.PathRouter;
+import org.simpleframework.http.socket.service.RouterContainer;
 import org.simpleframework.http.socket.service.Service;
-import static org.simpleframework.http.socket.service.ServiceEvent.DISPATCH_SOCKET;
-import static org.simpleframework.http.socket.service.ServiceEvent.ERROR;
-import org.simpleframework.transport.Channel;
-import org.simpleframework.transport.trace.Trace;
 
 /**
  * @author haijun.zhang
@@ -36,10 +34,10 @@ public class SocketController {
     @Context
     SecurityContext security;
 
-    private PathRouter path_Router_Socket = null;
+    private static PathRouter path_Router_Socket = null;
     private final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(SocketController.class);
 
-    public PathRouter getPathRouter() throws IOException {
+    public static PathRouter getPathRouter() throws IOException {
         if (path_Router_Socket == null) {
             Map<String, Service> registry = new HashMap<>();
             registry.put("/socket/chat", new BlogChat());
@@ -53,18 +51,36 @@ public class SocketController {
     @Consumes({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @Produces({BlogMediaType.APPLICATION_JSON, BlogMediaType.APPLICATION_PROTOBUF})
     @RolesAllowed("user")
-    public void connectSocket() {
-        Channel channel = request.getChannel();
-        Trace trace = channel.getTrace();
-        trace.trace(DISPATCH_SOCKET);
+    public void connectSocket() throws IOException {
+        getRouterContainer().handle(request, response);
+        response.setStatus(Status.OK);
+
+    }
+
+    public boolean isSocket(Request request, Response response){
         try {
-//            channel.getSocket();
             Service service = getPathRouter().route(request, response);
-//            service.connect(new WSSession(request, response, null));
-//            response.setStatus(Status.OK);
+            return service != null;
         } catch (IOException ex) {
-            trace.trace(ERROR, ex);
-            logger.error("IOException : {}", ex.getMessage());
         }
+        return false;
+    }
+
+    private static RouterContainer getRouterContainer() throws IOException {
+        return new RouterContainer((Request req, Response resp) -> {
+            System.exit(1);
+        }, SocketController.getPathRouter(), 2);
     }
 }
+//        Channel channel = request.getChannel();
+//        Trace trace = channel.getTrace();
+//        trace.trace(DISPATCH_SOCKET);
+//        try {
+////            channel.getSocket();
+//            Service service = getPathRouter().route(request, response);
+////            service.connect(new WSSession(request, response, null));
+////            response.setStatus(Status.OK);
+//        } catch (IOException ex) {
+//            trace.trace(ERROR, ex);
+//            logger.error("IOException : {}", ex.getMessage());
+//        }
