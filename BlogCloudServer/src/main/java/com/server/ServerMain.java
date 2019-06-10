@@ -9,6 +9,7 @@ import com.jersey.SimpleContainerFactory2;
 import com.server.filter.BlogFilter;
 import com.server.filter.SecurityRequestFilter;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.URI;
 import javax.ws.rs.core.UriBuilder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
@@ -38,5 +39,10 @@ public class ServerMain {
         resourceConfig.register(RolesAllowedDynamicFeature.class);
         resourceConfig.register(MultiPartFeature.class);
         return SimpleContainerFactory2.create(BASE_URI, resourceConfig);
+    }
+    
+    private static void getBlogSocket() {
+        ConfigStore.Server configServer = Configuration.getInstance().getConfig().getServer();
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(configServer.getPort());
     }
 }

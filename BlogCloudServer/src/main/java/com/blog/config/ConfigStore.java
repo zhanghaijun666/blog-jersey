@@ -123,7 +123,6 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:Config)
       ConfigOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use Config.newBuilder() to construct.
     private Config(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -145,9 +144,6 @@ public final class ConfigStore {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -159,6 +155,13 @@ public final class ConfigStore {
             case 0:
               done = true;
               break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
             case 10: {
               com.blog.config.ConfigStore.DB.Builder subBuilder = null;
               if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -221,13 +224,6 @@ public final class ConfigStore {
               bitField0_ |= 0x00000040;
               break;
             }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -245,7 +241,6 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_Config_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_Config_fieldAccessorTable
@@ -467,7 +462,6 @@ public final class ConfigStore {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -497,7 +491,6 @@ public final class ConfigStore {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -524,7 +517,6 @@ public final class ConfigStore {
       unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -560,6 +552,7 @@ public final class ConfigStore {
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -616,7 +609,7 @@ public final class ConfigStore {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasDb()) {
         hash = (37 * hash) + DB_FIELD_NUMBER;
         hash = (53 * hash) + getDb().hashCode();
@@ -650,17 +643,6 @@ public final class ConfigStore {
       return hash;
     }
 
-    public static com.blog.config.ConfigStore.Config parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.blog.config.ConfigStore.Config parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static com.blog.config.ConfigStore.Config parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -720,7 +702,6 @@ public final class ConfigStore {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -728,7 +709,6 @@ public final class ConfigStore {
     public static Builder newBuilder(com.blog.config.ConfigStore.Config prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -752,7 +732,6 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_Config_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_Config_fieldAccessorTable
@@ -778,7 +757,6 @@ public final class ConfigStore {
           getFileStorageFieldBuilder();
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (dbBuilder_ == null) {
@@ -810,18 +788,15 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.blog.config.ConfigStore.internal_static_Config_descriptor;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.Config getDefaultInstanceForType() {
         return com.blog.config.ConfigStore.Config.getDefaultInstance();
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.Config build() {
         com.blog.config.ConfigStore.Config result = buildPartial();
         if (!result.isInitialized()) {
@@ -830,7 +805,6 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.Config buildPartial() {
         com.blog.config.ConfigStore.Config result = new com.blog.config.ConfigStore.Config(this);
         int from_bitField0_ = bitField0_;
@@ -880,39 +854,32 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.blog.config.ConfigStore.Config) {
           return mergeFrom((com.blog.config.ConfigStore.Config)other);
@@ -956,7 +923,6 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         if (!hasDb()) {
           return false;
@@ -976,7 +942,6 @@ public final class ConfigStore {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1625,13 +1590,11 @@ public final class ConfigStore {
         }
         return fileStorageBuilder_;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1653,12 +1616,11 @@ public final class ConfigStore {
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<Config>
         PARSER = new com.google.protobuf.AbstractParser<Config>() {
-      @java.lang.Override
       public Config parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Config(input, extensionRegistry);
+          return new Config(input, extensionRegistry);
       }
     };
 
@@ -1671,7 +1633,6 @@ public final class ConfigStore {
       return PARSER;
     }
 
-    @java.lang.Override
     public com.blog.config.ConfigStore.Config getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1745,7 +1706,6 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:DB)
       DBOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use DB.newBuilder() to construct.
     private DB(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -1767,9 +1727,6 @@ public final class ConfigStore {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1781,6 +1738,13 @@ public final class ConfigStore {
             case 0:
               done = true;
               break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
@@ -1805,13 +1769,6 @@ public final class ConfigStore {
               password_ = bs;
               break;
             }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1829,7 +1786,6 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_DB_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_DB_fieldAccessorTable
@@ -2007,7 +1963,6 @@ public final class ConfigStore {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2025,7 +1980,6 @@ public final class ConfigStore {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2043,7 +1997,6 @@ public final class ConfigStore {
       unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2066,6 +2019,7 @@ public final class ConfigStore {
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -2107,7 +2061,7 @@ public final class ConfigStore {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasUrl()) {
         hash = (37 * hash) + URL_FIELD_NUMBER;
         hash = (53 * hash) + getUrl().hashCode();
@@ -2129,17 +2083,6 @@ public final class ConfigStore {
       return hash;
     }
 
-    public static com.blog.config.ConfigStore.DB parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.blog.config.ConfigStore.DB parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static com.blog.config.ConfigStore.DB parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2199,7 +2142,6 @@ public final class ConfigStore {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2207,7 +2149,6 @@ public final class ConfigStore {
     public static Builder newBuilder(com.blog.config.ConfigStore.DB prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2231,7 +2172,6 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_DB_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_DB_fieldAccessorTable
@@ -2254,7 +2194,6 @@ public final class ConfigStore {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         url_ = "";
@@ -2268,18 +2207,15 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.blog.config.ConfigStore.internal_static_DB_descriptor;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.DB getDefaultInstanceForType() {
         return com.blog.config.ConfigStore.DB.getDefaultInstance();
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.DB build() {
         com.blog.config.ConfigStore.DB result = buildPartial();
         if (!result.isInitialized()) {
@@ -2288,7 +2224,6 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.DB buildPartial() {
         com.blog.config.ConfigStore.DB result = new com.blog.config.ConfigStore.DB(this);
         int from_bitField0_ = bitField0_;
@@ -2314,39 +2249,32 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.blog.config.ConfigStore.DB) {
           return mergeFrom((com.blog.config.ConfigStore.DB)other);
@@ -2383,7 +2311,6 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         if (!hasUrl()) {
           return false;
@@ -2394,7 +2321,6 @@ public final class ConfigStore {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2717,13 +2643,11 @@ public final class ConfigStore {
         onChanged();
         return this;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2745,12 +2669,11 @@ public final class ConfigStore {
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<DB>
         PARSER = new com.google.protobuf.AbstractParser<DB>() {
-      @java.lang.Override
       public DB parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new DB(input, extensionRegistry);
+          return new DB(input, extensionRegistry);
       }
     };
 
@@ -2763,7 +2686,6 @@ public final class ConfigStore {
       return PARSER;
     }
 
-    @java.lang.Override
     public com.blog.config.ConfigStore.DB getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2804,7 +2726,6 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:Server)
       ServerOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use Server.newBuilder() to construct.
     private Server(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -2824,9 +2745,6 @@ public final class ConfigStore {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2838,6 +2756,13 @@ public final class ConfigStore {
             case 0:
               done = true;
               break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
@@ -2847,13 +2772,6 @@ public final class ConfigStore {
             case 16: {
               bitField0_ |= 0x00000002;
               port_ = input.readInt32();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
               break;
             }
           }
@@ -2873,7 +2791,6 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_Server_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_Server_fieldAccessorTable
@@ -2940,7 +2857,6 @@ public final class ConfigStore {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2950,7 +2866,6 @@ public final class ConfigStore {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2962,7 +2877,6 @@ public final class ConfigStore {
       unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2980,6 +2894,7 @@ public final class ConfigStore {
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3011,7 +2926,7 @@ public final class ConfigStore {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasHost()) {
         hash = (37 * hash) + HOST_FIELD_NUMBER;
         hash = (53 * hash) + getHost().hashCode();
@@ -3025,17 +2940,6 @@ public final class ConfigStore {
       return hash;
     }
 
-    public static com.blog.config.ConfigStore.Server parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.blog.config.ConfigStore.Server parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static com.blog.config.ConfigStore.Server parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3095,7 +2999,6 @@ public final class ConfigStore {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3103,7 +3006,6 @@ public final class ConfigStore {
     public static Builder newBuilder(com.blog.config.ConfigStore.Server prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3127,7 +3029,6 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_Server_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_Server_fieldAccessorTable
@@ -3150,7 +3051,6 @@ public final class ConfigStore {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         host_ = "127.0.0.1";
@@ -3160,18 +3060,15 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.blog.config.ConfigStore.internal_static_Server_descriptor;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.Server getDefaultInstanceForType() {
         return com.blog.config.ConfigStore.Server.getDefaultInstance();
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.Server build() {
         com.blog.config.ConfigStore.Server result = buildPartial();
         if (!result.isInitialized()) {
@@ -3180,7 +3077,6 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.Server buildPartial() {
         com.blog.config.ConfigStore.Server result = new com.blog.config.ConfigStore.Server(this);
         int from_bitField0_ = bitField0_;
@@ -3198,39 +3094,32 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.blog.config.ConfigStore.Server) {
           return mergeFrom((com.blog.config.ConfigStore.Server)other);
@@ -3255,12 +3144,10 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3387,13 +3274,11 @@ public final class ConfigStore {
         onChanged();
         return this;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3415,12 +3300,11 @@ public final class ConfigStore {
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<Server>
         PARSER = new com.google.protobuf.AbstractParser<Server>() {
-      @java.lang.Override
       public Server parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Server(input, extensionRegistry);
+          return new Server(input, extensionRegistry);
       }
     };
 
@@ -3433,7 +3317,6 @@ public final class ConfigStore {
       return PARSER;
     }
 
-    @java.lang.Override
     public com.blog.config.ConfigStore.Server getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3465,7 +3348,6 @@ public final class ConfigStore {
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:FileStorage)
       FileStorageOrBuilder {
-  private static final long serialVersionUID = 0L;
     // Use FileStorage.newBuilder() to construct.
     private FileStorage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
@@ -3484,9 +3366,6 @@ public final class ConfigStore {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -3498,17 +3377,17 @@ public final class ConfigStore {
             case 0:
               done = true;
               break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
               url_ = bs;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
               break;
             }
           }
@@ -3528,7 +3407,6 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_FileStorage_descriptor;
     }
 
-    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_FileStorage_fieldAccessorTable
@@ -3580,7 +3458,6 @@ public final class ConfigStore {
     }
 
     private byte memoizedIsInitialized = -1;
-    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3590,7 +3467,6 @@ public final class ConfigStore {
       return true;
     }
 
-    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
@@ -3599,7 +3475,6 @@ public final class ConfigStore {
       unknownFields.writeTo(output);
     }
 
-    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -3613,6 +3488,7 @@ public final class ConfigStore {
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
     public boolean equals(final java.lang.Object obj) {
       if (obj == this) {
@@ -3639,7 +3515,7 @@ public final class ConfigStore {
         return memoizedHashCode;
       }
       int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (19 * hash) + getDescriptorForType().hashCode();
       if (hasUrl()) {
         hash = (37 * hash) + URL_FIELD_NUMBER;
         hash = (53 * hash) + getUrl().hashCode();
@@ -3649,17 +3525,6 @@ public final class ConfigStore {
       return hash;
     }
 
-    public static com.blog.config.ConfigStore.FileStorage parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.blog.config.ConfigStore.FileStorage parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static com.blog.config.ConfigStore.FileStorage parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3719,7 +3584,6 @@ public final class ConfigStore {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3727,7 +3591,6 @@ public final class ConfigStore {
     public static Builder newBuilder(com.blog.config.ConfigStore.FileStorage prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
-    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3751,7 +3614,6 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_FileStorage_descriptor;
       }
 
-      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_FileStorage_fieldAccessorTable
@@ -3774,7 +3636,6 @@ public final class ConfigStore {
                 .alwaysUseFieldBuilders) {
         }
       }
-      @java.lang.Override
       public Builder clear() {
         super.clear();
         url_ = "store";
@@ -3782,18 +3643,15 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.blog.config.ConfigStore.internal_static_FileStorage_descriptor;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.FileStorage getDefaultInstanceForType() {
         return com.blog.config.ConfigStore.FileStorage.getDefaultInstance();
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.FileStorage build() {
         com.blog.config.ConfigStore.FileStorage result = buildPartial();
         if (!result.isInitialized()) {
@@ -3802,7 +3660,6 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public com.blog.config.ConfigStore.FileStorage buildPartial() {
         com.blog.config.ConfigStore.FileStorage result = new com.blog.config.ConfigStore.FileStorage(this);
         int from_bitField0_ = bitField0_;
@@ -3816,39 +3673,32 @@ public final class ConfigStore {
         return result;
       }
 
-      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
-      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.setField(field, value);
       }
-      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
-      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
-      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
+          int index, Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
-      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
+          Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
-      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.blog.config.ConfigStore.FileStorage) {
           return mergeFrom((com.blog.config.ConfigStore.FileStorage)other);
@@ -3870,12 +3720,10 @@ public final class ConfigStore {
         return this;
       }
 
-      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
-      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3970,13 +3818,11 @@ public final class ConfigStore {
         onChanged();
         return this;
       }
-      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFields(unknownFields);
       }
 
-      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3998,12 +3844,11 @@ public final class ConfigStore {
 
     @java.lang.Deprecated public static final com.google.protobuf.Parser<FileStorage>
         PARSER = new com.google.protobuf.AbstractParser<FileStorage>() {
-      @java.lang.Override
       public FileStorage parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new FileStorage(input, extensionRegistry);
+          return new FileStorage(input, extensionRegistry);
       }
     };
 
@@ -4016,7 +3861,6 @@ public final class ConfigStore {
       return PARSER;
     }
 
-    @java.lang.Override
     public com.blog.config.ConfigStore.FileStorage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4061,7 +3905,7 @@ public final class ConfigStore {
       "\022\022\n\004user\030\003 \001(\t:\004root\022\026\n\010password\030\004 \001(\t:\004" +
       "root\"5\n\006Server\022\027\n\004host\030\001 \001(\t:\t127.0.0.1\022" +
       "\022\n\004port\030\002 \001(\005:\0048888\"!\n\013FileStorage\022\022\n\003ur" +
-      "l\030\001 \001(\t:\005storeB\036\n\017com.blog.configB\013Confi" +
+      "l\030\001 \001(\t:\005storeB\036\n\017com.blog.configB\013Confi",
       "gStore"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
