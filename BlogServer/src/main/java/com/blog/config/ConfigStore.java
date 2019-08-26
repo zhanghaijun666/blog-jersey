@@ -120,11 +120,11 @@ public final class ConfigStore {
    * Protobuf type {@code Config}
    */
   public  static final class Config extends
-      com.google.protobuf.GeneratedMessageV3 implements
+      com.google.protobuf.GeneratedMessage implements
       // @@protoc_insertion_point(message_implements:Config)
       ConfigOrBuilder {
     // Use Config.newBuilder() to construct.
-    private Config(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private Config(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
     private Config() {
@@ -241,7 +241,7 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_Config_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_Config_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -497,16 +497,16 @@ public final class ConfigStore {
         output.writeMessage(1, getDb());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, webDir_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, webDir_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, logback_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 3, logback_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt32(4, sessionTimeout_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, salt_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 5, salt_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeMessage(6, getServer());
@@ -527,17 +527,17 @@ public final class ConfigStore {
           .computeMessageSize(1, getDb());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, webDir_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, webDir_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, logback_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, logback_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, sessionTimeout_);
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, salt_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(5, salt_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -666,39 +666,39 @@ public final class ConfigStore {
     }
     public static com.blog.config.ConfigStore.Config parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.Config parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.Config parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.Config parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.Config parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.Config parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
@@ -716,7 +716,7 @@ public final class ConfigStore {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -724,7 +724,7 @@ public final class ConfigStore {
      * Protobuf type {@code Config}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Config)
         com.blog.config.ConfigStore.ConfigOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -732,7 +732,7 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_Config_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_Config_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -745,13 +745,12 @@ public final class ConfigStore {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getDbFieldBuilder();
           getServerFieldBuilder();
           getFileStorageFieldBuilder();
@@ -1703,11 +1702,11 @@ public final class ConfigStore {
    * Protobuf type {@code DB}
    */
   public  static final class DB extends
-      com.google.protobuf.GeneratedMessageV3 implements
+      com.google.protobuf.GeneratedMessage implements
       // @@protoc_insertion_point(message_implements:DB)
       DBOrBuilder {
     // Use DB.newBuilder() to construct.
-    private DB(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private DB(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
     private DB() {
@@ -1786,7 +1785,7 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_DB_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_DB_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -1983,16 +1982,16 @@ public final class ConfigStore {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, url_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, url_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, driver_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 2, driver_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, user_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 3, user_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, password_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 4, password_);
       }
       unknownFields.writeTo(output);
     }
@@ -2003,16 +2002,16 @@ public final class ConfigStore {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, url_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, url_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, driver_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(2, driver_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, user_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(3, user_);
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, password_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(4, password_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2106,39 +2105,39 @@ public final class ConfigStore {
     }
     public static com.blog.config.ConfigStore.DB parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.DB parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.DB parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.DB parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.DB parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.DB parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
@@ -2156,7 +2155,7 @@ public final class ConfigStore {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2164,7 +2163,7 @@ public final class ConfigStore {
      * Protobuf type {@code DB}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:DB)
         com.blog.config.ConfigStore.DBOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -2172,7 +2171,7 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_DB_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_DB_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2185,13 +2184,12 @@ public final class ConfigStore {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -2723,11 +2721,11 @@ public final class ConfigStore {
    * Protobuf type {@code Server}
    */
   public  static final class Server extends
-      com.google.protobuf.GeneratedMessageV3 implements
+      com.google.protobuf.GeneratedMessage implements
       // @@protoc_insertion_point(message_implements:Server)
       ServerOrBuilder {
     // Use Server.newBuilder() to construct.
-    private Server(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private Server(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
     private Server() {
@@ -2791,7 +2789,7 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_Server_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_Server_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -2869,7 +2867,7 @@ public final class ConfigStore {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, host_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, host_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, port_);
@@ -2883,7 +2881,7 @@ public final class ConfigStore {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, host_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, host_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2963,39 +2961,39 @@ public final class ConfigStore {
     }
     public static com.blog.config.ConfigStore.Server parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.Server parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.Server parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.Server parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.Server parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.Server parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
@@ -3013,7 +3011,7 @@ public final class ConfigStore {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3021,7 +3019,7 @@ public final class ConfigStore {
      * Protobuf type {@code Server}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:Server)
         com.blog.config.ConfigStore.ServerOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -3029,7 +3027,7 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_Server_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_Server_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3042,13 +3040,12 @@ public final class ConfigStore {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -3345,11 +3342,11 @@ public final class ConfigStore {
    * Protobuf type {@code FileStorage}
    */
   public  static final class FileStorage extends
-      com.google.protobuf.GeneratedMessageV3 implements
+      com.google.protobuf.GeneratedMessage implements
       // @@protoc_insertion_point(message_implements:FileStorage)
       FileStorageOrBuilder {
     // Use FileStorage.newBuilder() to construct.
-    private FileStorage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private FileStorage(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
     }
     private FileStorage() {
@@ -3407,7 +3404,7 @@ public final class ConfigStore {
       return com.blog.config.ConfigStore.internal_static_FileStorage_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.blog.config.ConfigStore.internal_static_FileStorage_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -3470,7 +3467,7 @@ public final class ConfigStore {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, url_);
+        com.google.protobuf.GeneratedMessage.writeString(output, 1, url_);
       }
       unknownFields.writeTo(output);
     }
@@ -3481,7 +3478,7 @@ public final class ConfigStore {
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, url_);
+        size += com.google.protobuf.GeneratedMessage.computeStringSize(1, url_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3548,39 +3545,39 @@ public final class ConfigStore {
     }
     public static com.blog.config.ConfigStore.FileStorage parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.FileStorage parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.FileStorage parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.FileStorage parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static com.blog.config.ConfigStore.FileStorage parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input);
     }
     public static com.blog.config.ConfigStore.FileStorage parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
+      return com.google.protobuf.GeneratedMessage
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
@@ -3598,7 +3595,7 @@ public final class ConfigStore {
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3606,7 +3603,7 @@ public final class ConfigStore {
      * Protobuf type {@code FileStorage}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
         // @@protoc_insertion_point(builder_implements:FileStorage)
         com.blog.config.ConfigStore.FileStorageOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
@@ -3614,7 +3611,7 @@ public final class ConfigStore {
         return com.blog.config.ConfigStore.internal_static_FileStorage_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.blog.config.ConfigStore.internal_static_FileStorage_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3627,13 +3624,12 @@ public final class ConfigStore {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
       public Builder clear() {
@@ -3870,22 +3866,22 @@ public final class ConfigStore {
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Config_descriptor;
   private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Config_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_DB_descriptor;
   private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_DB_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Server_descriptor;
   private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Server_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_FileStorage_descriptor;
   private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_FileStorage_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
@@ -3923,25 +3919,25 @@ public final class ConfigStore {
     internal_static_Config_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_Config_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_Config_descriptor,
         new java.lang.String[] { "Db", "WebDir", "Logback", "SessionTimeout", "Salt", "Server", "FileStorage", });
     internal_static_DB_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_DB_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_DB_descriptor,
         new java.lang.String[] { "Url", "Driver", "User", "Password", });
     internal_static_Server_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_Server_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_Server_descriptor,
         new java.lang.String[] { "Host", "Port", });
     internal_static_FileStorage_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_FileStorage_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_FileStorage_descriptor,
         new java.lang.String[] { "Url", });
   }

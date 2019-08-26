@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com</groupId>
-    <artifactId>BlogCloudServer</artifactId>
+    <artifactId>BlogServer</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>BlogCloudServer</name>
+    <name>BlogServer</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -405,7 +405,7 @@
                                     <arg line="--java_out=../java proto/structure.proto"/>
                                 </exec>
                                 <exec executable="node" dir="../protobuf.js/bin">
-                                    <arg line="pbjs -t json-module -r BlogStore -w --force-long --force-message --no-comments  ../../BlogCloudServer/src/main/resources/proto/structure.proto -o ../../BlogCloudClient/www/resource/js/structure.js"/>
+                                    <arg line="pbjs -t json-module -r BlogStore -w --force-long --force-message --no-comments  ../../BlogServer/src/main/resources/proto/structure.proto -o ../../BlogCloudClient/www/resource/js/structure.js"/>
                                 </exec>
                             </target>
                         </configuration>

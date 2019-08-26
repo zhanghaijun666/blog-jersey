@@ -11,22 +11,22 @@ else
 	git stash clear
 	git pull
 fi
-cd /opt/BlogCloudJersey/BlogCloudServer
+cd /opt/BlogCloudJersey/BlogServer
 mvn clean package
 if [[ ! -d "/opt/Blog" ]]; then
 	mkdir -p /opt/Blog
 fi
 cd /opt/Blog
-ln -s /opt/BlogCloudJersey/BlogCloudServer/target/BlogCloudServer-1.0-SNAPSHOT.jar /opt/Blog/Blog-1.0.jar
+ln -s /opt/BlogCloudJersey/BlogServer/target/BlogServer-1.0-SNAPSHOT.jar /opt/Blog/Blog-1.0.jar
 ln -s /opt/BlogCloudJersey/BlogCloudClient/www /opt/Blog/www
 if [[ ! -d "/opt/Blog/config" ]]; then
-	cp -r /opt/BlogCloudJersey/BlogCloudServer/config /opt/Blog/config
+	cp -r /opt/BlogCloudJersey/BlogServer/config /opt/Blog/config
 fi
 if [[ ! -f "/opt/Blog/user.txt" ]]; then
-	cp /opt/BlogCloudJersey/BlogCloudServer/user.txt /opt/Blog/user.txt
+	cp /opt/BlogCloudJersey/BlogServer/user.txt /opt/Blog/user.txt
 fi
 if [[ ! -d "/opt/Blog/bin" ]]; then
-	cp -r /opt/BlogCloudJersey/BlogCloudServer/bin /opt/Blog/bin
+	cp -r /opt/BlogCloudJersey/BlogServer/bin /opt/Blog/bin
 	chmod -R +x /opt/Blog/bin/*.sh
 fi
 if [[ ! -d "/usr/lib/systemd/system" ]]; then
