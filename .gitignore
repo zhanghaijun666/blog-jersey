@@ -1,9 +1,9 @@
-/BlogCloudClient/nbproject/private/
-/BlogCloudClient/www/resource/js/structure.js
+/BlogClient/nbproject/private/
+/BlogClient/www/resource/js/structure.js
 
-/BlogCloudServer/src/main/java/com/blog/config/BlogStore.java
-/BlogCloudServer/src/main/java/com/blog/config/ConfigStore.java
-/BlogCloudServer/target/
-/BlogCloudServer/logs/
-/BlogCloudServer/store/
+/BlogServer/src/main/java/com/blog/config/BlogStore.java
+/BlogServer/src/main/java/com/blog/config/ConfigStore.java
+/BlogServer/target/
+/BlogServer/logs/
+/BlogServer/store/
 

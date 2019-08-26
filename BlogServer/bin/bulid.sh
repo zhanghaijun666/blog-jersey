@@ -2,31 +2,31 @@
 
 rm -rf /opt/Blog/Blog-1.0.jar
 rm -rf /opt/Blog/www
-if [[ ! -d "/opt/BlogCloudJersey" ]]; then
+if [[ ! -d "/opt/BlogJersey" ]]; then
 	cd /opt
-	git clone git@github.com:zhanghaijun666/BlogCloudJersey.git
+	git clone git@github.com:zhanghaijun666/BlogJersey.git
 else
-	cd /opt/BlogCloudJersey
+	cd /opt/BlogJersey
 	git stash
 	git stash clear
 	git pull
 fi
-cd /opt/BlogCloudJersey/BlogServer
+cd /opt/BlogJersey/BlogServer
 mvn clean package
 if [[ ! -d "/opt/Blog" ]]; then
 	mkdir -p /opt/Blog
 fi
 cd /opt/Blog
-ln -s /opt/BlogCloudJersey/BlogServer/target/BlogServer-1.0-SNAPSHOT.jar /opt/Blog/Blog-1.0.jar
-ln -s /opt/BlogCloudJersey/BlogCloudClient/www /opt/Blog/www
+ln -s /opt/BlogJersey/BlogServer/target/BlogServer-1.0-SNAPSHOT.jar /opt/Blog/Blog-1.0.jar
+ln -s /opt/BlogJersey/BlogClient/www /opt/Blog/www
 if [[ ! -d "/opt/Blog/config" ]]; then
-	cp -r /opt/BlogCloudJersey/BlogServer/config /opt/Blog/config
+	cp -r /opt/BlogJersey/BlogServer/config /opt/Blog/config
 fi
 if [[ ! -f "/opt/Blog/user.txt" ]]; then
-	cp /opt/BlogCloudJersey/BlogServer/user.txt /opt/Blog/user.txt
+	cp /opt/BlogJersey/BlogServer/user.txt /opt/Blog/user.txt
 fi
 if [[ ! -d "/opt/Blog/bin" ]]; then
-	cp -r /opt/BlogCloudJersey/BlogServer/bin /opt/Blog/bin
+	cp -r /opt/BlogJersey/BlogServer/bin /opt/Blog/bin
 	chmod -R +x /opt/Blog/bin/*.sh
 fi
 if [[ ! -d "/usr/lib/systemd/system" ]]; then

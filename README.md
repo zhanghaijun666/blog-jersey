@@ -1,4 +1,4 @@
-#### BlogCloudJersey
+#### BlogJersey
 
 个人知识库
 
